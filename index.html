@@ -1,68 +1,29 @@
 <!doctype html>
 <html>
   <head>
+    <base href="/"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Divjot Singh</title>
     <link rel="icon" href="prof.jpg" type="image/jpg"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <style>
-      body { margin: 0; padding: 0; }
-
-      @keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
-      .section { min-height: 100vh; color: white; background-color: purple; padding: 2% 5%; 
-        box-shadow: 0px 10px 50px 20px black; animation-name: unstack; animation-duration: 1s;} 
-
-      .section.green { background-color: green; }
-      .section.purple { background-color: purple; }
-      .section.red { background-color: #801515; }
-      .section.blue { background-color: #153379; }
-      .section.yellow { background-color: yellow; color: black; }
-      .section.orange { background-color: orange; color: black; }
-
-      span.green, p.green, a.green { color: green; }
-      span.purple, p.purple, a.purple { color: purple; }
-      span.red, p.red, a.red { color: red; }
-      span.blue, p.blue, a.blue { color: blue; }
-      span.yellow, p.yellow, a.yellow { color: yellow; }
-      span.orange, p.orange, a.orange { color: orange; }
-
-      .section h1 { font-size: 10em; padding: 5% 0; } 
-      .section h2 { font-size: 8em; padding: 3% 0; } 
-      .section h3 { font-size: 6em; padding: 2% 0; } 
-      .section h4 { font-size: 4em; padding: 2% 0; } 
-      .section h5 { font-size: 3em; padding: 2% 0; } 
-      .section h6 { font-size: 2em; padding: 2% 0; } 
-
-      @media screen and (max-width: 630px) {
-        .section h1 { font-size: 8em; padding: 5% 0; } 
-        .section h2 { font-size: 6em; padding: 3% 0; } 
-        .section h3 { font-size: 4em; padding: 2% 0; } 
-        .section h4 { font-size: 2em; padding: 2% 0; } 
-        .section h5 { font-size: 1.5em; padding: 2% 0; } 
-        .section h6 { font-size: 0.8em; padding: 2% 0; } 
-        #instagram-widget { width: 100% !important; overflow: hidden !important; }
-      }
-
-      .card-title { font-size: 154%; font-weight: bold; padding-bottom: 15px; text-transform: uppercase;  }
-      .card li { list-style: "* "; }
-
-      dd ul { padding-left: 0; }
-      .twitter-timeline { margin: 0 auto !important; }
-    </style> 
+    <link rel="stylesheet" href="/css/style.css"/>
   </head>
   <body>
 
     <div class="wrapper">
-      <div class="section" style="position:relative;z-index:10">
+      <div class="section" style="z-index:10">
+
         <h1 id="main-title"> Divjot Singh </h1>
-        <p style="font-size: 170%; width: 70%; "> Computer Engineering Undergraduate <a class="orange" target="_blank" href="http://wikipedia.org/wiki/Sikhism">Sikh</a> 
+        <p style="font-size: 170%; width: 70%; "> Computer Engineering Undergraduate 
+          <a class="orange" target="_blank" href="http://wikipedia.org/wiki/Sikhism">Sikh</a> 
           student at <a class="yellow"  href="#education">Netaji Subhas Institute of Technology</a> who loves 
-          to <a class="red"  href="#code">code</a> for a living and <a class="green" target="_blank" href="http://www.xboxgamertag.com/search/bogas04/">play</a>
-          rest of the time. </p>
+          to <a class="red"  href="#code">code</a> for a living and 
+          <a class="green" target="_blank" href="http://www.xboxgamertag.com/search/bogas04/">play</a> rest of the time. </p>
+
       </div> <!-- Section Ends -->
 
-      <div class="section yellow" style="position:relative;z-index:11" id="education">
+      <div class="section yellow" style="z-index:11" id="education">
 
         <h3> Much Education </h3>
 
@@ -137,7 +98,7 @@
         </div>
       </div> <!-- Section Ends-->
 
-      <div class="section red" style="position:relative;z-index:12" id="code">
+      <div class="section red" style="z-index:12" id="code">
 
         <h3> Such Work </h3>
 
@@ -191,7 +152,7 @@
         </div>
       </div> <!-- Section Ends-->
 
-      <div class="section blue" style="position:relative;z-index:13">
+      <div class="section blue" style="z-index:13">
         <h3> Very Social </h3>
         <div class="container-fluid">
 
@@ -223,7 +184,7 @@
         </div> <!-- Row Ends -->
       </div> <!-- Section Ends -->
 
-      <div class="section yellow text-center" style="position:relative;z-index: 14">
+      <div class="section yellow text-center" style="z-index: 14">
         <h2> I <span class="glyphicon glyphicon-heart red"></span> Java Script</h2>
         <h3> Technology </h3>
         <h4> Unix </h4>
