@@ -1,5 +1,4 @@
 body { margin: 0; padding: 0; }
-a { text-decoration: none; }
 
 -webkit-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
 -moz-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
