@@ -22,14 +22,15 @@ body { margin: 0; padding: 0; }
   animation-name: unstack; animation-duration: 1s;
 } 
 
-.section.green { background-color: green; }
+.section.green { background-color: #1DB61D; }
+.section.green a { color: #123886 }
 .section.purple { background-color: purple; }
 .section.red { background-color: #801515; }
 .section.blue { background-color: #153379; }
 .section.yellow { background-color: yellow; color: black; }
 .section.orange { background-color: orange; color: black; }
 
-span.green, p.green, a.green { color: green; }
+span.green, p.green, a.green { color: #1DB61D; }
 span.purple, p.purple, a.purple { color: purple; }
 span.red, p.red, a.red { color: red; }
 span.blue, p.blue, a.blue { color: blue; }
