@@ -57,6 +57,8 @@ span.orange, p.orange, a.orange { color: orange; }
 
   /* Oddity of the widget */
   #instagram-widget { width: 100% !important; overflow: hidden !important; }
+  /* Better li padding for mobile */
+  dd ul { padding-left: 10px !important; }
 }
 
 /* Oddity of the widget */
