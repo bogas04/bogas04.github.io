@@ -16,10 +16,10 @@ body { margin: 0; padding: 0; }
   -ms-box-shadow: 0px 10px 50px 20px black; 
   -o-box-shadow: 0px 10px 50px 20px black; 
   box-shadow: 0px 10px 50px 20px black; 
-  -webkit-animation-name: unstack; -webkit-animation-duration: 1s;
-  -moz-animation-name: unstack; -moz-animation-duration: 1s;
-  -o-animation-name: unstack; -o-animation-duration: 1s;
-  animation-name: unstack; animation-duration: 1s;
+  -webkit-animation-name: unstack 1s linear;
+  -moz-animation-name: unstack 1s linear;
+  -o-animation-name: unstack 1s linear;
+  animation-name: unstack 1s linear;
 } 
 
 .section.green { background-color: #1DB61D; }
