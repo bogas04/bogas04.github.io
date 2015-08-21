@@ -16,10 +16,10 @@ body { margin: 0; padding: 0; }
   -ms-box-shadow: 0px 10px 50px 20px black; 
   -o-box-shadow: 0px 10px 50px 20px black; 
   box-shadow: 0px 10px 50px 20px black; 
-  -webkit-animation: 2s cubic-bezier(.68,-0.55,.27,1.55) 0s normal none 1 running unstack;
-  -moz-animation: 2s cubic-bezier(.68,-0.55,.27,1.55) 0s normal none 1 running unstack;
-  -o-animation: 2s cubic-bezier(.68,-0.55,.27,1.55) 0s normal none 1 running unstack;
-  animation: 2s cubic-bezier(.68,-0.55,.27,1.55) 0s normal none 1 running unstack;
+  -webkit-animation: unstack 1s linear;
+  -moz-animation: unstack 1s linear;
+  -o-animation: unstack 1s linear;
+  animation: unstack 1s linear;
 } 
 
 .section.green { background-color: #1DB61D; }
