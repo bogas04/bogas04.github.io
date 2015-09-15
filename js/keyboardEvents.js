@@ -1,5 +1,4 @@
 window.onkeypress = function(e) {
-  console.log(e);
   this.currentSection = this.currentSection || 0;
   this.$sections = this.$sections || document.getElementsByClassName('section');
   if((e.charCode === 106 || e.keyCode === 40) && this.currentSection < this.$sections.length - 1) {
