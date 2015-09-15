@@ -1,93 +1,58 @@
+html { scroll-behavior: smooth; }
 body { margin: 0; padding: 0; }
 
--webkit-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
--moz-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
--o-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
-@keyframes unstack { from { margin-top: -50%; } to { margin-top: 0; } }
-
--webkit-@keyframes roll {
+-webkit-@keyframes roll { 
   from {
-    left: -50%;
-    -webkit-transform: rotateZ(360deg);
-    -moz-transform: rotateZ(360deg);
-    -o-transform: rotateZ(360deg);
-    -ms-transform: rotateZ(360deg);
-    transform: rotateZ(360deg);
+    -webkit-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
+    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
   }
   to {
-    left: 0;
-    -webkit-transform: rotateZ(0deg);
-    -moz-transform: rotateZ(0deg);
-    -o-transform: rotateZ(0deg);
-    -ms-transform: rotateZ(0deg);
-    transform: rotateZ(0deg);
+    -webkit-transform: rotateZ(0deg) translateX(0) scale(1);
+    transform: rotateZ(0deg) translateX(0) scale(1);
   }
 }
 -moz-@keyframes roll {
   from {
-    left: -50%;
-    -webkit-transform: rotateZ(360deg);
-    -moz-transform: rotateZ(360deg);
-    -o-transform: rotateZ(360deg);
-    -ms-transform: rotateZ(360deg);
-    transform: rotateZ(360deg);
+    -moz-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
+    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
   }
   to {
-    left: 0;
-    -webkit-transform: rotateZ(0deg);
-    -moz-transform: rotateZ(0deg);
-    -o-transform: rotateZ(0deg);
-    -ms-transform: rotateZ(0deg);
-    transform: rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translateX(0) scale(1);
+    transform: rotateZ(0deg) translateX(0) scale(1);
   }
 }
 -o-@keyframes roll {
   from {
-    left: -50%;
-    -webkit-transform: rotateZ(360deg);
-    -moz-transform: rotateZ(360deg);
-    -o-transform: rotateZ(360deg);
-    -ms-transform: rotateZ(360deg);
-    transform: rotateZ(360deg);
+    -o-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
+    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
   }
   to {
-    left: 0;
-    -webkit-transform: rotateZ(0deg);
-    -moz-transform: rotateZ(0deg);
-    -o-transform: rotateZ(0deg);
-    -ms-transform: rotateZ(0deg);
-    transform: rotateZ(0deg);
+    -o-transform: rotateZ(0deg) translateX(0) scale(1);
+    transform: rotateZ(0deg) translateX(0) scale(1);
   }
 }
 @keyframes roll {
   from {
-    left: -50%;
-    -webkit-transform: rotateZ(360deg);
-    -moz-transform: rotateZ(360deg);
-    -o-transform: rotateZ(360deg);
-    -ms-transform: rotateZ(360deg);
-    transform: rotateZ(360deg);
+    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
   }
   to {
-    left: 0;
-    -webkit-transform: rotateZ(0deg);
-    -moz-transform: rotateZ(0deg);
-    -o-transform: rotateZ(0deg);
-    -ms-transform: rotateZ(0deg);
-    transform: rotateZ(0deg);
+    transform: rotateZ(0deg) translateX(0) scale(1);
   }
 }
 
 #main-title img {
+  background-image: url(//github.com/bogas04.png);
   border-radius: 50%;
   border: 5px solid white;
+  min-width: 100px;
+  min-height: 100px;
   width: 20%;
   height: 20%;
   position: relative;
-  -webkit-animation: roll 1.25s linear;
-  -moz-animation: roll 1.25s linear;
-  -o-animation: roll 1.25s linear;
-  animation: roll 1.25s linear;
+  -webkit-animation: roll 0.75s ease-in;
+  -moz-animation: roll 0.75s ease-in;
+  -o-animation: roll 0.75s ease-in;
+  animation: roll 0.75s ease-in;
 }
 .section { 
   position: relative; 
@@ -100,10 +65,6 @@ body { margin: 0; padding: 0; }
   -ms-box-shadow: 0px 10px 50px 20px black; 
   -o-box-shadow: 0px 10px 50px 20px black; 
   box-shadow: 0px 10px 50px 20px black; 
-  -webkit-animation: unstack 1s linear;
-  -moz-animation: unstack 1s linear;
-  -o-animation: unstack 1s linear;
-  animation: unstack 1s linear;
 } 
 
 .section.green { background-color: #1DB61D; }
