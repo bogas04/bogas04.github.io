@@ -104,14 +104,13 @@ span.orange, p.orange, a.orange { color: orange; }
   .section h5 { font-size: 1.5em; padding: 2% 0; } 
   .section h6 { font-size: 0.8em; padding: 2% 0; } 
 
-  /* Oddity of the widget */
-  #instagram-widget { width: 100% !important; overflow: hidden !important; }
   /* Better li padding for mobile */
   dd ul { padding-left: 10px !important; }
 }
 
 /* Oddity of the widget */
 .twitter-timeline { margin: 0 auto !important; }
+#instagram-widget>div { margin: 0 auto !important; overflow: auto;  width: 100% !important; height: 403px; max-width: 400px; }
 
 /* Misc change to better align things */
 dd ul { padding-left: 0; }
