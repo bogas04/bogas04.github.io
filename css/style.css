@@ -1,45 +1,6 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; padding: 0; }
 
--webkit-@keyframes roll { 
-  from {
-    -webkit-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-  }
-  to {
-    -webkit-transform: rotateZ(0deg) translateX(0) scale(1);
-    transform: rotateZ(0deg) translateX(0) scale(1);
-  }
-}
--moz-@keyframes roll {
-  from {
-    -moz-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-  }
-  to {
-    -moz-transform: rotateZ(0deg) translateX(0) scale(1);
-    transform: rotateZ(0deg) translateX(0) scale(1);
-  }
-}
--o-@keyframes roll {
-  from {
-    -o-transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-  }
-  to {
-    -o-transform: rotateZ(0deg) translateX(0) scale(1);
-    transform: rotateZ(0deg) translateX(0) scale(1);
-  }
-}
-@keyframes roll {
-  from {
-    transform: rotateZ(360deg) translateX(-500px) scale(1.75);
-  }
-  to {
-    transform: rotateZ(0deg) translateX(0) scale(1);
-  }
-}
-
 #main-title img {
   background-image: url(//github.com/bogas04.png);
   border-radius: 50%;
@@ -49,10 +10,6 @@ body { margin: 0; padding: 0; }
   width: 20%;
   height: 20%;
   position: relative;
-  -webkit-animation: roll 0.75s ease-in;
-  -moz-animation: roll 0.75s ease-in;
-  -o-animation: roll 0.75s ease-in;
-  animation: roll 0.75s ease-in;
 }
 .section { 
   position: relative; 
