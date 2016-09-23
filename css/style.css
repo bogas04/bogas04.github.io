@@ -7,8 +7,8 @@ body { margin: 0; padding: 0; }
   border: 5px solid white;
   min-width: 100px;
   min-height: 100px;
-  width: 20%;
-  height: 20%;
+  width: 1.5em;
+  height: 1.5em;
   position: relative;
 }
 .section { 
