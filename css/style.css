@@ -67,7 +67,7 @@ span.orange, p.orange, a.orange { color: orange; }
 
 /* Oddity of the widget */
 .twitter-timeline { margin: 0 auto !important; }
-#instagram-widget>div { margin: 0 auto !important; overflow: auto;  width: 100% !important; height: 403px; max-width: 400px; }
+#instagram-widget { margin: 0 auto !important; height: 100em; }
 
 /* Misc change to better align things */
 dd ul { padding-left: 0; }
