@@ -9,7 +9,7 @@
       fjs.parentNode.insertBefore(js,fjs);
     }
   }
-})(document, 'script', [ {id: 'google-platform', url: '//apis.google.com/js/platform.js'}, {id: 'twitter-wjs', url: '//platform.twitter.com/widgets.js'}, {id: 'facebook-jssdk', url: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=603267456389915' }, {id: 'instagram-sdk', url: '//tsatchi.com/apps/instagram-widget-builder/b/2f6kDa7c407he35bUSTl6C18619BV24jLg91IbjKlFl9P7GZiWkO7g2i7d35d2A4R60Q1j' }, { id: 'statcounter', url: '//statcounter.com/counter/counter.js' }]); 
+})(document, 'script', [ {id: 'google-platform', url: '//apis.google.com/js/platform.js'}, {id: 'twitter-wjs', url: '//platform.twitter.com/widgets.js'}, {id: 'instagram-sdk', url: '//tsatchi.com/apps/instagram-widget-builder/b/2f6kDa7c407he35bUSTl6C18619BV24jLg91IbjKlFl9P7GZiWkO7g2i7d35d2A4R60Q1j' }, { id: 'statcounter', url: '//statcounter.com/counter/counter.js' }]); 
 
 /* Analytics */
 var sc_project=10571971; 

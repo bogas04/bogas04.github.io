@@ -32,6 +32,7 @@ span.green, p.green, a.green { color: #1DB61D; }
 span.purple, p.purple, a.purple { color: purple; }
 
 .section.red { background-color: #801515; }
+.section.grey { background-color: #292929; }
 span.red, p.red, a.red { color: red; }
 
 .section.blue { background-color: #153379; }
@@ -70,4 +71,6 @@ span.orange, p.orange, a.orange { color: orange; }
 #instagram-widget { margin: 0 auto !important; height: 100%; }
 
 /* Misc change to better align things */
-dd ul { padding-left: 0; }
+dd ul {
+  padding-left: 20px;
+}
