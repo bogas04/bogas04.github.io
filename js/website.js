@@ -11,10 +11,6 @@
   }
 })(document, 'script', [ {id: 'google-platform', url: '//apis.google.com/js/platform.js'}, {id: 'twitter-wjs', url: '//platform.twitter.com/widgets.js'}, {id: 'instagram-sdk', url: '//tsatchi.com/apps/instagram-widget-builder/b/2f6kDa7c407he35bUSTl6C18619BV24jLg91IbjKlFl9P7GZiWkO7g2i7d35d2A4R60Q1j' }, { id: 'statcounter', url: '//statcounter.com/counter/counter.js' }]); 
 
-/* Analytics */
-var sc_project=10571971; 
-var sc_invisible=1; 
-var sc_security="952925b7"; 
 
 /* Keyboard Events */
 window.onkeypress = function(e) {
