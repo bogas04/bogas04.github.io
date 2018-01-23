@@ -38,25 +38,29 @@ body { margin: 0; padding: 0; }
   max-width: 200px;
 }
 
-.section.green { background-color: #1DB61D; }
+.section.green { background-color: #4caf50; }
 .section.green a { color: #123886 }
-span.green, p.green, a.green { color: #1DB61D; }
+span.green, p.green, a.green { color: #4caf50; }
 
-.section.purple { background-color: #632a63; }
-span.purple, p.purple, a.purple { color: #632a63; }
+.section.grey { background-color: #9e9e9e; }
 
-.section.red { background-color: #801515; }
-.section.grey { background-color: #292929; }
-span.red, p.red, a.red { color: red; }
+.section.purple { background-color: #673ab7; }
+span.purple, p.purple, a.purple { color: #673ab7; }
 
-.section.blue { background-color: #153379; }
-span.blue, p.blue, a.blue { color: #153379; }
+.section.red { background-color: #f44336; }
+span.red, p.red, a.red { color: #f44336; }
 
-.section.yellow { background-color: yellow; color: black; }
-span.yellow, p.yellow, a.yellow { color: yellow; }
+.section.lightblue { background-color: #2196f3; }
+span.lightblue, p.lightblue, a.lightblue { color: #2196f3; }
 
-.section.orange { background-color: orange; color: black; }
-span.orange, p.orange, a.orange { color: orange; }
+.section.blue { background-color: #3f51b5; }
+span.blue, p.blue, a.blue { color: #3f51b5; }
+
+.section.yellow { background-color: #ffc107; color: black; }
+span.yellow, p.yellow, a.yellow { color: #ffc107; }
+
+.section.orange { background-color: #ff5722; color: black; }
+span.orange, p.orange, a.orange { color: #ff5722; }
 
 
 .section h1 { font-size: 10em; padding: 5% 0; } 
