@@ -11,6 +11,12 @@ body { margin: 0; padding: 0; }
   height: 1.5em;
   position: relative;
 }
+
+.row {
+  background-color: transparent;
+  border: none;
+}
+
 .section { 
   position: relative; 
   min-height: 100vh; 
