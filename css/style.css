@@ -15,7 +15,7 @@ body { margin: 0; padding: 0; }
   position: relative; 
   min-height: 100vh; 
   color: white; 
-  background-color: purple; 
+  background-color: #673ab7; 
   padding: 2% 5%; 
   -webkit-box-shadow: 0px 10px 50px 20px black; 
   -moz-box-shadow: 0px 10px 50px 20px black; 
