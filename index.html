@@ -6,7 +6,128 @@
     <title>Divjot Singh</title>
     <link rel="icon" href="//github.com/bogas04.png" type="image/jpg"/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { margin: 0; padding: 0; }
+
+      #main-title img {
+        background-image: url(//github.com/bogas04.png);
+        border-radius: 50%;
+        border: 5px solid white;
+        min-width: 100px;
+        min-height: 100px;
+        width: 1.5em;
+        height: 1.5em;
+        position: relative;
+      }
+
+      .row {
+        background-color: transparent;
+        border: none;
+      }
+
+      .section { 
+        position: relative; 
+        min-height: 100vh; 
+        color: white; 
+        background-color: #673ab7; 
+        padding: 2% 5%; 
+        -webkit-box-shadow: 0px 10px 50px 20px black; 
+        -moz-box-shadow: 0px 10px 50px 20px black; 
+        -ms-box-shadow: 0px 10px 50px 20px black; 
+        -o-box-shadow: 0px 10px 50px 20px black; 
+        box-shadow: 0px 10px 50px 20px black; 
+      } 
+
+      .social-icons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .social-icons img {
+        filter: invert(100%);
+        width: 10vw;
+        margin: 0 5%;
+        min-width: 75px;
+        max-width: 200px;
+      }
+
+      .talks {
+          display: grid;
+          grid-gap: 10px;
+          grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      }
+
+      .talk {
+
+      }
+
+      .talk-video {
+          width: 100%;
+          height: 25vw;
+      }
+
+      .talk-title {
+
+      }
+
+      .section.green { background-color: #4caf50; }
+      .section.green a { color: #123886 }
+      span.green, p.green, a.green { color: #4caf50; }
+
+      .section.grey { background-color: #9e9e9e; }
+
+      .section.purple { background-color: #673ab7; }
+      span.purple, p.purple, a.purple { color: #673ab7; }
+
+      .section.red { background-color: #f44336; }
+      span.red, p.red, a.red { color: #f44336; }
+
+      .section.lightblue { background-color: #2196f3; }
+      span.lightblue, p.lightblue, a.lightblue { color: #2196f3; }
+
+      .section.blue { background-color: #3f51b5; }
+      span.blue, p.blue, a.blue { color: #3f51b5; }
+
+      .section.yellow { background-color: #ffc107; color: black; }
+      span.yellow, p.yellow, a.yellow { color: #ffc107; }
+
+      .section.orange { background-color: #ff5722; color: black; }
+      .section.orange { color: white; }
+      span.orange, p.orange, a.orange { color: #ff5722; }
+
+
+      .section h1 { font-size: 10em; padding: 5% 0; } 
+      .section h2 { font-size: 8em; padding: 3% 0; } 
+      .section h3 { font-size: 6em; padding: 2% 10px; margin: 0 -10px; position: sticky; top: 0; background-color: inherit; z-index: 1; } 
+      .section h4 { font-size: 4em; padding: 2% 0; } 
+      .section h5 { font-size: 3em; padding: 2% 0; } 
+      .section h6 { font-size: 2em; padding: 2% 0; } 
+
+      .card-title { font-size: 154%; font-weight: bold; padding-bottom: 15px; text-transform: uppercase;  }
+
+      @media screen and (max-width: 630px) {
+        .section h1 { font-size: 8em; padding: 5% 0; } 
+        .section h2 { font-size: 6em; padding: 3% 0; } 
+        .section h3 { font-size: 4em; padding: 2% 0; } 
+        .section h4 { font-size: 2em; padding: 2% 0; } 
+        .section h5 { font-size: 1.5em; padding: 2% 0; } 
+        .section h6 { font-size: 0.8em; padding: 2% 0; } 
+
+        /* Better li padding for mobile */
+        dd ul { padding-left: 10px !important; }
+      }
+
+      /* Oddity of the widget */
+      .twitter-timeline { margin: 0 auto !important; }
+      #instagram-widget { margin: 0 auto !important; height: 100%; }
+
+      /* Misc change to better align things */
+      dd ul {
+        padding-left: 20px;
+      }
+    </style>
   </head>
   <body>
 
@@ -332,6 +453,8 @@
       </div> <!-- Row Ends -->
     </div> <!-- Section Ends -->
 
+    <script src="js/website.js"></script>
+  
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110963096-1"></script>
     <script>
