@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <style>
       html { scroll-behavior: smooth; }
-      
+
       body {
         margin: 0;
         padding: 0;
@@ -25,19 +25,27 @@
         position: relative;
       }
 
+      @media screen and (max-width: 730px) {
+        #main-title {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
       .row {
         background-color: transparent;
         border: none;
       }
 
-      .section { 
-        position: relative; 
-        min-height: 100vh; 
-        color: white; 
-        background-color: #673ab7; 
+      .section {
+        position: relative;
+        min-height: 100vh;
+        color: white;
+        background-color: #673ab7;
         padding: 2% 5%;
-        box-shadow: 0px 10px 50px 20px black; 
-      } 
+        box-shadow: 0px 10px 50px 20px black;
+      }
 
       .social-icons {
         width: 100%;
@@ -54,23 +62,15 @@
       }
 
       .talks {
-          display: grid;
-          grid-gap: 10px;
-          grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      }
-
-      .talk {
-
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
       }
 
       .talk-video {
-          width: 100%;
-          height: 25vw;
-          min-height: 55vh;
-      }
-
-      .talk-title {
-
+        width: 100%;
+        height: 25vw;
+        min-height: 55vh;
       }
 
       .section.green { background-color: #4caf50; }
@@ -99,30 +99,47 @@
       span.orange, p.orange, a.orange { color: #ff5722; }
 
 
-      .section h1 { font-size: 10rem; padding: 5% 0; } 
-      .section h2 { font-size: 8rem; padding: 3% 0; } 
-      .section h3 { font-size: 6rem; padding: 2% 10px; margin: 0 -10px; position: sticky; top: 0; background-color: inherit; z-index: 1; } 
-      .section h4 { font-size: 4rem; padding: 2% 0; } 
-      .section h5 { font-size: 3rem; padding: 2% 0; } 
-      .section h6 { font-size: 2rem; padding: 2% 0; } 
+      .section h1 { font-size: 6rem; padding: 5% 0; }
+      .section h2 { font-size: 4rem; padding: 3% 0; }
+      .section h3 { font-size: 3.5rem; padding: 2% 10px; margin: 0 -10px; position: sticky; top: 0; background-color: inherit; z-index: 1; }
+      .section h4 { font-size: 3rem; padding: 2% 0; }
+      .section h5 { font-size: 2.5rem; padding: 2% 0; }
+      .section h6 { font-size: 2rem; padding: 2% 0; }
 
-      .card-title { font-size: 154%; font-weight: bold; padding-bottom: 15px; text-transform: uppercase;  }
+      .card-title { font-size: 154%; font-weight: bold; padding-bottom: 15px; text-transform: uppercase; }
 
       @media screen and (max-width: 630px) {
-        .section h1 { font-size: 8em; padding: 5% 0; } 
-        .section h2 { font-size: 6em; padding: 3% 0; } 
-        .section h3 { font-size: 4em; padding: 2% 0; } 
-        .section h4 { font-size: 2em; padding: 2% 0; } 
-        .section h5 { font-size: 1.5em; padding: 2% 0; } 
-        .section h6 { font-size: 0.8em; padding: 2% 0; } 
+        .section h1 { font-size: 6em; padding: 5% 0; }
+        .section h2 { font-size: 4em; padding: 3% 0; }
+        .section h3 { font-size: 3.5em; padding: 2% 0; }
+        .section h4 { font-size: 3em; padding: 2% 0; }
+        .section h5 { font-size: 2.5em; padding: 2% 0; }
+        .section h6 { font-size: 2em; padding: 2% 0; }
 
         /* Better li padding for mobile */
         dd ul { padding-left: 10px !important; }
+
+        #main-title {
+          align-items: flex-start;
+        }
       }
 
       /* Oddity of the widget */
-      .twitter-timeline { margin: 0 auto !important; }
-      #instagram-widget { margin: 0 auto !important; height: 100%; }
+      .twitter-timeline {
+        margin: 0 auto !important;
+      }
+
+      #instagram-widget {
+        margin: 0 auto !important;
+        height: 100%;
+      }
+
+      #instagram-widget iframe {
+        width: 100%;
+        border: none;
+        overflow: hidden;
+        height: 390px;
+      }
 
       /* Misc change to better align things */
       dd ul {
@@ -136,7 +153,7 @@
 
       <h1 id="main-title"> <img src="//github.com/bogas04.png" alt="👳🏽"/> Divjot Singh </h1>
 
-      <div class="social-icons"> 
+      <div class="social-icons">
          <a href="https://linkedin.com/in/bogas04" target="_blank">
            <img src="img/linkedin.png" alt="LinkedIn" />
          </a>
@@ -210,13 +227,13 @@
             <dt>Performance: </dt> <dd> 79.48% <small>5<sup>th</sup> position in entire department (~190 students)</small></dd>
             <dt>Majored In: </dt> <dd> Computer Engineering </dd>
             <dt>Major Achievements: </dt>
-            <dd> 
+            <dd>
             <ul>
               <li>Granted merit scholarship for all four years.</li>
               <li>Consistently stood in top 10 performing students of the department.</li>
               <li>Mentored class of 30 in an IEEE NSIT SIG for Web Development and Design</li>
               <li>Wrote a report on <a href="Rapes.pdf">Rapes</a></li>
-              <li>Successfully completed projects like : 
+              <li>Successfully completed projects like :
                 <a target="_blank" href="//github.com/bogas04/mvp-generator">MVP Generator</a> |
                 <a target="_blank" href="//github.com/bogas04/collnet">CollNet</a> |
                 <a target="_blank" href="//github.com/bogas04/cloudkeeper">CloudKeeper</a> |
@@ -225,7 +242,7 @@
               <li>Worked on a research project under Vidhi Khanduja (Assistant Professor) on a database watermarking scheme.</li>
             </ul>
             </dd>
-            <dt>Societies: </dt> 
+            <dt>Societies: </dt>
             <dd>
             <ul>
               <li> <a target="_blank" href="//ieeensit.org">IEEE NSIT</a> - Web Developer</li>
@@ -233,7 +250,7 @@
               <li> <a target="_blank" href="//collegespace.in">CollegeSpace</a> - Tech Head </li>
             </ul>
             </dd>
-          </dl> 
+          </dl>
         </div> <!-- Row Ends -->
 
         <div class="row card">
@@ -244,7 +261,7 @@
             <dt>Performance in 12<sup>th</sup></dt> <dd> 95.2% </dd>
             <dt>Performance in 10<sup>th</sup></dt> <dd> 9.8 CGPA ~ 93.1% </dd>
             <dt>Major Achievements: </dt>
-            <dd> 
+            <dd>
             <ul>
               <li>Granted merit scholarship for 3 years: 10<sup>th</sup> - 12<sup>th</sup> grades</li>
               <li>Topped Science department in 12<sup>th</sup> Grade</li>
@@ -261,18 +278,18 @@
       <h3> Such Work </h3>
 
       <div class="container-fluid">
-        
+
         <div class="row card">
-          <div class="card-title">User Interface Engineer II, <a target="_blank" href="https://swiggy.com">Swiggy, Bengaluru</a> </div>
+          <div class="card-title"><a target="_blank" href="https://swiggy.com">Swiggy, Bengaluru</a>, User Interface Engineer II </div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>January 2018 - Present</dd>
             <dt>Team: </dt> <dd>Portal Team</dd>
             <dt>Description: </dt> <dd>TBA</dd>
           </dl>
         </div>
-        
+
         <div class="row card">
-          <div class="card-title">Senior Software Development Engineer, <a target="_blank" href="https://housing.com">Housing.com, Mumbai</a> </div>
+          <div class="card-title"><a target="_blank" href="https://housing.com">Housing.com, Mumbai</a>, Senior Software Development Engineer </div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>October 2017 - January 2018</dd>
             <dt>Team: </dt> <dd><a href="https://twitter.com/HousingEngg" target="_blank">@HousingEngg</a> Frontend team</dd>
@@ -281,7 +298,7 @@
               <li>Migrated to React 16 from version 15. 50% win for <code>renderToString</code> completion time.</li>
               <li>Migrated to NodeJS version 8 from version 6 gave another 50% win for above.</li>
               <li>Reduced asset size by roughly 20% using Brotli compression.</li>
-              <li>Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.</li> 
+              <li>Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.</li>
               <li>Improved scroll performance of listing page by using <code>will-change</code> CSS rule, along with disabling <code>pointer-events</code> on scroll.</li>
             </ul>
             </dd>
@@ -289,7 +306,7 @@
         </div>
 
         <div class="row card">
-          <div class="card-title">Software Developer, <a target="_blank" href="http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html">Samsung R&D Institue, Bangalore</a> </div>
+          <div class="card-title"><a target="_blank" href="http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html">Samsung R&D Institue, Bangalore</a>, Software Developer </div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>June 2016 - October 2017</dd>
             <dt>Team: </dt> <dd><a href="https://twitter.com/SamsungInternet" target="_blank">@SamsungInternet</a> team</dd>
@@ -342,7 +359,7 @@
         </div> <!-- Row Ends -->
 
         <div class="row card">
-          <div class="card-title">Fullstack JavaScript Developer, <a target="_blank" href="http://chefsbasket.com">Fizzy Food Lab's, Mumbai</a> </div>
+          <div class="card-title"><a target="_blank" href="http://chefsbasket.com">Fizzy Food Lab's, Mumbai</a>, Fullstack JavaScript Developer </div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>December 2015 - January 2015 ( 1 Month )</dd>
             <dt>Description: </dt>
@@ -355,15 +372,15 @@
         </div> <!-- Row Ends -->
 
         <div class="row card">
-          <div class="card-title">Student Trainee, <a target="_blank" href="//www.samsung.com/in/sri-b/siso.html">Samsung Research Institute, Bangalore</a> </div>
+          <div class="card-title"><a target="_blank" href="//www.samsung.com/in/sri-b/siso.html">Samsung Research Institute, Bangalore</a>, Student Trainee</div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>June 2015 - August 2015 ( 2 Months )</dd>
             <dt>Description: </dt>
             <dd>
             <ul>
               <li>Developed tile based map server using NodeJS, mapnik and TileMill</li>
-              <li>Set up Mongodb cluster (3 systems), developed scripts to convert data from mongodb 
-                to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display 
+              <li>Set up Mongodb cluster (3 systems), developed scripts to convert data from mongodb
+                to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display
                 results of the road anlaysis done by Hadoop.</li>
             </ul>
             </dd>
@@ -371,7 +388,7 @@
         </div> <!-- Row Ends -->
 
         <div class="row card">
-          <div class="card-title">Product Developer, <a target="_blank" href="//refiral.com">Refiral</a></div>
+          <div class="card-title"><a target="_blank" href="//refiral.com">Refiral</a>, Product Developer</div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>October 2013 - October 2014 ( 1 Year )</dd>
             <dt>Description: </dt>
@@ -389,11 +406,11 @@
           </dl>
         </div> <!-- Row Ends -->
         <div class="row card">
-          <div class="card-title">Frontend Development Intern, <a target="_blank" href="//frrole.com">Frrole</a></div>
+          <div class="card-title"><a target="_blank" href="//frrole.com">Frrole</a>, Frontend Development Intern</div>
           <dl class="dl-horizontal">
             <dt>Duration: </dt> <dd>November 2013 - January 2014 ( 3 Months )</dd>
             <dt>Description: </dt>
-            <dd>Buzzometer - Created an interactive and responsive web app using the APIs of Frrole 
+            <dd>Buzzometer - Created an interactive and responsive web app using the APIs of Frrole
             using jQuery , PHP and XML for analyzing the buzz created by a particular movie.</dd>
           </dl>
         </div> <!-- Row Ends -->
@@ -407,7 +424,7 @@
     <div class="section green" style="z-index:13">
       <h3> So Talkative </h3>
       <div class="container-fluid">
-        <div class="row">        
+        <div class="row">
           <div class="talks">
             <div class="talk">
               <iframe
@@ -446,7 +463,6 @@
                 allowTransparency="true"
                 frameborder="0"
                 scrolling="no"
-                style="border:none; overflow:hidden; width:390px; height:390px"
               ></iframe>
             </div>
           </div>
@@ -462,7 +478,7 @@
     </div> <!-- Section Ends -->
 
     <script src="js/website.js"></script>
-  
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110963096-1"></script>
     <script>
