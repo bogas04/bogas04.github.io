@@ -65,10 +65,14 @@
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
       }
 
-      .talk-video {
+      .talk-video, .talk-image {
         width: 100%;
         height: 25vw;
         min-height: 55vh;
+      }
+      
+      .talk-image {
+        object-fit: cover;
       }
 
       .section.green { background-color: #4caf50; }
@@ -448,7 +452,7 @@
             </div>
             <div class="talk">
               <img
-                      class="talk-video"
+                      class="talk-image"
                       src="img/testing-with-jest.png"
               />
               <h6 class="talk-title"><a href="http://bit.ly/jest-04-2018">Testing with Jest</a> at <a href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/" target="_blank">ReactJS Bangalore #32</a></h6>
