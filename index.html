@@ -61,14 +61,13 @@
 
       .talks {
         display: grid;
-        grid-gap: 10px;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-gap: 50px;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
       }
 
       .talk-video, .talk-image {
+        height: 50vh;
         width: 100%;
-        height: 25vw;
-        min-height: 55vh;
       }
       
       .talk-image {
@@ -108,6 +107,17 @@
       .section h5 { font-size: 2.5rem; padding: 2% 0; }
       .section h6 { font-size: 2rem; padding: 2% 0; }
 
+      .social-grid .card-title {
+        height: 45vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .social-grid a {
+        color: inherit;
+      }
+
       .card-title { font-size: 154%; font-weight: bold; padding-bottom: 15px; text-transform: uppercase; }
 
       @media screen and (max-width: 750px) {
@@ -124,23 +134,17 @@
         #main-title {
           align-items: flex-start;
         }
-      }
 
-      /* Oddity of the widget */
-      .twitter-timeline {
-        margin: 0 auto !important;
-      }
+        .talks {
+          display: grid;
+          grid-gap: 50px;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
 
-      #instagram-widget {
-        margin: 0 auto !important;
-        height: 100%;
-      }
-
-      #instagram-widget iframe {
-        width: 100%;
-        border: none;
-        overflow: hidden;
-        height: 390px;
+        .talk-video, .talk-image {
+          height: 50vh;
+          width: 100%;
+        }
       }
 
       /* Misc change to better align things */
@@ -457,6 +461,13 @@
               />
               <h6 class="talk-title"><a href="http://bit.ly/jest-04-2018">Testing with Jest</a> at <a href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/" target="_blank">ReactJS Bangalore #32</a></h6>
             </div>
+            <div class="talk">
+              <img
+                      class="talk-image"
+                      src="img/react-2019.png"
+              />
+              <h6 class="talk-title"><a href="http://bit.ly/react-2019">React in 2019</a> at <a href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/" target="_blank">ReactJS Bangalore #41</a></h6>
+            </div>
           </div>
         </div>
       </div>
@@ -467,33 +478,16 @@
       <div class="container-fluid">
 
 
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <p class="card-title"> Find me on <a target="_blank" href="//twitter.com/bogas04">Twitter</a> </p>
-            <a class="twitter-timeline" target="_blank" href="//twitter.com/bogas04" data-widget-id="384610708496723968">
-              Tweets by @bogas04
-            </a>
+        <div class="row social-grid">
+          <div class="col-md-6 text-center">
+            <p class="card-title"> <a target="_blank" href="//twitter.com/bogas04">Twitter</a> </p>
+            <p class="card-title"> <a target="_blank" href="//instagram.com/bogas04">Instagram</a> </p>
           </div>
 
-          <div class="col-md-4 text-center">
-            <p class="card-title"> Find me on <a target="_blank" href="//instagram.com/bogas04">Instagram</a> </p>
-            <div id="instagram-widget">
-              <iframe
-                src="https://snapwidget.com/embed/499964"
-                class="snapwidget-widget"
-                allowTransparency="true"
-                frameborder="0"
-                scrolling="no"
-              ></iframe>
-            </div>
+          <div class="col-md-6 text-center">
+            <p class="card-title"> <a target="_blank" href="//youtube.com/divjotbogas">YouTube</a></p>
+            <p class="card-title"> <a target="_blank" href="https://medium.com/@bogas04">Medium</a></p>
           </div>
-
-          <div class="col-md-4 text-center">
-            <div class="card-title"> Find Me on <a target="_blank" href="//youtube.com/divjotbogas">YouTube</a>, <a href="https://medium.com/@bogas04" target="_blank">Medium</a></div>
-            <div class="g-ytsubscribe" data-channel="DivjotBogas" data-layout="full" data-theme="dark" data-count="default"></div>
-            <hr/>
-          </div>
-
         </div> <!-- Container Ends -->
       </div> <!-- Row Ends -->
     </div> <!-- Section Ends -->
