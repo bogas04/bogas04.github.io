@@ -71,6 +71,7 @@
       display: grid;
       grid-gap: 50px;
       grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      width: 100%;
     }
 
     .talk-video,
@@ -237,7 +238,7 @@
       position: absolute;
       left: -11px;
       border-radius: 50%;
-      top: 10px;
+      top: 8px;
     }
 
     #work .row.card {
@@ -717,26 +718,48 @@
       <div class="row">
         <div class="talks">
           <div class="talk">
+            <img class="talk-image" src="img/blazing-fast-web.png" alt="Banner image for the talk" />
+            <h6 class="talk-title">
+              <a href="http://bit.ly/web-performance-2019">Web Performance in 2019</a> at
+              <a href="https://www.hellomeets.com/" target="_blank" rel="noopener noreferrer">Hello Meets, Swiggy
+                Office</a>
+            </h6>
+          </div>
+
+          <div class="talk">
             <iframe title="Video of the talk" id="ytplayer" type="text/html" class="talk-video" frameborder="0"
               src="https://www.youtube.com/embed/lN8b_fXRC_A?autoplay=0&origin=https://bogas04.github.io"></iframe>
+            <h6 class="talk-title">
+              <a href="https://www.swiggy.com">Swiggy ♥️ Web</a> at
+              <a href="" target="_blank" rel="noopener noreferrer">Keynote, Google for Mobile India 2019</a>
+            </h6>
+          </div>
 
-            <h6 class="talk-title"><a href="http://bit.ly/gddx-dec2017">Delivering Fast Web-apps Fast</a> at <a
-                href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
-                target="_blank" rel="noopener noreferrer">Google Developers' Day, Extended (Mumbai)</a></h6>
-          </div>
-          <div class="talk">
-            <img class="talk-image" src="img/testing-with-jest.png" alt="Banner image for the talk" />
-            <h6 class="talk-title"><a href="http://bit.ly/jest-04-2018">Testing with Jest</a> at <a
-                href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/" target="_blank"
-                rel="noopener noreferrer">ReactJS Bangalore
-                #32</a></h6>
-          </div>
           <div class="talk">
             <img class="talk-image" src="img/react-2019.png" alt="Banner image for the talk" />
             <h6 class="talk-title"><a href="http://bit.ly/react-2019">React in 2019</a> at <a
                 href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/" target="_blank"
-                rel="noopener noreferrer">ReactJS Bangalore
-                #41</a></h6>
+                rel="noopener noreferrer">ReactJS Bangalore #41</a></h6>
+          </div>
+
+          <div class="talk">
+            <img class="talk-image" src="img/testing-with-jest.png" alt="Banner image for the talk" />
+            <h6 class="talk-title">
+              <a href="http://bit.ly/jest-04-2018">Testing with Jest</a> at
+              <a href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/" target="_blank"
+                rel="noopener noreferrer">ReactJS Bangalore #32</a>
+            </h6>
+          </div>
+
+          <div class="talk">
+            <iframe title="Video of the talk" id="ytplayer" type="text/html" class="talk-video" frameborder="0"
+              src="https://www.youtube.com/embed/lN8b_fXRC_A?autoplay=0&origin=https://bogas04.github.io"></iframe>
+
+            <h6 class="talk-title">
+              <a href="http://bit.ly/gddx-dec2017">Delivering Fast Web-apps Fast</a> at
+              <a href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
+                target="_blank" rel="noopener noreferrer">Google Developers' Day, Extended (Mumbai)</a>
+            </h6>
           </div>
         </div>
       </div>
@@ -765,7 +788,7 @@
       </div> <!-- Container Ends -->
     </div> <!-- Row Ends -->
   </div> <!-- Section Ends -->
-  
+
   <script src="js/website.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110963096-1"></script>
