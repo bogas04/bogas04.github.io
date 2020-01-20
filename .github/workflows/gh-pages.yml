@@ -24,6 +24,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+
       - run: npm ci
 
       - run: npm run test
