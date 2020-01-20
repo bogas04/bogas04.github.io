@@ -1,0 +1,8 @@
+{
+	"background_color": "#ffffff",
+	"theme_color": "#333333",
+	"name": "bogas04.github.io",
+	"short_name": "Divjot's personal website",
+	"display": "minimal-ui",
+	"start_url": "/"
+}

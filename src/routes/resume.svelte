@@ -1,0 +1,10 @@
+<script>
+  window.location.href =
+    "https://drive.google.com/open?id=0B8Ac2U3EnKTJdWZEblVzQV96QlU";
+</script>
+
+<svelte:head>
+  <meta
+    http-equiv="refresh"
+    content="1;url=https://drive.google.com/open?id=0B8Ac2U3EnKTJdWZEblVzQV96QlU" />
+</svelte:head>

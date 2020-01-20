@@ -1,23 +1,10 @@
 import * as fs from "fs";
-import * as path from "path";
-import snarkdown from "snarkdown";
+import path from "path";
+import { toMarkdown, parseHead, getHeroImage } from "./_utils";
 
-const sanitize = str =>
-  str
-    .replace(/  /gi, " ")
-    .replace(/['"]/gi, "")
-    .trim();
+const pathJoin = path.join;
 
-const sanitizeDate = date => {
-  return new Date(date).toLocaleDateString("en-ca").replace(/\//gi, "-");
-};
-
-const slugifiy = (title, date) =>
-  `${title.replace(/,/gi, "-").replace(/ /gi, "-")}-${sanitizeDate(
-    date
-  )}`.toLowerCase();
-
-const blogDataFolder = path.join(
+const blogDataFolder = pathJoin(
   process.cwd(),
   "src",
   "routes",
@@ -25,45 +12,29 @@ const blogDataFolder = path.join(
   "_data"
 );
 
-function parseHead(rawHead) {
-  const lines = rawHead
-    .split("\n")
-    .map(line => line.trim())
-    .filter(Boolean);
-
-  const meta = {};
-
-  let previousTag = "";
-
-  for (const line of lines) {
-    if (line.includes(":")) {
-      const [tag, ...content] = line.split(":");
-      previousTag = tag;
-      meta[previousTag] = sanitize(content.join(":"));
-      continue;
-    }
-    meta[previousTag] += sanitize(line);
-  }
-
-  meta.slug = slugifiy(meta.title, meta.date);
-
-  return meta;
-}
-
 const posts = fs
+  // read all files
   .readdirSync(blogDataFolder)
+  // filter out mds
   .filter(fileName => /\.md$/.test(fileName))
-  .map(fileName =>
-    fs.readFileSync(path.join(blogDataFolder, fileName), "utf-8")
-  )
-  .map(content => content.split("---"))
-  .map(([, head, body]) => {
+  // filter out drafts
+  .filter(fileName => !/^draft /.test(fileName))
+  // get contents
+  .map(fileName => fs.readFileSync(pathJoin(blogDataFolder, fileName), "utf-8"))
+  .map(content => {
+    // parse front matter
+    const [, head, body] = content.split("---");
     const meta = parseHead(head);
+    const html = toMarkdown(body);
 
+    // construct posts data
     return {
       ...meta,
-      html: snarkdown(body)
+      image: getHeroImage(html),
+      html
     };
-  });
+  })
+  // sort by date
+  .sort((a, b) => a.date < b.date);
 
 export default posts;
