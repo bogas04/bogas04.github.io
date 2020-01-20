@@ -341,11 +341,8 @@
       rel="noopener noreferrer">
       <img src="img/twitter.png" alt="Twitter" />
     </a>
-    <a
-      href="https://medium.com/@bogas04"
-      target="_blank"
-      rel="noopener noreferrer">
-      <img src="img/medium.svg" alt="Medium" />
+    <a href="/blog">
+      <img src="img/medium.svg" alt="Blog" />
     </a>
     <a
       href="https://github.com/bogas04"
