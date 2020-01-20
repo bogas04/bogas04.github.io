@@ -1,6 +1,6 @@
 ---
-title: Monorepos. Let’s talk about it.
-description: >-
+title: Monorepos, let's talk about it
+description:
   Recall the days when you were just introduced to git or a similar type of
   version control system. I’m guessing you must have faced some…
 date: "2019-09-17T07:55:58.095Z"
@@ -9,8 +9,7 @@ keywords: []
 slug: /@bogas04/monorepos-lets-talk-about-it-4b1b7d4f1038
 ---
 
-![Beautiful illustrations credits: [Undraw](https://undraw.co/)](img/blog/1__zWhHZUDWuxJwfEoumC1__OQ.png)
-Beautiful illustrations credits: [Undraw](https://undraw.co/)
+![Image credits: undraw](img/blog/1__zWhHZUDWuxJwfEoumC1__OQ.png)
 
 Recall the days when you were just introduced to `git` or a similar type of version control system. I’m guessing you must have faced some friction initially, how it breaks your flow, how you just can’t merge to master without rebasing/merging changes in first.
 
@@ -24,8 +23,7 @@ While git was solving problems around managing single codebase with multiple tea
 
 > Is Monorepo that cool font I see on Twitter?
 
-![Beautiful illustrations credits: [Undraw](https://undraw.co/)](img/blog/1__ZzlBaQH6w1BgwZdo3bIYRQ.png)
-Beautiful illustrations credits: [Undraw](https://undraw.co/)
+![Image credits: undraw](img/blog/1__ZzlBaQH6w1BgwZdo3bIYRQ.png)
 
 Before diving into the topic, let’s first understand what Monorepo truly means. This is what Wikipedia has to say:
 
@@ -60,8 +58,7 @@ When I say work, I mean writing features, updating build pipeline, reviewing cod
 
 As the codebases grew, we recognized some patterns:
 
-![Beautiful illustrations credits: [Undraw](https://undraw.co/)](img/blog/1____L__bUfSLVT6EboXRO7SSGg.png)
-Beautiful illustrations credits: [Undraw](https://undraw.co/)
+![Image credits: undraw](img/blog/1____L__bUfSLVT6EboXRO7SSGg.png)
 
 - Features written on mweb, while dissimilar enough to not to be dragged and dropped to dweb, held enough similarities to be broken into reusable parts.
 - Fixes that go on mweb are also needed on dweb.
@@ -112,8 +109,7 @@ The linter is common to entire Monorepo, and each new rule affects all the packa
 - **cache** (a caching module used by mweb and dweb)
 - **restaurant-url** (a restaurant slug generator, multiple tenants)
 
-![Beautiful illustrations credits: [Undraw](https://undraw.co/)](img/blog/1__kvwGrM__62LBXWLHxH__QwGw.png)
-Beautiful illustrations credits: [Undraw](https://undraw.co/)
+![Image credits: undraw](img/blog/1__kvwGrM__62LBXWLHxH__QwGw.png)
 
 I think that giving the option to easily create a new package incentivizes developers to think in more modular terms. They don’t think in the context of an app but rather in a more general way.
 
@@ -147,8 +143,7 @@ But it ain’t all fun. Our PR section is a bit noisier. It’s not like we’re
 
 So far we’re seeing Monorepo architecture a better fit for our growing codebase and team. It also impacts the way we design new libraries and components, often promoting clearer separations of concerns.
 
-![Beautiful illustrations credits: [Undraw](https://undraw.co/)](img/blog/1__O3UIYiDjYTXMAZd7GBMwVg.png)
-Beautiful illustrations credits: [Undraw](https://undraw.co/)
+![Image credits: undraw](img/blog/1__O3UIYiDjYTXMAZd7GBMwVg.png)
 
 Should you use monorepo? Like all things, it depends on TM! I hope this blog gave enough insight to you as to why we started using a Monorepo, and how it’s benefiting us.
 

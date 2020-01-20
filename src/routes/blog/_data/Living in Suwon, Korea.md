@@ -1,6 +1,6 @@
 ---
-title: "Living in Suwon, Korea"
-description: >-
+title: Living in Suwon, Korea
+description:
   First of all, let me clear out that I’m not a blogger, and definitely not as
   equipped in English as I would say I’m in JavaScript.
 date: "2016-11-27T11:48:44.318Z"

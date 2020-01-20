@@ -1,9 +1,9 @@
 ---
 title: Always bet on web
-description: >-
+description:
   Most companies don’t take the effort to build and maintain a good webapp. The
   focus has always been on getting your users to download a…
-date: ""
+date: "2018-08-19T06:02:13.793Z"
 categories: []
 keywords: []
 slug: ""

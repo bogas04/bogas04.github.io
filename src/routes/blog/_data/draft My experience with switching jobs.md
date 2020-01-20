@@ -1,7 +1,7 @@
 ---
 title: My experience with switching jobs
 description: I recently switched my job and this post is all about it.
-date: ""
+date: "2017-11-09T06:02:13.793Z"
 categories: []
 keywords: []
 slug: ""

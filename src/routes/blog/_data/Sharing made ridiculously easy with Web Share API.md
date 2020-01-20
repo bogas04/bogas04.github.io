@@ -1,6 +1,6 @@
 ---
 title: Sharing made ridiculously easy with Web Share API
-description: >-
+description:
   With growing mobile usage, performance and leanness (yeah, that’s a word) is
   becoming top priority for web apps. Oddly enough, sharing has…
 date: "2017-09-22T16:27:20.946Z"

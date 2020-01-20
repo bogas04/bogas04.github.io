@@ -796,9 +796,7 @@
       <dl class="dl-horizontal">
         <dt>Resume:</dt>
         <dd>
-          <a target="_blank" rel="noopener noreferrer" href="resume.html">
-            Resume
-          </a>
+          <a target="_blank" rel="noopener noreferrer" href="/resume">Resume</a>
         </dd>
         <dt>Programming Languages:</dt>
         <dd>C, TypeScript, JavaScript (ES2015+), PHP, Java,</dd>
@@ -980,7 +978,7 @@
             </li>
             <li>
               Wrote a report on
-              <a href="Rapes.pdf">Rapes</a>
+              <a href="/Rapes.pdf">Rapes</a>
             </li>
             <li>
               Successfully completed projects like :

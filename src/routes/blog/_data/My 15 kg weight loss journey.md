@@ -1,6 +1,6 @@
 ---
-title: My 15 kg weight loss journey.
-description: >-
+title: My 15 kg weight loss journey
+description:
   So coming to my story, I didn’t quite intend to lose weight, or follow any
   diet, or did a rigorous workout. I believe that it’s basically…
 date: "2017-07-20T10:31:03.755Z"

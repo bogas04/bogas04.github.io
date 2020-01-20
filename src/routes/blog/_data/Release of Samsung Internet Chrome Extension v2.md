@@ -1,6 +1,6 @@
 ---
 title: Release of Samsung Internet Chrome Extension v2
-description: >-
+description:
   Update Oct 2017: Since the release of v2 (March 2017), we saw a 9.3x increase
   in our monthly active users (~8k to 75k). We also observed…
 date: "2017-03-09T06:02:13.793Z"

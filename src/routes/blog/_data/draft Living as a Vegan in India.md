@@ -1,9 +1,9 @@
 ---
 title: Living as a Vegan in India
-description: >-
+description:
   You might know from my previous post that I underwent a body transformation by
   losing 20 kilograms over 6 months. I touch about my diet…
-date: ""
+date: "2018-03-09T06:02:13.793Z"
 categories: []
 keywords: []
 slug: ""
