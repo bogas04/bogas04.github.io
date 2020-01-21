@@ -71,6 +71,19 @@
     max-width: 200px;
   }
 
+  .uses {
+    font-size: 2rem;
+    display: block;
+    font-style: italic;
+    color: #ffc600;
+    text-decoration: underline #eb4471;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 10vh;
+  }
+
   .talks {
     display: grid;
     grid-gap: 50px;
@@ -351,6 +364,8 @@
       <img src="img/github.svg" alt="GitHub" />
     </a>
   </nav>
+
+  <a class="uses" href="/uses" rel="prefetch">/uses</a>
 
 </div>
 <!-- Section Ends -->
