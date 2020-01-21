@@ -21,22 +21,22 @@
     line-height: 1.5;
   }
 
-  li {
-    list-style: none;
-  }
-
   .post {
-    text-decoration: none;
+    list-style: none;
     border-radius: 5px;
     border: 1px solid #cbcbcb;
-    padding: 1em;
     margin: 1em;
     transition: all 0.2s;
+  }
+
+  .post a {
+    text-decoration: none;
+    padding: 1em;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 1em;
   }
+
   .post:hover {
     box-shadow: #0003 0px 2px 5px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
       rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
@@ -46,14 +46,22 @@
     min-width: 30%;
     max-width: 30%;
   }
+
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+  }
   @media (max-width: 800px) {
-    .post {
+    .post a {
       flex-direction: column-reverse;
     }
     .post img {
-      min-width: 100%;
+      min-width: calc(100% + 2em);
       padding: 0;
-      margin: 1em;
+      margin: -1em -1em 1em;
+      height: 300px;
+      object-fit: cover;
     }
   }
 </style>
@@ -91,21 +99,19 @@
 
 <ul>
   {#each posts as post}
-    <!-- we're using the non-standard `rel=prefetch` attribute to
-				tell Sapper to load the data for the page as soon as
-				the user hovers over the link or taps it, instead of
-				waiting for the 'click' event -->
-    <a rel="prefetch" href="blog/{post.slug}" class="post">
-      <li>
-        <h2>{post.title}</h2>
+    <li class="post">
+      <a rel="prefetch" href="blog/{post.slug}">
+        <div class="post-body">
+          <h2>{post.title}</h2>
 
-        <p>{post.description}</p>
-        <span>{sanitizeDate(post.date)}</span>
-      </li>
-      {#if post.image}
-        <img src={post.image} alt="Image for the post" />
-      {/if}
-    </a>
+          <p>{post.description}</p>
+          <span>{new Date(post.date).toDateString()}</span>
+        </div>
+        {#if post.image}
+          <img src={post.image} alt="Image for the post" />
+        {/if}
+      </a>
+    </li>
   {/each}
 
 </ul>
