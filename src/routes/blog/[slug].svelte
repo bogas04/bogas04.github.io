@@ -14,9 +14,12 @@
 </script>
 
 <script>
+  import { BLOG_URL, WEBSITE_URL } from "../../constants";
+
   export let post;
   export const postTitle = `${post.title} | Blog | Divjot Singh`;
-  export const postUrl = `https://bogas04.github.io/blog/${post.slug}`;
+  export const postUrl = `${BLOG_URL}/${post.slug}`;
+  export const postImage = `${WEBSITE_URL}/${post.image}`;
 </script>
 
 <style>
@@ -66,14 +69,14 @@
   <meta property="og:url" content={postUrl} />
   <meta property="og:title" content={postTitle} />
   <meta property="og:description" content={post.description} />
-  <meta property="og:image" content={post.image} />
+  <meta property="og:image" content={postImage} />
 
   <!-- Twitter -->
-  <meta property="twitter:card" content={post.image} />
+  <meta property="twitter:card" content={postImage} />
   <meta property="twitter:url" content={postUrl} />
   <meta property="twitter:title" content={postTitle} />
   <meta property="twitter:description" content={post.description} />
-  <meta property="twitter:image" content={post.image} />
+  <meta property="twitter:image" content={postImage} />
 </svelte:head>
 
 <h1>

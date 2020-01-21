@@ -10,6 +10,7 @@
 </script>
 
 <script>
+  import { BLOG_URL } from "../../constants";
   export let posts;
 </script>
 
@@ -65,7 +66,7 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bogas04.github.io/blog" />
+  <meta property="og:url" content={BLOG_URL} />
   <meta property="og:title" content="Blog | Divjot Singh" />
   <meta
     property="og:description"
@@ -74,7 +75,7 @@
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://bogas04.github.io/blog" />
+  <meta property="twitter:url" content={BLOG_URL} />
   <meta property="twitter:title" content="Blog | Divjot Singh" />
   <meta
     property="twitter:description"
