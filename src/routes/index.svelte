@@ -324,7 +324,6 @@
 </style>
 
 <svelte:head>
-  <title>Divjot Singh</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -332,6 +331,34 @@
   <link
     rel="stylesheet"
     href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+  <!-- Primary Meta Tags -->
+  <title>Divjot Singh | Developer | Vegan | Sikh</title>
+  <meta name="title" content="Divjot Singh | Developer | Vegan | Sikh" />
+  <meta
+    name="description"
+    content="Developer, Sikh & a Vegan residing in Bengaluru, India." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bogas04.github.io/" />
+  <meta property="og:title" content="Divjot Singh | Developer | Vegan | Sikh" />
+  <meta
+    property="og:description"
+    content="Developer, Sikh & a Vegan residing in Bengaluru, India." />
+  <meta property="og:image" content="https://github.com/bogas04.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://bogas04.github.io/" />
+  <meta
+    property="twitter:title"
+    content="Divjot Singh | Developer | Vegan | Sikh" />
+  <meta
+    property="twitter:description"
+    content="Developer, Sikh & a Vegan residing in Bengaluru, India." />
+  <meta property="twitter:image" content="https://github.com/bogas04.png" />
+
 </svelte:head>
 
 <div class="section" style="z-index:10">
