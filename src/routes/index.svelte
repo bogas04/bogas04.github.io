@@ -671,7 +671,7 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>December 2015 - January 2015 ( 1 Month )</dd>
+        <dd>December 2015 - January 2015</dd>
         <dt>Description:</dt>
         <dd>
           <ul>
@@ -703,7 +703,7 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>June 2015 - August 2015 ( 2 Months )</dd>
+        <dd>June 2015 - August 2015</dd>
         <dt>Description:</dt>
         <dd>
           <ul>
@@ -731,7 +731,7 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>October 2013 - October 2014 ( 1 Year )</dd>
+        <dd>October 2013 - October 2014</dd>
         <dt>Description:</dt>
         <dd>
           Co-founding team member. Managed JavaScript head of the tool.
@@ -772,11 +772,11 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>November 2013 - January 2014 ( 3 Months )</dd>
+        <dd>November 2013 - January 2014</dd>
         <dt>Description:</dt>
         <dd>
           Buzzometer - Created an interactive and responsive web app using the
-          APIs of Frrole using jQuery , PHP and XML for analyzing the buzz
+          APIs of Frrole using jQuery, PHP and XML for analyzing the buzz
           created by a particular movie.
         </dd>
       </dl>

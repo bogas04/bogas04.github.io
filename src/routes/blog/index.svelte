@@ -24,7 +24,7 @@
     list-style: none;
   }
 
-  a {
+  .post {
     text-decoration: none;
     border-radius: 5px;
     border: 1px solid #cbcbcb;
@@ -33,17 +33,27 @@
     transition: all 0.2s;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    padding: 1em;
   }
-  a:hover {
+  .post:hover {
     box-shadow: #0003 0px 2px 5px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
       rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
   }
-  a img {
-    margin: -1em -1em;
-    padding-left: 2em;
+  .post img {
+    margin: 0;
     min-width: 30%;
     max-width: 30%;
+  }
+  @media (max-width: 800px) {
+    .post {
+      flex-direction: column-reverse;
+    }
+    .post img {
+      min-width: 100%;
+      padding: 0;
+      margin: 1em;
+    }
   }
 </style>
 
@@ -73,7 +83,10 @@
 
 </svelte:head>
 
-<h1>My blog</h1>
+<h1>
+  <a href="/" rel="preload">Divjot Singh</a>
+  | Blog
+</h1>
 
 <ul>
   {#each posts as post}
@@ -81,7 +94,7 @@
 				tell Sapper to load the data for the page as soon as
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
-    <a rel="prefetch" href="blog/{post.slug}">
+    <a rel="prefetch" href="blog/{post.slug}" class="post">
       <li>
         <h2>{post.title}</h2>
 

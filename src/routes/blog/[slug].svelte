@@ -77,8 +77,10 @@
 </svelte:head>
 
 <h1>
-  <a href="/blog">My blog</a>
-  / {post.title}
+  <a href="/">Divjot Singh</a>
+  |
+  <a href="/blog" rel="preload">Blog</a>
+  | {post.title}
 </h1>
 
 <div class="content">
