@@ -15,6 +15,8 @@
 
 <script>
   export let post;
+  export const postTitle = `${post.title} | Blog | Divjot Singh`;
+  export const postUrl = `https://bogas04.github.io/blog/${post.slug}`;
 </script>
 
 <style>
@@ -54,7 +56,24 @@
 </style>
 
 <svelte:head>
-  <title>{post.title}</title>
+  <!-- Primary Meta Tags -->
+  <title>{postTitle}</title>
+  <meta name="title" content={postTitle} />
+  <meta name="description" content={post.description} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={postUrl} />
+  <meta property="og:title" content={postTitle} />
+  <meta property="og:description" content={post.description} />
+  <meta property="og:image" content={post.image} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content={post.image} />
+  <meta property="twitter:url" content={postUrl} />
+  <meta property="twitter:title" content={postTitle} />
+  <meta property="twitter:description" content={post.description} />
+  <meta property="twitter:image" content={post.image} />
 </svelte:head>
 
 <h1>

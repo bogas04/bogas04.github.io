@@ -48,7 +48,29 @@
 </style>
 
 <svelte:head>
-  <title>My Blog</title>
+  <!-- Primary Meta Tags -->
+  <title>Blog | Divjot Singh</title>
+  <meta name="title" content="Blog | Divjot Singh" />
+  <meta name="description" content="My thoughts on work, life and world." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bogas04.github.io/blog" />
+  <meta property="og:title" content="Blog | Divjot Singh" />
+  <meta
+    property="og:description"
+    content="My thoughts on work, life and world." />
+  <meta property="og:image" content="" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://bogas04.github.io/blog" />
+  <meta property="twitter:title" content="Blog | Divjot Singh" />
+  <meta
+    property="twitter:description"
+    content="My thoughts on work, life and world." />
+  <meta property="twitter:image" content="" />
+
 </svelte:head>
 
 <h1>My blog</h1>
