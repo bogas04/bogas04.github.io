@@ -811,7 +811,9 @@
       <dl class="dl-horizontal">
         <dt>Resume:</dt>
         <dd>
-          <a target="_blank" rel="noopener noreferrer" href="/resume">Resume</a>
+          <a target="_blank" rel="noopener noreferrer" href="/resume">
+            Download resume
+          </a>
         </dd>
         <dt>Programming Languages:</dt>
         <dd>C, TypeScript, JavaScript (ES2015+), PHP, Java,</dd>
