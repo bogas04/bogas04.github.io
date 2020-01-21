@@ -9,7 +9,7 @@ keywords: []
 slug: /@bogas04/how-i-lost-15-kgs-82b2302f205e
 ---
 
-![](img/blog/1__AW6KCuaBBSUSWKu8dIrmLA.png)
+![A picture showing downward trend of my body weight from 90kg to 69kg over few months](img/blog/1__AW6KCuaBBSUSWKu8dIrmLA.png)
 
 So coming to my story, I didn’t quite intend to lose weight, or follow any diet, or did a rigorous workout. I believe that it’s basically the result of negative-feedback in my brain. Sounds weird right? I’ll explain.
 
@@ -74,7 +74,7 @@ So to summarize, all I did was;
 
 ### The Results
 
-![](img/blog/1__OHlYFf__A8U689ORGveNMHA.png)
+![Downward trend of weight](img/blog/1__OHlYFf__A8U689ORGveNMHA.png)
 
 - Age: 23 years and 1 month
 - Weight: 72 kilograms | 158.7 pounds

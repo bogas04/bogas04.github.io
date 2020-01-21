@@ -75,7 +75,8 @@ As you can see, while the projects are very different (check out [swiggy.com](ht
 
 ### The how.
 
-![[https://lerna.js.org/](https://lerna.js.org/)](img/blog/1__0WjBWfdkbcob39FMklwp7A.png)
+![Logo of Lerna](img/blog/1__0WjBWfdkbcob39FMklwp7A.png)
+
 [https://lerna.js.org/](https://lerna.js.org/)
 
 Depending on your ecosystem, there will be different tools to help you with maintaining a Monorepo. You can obviously go vanilla and just use different folders per project. We use [Lerna](https://lerna.js.org/) for maintaining our JavaScript codebase.
