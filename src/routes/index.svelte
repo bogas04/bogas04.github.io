@@ -342,7 +342,7 @@
       <img src="img/twitter.png" alt="Twitter" />
     </a>
     <a href="/blog" rel="prefetch">
-      <img src="img/medium.svg" alt="Blog" />
+      <img src="img/blog.png" alt="Blog" />
     </a>
     <a
       href="https://github.com/bogas04"
