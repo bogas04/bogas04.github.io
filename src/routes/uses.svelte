@@ -42,7 +42,7 @@
   }
 
   .section h2 {
-    font-size: 4rem;
+    font-size: 3em;
     padding: 3% 0;
   }
 
@@ -61,6 +61,11 @@
 
   li a {
     text-decoration: none;
+    color: #ffc600;
+  }
+
+  ul ol li {
+    font-size: 0.8em;
   }
 
   @media screen and (max-width: 750px) {
@@ -85,14 +90,38 @@
 </style>
 
 <svelte:head>
-  <title>Divjot Singh</title>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="//github.com/bogas04.png" type="image/jpg" />
   <link
     rel="stylesheet"
     href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+  <!-- Primary Meta Tags -->
+  <title>What does Divjot Singh use?</title>
+  <meta name="title" content="What does Divjot Singh use?" />
+  <meta
+    name="description"
+    content="List of all the things Divjot Singh uses in his day to day life." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bogas04.github.io/uses" />
+  <meta property="og:title" content="What does Divjot Singh use?" />
+  <meta
+    property="og:description"
+    content="List of all the things Divjot Singh uses in his day to day life." />
+  <meta property="og:image" content="https://github.com/bogas04.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://bogas04.github.io/" />
+  <meta property="twitter:title" content="What does Divjot Singh use?" />
+  <meta
+    property="twitter:description"
+    content="List of all the things Divjot Singh uses in his day to day life." />
+  <meta property="twitter:image" content="https://github.com/bogas04.png" />
+
 </svelte:head>
 
 <div class="section" style="z-index:10">
@@ -110,6 +139,33 @@
       <h2>Software</h2>
       <li>
         <a href="https://code.visualstudio.com" target="_blank">👨‍💻 VS Code</a>
+        with
+        <ol>
+          <li>
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"
+              target="_blank">
+              Night Owl Light
+            </a>
+            theme
+          </li>
+          <li>
+            <a
+              href="https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions"
+              target="_blank">
+              Fira Code
+            </a>
+            font
+          </li>
+          <li>
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim"
+              target="_blank">
+              Vim
+            </a>
+            key bindings
+          </li>
+        </ol>
       </li>
       <li>
         <a
