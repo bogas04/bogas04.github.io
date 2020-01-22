@@ -24,6 +24,7 @@
   .post {
     list-style: none;
     border-radius: 5px;
+    overflow: hidden;
     border: 1px solid #cbcbcb;
     margin: 1em;
     transition: all 0.2s;
