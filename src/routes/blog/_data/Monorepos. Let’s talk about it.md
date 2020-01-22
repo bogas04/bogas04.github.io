@@ -83,6 +83,34 @@ Depending on your ecosystem, there will be different tools to help you with main
 
 Thanks to its community, there’s a [lot](https://github.com/lerna/lerna/tree/master/commands/publish) [of](https://github.com/lerna/lerna/blob/master/FAQ.md) [documentation](https://lerna.js.org/#commands) and [help](https://medium.com/mitterio/multirepo-to-lerna-js-monorepo-80f6657cb443) for Lerna [related](https://github.com/lerna/lerna/blob/master/doc/troubleshooting.md) [queries](https://github.com/lerna/lerna/blob/master/doc/guides.md).
 
+```bash
+# Install lerna globally
+npm i -g lerna
+
+# Change directory to your work folder
+cd ~/Work
+
+# Make the folder you want to keep your monorepo in
+mkdir portal-web
+
+# Change directory to monorepo folder
+cd portal-web
+
+# Initialize lerna (it will handle `git init`)
+lerna init
+
+# Commit the changes
+git add . && git commit -m "Initial commit"
+
+# Import other packages (https://github.com/lerna/lerna/tree/master/commands/import)
+lerna import ~/Work/portal-mweb
+
+# That's pretty much it!
+
+# Fun fact: If you want to rename your package, simply rename the folder before importing.
+# Fun fact 2: You might need to flatten out the commits in most cases (https://github.com/lerna/lerna/tree/master/commands/import#--flatten)
+```
+
 You may use [above scripts](https://gist.github.com/bogas04/874731db80967c040209fea396bf7804) to import existing repositories to a lerna based monorepo.
 
 Running scripts from the root has been made simpler using these handy [npm scripts](https://docs.npmjs.com/misc/scripts).
@@ -92,6 +120,19 @@ These scripts allow for convenient way to invoke package scripts from root folde
 Since our packages are hosted in [internal npm registry](https://verdaccio.org/), we inject a .npmrc in our [Jenkins](https://jenkins.io/) build the pipeline to avoid committing the authToken.
 
 A script to find all scoped dependencies of a project
+
+```bash
+# Install monorepo dependencies from internal npm registry
+npm i `../../scripts/scope-packages.js @portal`
+
+# Fun fact:
+# `npm i <package-name>` would also install other dependencies if they aren't present in node_modules,
+# along with the mentioned <package-name>
+
+# Fun fact 2:
+# In presence of package-lock.json, `npm i` would use those version numbers instead of fetching the latest ones
+# This essentially makes it a hybrid of `npm i` and `npm ci`
+```
 
 One interesting thing about [Lerna](https://lerna.js.org/) is that it [doesn’t](https://gist.github.com/bogas04/8c9702aba064b03b1162a0058c7b8f98) want private packages to be part of the `package-lock.json.` This means we can’t just simply use `npm ci`. We use this bash script to get past that.
 
