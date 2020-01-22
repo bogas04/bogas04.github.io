@@ -244,6 +244,7 @@
     box-shadow: -20px 0 0px -17px grey;
     margin-left: -15px;
     padding-left: 15px;
+    box-shadow: -20px 16px 0px -17px #808080;
   }
 
   #work .row.card::before {
@@ -256,10 +257,6 @@
     left: -11px;
     border-radius: 50%;
     top: 8px;
-  }
-
-  #work .row.card {
-    box-shadow: -20px 16px 0px -17px #808080;
   }
 
   #work .row.card:first-child::before {
@@ -324,12 +321,6 @@
     padding-left: 20px;
   }
 </style>
-
-<svelte:head>
-  <link
-    rel="stylesheet"
-    href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-</svelte:head>
 
 <SeoTags
   title="Divjot Singh | Developer | Vegan | Sikh"

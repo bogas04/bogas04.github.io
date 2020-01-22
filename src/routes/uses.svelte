@@ -93,12 +93,6 @@
   }
 </style>
 
-<svelte:head>
-  <link
-    rel="stylesheet"
-    href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-</svelte:head>
-
 <SeoTags
   title="What does Divjot Singh use?"
   description="List of all the things Divjot Singh uses in his day to day life."
