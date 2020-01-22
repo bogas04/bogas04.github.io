@@ -54,6 +54,9 @@
     align-content: space-between;
   }
   @media (max-width: 800px) {
+    ul {
+      margin: 2em -1em;
+    }
     .post a {
       flex-direction: column-reverse;
     }
