@@ -414,7 +414,14 @@
         <dt>Duration:</dt>
         <dd>November 2019 - Present</dd>
         <dt>Team:</dt>
-        <dd>Portal Team</dd>
+        <dd>
+          <a
+            href="https://www.twitter.com/SwiggyTech"
+            rel="noopener noreferrer"
+            target="_blank">
+            @SwiggyTech - Web Team
+          </a>
+        </dd>
         <dt>Projects:</dt>
         <dd>
           <ul>
@@ -456,8 +463,8 @@
               Moved codebase to a monorepo for improved developer experience.
             </li>
             <li>
-              Implemented UA based asset serving system for smaller bundle
-              sizes.
+              Implemented automatic UA based asset serving system for smaller
+              bundle sizes. (20%)
             </li>
             <li>Developed Everyday Offers Feature for mobile PWA.</li>
           </ul>
@@ -621,7 +628,7 @@
                   the team.
                 </li>
                 <li>
-                  Successfully launched first phase of app withing MyGalaxy on
+                  Successfully launched first phase of app within MyGalaxy on
                   Tizen in Late May.
                 </li>
               </ul>
@@ -698,7 +705,7 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>December 2015 - January 2015</dd>
+        <dd>December 2015 - January 2016</dd>
         <dt>Description:</dt>
         <dd>
           <ul>
@@ -780,7 +787,7 @@
             </li>
             <li>
               Integration with social networks to enable the tool. Studied
-              Facebook documentations to leverage best out of its Graph API.
+              Facebook documentation to leverage best out of its Graph API.
             </li>
             <li>
               Helped in strategy and planning of the tool in its initial phase.
