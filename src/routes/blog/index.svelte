@@ -11,6 +11,7 @@
 
 <script>
   import { BLOG_URL } from "../../constants";
+  import SeoTags from "../../components/seo-tags.svelte";
   export let posts;
 </script>
 
@@ -70,31 +71,11 @@
   }
 </style>
 
-<svelte:head>
-  <!-- Primary Meta Tags -->
-  <title>Blog | Divjot Singh</title>
-  <meta name="title" content="Blog | Divjot Singh" />
-  <meta name="description" content="My thoughts on work, life and world." />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={BLOG_URL} />
-  <meta property="og:title" content="Blog | Divjot Singh" />
-  <meta
-    property="og:description"
-    content="My thoughts on work, life and world." />
-  <meta property="og:image" content="" />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content={BLOG_URL} />
-  <meta property="twitter:title" content="Blog | Divjot Singh" />
-  <meta
-    property="twitter:description"
-    content="My thoughts on work, life and world." />
-  <meta property="twitter:image" content="" />
-
-</svelte:head>
+<SeoTags
+  title="Blog | Divjot Singh"
+  description="My thoughts on work, life and world."
+  imageUrl=""
+  pageUrl={BLOG_URL} />
 
 <h1>
   <a href="/" rel="preload">Divjot Singh</a>

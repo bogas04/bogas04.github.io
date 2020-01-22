@@ -1,3 +1,7 @@
+<script>
+  import SeoTags from "../components/seo-tags.svelte";
+</script>
+
 <style>
   #main-title {
     display: flex;
@@ -90,39 +94,16 @@
 </style>
 
 <svelte:head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="//github.com/bogas04.png" type="image/jpg" />
   <link
     rel="stylesheet"
     href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-
-  <!-- Primary Meta Tags -->
-  <title>What does Divjot Singh use?</title>
-  <meta name="title" content="What does Divjot Singh use?" />
-  <meta
-    name="description"
-    content="List of all the things Divjot Singh uses in his day to day life." />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bogas04.github.io/uses" />
-  <meta property="og:title" content="What does Divjot Singh use?" />
-  <meta
-    property="og:description"
-    content="List of all the things Divjot Singh uses in his day to day life." />
-  <meta property="og:image" content="https://github.com/bogas04.png" />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://bogas04.github.io/" />
-  <meta property="twitter:title" content="What does Divjot Singh use?" />
-  <meta
-    property="twitter:description"
-    content="List of all the things Divjot Singh uses in his day to day life." />
-  <meta property="twitter:image" content="https://github.com/bogas04.png" />
-
 </svelte:head>
+
+<SeoTags
+  title="What does Divjot Singh use?"
+  description="List of all the things Divjot Singh uses in his day to day life."
+  imageUrl="https://github.com/bogas04.png"
+  pageUrl="https://bogas04.github.io/uses" />
 
 <div class="section" style="z-index:10">
 

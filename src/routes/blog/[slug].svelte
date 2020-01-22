@@ -15,6 +15,7 @@
 
 <script>
   import { BLOG_URL, WEBSITE_URL } from "../../constants";
+  import SeoTags from "../../components/seo-tags.svelte";
 
   export let post;
   export const postTitle = `${post.title} | Blog | Divjot Singh`;
@@ -58,26 +59,11 @@
   }
 </style>
 
-<svelte:head>
-  <!-- Primary Meta Tags -->
-  <title>{postTitle}</title>
-  <meta name="title" content={postTitle} />
-  <meta name="description" content={post.description} />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={postUrl} />
-  <meta property="og:title" content={postTitle} />
-  <meta property="og:description" content={post.description} />
-  <meta property="og:image" content={postImage} />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content={postImage} />
-  <meta property="twitter:url" content={postUrl} />
-  <meta property="twitter:title" content={postTitle} />
-  <meta property="twitter:description" content={post.description} />
-  <meta property="twitter:image" content={postImage} />
-</svelte:head>
+<SeoTags
+  title={postTitle}
+  description={post.description}
+  imageUrl={postImage}
+  pageUrl={postUrl} />
 
 <h1>
   <a href="/">Divjot Singh</a>
