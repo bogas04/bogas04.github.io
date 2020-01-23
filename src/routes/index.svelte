@@ -111,90 +111,21 @@
     color: #123886;
   }
 
-  span.green,
-  p.green,
-  a.green {
-    color: #4caf50;
-  }
-
   .section.grey {
     background-color: rgb(52, 58, 64);
-  }
-
-  .section.purple {
-    background-color: #673ab7;
-  }
-
-  span.purple,
-  p.purple,
-  a.purple {
-    color: #673ab7;
-  }
-
-  .section.red {
-    background-color: #f44336;
-  }
-
-  span.red,
-  p.red,
-  a.red {
-    color: #f44336;
-  }
-
-  .section.lightblue {
-    background-color: #2196f3;
-  }
-
-  span.lightblue,
-  p.lightblue,
-  a.lightblue {
-    color: #2196f3;
   }
 
   .section.blue {
     background-color: #3f51b5;
   }
 
-  span.blue,
-  p.blue,
-  a.blue {
-    color: #3f51b5;
-  }
-
   .section.yellow {
     background-color: #ffc107;
     color: black;
   }
-
-  span.yellow,
-  p.yellow,
-  a.yellow {
-    color: #ffc107;
-  }
-
-  .section.orange {
-    background-color: #ff5722;
-    color: black;
-  }
-
-  .section.orange {
-    color: white;
-  }
-
-  span.orange,
-  p.orange,
-  a.orange {
-    color: #ff5722;
-  }
-
   .section h1 {
     font-size: 8rem;
     padding: 5% 0;
-  }
-
-  .section h2 {
-    font-size: 4rem;
-    padding: 3% 0;
   }
 
   .section h3 {
@@ -205,16 +136,6 @@
     top: 0;
     background-color: inherit;
     z-index: 1;
-  }
-
-  .section h4 {
-    font-size: 3rem;
-    padding: 2% 0;
-  }
-
-  .section h5 {
-    font-size: 2.5rem;
-    padding: 2% 0;
   }
 
   .section h6 {
@@ -268,24 +189,8 @@
       font-size: 8em;
       padding: 5% 0;
     }
-
-    .section h2 {
-      font-size: 4em;
-      padding: 3% 0;
-    }
-
     .section h3 {
       font-size: 3.5em;
-      padding: 2% 0;
-    }
-
-    .section h4 {
-      font-size: 3em;
-      padding: 2% 0;
-    }
-
-    .section h5 {
-      font-size: 2.5em;
       padding: 2% 0;
     }
 
@@ -395,11 +300,12 @@
             <li>Leading New Initiatives Team (Swiggy Stores, Swiggy Go)</li>
           </ul>
         </dd>
-        <!-- <dt>Major Achievements: </dt> <dd>
-              <ul>
-                 <li>Awards: MVP (Oct 2018)</li>
-              </ul>
-            </dd> -->
+        <dt>Major Achievements:</dt>
+        <dd>
+          <ul>
+            <li>Awards: MVP (Oct 2018)</li>
+          </ul>
+        </dd>
       </dl>
     </div>
 
