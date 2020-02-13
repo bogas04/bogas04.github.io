@@ -33,7 +33,11 @@ export function parseHead(rawHead) {
     }
     meta[previousTag] += sanitize(line);
   }
-
+  meta.keywords = meta.keywords
+    .trim()
+    .slice(1, -1)
+    .split(",")
+    .map(e => e.trim());
   meta.slug = slugifiyTitleDate(meta.title, meta.date);
 
   return meta;

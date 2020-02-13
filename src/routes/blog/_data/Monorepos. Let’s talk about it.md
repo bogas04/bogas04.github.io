@@ -5,7 +5,7 @@ description:
   version control system. I’m guessing you must have faced some…
 date: "2019-09-17T07:55:58.095Z"
 categories: []
-keywords: []
+keywords: [git, repository, monorepos, coding, lerna, javascript]
 slug: /@bogas04/monorepos-lets-talk-about-it-4b1b7d4f1038
 ---
 

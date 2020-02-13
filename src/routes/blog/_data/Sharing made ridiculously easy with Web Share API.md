@@ -5,11 +5,11 @@ description:
   becoming top priority for web apps. Oddly enough, sharing has…
 date: "2017-09-22T16:27:20.946Z"
 categories: []
-keywords: []
+keywords: [web share api, web apis, browser, DOM, PWA, web apps]
 slug: /@bogas04/sharing-made-ridiculously-easy-with-web-share-api-33f6c9189d04
 ---
 
-![](img/blog/1__qp3z0ij8v372R__DVbuJB6Q.jpeg)
+![Image with icons of social media platforms](img/blog/1__qp3z0ij8v372R__DVbuJB6Q.jpeg)
 
 > With growing mobile usage, performance and leanness (yeah, that’s a word) is becoming top priority for web apps. Oddly enough, sharing has never worked out well for web, until now (hopefully).
 

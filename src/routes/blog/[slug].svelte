@@ -24,14 +24,6 @@
 </script>
 
 <style>
-  /*
-		By default, CSS is locally scoped to the component,
-		and any unused styles are dead-code-eliminated.
-		In this page, Svelte can't know which elements are
-		going to appear inside the {{{post.html}}} block,
-		so we have to use the :global(...) modifier to target
-		all elements inside .content
-	*/
   .content :global(h2) {
     font-size: 1.4em;
     font-weight: 500;
@@ -57,20 +49,26 @@
   .content :global(li) {
     margin: 0 0 0.5em 0;
   }
+  h4 {
+    text-transform: capitalize;
+    margin-bottom: 2em;
+  }
 </style>
 
 <SeoTags
   title={postTitle}
   description={post.description}
   imageUrl={postImage}
-  pageUrl={postUrl} />
+  pageUrl={postUrl}
+  keywords={post.keywords.join(', ')} />
 
-<h1>
+<h1>{post.title}</h1>
+<h4>
   <a href="/">Divjot Singh</a>
-  |
-  <a href="/blog" rel="preload">Blog</a>
-  | {post.title}
-</h1>
+  | {new Date(post.date).toDateString()}
+  <br />
+  {post.keywords.join(', ')}
+</h4>
 
 <div class="content">
   {@html post.html}

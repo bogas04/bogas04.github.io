@@ -5,7 +5,7 @@ description:
   diet, or did a rigorous workout. I believe that it’s basically…
 date: "2017-07-20T10:31:03.755Z"
 categories: []
-keywords: []
+keywords: [weight loss, vegan, plant based diet, dieting, health]
 slug: /@bogas04/how-i-lost-15-kgs-82b2302f205e
 ---
 

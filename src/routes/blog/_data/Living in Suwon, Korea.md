@@ -5,7 +5,7 @@ description:
   equipped in English as I would say I’m in JavaScript.
 date: "2016-11-27T11:48:44.318Z"
 categories: []
-keywords: []
+keywords: [travel, south korea, suwon, seoul, sikh, vegetarian]
 slug: /@bogas04/living-in-suwon-korea-1b3afd88a2ab
 ---
 

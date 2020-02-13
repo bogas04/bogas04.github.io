@@ -54,6 +54,12 @@
     flex-direction: column;
     align-content: space-between;
   }
+
+  .post-body p,
+  .post-body span {
+    color: initial;
+  }
+
   @media (max-width: 800px) {
     ul {
       margin: 2em -1em;

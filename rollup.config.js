@@ -1,3 +1,4 @@
+import fs from "fs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
@@ -17,6 +18,23 @@ const onwarn = (warning, onwarn) =>
   onwarn(warning);
 const dedupe = importee =>
   importee === "svelte" || importee.startsWith("svelte/");
+
+/**
+ * A simple rollup plugin that triggers [buildStart](https://rollupjs.org/guide/en/#buildstart) whenever any of the dirs in paths updates.
+ * @param  {...string} paths
+ */
+const watchDirPlugin = (...paths) => {
+  return {
+    buildStart() {
+      paths.forEach(path => {
+        const files = fs.readdirSync(path);
+        files.forEach(file => {
+          this.addWatchFile(path.split("./")[1] + file);
+        });
+      });
+    }
+  };
+};
 
 export default {
   client: {
@@ -86,7 +104,8 @@ export default {
       resolve({
         dedupe
       }),
-      commonjs()
+      commonjs(),
+      watchDirPlugin("./src/routes/blog/_data/")
     ],
     external: Object.keys(pkg.dependencies).concat(
       require("module").builtinModules ||
