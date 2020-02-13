@@ -65,6 +65,8 @@
 <h1>{post.title}</h1>
 <h4>
   <a href="/">Divjot Singh</a>
+  |
+  <a href="/blog">Blog</a>
   | {new Date(post.date).toDateString()}
   <br />
   {post.keywords.join(', ')}
