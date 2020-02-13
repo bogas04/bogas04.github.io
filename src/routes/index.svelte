@@ -291,19 +291,35 @@
             href="https://www.twitter.com/SwiggyTech"
             rel="noopener noreferrer"
             target="_blank">
-            @SwiggyTech - Web Team
+            @SwiggyTech
           </a>
+          - New Initiatives Team (Web)
         </dd>
         <dt>Projects:</dt>
         <dd>
           <ul>
-            <li>Leading New Initiatives Team (Swiggy Stores, Swiggy Go)</li>
-          </ul>
-        </dd>
-        <dt>Major Achievements:</dt>
-        <dd>
-          <ul>
-            <li>Awards: MVP (Oct 2018)</li>
+            <li>Lead the release of Timeline shareability on Swiggy Go.</li>
+            <li>Lead the release of Swiggy Stores PWA.</li>
+            <li>Lead the release of Swiggy Single Page Checkout for Food.</li>
+            <li>Developed new PL driven UI for Swiggy Stores.</li>
+            <li>
+              Developed a system for incorporating Origin Trials for our PWAs,
+              starting with
+              <a
+                href="https://web.dev/sms-receiver-api-announcement/"
+                target="_blank">
+                SMS Receiver API
+              </a>
+              &
+              <a href="https://web.dev/contact-picker/" target="_blank">
+                Contacts API
+              </a>
+              .
+            </li>
+            <li>
+              Deprecated legacy systems and ported the same to modern services.
+            </li>
+            <li>Regularly worked with and maintained HAProxy configuration.</li>
           </ul>
         </dd>
       </dl>
@@ -320,7 +336,15 @@
         <dt>Duration:</dt>
         <dd>January 2018 - November 2019</dd>
         <dt>Team:</dt>
-        <dd>Portal Team</dd>
+        <dd>
+          <a
+            href="https://www.twitter.com/SwiggyTech"
+            rel="noopener noreferrer"
+            target="_blank">
+            @SwiggyTech
+          </a>
+          - Web Team
+        </dd>
         <dt>Projects:</dt>
         <dd>
           <ul>
@@ -330,14 +354,21 @@
               dashboards.
             </li>
             <li>
+              Designed and developed static site serving system for legal pages.
+            </li>
+            <li>
               Designed Hotstar-Pop integration and scaled codepath for 120k RPM.
             </li>
             <li>
               Moved codebase to a monorepo for improved developer experience.
             </li>
             <li>
-              Implemented automatic UA based asset serving system for smaller
+              Developed automatic UA based asset serving system for smaller
               bundle sizes. (20%)
+            </li>
+            <li>
+              Developed Restaurant Hygiene Pages for PWA and as webview for
+              apps.
             </li>
             <li>Developed Everyday Offers Feature for mobile PWA.</li>
           </ul>
