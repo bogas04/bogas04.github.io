@@ -9,9 +9,9 @@ keywords: [travel, south korea, suwon, seoul, sikh, vegetarian]
 slug: /@bogas04/living-in-suwon-korea-1b3afd88a2ab
 ---
 
-First of all, let me clear out that I’m not a blogger, and definitely not as equipped in English as I would say I’m in JavaScript.
+First of all, let me clear out that I’m not a blogger, and definitely not as equipped in English as I would say I’m in JavaScript. Now that’s been established, let’s talk about me, Samsung and Suwon.
 
-Now that’s been established, let’s talk about me, Samsung and Suwon.
+![Christmas celebrations in Seoul, South Korea](/img/blog/south-korea-xmas.jpg)
 
 ### Me
 

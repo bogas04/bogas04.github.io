@@ -28,6 +28,10 @@
     font-size: 1.4em;
     font-weight: 500;
   }
+  .content :global(img),
+  .content :global(h4) {
+    margin: 1em 0;
+  }
 
   .content :global(pre) {
     background-color: #f9f9f9;
