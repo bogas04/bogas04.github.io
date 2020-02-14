@@ -113,7 +113,7 @@
   }
 
   .talk-video::after {
-    content: "►";
+    content: "▶";
     position: absolute;
     left: 50%;
     top: 50%;
@@ -340,11 +340,15 @@
               starting with
               <a
                 href="https://web.dev/sms-receiver-api-announcement/"
-                target="_blank">
+                target="_blank"
+                rel="noopener noreferrer">
                 SMS Receiver API
               </a>
               &
-              <a href="https://web.dev/contact-picker/" target="_blank">
+              <a
+                href="https://web.dev/contact-picker/"
+                target="_blank"
+                rel="noopener noreferrer">
                 Contacts API
               </a>
               .
@@ -470,6 +474,7 @@
       <div class="card-title">
         <a
           target="_blank"
+          rel="noopener noreferrer"
           href="http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html">
           Samsung R&D Institute, Bangalore
         </a>
@@ -1120,6 +1125,7 @@
           <a
             href="https://www.youtube.com/watch?v=2mX8hmefCRI"
             target="_blank"
+            rel="noopener noreferrer"
             class="talk-video">
             <img
               loading="lazy"
@@ -1178,6 +1184,7 @@
           <a
             href="https://www.youtube.com/watch?v=lN8b_fXRC_A"
             target="_blank"
+            rel="noopener noreferrer"
             class="talk-video">
             <img
               loading="lazy"
