@@ -1,6 +1,11 @@
 <script>
   import SeoTags from "../components/seo-tags.svelte";
 
+  import GithubIcon from "../components/icons/github.svelte";
+  import LinkedInIcon from "../components/icons/linkedin.svelte";
+  import BlogIcon from "../components/icons/blog.svelte";
+  import TwitterIcon from "../components/icons/twitter.svelte";
+
   if (typeof window !== "undefined") {
     window.onkeypress = function(e) {
       this.currentSection = this.currentSection || 0;
@@ -63,14 +68,12 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 2em;
   }
 
-  .social-icons img {
+  :global(.social-icons-svg) {
     filter: invert(100%);
-    width: 10vw;
-    margin: 0 5%;
-    min-width: 75px;
-    max-width: 200px;
+    transform: scale(1.5);
   }
 
   .uses {
@@ -93,14 +96,37 @@
     width: 100%;
   }
 
-  .talk-video,
+  .talk-video img,
   .talk-image {
     height: 50vh;
     width: 100%;
+    object-fit: cover;
   }
 
-  .talk-image {
-    object-fit: cover;
+  .talk-video {
+    position: relative;
+  }
+
+  .talk-video:hover::after {
+    transform: scale(5);
+    background: rgba(100, 100, 100, 0.6);
+  }
+
+  .talk-video::after {
+    content: "►";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: white;
+    border-radius: 50%;
+    background: rgba(100, 100, 100, 0.4);
+    transform: scale(4.7);
+    height: 2em;
+    width: 2em;
+    display: flex;
+    justify-content: center;
+    transition: transform ease 0.2s;
+    align-items: center;
   }
 
   .section.green {
@@ -219,6 +245,13 @@
       height: 50vh;
       width: 100%;
     }
+    .social-icons {
+      padding: 0.5em;
+    }
+
+    :global(.social-icons-svg) {
+      transform: scale(0.8);
+    }
   }
 
   /* Misc change to better align things */
@@ -245,22 +278,22 @@
       href="https://linkedin.com/in/bogas04"
       target="_blank"
       rel="noopener noreferrer">
-      <img src="img/linkedin.png" alt="LinkedIn" />
+      <LinkedInIcon class="social-icons-svg" />
     </a>
     <a
       href="https://twitter.com/bogas04"
       target="_blank"
       rel="noopener noreferrer">
-      <img src="img/twitter.png" alt="Twitter" />
+      <TwitterIcon class="social-icons-svg" />
     </a>
     <a href="/blog" rel="prefetch">
-      <img src="img/blog.png" alt="Blog" />
+      <BlogIcon class="social-icons-svg" />
     </a>
     <a
       href="https://github.com/bogas04"
       target="_blank"
       rel="noopener noreferrer">
-      <img src="img/github.svg" alt="GitHub" />
+      <GithubIcon class="social-icons-svg" />
     </a>
   </nav>
 
@@ -1083,13 +1116,14 @@
         </div>
 
         <div class="talk">
-          <iframe
-            title="Video of the talk"
-            id="ytplayer"
-            type="text/html"
-            class="talk-video"
-            frameborder="0"
-            src="https://www.youtube.com/embed/2mX8hmefCRI?start=450" />
+          <a
+            href="https://www.youtube.com/watch?v=2mX8hmefCRI"
+            target="_blank"
+            class="talk-video">
+            <img
+              alt="Video of the talk"
+              src="https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg" />
+          </a>
           <h6 class="talk-title">
             <a href="https://www.swiggy.com">Swiggy ♥️ Web</a>
             at
@@ -1137,13 +1171,14 @@
         </div>
 
         <div class="talk">
-          <iframe
-            title="Video of the talk"
-            id="ytplayer"
-            type="text/html"
-            class="talk-video"
-            frameborder="0"
-            src="https://www.youtube.com/embed/lN8b_fXRC_A?autoplay=0&origin=https://bogas04.github.io" />
+          <a
+            href="https://www.youtube.com/watch?v=lN8b_fXRC_A"
+            target="_blank"
+            class="talk-video">
+            <img
+              alt="Video of the talk"
+              src="https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg" />
+          </a>
 
           <h6 class="talk-title">
             <a href="http://bit.ly/gddx-dec2017">
