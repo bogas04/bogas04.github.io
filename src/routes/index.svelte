@@ -1099,6 +1099,7 @@
         <div class="talk">
           <img
             class="talk-image"
+            loading="lazy"
             src="img/blazing-fast-web.png"
             alt="Banner image for the talk" />
           <h6 class="talk-title">
@@ -1121,6 +1122,7 @@
             target="_blank"
             class="talk-video">
             <img
+              loading="lazy"
               alt="Video of the talk"
               src="https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg" />
           </a>
@@ -1138,6 +1140,7 @@
 
         <div class="talk">
           <img
+            loading="lazy"
             class="talk-image"
             src="img/react-2019.png"
             alt="Banner image for the talk" />
@@ -1155,6 +1158,7 @@
 
         <div class="talk">
           <img
+            loading="lazy"
             class="talk-image"
             src="img/testing-with-jest.png"
             alt="Banner image for the talk" />
@@ -1176,6 +1180,7 @@
             target="_blank"
             class="talk-video">
             <img
+              loading="lazy"
               alt="Video of the talk"
               src="https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg" />
           </a>
