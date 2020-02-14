@@ -70,10 +70,17 @@
     justify-content: space-between;
     padding: 2em;
   }
+  .social-icons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-transform: lowercase;
+  }
 
   :global(.social-icons-svg) {
     filter: invert(100%);
-    transform: scale(1.5);
+    margin-bottom: 0.5em;
   }
 
   .uses {
@@ -157,7 +164,7 @@
   .section h3 {
     font-size: 3.5rem;
     padding: 2% 10px;
-    margin: 0 -10px;
+    margin: 0 -20px;
     position: sticky;
     top: 0;
     background-color: inherit;
@@ -217,7 +224,7 @@
     }
     .section h3 {
       font-size: 3.5em;
-      padding: 2% 0;
+      padding: 2% 10px;
     }
 
     .section h6 {
@@ -261,8 +268,8 @@
 </style>
 
 <SeoTags
-  title="Divjot Singh | Developer | Vegan | Sikh"
-  description="Developer, Sikh & a Vegan residing in Bengaluru, India."
+  title="Divjot Singh | Frontend Engineer | Vegan | Sikh"
+  description="Frontend Engineer, Sikh & a Vegan residing in Bengaluru, India."
   imageUrl="https://github.com/bogas04.png"
   pageUrl="https://bogas04.github.io/" />
 
@@ -279,21 +286,25 @@
       target="_blank"
       rel="noopener noreferrer">
       <LinkedInIcon class="social-icons-svg" />
+      LinkedIn
     </a>
     <a
       href="https://twitter.com/bogas04"
       target="_blank"
       rel="noopener noreferrer">
       <TwitterIcon class="social-icons-svg" />
+      Twitter
     </a>
     <a href="/blog" rel="prefetch">
       <BlogIcon class="social-icons-svg" />
+      /blog
     </a>
     <a
       href="https://github.com/bogas04"
       target="_blank"
       rel="noopener noreferrer">
       <GithubIcon class="social-icons-svg" />
+      Github
     </a>
   </nav>
 
@@ -884,13 +895,40 @@
         </dd>
         <dt>Tools</dt>
         <dd>
-          <a href="https://www.npmjs.com/" target="_blank">npm</a>
+          <a
+            href="https://www.npmjs.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            npm
+          </a>
           ,
-          <a href="https://git-scm.com/" target="_blank">git</a>
+          <a
+            href="https://git-scm.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            git
+          </a>
           ,
-          <a href="http://webpack.js.org/" target="_blank">webpack</a>
+          <a
+            href="http://webpack.js.org/"
+            target="_blank"
+            rel="noopener noreferrer">
+            webpack
+          </a>
           ,
-          <a href="http://babeljs.io/" target="_blank">babel</a>
+          <a
+            href="https://rollupjs.org/"
+            target="_blank"
+            rel="noopener noreferrer">
+            rollup
+          </a>
+          ,
+          <a
+            href="http://babeljs.io/"
+            target="_blank"
+            rel="noopener noreferrer">
+            babel
+          </a>
           ,
           <a
             href="https://jestjs.io/"
@@ -906,21 +944,51 @@
             Styleguidist
           </a>
           ,
-          <a href="https://www.heroku.com/" target="_blank">heroku</a>
+          <a
+            href="https://www.heroku.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            heroku
+          </a>
           ,
-          <a href="https://gruntjs.com/" target="_blank">grunt</a>
+          <a
+            href="https://gruntjs.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            grunt
+          </a>
           ,
-          <a href="https://lerna.js.org/" target="_blank">lerna</a>
+          <a
+            href="https://lerna.js.org/"
+            target="_blank"
+            rel="noopener noreferrer">
+            lerna
+          </a>
           ,
-          <a href="https://gulpjs.com/" target="_blank">gulp</a>
+          <a
+            href="https://gulpjs.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            gulp
+          </a>
           ,
-          <a href="https://bower.io/" target="_blank">bower</a>
+          <a href="https://bower.io/" target="_blank" rel="noopener noreferrer">
+            bower
+          </a>
           ,
-          <a href="https://code.visualstudio.com/" target="_blank">
+          <a
+            href="https://code.visualstudio.com/"
+            target="_blank"
+            rel="noopener noreferrer">
             Visual Studio Code
           </a>
           ,
-          <a href="https://vim.sourceforge.io/" target="_blank">Vim</a>
+          <a
+            href="https://vim.sourceforge.io/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Vim
+          </a>
           ,
           <a
             href="https://www.jetbrains.com/idea/"
@@ -928,7 +996,12 @@
             rel="noopener noreferrer">
             IntelliJ IDEA
           </a>
-          <a href="https://www.eclipse.org/" target="_blank">Eclipse</a>
+          <a
+            href="https://www.eclipse.org/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Eclipse
+          </a>
           ,
         </dd>
         <dt>Other Languages 🤷‍♂️ :</dt>
