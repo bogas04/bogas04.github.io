@@ -39,10 +39,11 @@
     align-items: flex-start;
   }
 
-  .post:hover {
-    box-shadow: #0003 0px 2px 5px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+  .post a:hover,
+  .post a:focus {
+    background-color: rgba(0, 0, 0, 0.1);
   }
+
   .post img {
     margin: 0;
     min-width: 30%;
@@ -64,6 +65,16 @@
     .post-body p,
     .post-body span {
       color: white;
+    }
+
+    .post:hover,
+    .post:focus {
+      box-shadow: none;
+    }
+
+    .post a:hover,
+    .post a:focus {
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 
