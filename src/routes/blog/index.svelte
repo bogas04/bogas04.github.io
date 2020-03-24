@@ -60,6 +60,13 @@
     color: initial;
   }
 
+  @media (prefers-color-scheme: dark) {
+    .post-body p,
+    .post-body span {
+      color: white;
+    }
+  }
+
   @media (max-width: 800px) {
     ul {
       margin: 2em -1em;

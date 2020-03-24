@@ -46,6 +46,12 @@
     padding: 0;
   }
 
+  @media (prefers-color-scheme: dark) {
+    .content :global(pre) {
+      color: black;
+    }
+  }
+
   .content :global(ul) {
     line-height: 1.5;
   }

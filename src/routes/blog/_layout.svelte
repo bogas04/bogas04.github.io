@@ -8,6 +8,18 @@
     box-sizing: border-box;
   }
 
+  @media (prefers-color-scheme: dark) {
+    :global(body),
+    main {
+      background: #333;
+      color: white;
+    }
+
+    :global(a) {
+      color: lightsalmon;
+    }
+  }
+
   :global(img) {
     width: 100%;
   }
