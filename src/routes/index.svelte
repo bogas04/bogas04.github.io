@@ -328,7 +328,7 @@
       </div>
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>November 2019 - Present</dd>
+        <dd>November 2019 - April 2020</dd>
         <dt>Team:</dt>
         <dd>
           <a
@@ -346,6 +346,7 @@
             <li>Lead the release of Swiggy Stores PWA.</li>
             <li>Lead the release of Swiggy Single Page Checkout for Food.</li>
             <li>Developed new PL driven UI for Swiggy Stores.</li>
+            <li>Developed new Swiggy Genie.</li>
             <li>
               Developed a system for incorporating Origin Trials for our PWAs,
               starting with
