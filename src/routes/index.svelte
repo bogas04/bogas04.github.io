@@ -321,6 +321,19 @@
 
     <div class="row card">
       <div class="card-title">
+        <a target="_blank" rel="noopener noreferrer" href="https://udaan.com">
+          Udaan
+        </a>
+        , Software Engineer
+      </div>
+      <dl class="dl-horizontal">
+        <dt>Duration:</dt>
+        <dd>April 2020 - Present</dd>
+      </dl>
+    </div>
+
+    <div class="row card">
+      <div class="card-title">
         <a target="_blank" rel="noopener noreferrer" href="https://swiggy.com">
           Swiggy, Bengaluru
         </a>
