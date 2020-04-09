@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import Link from "next/link";
+
 import SeoTags from "../components/SeoTags";
 
 import TwitterIcon from "../components/icons/twitter";
@@ -301,10 +303,13 @@ function HomePage() {
             <TwitterIcon className="social-icons-svg" />
             Twitter
           </a>
-          <a href="/blog" rel="prefetch">
-            <BlogIcon className="social-icons-svg" />
-            /blog
-          </a>
+
+          <Link href="/blog">
+            <a>
+              <BlogIcon className="social-icons-svg" />
+              /blog
+            </a>
+          </Link>
           <a
             href="https://github.com/bogas04"
             target="_blank"
@@ -315,9 +320,9 @@ function HomePage() {
           </a>
         </nav>
 
-        <a className="uses" href="/uses" rel="prefetch">
-          /uses
-        </a>
+        <Link href="/uses">
+          <a className="uses">/uses</a>
+        </Link>
       </div>
 
       <div className="section grey" style={{ zIndex: 12 }} id="work">
@@ -880,56 +885,56 @@ function HomePage() {
                   rel="noopener noreferrer"
                 >
                   ReactJS
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://redux.js.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Redux
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://angularjs.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   AngularJS
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://getbootstrap.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   BootStrap
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://jquery.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   jQuery
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="httpss://nodejs.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   NodeJS
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://expressjs.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   ExpressJS
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.slimframework.com/"
                   target="_blank"
@@ -937,7 +942,6 @@ function HomePage() {
                 >
                   Slim MicroFramework
                 </a>
-                ,
               </dd>
               <dt>Databases</dt>
               <dd>
@@ -947,16 +951,16 @@ function HomePage() {
                   rel="noopener noreferrer"
                 >
                   PostgreSQL
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.mysql.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   MySQL
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.mongodb.com/"
                   target="_blank"
@@ -964,7 +968,6 @@ function HomePage() {
                 >
                   MongoDB
                 </a>
-                ,
               </dd>
               <dt>Tools</dt>
               <dd>
@@ -974,119 +977,120 @@ function HomePage() {
                   rel="noopener noreferrer"
                 >
                   npm
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://git-scm.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   git
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="http://webpack.js.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   webpack
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://rollupjs.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   rollup
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="http://babeljs.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   babel
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://jestjs.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Jest
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://react-styleguidist.js.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Styleguidist
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.heroku.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   heroku
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://gruntjs.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   grunt
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://lerna.js.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   lerna
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://gulpjs.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   gulp
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://bower.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   bower
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://code.visualstudio.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Visual Studio Code
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://vim.sourceforge.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Vim
-                </a>
-                ,
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.jetbrains.com/idea/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   IntelliJ IDEA
-                </a>
+                </a>{" "}
+                ,{" "}
                 <a
                   href="https://www.eclipse.org/"
                   target="_blank"
@@ -1094,7 +1098,6 @@ function HomePage() {
                 >
                   Eclipse
                 </a>
-                ,
               </dd>
               <dt>Other Languages 🤷‍♂️ :</dt>
               <dd>HTML, CSS, XML, YAML, Stylus</dd>

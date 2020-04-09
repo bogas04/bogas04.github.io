@@ -4,6 +4,8 @@ import SeoTags from "../../components/SeoTags";
 import { getBlogPosts, IBlogPost } from "../../utils/blog";
 import BlogLayout from "../../layout/blog";
 
+import Link from "next/link";
+
 export async function getStaticProps() {
   const posts = getBlogPosts();
 
@@ -108,24 +110,28 @@ function BlogListing({ posts }: IBlogListingProps) {
       />
 
       <h1>
-        <a href="/" rel="preload">
-          Divjot Singh
-        </a>{" "}
+        <Link href="/">
+          <a>Divjot Singh</a>
+        </Link>{" "}
         | Blog
       </h1>
 
       <ul>
         {posts.map((post) => (
           <li className="post" key={post.title}>
-            <a rel="prefetch" href={`blog/${post.slug}`}>
-              <div className="post-body">
-                <h2>{post.title}</h2>
+            <Link href={`blog/${post.slug}`}>
+              <a>
+                <div className="post-body">
+                  <h2>{post.title}</h2>
 
-                <p>{post.description}</p>
-                <span>{new Date(post.date).toDateString()}</span>
-              </div>
-              {post.image && <img src={post.image} alt="Image for the post" />}
-            </a>
+                  <p>{post.description}</p>
+                  <span>{new Date(post.date).toDateString()}</span>
+                </div>
+                {post.image && (
+                  <img src={post.image} alt="Image for the post" />
+                )}
+              </a>
+            </Link>
           </li>
         ))}
       </ul>

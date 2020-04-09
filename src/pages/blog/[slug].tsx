@@ -5,6 +5,7 @@ import { BLOG_URL, WEBSITE_URL } from "../../constants";
 import { getBlogPosts, IBlogPost } from "../../utils/blog";
 import SeoTags from "../../components/SeoTags";
 import BlogLayout from "../../layout/blog";
+import Link from "next/link";
 
 export async function getStaticPaths() {
   const posts = getBlogPosts();
@@ -91,8 +92,14 @@ function BlogPost({ post }: IBlogPostProps) {
 
       <h1>{post.title}</h1>
       <h4>
-        <a href="/">Divjot Singh</a> | <a href="/blog">Blog</a> |{" "}
-        {new Date(post.date).toDateString()}
+        <Link href="/">
+          <a>Divjot Singh</a>
+        </Link>{" "}
+        |{" "}
+        <Link href="/blog">
+          <a>Blog</a>
+        </Link>{" "}
+        | {new Date(post.date).toDateString()}
         <br />
         {keywords}
       </h4>

@@ -4057,13 +4057,31 @@ function MyApp(_ref) {
       lineNumber: 9,
       columnNumber: 7
     }
-  }, __jsx("script", {
+  }, __jsx("meta", {
+    content: "width=device-width,initial-scale=1",
+    name: "viewport",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 9
+    }
+  }), __jsx("meta", {
+    content: "#333333",
+    name: "theme-color",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 9
+    }
+  }), __jsx("script", {
     async: true,
     src: "https://www.googletagmanager.com/gtag/js?id=UA-110963096-1",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10,
+      lineNumber: 12,
       columnNumber: 9
     }
   }), __jsx("script", {
@@ -4073,7 +4091,7 @@ function MyApp(_ref) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14,
+      lineNumber: 16,
       columnNumber: 9
     }
   })));

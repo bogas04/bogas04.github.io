@@ -1,4 +1,6 @@
-import { memo } from "react";
+import React, { memo } from "react";
+
+import Link from "next/link";
 
 import SeoTags from "../components/SeoTags";
 
@@ -107,9 +109,9 @@ function UsesPage() {
       <div className="section" style={{ zIndex: 10 }}>
         <h1 id="main-title">
           <img src="//github.com/bogas04.png" alt="👳🏽" />
-          <a href="/" rel="prefetch">
-            Divjot Singh
-          </a>{" "}
+          <Link href="/">
+            <a>Divjot Singh</a>
+          </Link>{" "}
           <small>
             <a href="http://uses.tech" target="_blank">
               /uses

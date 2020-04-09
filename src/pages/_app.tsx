@@ -7,6 +7,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Component {...pageProps} />
       <Head>
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta content="#333333" name="theme-color" />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-110963096-1"
