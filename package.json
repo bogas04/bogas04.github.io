@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "export": "next export && cp -r out/* ./",
+    "export": "next export && rm -rf _next blog img && mv out/* ./",
     "start": "next"
   },
   "dependencies": {
