@@ -331,7 +331,7 @@ function HomePage() {
                 rel="noopener noreferrer"
                 href="https://udaan.com"
               >
-                Udaan
+                Udaan, Bengaluru
               </a>
               , Software Engineer
             </div>
@@ -363,7 +363,7 @@ function HomePage() {
                   target="_blank"
                 >
                   @SwiggyTech
-                </a>
+                </a>{" "}
                 - New Initiatives Team (Web)
               </dd>
               <dt>Projects:</dt>
@@ -380,15 +380,15 @@ function HomePage() {
                   <li>Developed new Swiggy Genie.</li>
                   <li>
                     Developed a system for incorporating Origin Trials for our
-                    PWAs, starting with
+                    PWAs, starting with{" "}
                     <a
                       href="https://web.dev/sms-receiver-api-announcement/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       SMS Receiver API
-                    </a>
-                    &
+                    </a>{" "}
+                    &{" "}
                     <a
                       href="https://web.dev/contact-picker/"
                       target="_blank"
@@ -432,7 +432,7 @@ function HomePage() {
                   target="_blank"
                 >
                   @SwiggyTech
-                </a>
+                </a>{" "}
                 - Web Team
               </dd>
               <dt>Projects:</dt>
@@ -497,8 +497,8 @@ function HomePage() {
                   rel="noopener noreferrer"
                 >
                   @HousingEngg
-                </a>
-                Frontend team
+                </a>{" "}
+                - Frontend team
               </dd>
               <dt>Description:</dt>
               <dd>
@@ -506,9 +506,8 @@ function HomePage() {
                 housing PWA. This was achieved by following enhancements;
                 <ul>
                   <li>
-                    Migrated to React 16 from version 15. 50% win for
-                    <code>renderToString</code>
-                    completion time.
+                    Migrated to React 16 from version 15. 50% win for{" "}
+                    <code>renderToString</code> completion time.
                   </li>
                   <li>
                     Migrated to NodeJS version 8 from version 6 gave another 50%
@@ -522,11 +521,9 @@ function HomePage() {
                     to reduce overall page size.
                   </li>
                   <li>
-                    Improved scroll performance of listing page by using
-                    <code>will-change</code>
-                    CSS rule, along with disabling
-                    <code>pointer-events</code>
-                    on scroll.
+                    Improved scroll performance of listing page by using{" "}
+                    <code>will-change</code> CSS rule, along with disabling{" "}
+                    <code>pointer-events</code> on scroll.
                   </li>
                 </ul>
               </dd>
@@ -540,7 +537,7 @@ function HomePage() {
                 rel="noopener noreferrer"
                 href="http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html"
               >
-                Samsung R&D Institute, Bangalore
+                Samsung R&D Institute, Bengaluru
               </a>
               , Software Developer
             </div>
@@ -555,7 +552,7 @@ function HomePage() {
                   rel="noopener noreferrer"
                 >
                   @SamsungInternet
-                </a>
+                </a>{" "}
                 team
               </dd>
               <dt>Projects:</dt>
@@ -569,7 +566,7 @@ function HomePage() {
                         rel="noopener noreferrer"
                       >
                         Samsung Internet PC Extension
-                      </a>
+                      </a>{" "}
                     </strong>
                     Starting June 2016
                     <ul>
@@ -577,14 +574,14 @@ function HomePage() {
                         Revamped the extension codebase by switching to modern
                         JavaScript paradigms, UI overhaul and performance
                         optimizations. Improved localization of strings and
-                        helped in
+                        helped in{" "}
                         <a
                           href="https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           rebranding
-                        </a>
+                        </a>{" "}
                         for version 2.0.
                       </li>
                       <li>
@@ -611,28 +608,28 @@ function HomePage() {
                         rel="noopener noreferrer"
                       >
                         Gaana Web App
-                      </a>
+                      </a>{" "}
                     </strong>
                     Starting March 2017
                     <ul>
                       <li>
                         Designed and developed the web application in ReactJS +
-                        Redux +
+                        Redux +{" "}
                         <a
                           href="https://github.com/styled-components/styled-components"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           Styled-Components
-                        </a>
-                        (later replaced with
+                        </a>{" "}
+                        (later replaced with{" "}
                         <a
                           href="https://github.com/tkstrong4/emotion"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           Emotion
-                        </a>
+                        </a>{" "}
                         for perf wins).
                       </li>
                       <li>
@@ -655,15 +652,15 @@ function HomePage() {
                         rel="noopener noreferrer"
                       >
                         Samsung Internet
-                      </a>
-                      -
+                      </a>{" "}
+                      -{" "}
                       <a
                         href="http://www.samsung.com/global/galaxy/apps/bixby/"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         Bixby
-                      </a>
+                      </a>{" "}
                     </strong>
                     April 2017 – July 2017
                     <ul>
@@ -689,12 +686,12 @@ function HomePage() {
               <dd>
                 <ul>
                   <li>
-                    <strong>Employee of the Month (December 2016)</strong>
+                    <strong>Employee of the Month (December 2016)</strong>{" "}
                     Awarded as Employee of the Month for supporting and
                     developing Samsung Internet PC Extension v2.0 in HQ.
                   </li>
                   <li>
-                    <strong>Samsung Citizen Award (March 2017)</strong>
+                    <strong>Samsung Citizen Award (March 2017)</strong>{" "}
                     <em>
                       "Though a fresher and new to product development, [he]
                       took up one of the key components of Samsung Internet
@@ -727,14 +724,14 @@ function HomePage() {
               <dd>
                 <ul>
                   <li>
-                    Developed an
+                    Developed an{" "}
                     <a
                       href="http://chefsbasket.herokuapp.com"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       SPA
-                    </a>
+                    </a>{" "}
                     using ReactJS, NodeJS and Postgresql
                   </li>
                 </ul>
@@ -749,7 +746,7 @@ function HomePage() {
                 rel="noopener noreferrer"
                 href="//www.samsung.com/in/sri-b/siso.html"
               >
-                Samsung Research Institute, Bangalore
+                Samsung Research Institute, Bengaluru
               </a>
               , Student Trainee
             </div>
@@ -777,7 +774,7 @@ function HomePage() {
           <div className="row card">
             <div className="card-title">
               <a target="_blank" rel="noopener noreferrer" href="//refiral.com">
-                Refiral
+                Refiral, New Delhi
               </a>
               , Product Developer
             </div>
@@ -819,7 +816,7 @@ function HomePage() {
           <div className="row card">
             <div className="card-title">
               <a target="_blank" rel="noopener noreferrer" href="//frrole.com">
-                Frrole
+                Frrole, Remote
               </a>
               , Frontend Development Intern
             </div>
@@ -1136,42 +1133,41 @@ function HomePage() {
                     and Design
                   </li>
                   <li>
-                    Wrote a report on
-                    <a href="/Rapes.pdf">Rapes</a>
+                    Wrote a report on <a href="/Rapes.pdf">Rapes</a>
                   </li>
                   <li>
-                    Successfully completed projects like :
+                    Successfully completed projects like :{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
                       href="//github.com/bogas04/mvp-generator"
                     >
                       MVP Generator
-                    </a>
-                    |
+                    </a>{" "}
+                    |{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
                       href="//github.com/bogas04/collnet"
                     >
                       CollNet
-                    </a>
-                    |
+                    </a>{" "}
+                    |{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
                       href="//github.com/bogas04/cloudkeeper"
                     >
                       CloudKeeper
-                    </a>
-                    |
+                    </a>{" "}
+                    |{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
                       href="//github.com/bogas04/Attendance-System"
                     >
                       Student Attendance System
-                    </a>
+                    </a>{" "}
                     , and more...
                   </li>
                   <li>
@@ -1279,8 +1275,8 @@ function HomePage() {
                 <h6 className="talk-title">
                   <a href="http://bit.ly/web-performance-2019">
                     Web Performance in 2019
-                  </a>
-                  at
+                  </a>{" "}
+                  at{" "}
                   <a
                     href="https://www.hellomeets.com/"
                     target="_blank"
@@ -1305,8 +1301,7 @@ function HomePage() {
                   />
                 </a>
                 <h6 className="talk-title">
-                  <a href="https://www.swiggy.com">Swiggy ♥️ Web</a>
-                  at
+                  <a href="https://www.swiggy.com">Swiggy ♥️ Web</a> at{" "}
                   <a
                     href="https://www.youtube.com/watch?time_continue=450&v=2mX8hmefCRI&feature=emb_title"
                     target="_blank"
@@ -1325,8 +1320,7 @@ function HomePage() {
                   alt="Banner image for the talk"
                 />
                 <h6 className="talk-title">
-                  <a href="http://bit.ly/react-2019">React in 2019</a>
-                  at
+                  <a href="http://bit.ly/react-2019">React in 2019</a> at{" "}
                   <a
                     href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/"
                     target="_blank"
@@ -1345,8 +1339,7 @@ function HomePage() {
                   alt="Banner image for the talk"
                 />
                 <h6 className="talk-title">
-                  <a href="http://bit.ly/jest-04-2018">Testing with Jest</a>
-                  at
+                  <a href="http://bit.ly/jest-04-2018">Testing with Jest</a> at{" "}
                   <a
                     href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/"
                     target="_blank"
@@ -1374,8 +1367,8 @@ function HomePage() {
                 <h6 className="talk-title">
                   <a href="http://bit.ly/gddx-dec2017">
                     Delivering Fast Web-apps Fast
-                  </a>
-                  at
+                  </a>{" "}
+                  at{" "}
                   <a
                     href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
                     target="_blank"

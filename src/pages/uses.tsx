@@ -109,7 +109,7 @@ function UsesPage() {
           <img src="//github.com/bogas04.png" alt="👳🏽" />
           <a href="/" rel="prefetch">
             Divjot Singh
-          </a>
+          </a>{" "}
           <small>
             <a href="http://uses.tech" target="_blank">
               /uses
@@ -123,7 +123,7 @@ function UsesPage() {
             <li>
               <a href="https://code.visualstudio.com" target="_blank">
                 👨‍💻 VS Code
-              </a>
+              </a>{" "}
               with
               <ol>
                 <li>
@@ -132,7 +132,7 @@ function UsesPage() {
                     target="_blank"
                   >
                     Night Owl Light
-                  </a>
+                  </a>{" "}
                   theme
                 </li>
                 <li>
@@ -141,7 +141,7 @@ function UsesPage() {
                     target="_blank"
                   >
                     Fira Code
-                  </a>
+                  </a>{" "}
                   font
                 </li>
                 <li>
@@ -150,7 +150,7 @@ function UsesPage() {
                     target="_blank"
                   >
                     Vim
-                  </a>
+                  </a>{" "}
                   key bindings
                 </li>
               </ol>
