@@ -1,8 +1,17 @@
 import "../global.css";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import { useEffect } from "react";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    // remove all sws
+    if (window.navigator.serviceWorker) {
+      navigator.serviceWorker
+        .getRegistrations()
+        .then((sws) => sws.map((sw) => sw.unregister()));
+    }
+  }, []);
   return (
     <>
       <Component {...pageProps} />
