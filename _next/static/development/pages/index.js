@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/blog.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
 /*!***************************************************************!*\
@@ -139,6 +139,36 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 module.exports = _createClass;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
 
 /***/ }),
 
@@ -614,21 +644,21 @@ var assign=Object.assign.bind(Object);function g(){return assign;}Object.defineP
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fblog&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2Findex.tsx!./":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fblog&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2Findex.tsx ***!
-  \****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Findex.tsx!./":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Findex.tsx ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/blog", function() {
-      var mod = __webpack_require__(/*! ./src/pages/blog/index.tsx */ "./src/pages/blog/index.tsx")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/", function() {
+      var mod = __webpack_require__(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx")
       if(true) {
-        module.hot.accept(/*! ./src/pages/blog/index.tsx */ "./src/pages/blog/index.tsx", function() {
-          if(!next.router.components["/blog"]) return
-          var updatedPage = __webpack_require__(/*! ./src/pages/blog/index.tsx */ "./src/pages/blog/index.tsx")
-          next.router.update("/blog", updatedPage)
+        module.hot.accept(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx", function() {
+          if(!next.router.components["/"]) return
+          var updatedPage = __webpack_require__(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx")
+          next.router.update("/", updatedPage)
         })
       }
       return mod
@@ -4922,25 +4952,196 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/constants/index.ts":
-/*!********************************!*\
-  !*** ./src/constants/index.ts ***!
-  \********************************/
-/*! exports provided: WEBSITE_URL, BLOG_URL */
+/***/ "./src/components/icons/blog.tsx":
+/*!***************************************!*\
+  !*** ./src/components/icons/blog.tsx ***!
+  \***************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WEBSITE_URL", function() { return WEBSITE_URL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BLOG_URL", function() { return BLOG_URL; });
-var WEBSITE_URL = "https://bogas04.github.io";
-var BLOG_URL = "https://bogas04.github.io/blog";
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var _this = undefined,
+    _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/components/icons/blog.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+var BlogIcon = function BlogIcon(props) {
+  return __jsx("svg", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    viewBox: "0 0 300 300",
+    width: 97.75,
+    height: 97.75
+  }, props, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4,
+      columnNumber: 3
+    }
+  }), __jsx("path", {
+    d: "M149.996 0C67.157 0 .001 67.161.001 149.997S67.157 300 149.996 300s150.003-67.163 150.003-150.003S232.835 0 149.996 0zm71.306 107.945l-14.247 14.247-29.001-28.999-11.002 11.002 29.001 29.001-71.132 71.126-28.999-28.996-11.002 11.002 28.999 28.999-7.088 7.088-.135-.135a5.612 5.612 0 01-3.582 2.575l-27.043 6.03a5.61 5.61 0 01-5.197-1.512 5.613 5.613 0 01-1.512-5.203l6.027-27.035a5.631 5.631 0 012.578-3.582l-.137-.137L192.3 78.941a4.304 4.304 0 016.082.005l22.922 22.917a4.302 4.302 0 01-.002 6.082z",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BlogIcon);
 
 /***/ }),
 
-/***/ "./src/layout/blog.tsx":
+/***/ "./src/components/icons/github.tsx":
+/*!*****************************************!*\
+  !*** ./src/components/icons/github.tsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var _this = undefined,
+    _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/components/icons/github.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+var GithubIcon = function GithubIcon(props) {
+  return __jsx("svg", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    viewBox: "0 0 24 24",
+    width: 97.75,
+    height: 97.75
+  }, props, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4,
+      columnNumber: 3
+    }
+  }), __jsx("path", {
+    d: "M12 .5C5.37.5 0 5.78 0 12.292c0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567 0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716 1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827 0-1.287.465-2.339 1.235-3.164-.135-.298-.54-1.497.105-3.121 0 0 1.005-.316 3.3 1.209.96-.262 1.98-.392 3-.398 1.02.006 2.04.136 3 .398 2.28-1.525 3.285-1.209 3.285-1.209.645 1.624.24 2.823.12 3.121.765.825 1.23 1.877 1.23 3.164 0 4.53-2.805 5.527-5.475 5.817.42.354.81 1.077.81 2.182 0 1.578-.015 2.846-.015 3.229 0 .309.21.678.825.56C20.565 21.917 24 17.495 24 12.292 24 5.78 18.627.5 12 .5z",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GithubIcon);
+
+/***/ }),
+
+/***/ "./src/components/icons/linkedin.tsx":
+/*!*******************************************!*\
+  !*** ./src/components/icons/linkedin.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var _this = undefined,
+    _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/components/icons/linkedin.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+var LinkedInIcon = function LinkedInIcon(props) {
+  return __jsx("svg", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    width: 97.75,
+    height: 97.75
+  }, props, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4,
+      columnNumber: 3
+    }
+  }), __jsx("path", {
+    d: "M48.875 0C21.882 0 0 21.882 0 48.875S21.882 97.75 48.875 97.75 97.75 75.868 97.75 48.875 75.868 0 48.875 0zM30.562 81.966h-13.74V37.758h13.74v44.208zm-6.867-50.251a7.968 7.968 0 01-7.969-7.968 7.968 7.968 0 017.969-7.964c4.392 0 7.962 3.57 7.962 7.964 0 4.399-3.571 7.968-7.962 7.968zm58.328 50.251H68.294V60.467c0-5.127-.095-11.721-7.142-11.721-7.146 0-8.245 5.584-8.245 11.35v21.869H39.179V37.758h13.178v6.041h.185c1.835-3.476 6.315-7.14 13-7.14 13.913 0 16.481 9.156 16.481 21.059v24.248z",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LinkedInIcon);
+
+/***/ }),
+
+/***/ "./src/components/icons/twitter.tsx":
+/*!******************************************!*\
+  !*** ./src/components/icons/twitter.tsx ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var _this = undefined,
+    _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/components/icons/twitter.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+var TwitterIcon = function TwitterIcon(props) {
+  return __jsx("svg", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    viewBox: "0 0 512 512",
+    width: 97.75,
+    height: 97.75
+  }, props, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4,
+      columnNumber: 3
+    }
+  }), __jsx("path", {
+    d: "M256 0C114.637 0 0 114.637 0 256s114.637 256 256 256 256-114.637 256-256S397.363 0 256 0zm116.887 199.602c.113 2.52.168 5.05.168 7.593 0 77.645-59.102 167.18-167.184 167.184h.004-.004c-33.184 0-64.062-9.727-90.066-26.395 4.597.543 9.277.813 14.015.813 27.532 0 52.868-9.39 72.98-25.152-25.722-.477-47.41-17.465-54.894-40.813a58.481 58.481 0 0011.043 1.063 58.8 58.8 0 0015.496-2.07c-26.886-5.384-47.14-29.145-47.14-57.598 0-.266 0-.504.007-.75a58.354 58.354 0 0026.614 7.347c-15.778-10.527-26.149-28.523-26.149-48.91a58.597 58.597 0 017.957-29.535c28.977 35.555 72.282 58.937 121.118 61.394a58.708 58.708 0 01-1.528-13.398c0-32.437 26.317-58.754 58.766-58.754 16.902 0 32.168 7.145 42.89 18.567a117.855 117.855 0 0037.313-14.262c-4.395 13.715-13.707 25.222-25.84 32.5 11.887-1.422 23.215-4.574 33.742-9.254a119.412 119.412 0 01-29.308 30.43zm0 0",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TwitterIcon);
+
+/***/ }),
+
+/***/ "./src/pages/index.tsx":
 /*!*****************************!*\
-  !*** ./src/layout/blog.tsx ***!
+  !*** ./src/pages/index.tsx ***!
   \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -4949,199 +5150,2762 @@ var BLOG_URL = "https://bogas04.github.io/blog";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined,
-    _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/layout/blog.tsx";
-
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_SeoTags__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SeoTags */ "./src/components/SeoTags/index.ts");
+/* harmony import */ var _components_icons_twitter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/icons/twitter */ "./src/components/icons/twitter.tsx");
+/* harmony import */ var _components_icons_blog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/icons/blog */ "./src/components/icons/blog.tsx");
+/* harmony import */ var _components_icons_linkedin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/icons/linkedin */ "./src/components/icons/linkedin.tsx");
+/* harmony import */ var _components_icons_github__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/icons/github */ "./src/components/icons/github.tsx");
+var _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/pages/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-var BlogLayout = function BlogLayout(_ref) {
-  var children = _ref.children;
+
+
+
+
+
+
+function HomePage() {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    window.onkeypress = function (e) {
+      this.currentSection = this.currentSection || 0;
+      this.$sections = this.$sections || document.getElementsByClassName("section");
+
+      if ((e.charCode === 106 || e.keyCode === 40) && this.currentSection < this.$sections.length - 1) {
+        window.scrollTo(0, this.$sections[++this.currentSection].offsetTop);
+        return false;
+      } else if ((e.charCode === 107 || e.keyCode === 38) && this.currentSection > 0) {
+        window.scrollTo(0, this.$sections[--this.currentSection].offsetTop);
+        return false;
+      }
+    };
+  }, []);
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("style", {
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6,
-      columnNumber: 7
-    }
-  }, "\n        main {\n            position: relative;\n            max-width: 56em;\n            background-color: white;\n            padding: 2em;\n            margin: 0 auto;\n            box-sizing: border-box;\n        }\n\n        img {\n            width: 100%;\n        }\n\n        @media (prefers-color-scheme: dark) {\n            body,\n            main {\n                background: #333;\n                color: white;\n            }\n\n            a {\n                color: lightsalmon;\n            }\n        }\n    "), __jsx("main", {
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 7
-    }
-  }, children));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (BlogLayout);
-
-/***/ }),
-
-/***/ "./src/pages/blog/index.tsx":
-/*!**********************************!*\
-  !*** ./src/pages/blog/index.tsx ***!
-  \**********************************/
-/*! exports provided: __N_SSG, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__N_SSG", function() { return __N_SSG; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants */ "./src/constants/index.ts");
-/* harmony import */ var _components_SeoTags__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/SeoTags */ "./src/components/SeoTags/index.ts");
-/* harmony import */ var _layout_blog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../layout/blog */ "./src/layout/blog.tsx");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-var _jsxFileName = "/Users/divjot.singh/Work/bogas04.github.io/src/pages/blog/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-function BlogListing(_ref) {
-  var _this = this;
-
-  var posts = _ref.posts;
-  return __jsx(_layout_blog__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
-      columnNumber: 5
-    }
-  }, __jsx("style", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 35,
       columnNumber: 7
     }
-  }, "\n  ul {\n    margin: 2em 1em;\n    padding: 0;\n    line-height: 1.5;\n  }\n\n  .post {\n    list-style: none;\n    border-radius: 5px;\n    overflow: hidden;\n    border: 1px solid #cbcbcb;\n    margin: 1em;\n    transition: all 0.2s;\n  }\n\n  .post a {\n    text-decoration: none;\n    padding: 1em;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-start;\n  }\n\n  .post a:hover,\n  .post a:focus {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .post img {\n    margin: 0;\n    min-width: 30%;\n    max-width: 30%;\n  }\n\n  .post-body {\n    display: flex;\n    flex-direction: column;\n    align-content: space-between;\n  }\n\n  .post-body p,\n  .post-body span {\n    color: initial;\n  }\n\n  @media (prefers-color-scheme: dark) {\n    .post-body p,\n    .post-body span {\n      color: white;\n    }\n\n    .post:hover,\n    .post:focus {\n      box-shadow: none;\n    }\n\n    .post a:hover,\n    .post a:focus {\n      background-color: rgba(0, 0, 0, 0.5);\n    }\n  }\n\n  @media (max-width: 800px) {\n    ul {\n      margin: 2em -1em;\n    }\n    .post a {\n      flex-direction: column-reverse;\n    }\n    .post img {\n      min-width: calc(100% + 2em);\n      padding: 0;\n      margin: -1em -1em 1em;\n      height: 300px;\n      object-fit: cover;\n    }\n  }"), __jsx(_components_SeoTags__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: "Blog | Divjot Singh",
-    description: "My thoughts on work, life and world.",
-    imageUrl: "",
-    pageUrl: _constants__WEBPACK_IMPORTED_MODULE_1__["BLOG_URL"],
+  }, "\n  #main-title {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  #main-title img {\n    background-image: url(//github.com/bogas04.png);\n    border-radius: 50%;\n    border: 5px solid white;\n    min-width: 100px;\n    min-height: 100px;\n    width: 1.5em;\n    height: 1.5em;\n    position: relative;\n  }\n\n  .row {\n    background-color: transparent;\n    border: none;\n  }\n\n  a {\n    color: #3493f2;\n  }\n\n  .section {\n    position: relative;\n    min-height: 100vh;\n    color: white;\n    background-color: #673ab7;\n    padding: 2% 5%;\n    box-shadow: 0px 10px 50px 20px black;\n  }\n\n  .social-icons {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    padding: 2em;\n  }\n  .social-icons a {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    text-transform: lowercase;\n  }\n\n  .social-icons-svg {\n    filter: invert(100%);\n    margin-bottom: 0.5em;\n  }\n\n  .uses {\n    font-size: 2rem;\n    display: block;\n    font-style: italic;\n    color: #ffc600;\n    text-decoration: underline #eb4471;\n    text-align: center;\n    width: 100%;\n    position: absolute;\n    left: 0;\n    bottom: 10vh;\n  }\n\n  .talks {\n    display: grid;\n    grid-gap: 50px;\n    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));\n    width: 100%;\n  }\n\n  .talk-video img,\n  .talk-image {\n    height: 50vh;\n    width: 100%;\n    object-fit: cover;\n  }\n\n  .talk-video {\n    position: relative;\n  }\n\n  .talk-video:hover::after {\n    transform: scale(5);\n    background: rgba(100, 100, 100, 0.6);\n  }\n\n  .talk-video::after {\n    content: \"\u25B6\";\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    color: white;\n    border-radius: 50%;\n    background: rgba(100, 100, 100, 0.4);\n    transform: scale(4.7);\n    height: 2em;\n    width: 2em;\n    display: flex;\n    justify-content: center;\n    transition: transform ease 0.2s;\n    align-items: center;\n  }\n\n  .section.green {\n    background-color: #4caf50;\n  }\n\n  .section.green a {\n    color: #123886;\n  }\n\n  .section.grey {\n    background-color: rgb(52, 58, 64);\n  }\n\n  .section.blue {\n    background-color: #3f51b5;\n  }\n\n  .section.yellow {\n    background-color: #ffc107;\n    color: black;\n  }\n  .section h1 {\n    font-size: 8rem;\n    padding: 5% 0;\n  }\n\n  .section h3 {\n    font-size: 3.5rem;\n    padding: 2% 10px;\n    margin: 0 -20px;\n    position: sticky;\n    top: 0;\n    background-color: inherit;\n    z-index: 1;\n  }\n\n  .section h6 {\n    font-size: 2rem;\n    padding: 2% 0;\n  }\n\n  .social-grid .card-title {\n    height: 45vh;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n\n  .social-grid a {\n    color: inherit;\n  }\n\n  .card-title {\n    font-size: 154%;\n    font-weight: bold;\n    padding-bottom: 15px;\n    text-transform: uppercase;\n  }\n\n  #work .row.card {\n    box-shadow: -20px 0 0px -17px grey;\n    margin-left: -15px;\n    padding-left: 15px;\n    box-shadow: -20px 16px 0px -17px #808080;\n  }\n\n  #work .row.card::before {\n    content: \"\";\n    width: 20px;\n    height: 20px;\n    background: #939393;\n    display: block;\n    position: absolute;\n    left: -11px;\n    border-radius: 50%;\n    top: 8px;\n  }\n\n  #work .row.card:first-child::before {\n    background-color: #4dbf9a;\n  }\n\n  @media screen and (max-width: 750px) {\n    .section h1 {\n      font-size: 8em;\n      padding: 5% 0;\n    }\n    .section h3 {\n      font-size: 3.5em;\n      padding: 2% 10px;\n    }\n\n    .section h6 {\n      font-size: 2em;\n      padding: 2% 0;\n    }\n\n    /* Better li padding for mobile */\n    dd ul {\n      padding-left: 10px !important;\n    }\n\n    #main-title {\n      align-items: flex-start;\n    }\n\n    .talks {\n      display: grid;\n      grid-gap: 50px;\n      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    }\n\n    .talk-video,\n    .talk-image {\n      height: 50vh;\n      width: 100%;\n    }\n    .social-icons {\n      padding: 0.5em;\n    }\n\n    .social-icons-svg {\n      transform: scale(0.8);\n    }\n  }\n\n  /* Misc change to better align things */\n  dd ul {\n    padding-left: 20px;\n  }\n  "), __jsx(_components_SeoTags__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: "Divjot Singh | Frontend Engineer | Vegan | Sikh",
+    description: "Frontend Engineer, Sikh & a Vegan residing in Bengaluru, India.",
+    imageUrl: "https://github.com/bogas04.png",
+    pageUrl: "https://bogas04.github.io/",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105,
+      lineNumber: 276,
       columnNumber: 7
     }
-  }), __jsx("h1", {
+  }), __jsx("div", {
+    className: "section",
+    style: {
+      zIndex: 10
+    },
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112,
+      lineNumber: 283,
       columnNumber: 7
     }
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    href: "/",
+  }, __jsx("h1", {
+    id: "main-title",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113,
+      lineNumber: 284,
       columnNumber: 9
+    }
+  }, __jsx("img", {
+    src: "//github.com/bogas04.png",
+    alt: "\uD83D\uDC73\uD83C\uDFFD",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 285,
+      columnNumber: 11
+    }
+  }), "Divjot Singh"), __jsx("nav", {
+    className: "social-icons",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 289,
+      columnNumber: 9
+    }
+  }, __jsx("a", {
+    href: "https://linkedin.com/in/bogas04",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 290,
+      columnNumber: 11
+    }
+  }, __jsx(_components_icons_linkedin__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: "social-icons-svg",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 295,
+      columnNumber: 13
+    }
+  }), "LinkedIn"), __jsx("a", {
+    href: "https://twitter.com/bogas04",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 298,
+      columnNumber: 11
+    }
+  }, __jsx(_components_icons_twitter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: "social-icons-svg",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 303,
+      columnNumber: 13
+    }
+  }), "Twitter"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/blog",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 307,
+      columnNumber: 11
     }
   }, __jsx("a", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114,
-      columnNumber: 11
+      lineNumber: 308,
+      columnNumber: 13
     }
-  }, "Divjot Singh")), " ", "| Blog"), __jsx("ul", {
+  }, __jsx(_components_icons_blog__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: "social-icons-svg",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119,
+      lineNumber: 309,
+      columnNumber: 15
+    }
+  }), "/blog")), __jsx("a", {
+    href: "https://github.com/bogas04",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 313,
+      columnNumber: 11
+    }
+  }, __jsx(_components_icons_github__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: "social-icons-svg",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 318,
+      columnNumber: 13
+    }
+  }), "Github")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/uses",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 323,
+      columnNumber: 9
+    }
+  }, __jsx("a", {
+    className: "uses",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 324,
+      columnNumber: 11
+    }
+  }, "/uses"))), __jsx("div", {
+    className: "section grey",
+    style: {
+      zIndex: 12
+    },
+    id: "work",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 328,
       columnNumber: 7
     }
-  }, posts.map(function (post) {
-    return __jsx("li", {
-      className: "post",
-      key: post.title,
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 121,
-        columnNumber: 11
-      }
-    }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
-      href: "blog/[slug]",
-      as: "blog/".concat(post.slug),
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 122,
-        columnNumber: 13
-      }
-    }, __jsx("a", {
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 123,
-        columnNumber: 15
-      }
-    }, __jsx("div", {
-      className: "post-body",
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 124,
-        columnNumber: 17
-      }
-    }, __jsx("h2", {
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 125,
-        columnNumber: 19
-      }
-    }, post.title), __jsx("p", {
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 127,
-        columnNumber: 19
-      }
-    }, post.description), __jsx("span", {
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 128,
-        columnNumber: 19
-      }
-    }, new Date(post.date).toDateString())), post.image && __jsx("img", {
-      src: post.image,
-      alt: "Image for the post",
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 131,
-        columnNumber: 19
-      }
-    }))));
-  })));
+  }, __jsx("h3", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 329,
+      columnNumber: 9
+    }
+  }, "Such Work"), __jsx("div", {
+    className: "container-fluid",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 331,
+      columnNumber: 9
+    }
+  }, __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 332,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 333,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://udaan.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 334,
+      columnNumber: 15
+    }
+  }, "Udaan, Bengaluru"), ", Software Engineer"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 343,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 344,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 345,
+      columnNumber: 15
+    }
+  }, "April 2020 - Present"))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 349,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 350,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://swiggy.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 351,
+      columnNumber: 15
+    }
+  }, "Swiggy, Bengaluru"), ", Software Development Engineer III"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 360,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 361,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 362,
+      columnNumber: 15
+    }
+  }, "November 2019 - April 2020"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 363,
+      columnNumber: 15
+    }
+  }, "Team:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 364,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.twitter.com/SwiggyTech",
+    rel: "noopener noreferrer",
+    target: "_blank",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 365,
+      columnNumber: 17
+    }
+  }, "@SwiggyTech"), " ", "- New Initiatives Team (Web)"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 374,
+      columnNumber: 15
+    }
+  }, "Projects:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 375,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 376,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 377,
+      columnNumber: 19
+    }
+  }, "Lead the release of Timeline shareability on Swiggy Go."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 380,
+      columnNumber: 19
+    }
+  }, "Lead the release of Swiggy Stores PWA."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 381,
+      columnNumber: 19
+    }
+  }, "Lead the release of Swiggy Single Page Checkout for Food."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 384,
+      columnNumber: 19
+    }
+  }, "Developed new PL driven UI for Swiggy Stores."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 385,
+      columnNumber: 19
+    }
+  }, "Developed new Swiggy Genie."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 386,
+      columnNumber: 19
+    }
+  }, "Developed a system for incorporating Origin Trials for our PWAs, starting with", " ", __jsx("a", {
+    href: "https://web.dev/sms-receiver-api-announcement/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 389,
+      columnNumber: 21
+    }
+  }, "SMS Receiver API"), " ", "&", " ", __jsx("a", {
+    href: "https://web.dev/contact-picker/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 397,
+      columnNumber: 21
+    }
+  }, "Contacts API"), "."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 406,
+      columnNumber: 19
+    }
+  }, "Deprecated legacy systems and ported the same to modern services."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 410,
+      columnNumber: 19
+    }
+  }, "Regularly worked with and maintained HAProxy configuration."))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 418,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 419,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://swiggy.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 420,
+      columnNumber: 15
+    }
+  }, "Swiggy, Bengaluru"), ", Software Development Engineer II"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 429,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 430,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 431,
+      columnNumber: 15
+    }
+  }, "January 2018 - November 2019"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 432,
+      columnNumber: 15
+    }
+  }, "Team:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 433,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.twitter.com/SwiggyTech",
+    rel: "noopener noreferrer",
+    target: "_blank",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 434,
+      columnNumber: 17
+    }
+  }, "@SwiggyTech"), " ", "- Web Team"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 443,
+      columnNumber: 15
+    }
+  }, "Projects:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 444,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 445,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 446,
+      columnNumber: 19
+    }
+  }, "Designed and developed multi-tenant payments module"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 447,
+      columnNumber: 19
+    }
+  }, "Designed and developed website generator (Gauntlet). 10+ dashboards."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 451,
+      columnNumber: 19
+    }
+  }, "Designed and developed static site serving system for legal pages."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 455,
+      columnNumber: 19
+    }
+  }, "Designed Hotstar-Pop integration and scaled codepath for 120k RPM."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 459,
+      columnNumber: 19
+    }
+  }, "Moved codebase to a monorepo for improved developer experience."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 463,
+      columnNumber: 19
+    }
+  }, "Developed automatic UA based asset serving system for smaller bundle sizes. (20%)"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 467,
+      columnNumber: 19
+    }
+  }, "Developed Restaurant Hygiene Pages for PWA and as webview for apps."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 471,
+      columnNumber: 19
+    }
+  }, "Developed Everyday Offers Feature for mobile PWA."))), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 474,
+      columnNumber: 15
+    }
+  }, "Major Achievements:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 475,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 476,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 477,
+      columnNumber: 19
+    }
+  }, "Awards: MVP (Oct 2018)"))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 483,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 484,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://housing.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 485,
+      columnNumber: 15
+    }
+  }, "Housing.com, Mumbai"), ", Senior Software Development Engineer"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 494,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 495,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 496,
+      columnNumber: 15
+    }
+  }, "October 2017 - January 2018"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 497,
+      columnNumber: 15
+    }
+  }, "Team:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 498,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://twitter.com/HousingEngg",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 499,
+      columnNumber: 17
+    }
+  }, "@HousingEngg"), " ", "- Frontend team"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 508,
+      columnNumber: 15
+    }
+  }, "Description:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 509,
+      columnNumber: 15
+    }
+  }, "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements;", __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 512,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 513,
+      columnNumber: 19
+    }
+  }, "Migrated to React 16 from version 15. 50% win for", " ", __jsx("code", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 515,
+      columnNumber: 21
+    }
+  }, "renderToString"), " completion time."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 517,
+      columnNumber: 19
+    }
+  }, "Migrated to NodeJS version 8 from version 6 gave another 50% win for above."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 521,
+      columnNumber: 19
+    }
+  }, "Reduced asset size by roughly 20% using Brotli compression."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 524,
+      columnNumber: 19
+    }
+  }, "Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 528,
+      columnNumber: 19
+    }
+  }, "Improved scroll performance of listing page by using", " ", __jsx("code", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 530,
+      columnNumber: 21
+    }
+  }, "will-change"), " CSS rule, along with disabling", " ", __jsx("code", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 531,
+      columnNumber: 21
+    }
+  }, "pointer-events"), " on scroll."))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 538,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 539,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 540,
+      columnNumber: 15
+    }
+  }, "Samsung R&D Institute, Bengaluru"), ", Software Developer"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 549,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 550,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 551,
+      columnNumber: 15
+    }
+  }, "June 2016 - October 2017"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 552,
+      columnNumber: 15
+    }
+  }, "Team:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 553,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://twitter.com/SamsungInternet",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 554,
+      columnNumber: 17
+    }
+  }, "@SamsungInternet"), " ", "team"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 563,
+      columnNumber: 15
+    }
+  }, "Projects:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 564,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 565,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 566,
+      columnNumber: 19
+    }
+  }, __jsx("strong", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 567,
+      columnNumber: 21
+    }
+  }, __jsx("a", {
+    href: "https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 568,
+      columnNumber: 23
+    }
+  }, "Samsung Internet PC Extension"), " "), "Starting June 2016", __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 577,
+      columnNumber: 21
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 578,
+      columnNumber: 23
+    }
+  }, "Revamped the extension codebase by switching to modern JavaScript paradigms, UI overhaul and performance optimizations. Improved localization of strings and helped in", " ", __jsx("a", {
+    href: "https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 583,
+      columnNumber: 25
+    }
+  }, "rebranding"), " ", "for version 2.0."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 592,
+      columnNumber: 23
+    }
+  }, "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from 2.7 to 3.7 post launch)."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 597,
+      columnNumber: 23
+    }
+  }, "Currently working on adding new features and improving sync performance."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 601,
+      columnNumber: 23
+    }
+  }, "Userbase increased from 8,000 to 60,000 monthly active users (~8x) within 4 months of 2.0 release."))), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 608,
+      columnNumber: 19
+    }
+  }, __jsx("strong", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 609,
+      columnNumber: 21
+    }
+  }, __jsx("a", {
+    href: "https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 610,
+      columnNumber: 23
+    }
+  }, "Gaana Web App"), " "), "Starting March 2017", __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 619,
+      columnNumber: 21
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 620,
+      columnNumber: 23
+    }
+  }, "Designed and developed the web application in ReactJS + Redux +", " ", __jsx("a", {
+    href: "https://github.com/styled-components/styled-components",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 623,
+      columnNumber: 25
+    }
+  }, "Styled-Components"), " ", "(later replaced with", " ", __jsx("a", {
+    href: "https://github.com/tkstrong4/emotion",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 631,
+      columnNumber: 25
+    }
+  }, "Emotion"), " ", "for perf wins)."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 640,
+      columnNumber: 23
+    }
+  }, "Challenges like performance on low end devices, inter-op between Tizen APIs and Web Platform were tackled along with the team."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 645,
+      columnNumber: 23
+    }
+  }, "Successfully launched first phase of app within MyGalaxy on Tizen in Late May."))), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 652,
+      columnNumber: 19
+    }
+  }, __jsx("strong", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 653,
+      columnNumber: 21
+    }
+  }, __jsx("a", {
+    href: "https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 654,
+      columnNumber: 23
+    }
+  }, "Samsung Internet"), " ", "-", " ", __jsx("a", {
+    href: "http://www.samsung.com/global/galaxy/apps/bixby/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 662,
+      columnNumber: 23
+    }
+  }, "Bixby"), " "), "April 2017 \u2013 July 2017", __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 671,
+      columnNumber: 21
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 672,
+      columnNumber: 23
+    }
+  }, "Wrote JSGF gram files for Samsung Internet domain. [", __jsx("a", {
+    href: "https://www.youtube.com/watch?v=k2IM_wHrSQ8",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 674,
+      columnNumber: 25
+    }
+  }, "video"), "]"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 683,
+      columnNumber: 23
+    }
+  }, "Helped in bringing accuracy to 95%+ for Bixby US launch."))))), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 690,
+      columnNumber: 15
+    }
+  }, "Major Achievements:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 691,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 692,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 693,
+      columnNumber: 19
+    }
+  }, __jsx("strong", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 694,
+      columnNumber: 21
+    }
+  }, "Employee of the Month (December 2016)"), " ", "Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 698,
+      columnNumber: 19
+    }
+  }, __jsx("strong", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 699,
+      columnNumber: 21
+    }
+  }, "Samsung Citizen Award (March 2017)"), " ", __jsx("em", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 700,
+      columnNumber: 21
+    }
+  }, "\"Though a fresher and new to product development, [he] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, [he] has displayed enormous passion with a clear goal of making it much better.\"")))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 714,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 715,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "http://chefsbasket.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 716,
+      columnNumber: 15
+    }
+  }, "Fizzy Food Lab's, Mumbai"), ", Fullstack JavaScript Developer"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 725,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 726,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 727,
+      columnNumber: 15
+    }
+  }, "December 2015 - January 2016"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 728,
+      columnNumber: 15
+    }
+  }, "Description:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 729,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 730,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 731,
+      columnNumber: 19
+    }
+  }, "Developed an", " ", __jsx("a", {
+    href: "http://chefsbasket.herokuapp.com",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 733,
+      columnNumber: 21
+    }
+  }, "SPA"), " ", "using ReactJS, NodeJS and Postgresql"))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 747,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 748,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//www.samsung.com/in/sri-b/siso.html",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 749,
+      columnNumber: 15
+    }
+  }, "Samsung Research Institute, Bengaluru"), ", Student Trainee"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 758,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 759,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 760,
+      columnNumber: 15
+    }
+  }, "June 2015 - August 2015"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 761,
+      columnNumber: 15
+    }
+  }, "Description:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 762,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 763,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 764,
+      columnNumber: 19
+    }
+  }, "Developed tile based map server using NodeJS, mapnik and TileMill"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 768,
+      columnNumber: 19
+    }
+  }, "Set up Mongodb cluster (3 systems), developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road anlaysis done by Hadoop."))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 779,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 780,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//refiral.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 781,
+      columnNumber: 15
+    }
+  }, "Refiral, New Delhi"), ", Product Developer"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 786,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 787,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 788,
+      columnNumber: 15
+    }
+  }, "October 2013 - October 2014"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 789,
+      columnNumber: 15
+    }
+  }, "Description:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 790,
+      columnNumber: 15
+    }
+  }, "Co-founding team member. Managed JavaScript head of the tool.", __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 792,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 793,
+      columnNumber: 19
+    }
+  }, "Health Report tool for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 798,
+      columnNumber: 19
+    }
+  }, "Performance improvements by deploying faster routes to server calls. (300-400ms win)"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 802,
+      columnNumber: 19
+    }
+  }, "Expanding support to several e-commerce platforms."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 803,
+      columnNumber: 19
+    }
+  }, "Extending help in creating the internal API. Made its use to make several customizable popouts, providing more options than industry."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 808,
+      columnNumber: 19
+    }
+  }, "Integration with social networks to enable the tool. Studied Facebook documentation to leverage best out of its Graph API."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 813,
+      columnNumber: 19
+    }
+  }, "Helped in strategy and planning of the tool in its initial phase."))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 821,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 822,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//frrole.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 823,
+      columnNumber: 15
+    }
+  }, "Frrole, Remote"), ", Frontend Development Intern"), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 828,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 829,
+      columnNumber: 15
+    }
+  }, "Duration:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 830,
+      columnNumber: 15
+    }
+  }, "November 2013 - January 2014"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 831,
+      columnNumber: 15
+    }
+  }, "Description:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 832,
+      columnNumber: 15
+    }
+  }, "Buzzometer - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie."))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 840,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 841,
+      columnNumber: 13
+    }
+  }, "And much more, meet up for a \u2615 coffee if my work interests you")))), __jsx("div", {
+    className: "section yellow",
+    style: {
+      zIndex: 11
+    },
+    id: "education",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 849,
+      columnNumber: 7
+    }
+  }, __jsx("h3", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 850,
+      columnNumber: 9
+    }
+  }, "Much Education"), __jsx("div", {
+    className: "container-fluid",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 852,
+      columnNumber: 9
+    }
+  }, __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 853,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 854,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    href: "https://linkedin.com/in/bogas04",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 855,
+      columnNumber: 15
+    }
+  }, "Professionally Me")), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 864,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 865,
+      columnNumber: 15
+    }
+  }, "Resume:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 866,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "/resume",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 867,
+      columnNumber: 17
+    }
+  }, "Download resume")), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 871,
+      columnNumber: 15
+    }
+  }, "Programming Languages:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 872,
+      columnNumber: 15
+    }
+  }, "C, TypeScript, JavaScript (ES2015+), PHP, Java,"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 873,
+      columnNumber: 15
+    }
+  }, "Stacks/Technologies:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 874,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://preactjs.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 875,
+      columnNumber: 17
+    }
+  }, "(P)"), __jsx("a", {
+    href: "https://facebook.github.io/react/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 882,
+      columnNumber: 17
+    }
+  }, "ReactJS"), " ", ",", " ", __jsx("a", {
+    href: "https://redux.js.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 890,
+      columnNumber: 17
+    }
+  }, "Redux"), " ", ",", " ", __jsx("a", {
+    href: "https://angularjs.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 898,
+      columnNumber: 17
+    }
+  }, "AngularJS"), " ", ",", " ", __jsx("a", {
+    href: "https://getbootstrap.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 906,
+      columnNumber: 17
+    }
+  }, "BootStrap"), " ", ",", " ", __jsx("a", {
+    href: "https://jquery.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 914,
+      columnNumber: 17
+    }
+  }, "jQuery"), " ", ",", " ", __jsx("a", {
+    href: "httpss://nodejs.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 922,
+      columnNumber: 17
+    }
+  }, "NodeJS"), " ", ",", " ", __jsx("a", {
+    href: "https://expressjs.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 930,
+      columnNumber: 17
+    }
+  }, "ExpressJS"), " ", ",", " ", __jsx("a", {
+    href: "https://www.slimframework.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 938,
+      columnNumber: 17
+    }
+  }, "Slim MicroFramework")), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 946,
+      columnNumber: 15
+    }
+  }, "Databases"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 947,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.postgresql.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 948,
+      columnNumber: 17
+    }
+  }, "PostgreSQL"), " ", ",", " ", __jsx("a", {
+    href: "https://www.mysql.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 956,
+      columnNumber: 17
+    }
+  }, "MySQL"), " ", ",", " ", __jsx("a", {
+    href: "https://www.mongodb.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 964,
+      columnNumber: 17
+    }
+  }, "MongoDB")), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 972,
+      columnNumber: 15
+    }
+  }, "Tools"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 973,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.npmjs.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 974,
+      columnNumber: 17
+    }
+  }, "npm"), " ", ",", " ", __jsx("a", {
+    href: "https://git-scm.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 982,
+      columnNumber: 17
+    }
+  }, "git"), " ", ",", " ", __jsx("a", {
+    href: "http://webpack.js.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 990,
+      columnNumber: 17
+    }
+  }, "webpack"), " ", ",", " ", __jsx("a", {
+    href: "https://rollupjs.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 998,
+      columnNumber: 17
+    }
+  }, "rollup"), " ", ",", " ", __jsx("a", {
+    href: "http://babeljs.io/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1006,
+      columnNumber: 17
+    }
+  }, "babel"), " ", ",", " ", __jsx("a", {
+    href: "https://jestjs.io/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1014,
+      columnNumber: 17
+    }
+  }, "Jest"), " ", ",", " ", __jsx("a", {
+    href: "https://react-styleguidist.js.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1022,
+      columnNumber: 17
+    }
+  }, "Styleguidist"), " ", ",", " ", __jsx("a", {
+    href: "https://www.heroku.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1030,
+      columnNumber: 17
+    }
+  }, "heroku"), " ", ",", " ", __jsx("a", {
+    href: "https://gruntjs.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1038,
+      columnNumber: 17
+    }
+  }, "grunt"), " ", ",", " ", __jsx("a", {
+    href: "https://lerna.js.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1046,
+      columnNumber: 17
+    }
+  }, "lerna"), " ", ",", " ", __jsx("a", {
+    href: "https://gulpjs.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1054,
+      columnNumber: 17
+    }
+  }, "gulp"), " ", ",", " ", __jsx("a", {
+    href: "https://bower.io/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1062,
+      columnNumber: 17
+    }
+  }, "bower"), " ", ",", " ", __jsx("a", {
+    href: "https://code.visualstudio.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1070,
+      columnNumber: 17
+    }
+  }, "Visual Studio Code"), " ", ",", " ", __jsx("a", {
+    href: "https://vim.sourceforge.io/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1078,
+      columnNumber: 17
+    }
+  }, "Vim"), " ", ",", " ", __jsx("a", {
+    href: "https://www.jetbrains.com/idea/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1086,
+      columnNumber: 17
+    }
+  }, "IntelliJ IDEA"), " ", ",", " ", __jsx("a", {
+    href: "https://www.eclipse.org/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1094,
+      columnNumber: 17
+    }
+  }, "Eclipse")), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1102,
+      columnNumber: 15
+    }
+  }, "Other Languages \uD83E\uDD37\u200D\u2642\uFE0F :"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1103,
+      columnNumber: 15
+    }
+  }, "HTML, CSS, XML, YAML, Stylus"))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1107,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1108,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//nsit.ac.in/",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1109,
+      columnNumber: 15
+    }
+  }, "Netaji Subhas Institute of Technology")), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1113,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1114,
+      columnNumber: 15
+    }
+  }, "Batch:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1115,
+      columnNumber: 15
+    }
+  }, "2012 - 2016"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1116,
+      columnNumber: 15
+    }
+  }, "Performance:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1117,
+      columnNumber: 15
+    }
+  }, "79.48%", __jsx("small", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1119,
+      columnNumber: 17
+    }
+  }, "5", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1120,
+      columnNumber: 20
+    }
+  }, "th"), "position in entire department (~190 students)")), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1124,
+      columnNumber: 15
+    }
+  }, "Majored In:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1125,
+      columnNumber: 15
+    }
+  }, "Computer Engineering"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1126,
+      columnNumber: 15
+    }
+  }, "Major Achievements:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1127,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1128,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1129,
+      columnNumber: 19
+    }
+  }, "Granted merit scholarship for all four years."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1130,
+      columnNumber: 19
+    }
+  }, "Consistently stood in top 10 performing students of the department."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1134,
+      columnNumber: 19
+    }
+  }, "Mentored class of 30 in an IEEE NSIT SIG for Web Development and Design"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1138,
+      columnNumber: 19
+    }
+  }, "Wrote a report on ", __jsx("a", {
+    href: "/Rapes.pdf",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1139,
+      columnNumber: 39
+    }
+  }, "Rapes")), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1141,
+      columnNumber: 19
+    }
+  }, "Successfully completed projects like :", " ", __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//github.com/bogas04/mvp-generator",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1143,
+      columnNumber: 21
+    }
+  }, "MVP Generator"), " ", "|", " ", __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//github.com/bogas04/collnet",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1151,
+      columnNumber: 21
+    }
+  }, "CollNet"), " ", "|", " ", __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//github.com/bogas04/cloudkeeper",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1159,
+      columnNumber: 21
+    }
+  }, "CloudKeeper"), " ", "|", " ", __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//github.com/bogas04/Attendance-System",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1167,
+      columnNumber: 21
+    }
+  }, "Student Attendance System"), " ", ", and more..."), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1176,
+      columnNumber: 19
+    }
+  }, "Worked on a research project under Vidhi Khanduja (Assistant Professor) on a database watermarking scheme."))), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1182,
+      columnNumber: 15
+    }
+  }, "Societies:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1183,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1184,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1185,
+      columnNumber: 19
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//ieeensit.org",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1186,
+      columnNumber: 21
+    }
+  }, "IEEE NSIT"), "- Web Developer"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1195,
+      columnNumber: 19
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//junoonnsit.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1196,
+      columnNumber: 21
+    }
+  }, "Junoon - The Official Photography Club"), "- Core Member"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1205,
+      columnNumber: 19
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//collegespace.in",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1206,
+      columnNumber: 21
+    }
+  }, "CollegeSpace"), "- Tech Head"))))), __jsx("div", {
+    className: "row card",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1220,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1221,
+      columnNumber: 13
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "http://www.stmarysschooldwarka.com/",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1222,
+      columnNumber: 15
+    }
+  }, "St. Mary's School")), __jsx("dl", {
+    className: "dl-horizontal",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1230,
+      columnNumber: 13
+    }
+  }, __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1231,
+      columnNumber: 15
+    }
+  }, "Batch:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1232,
+      columnNumber: 15
+    }
+  }, "2002- 2012"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1233,
+      columnNumber: 15
+    }
+  }, "Board:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1234,
+      columnNumber: 15
+    }
+  }, "CBSE"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1235,
+      columnNumber: 15
+    }
+  }, "Performance in 12", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1237,
+      columnNumber: 17
+    }
+  }, "th")), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1239,
+      columnNumber: 15
+    }
+  }, "95.2%"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1240,
+      columnNumber: 15
+    }
+  }, "Performance in 10", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1242,
+      columnNumber: 17
+    }
+  }, "th")), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1244,
+      columnNumber: 15
+    }
+  }, "9.8 CGPA ~ 93.1%"), __jsx("dt", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1245,
+      columnNumber: 15
+    }
+  }, "Major Achievements:"), __jsx("dd", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1246,
+      columnNumber: 15
+    }
+  }, __jsx("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1247,
+      columnNumber: 17
+    }
+  }, __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1248,
+      columnNumber: 19
+    }
+  }, "Granted merit scholarship for 3 years: 10", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1250,
+      columnNumber: 21
+    }
+  }, "th"), "- 12", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1251,
+      columnNumber: 21
+    }
+  }, "th"), "grades"), __jsx("li", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1254,
+      columnNumber: 19
+    }
+  }, "Topped Science department in 12", __jsx("sup", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1256,
+      columnNumber: 21
+    }
+  }, "th"), "Grade"))))))), __jsx("div", {
+    className: "section green",
+    style: {
+      zIndex: 13
+    },
+    id: "talks",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1266,
+      columnNumber: 7
+    }
+  }, __jsx("h3", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1267,
+      columnNumber: 9
+    }
+  }, "So Talkative"), __jsx("div", {
+    className: "container-fluid",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1268,
+      columnNumber: 9
+    }
+  }, __jsx("div", {
+    className: "row",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1269,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "talks",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1270,
+      columnNumber: 13
+    }
+  }, __jsx("div", {
+    className: "talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1271,
+      columnNumber: 15
+    }
+  }, __jsx("img", {
+    className: "talk-image",
+    loading: "lazy",
+    src: "/img/blazing-fast-web.png",
+    alt: "Banner image for the talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1272,
+      columnNumber: 17
+    }
+  }), __jsx("h6", {
+    className: "talk-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1278,
+      columnNumber: 17
+    }
+  }, __jsx("a", {
+    href: "http://bit.ly/web-performance-2019",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1279,
+      columnNumber: 19
+    }
+  }, "Web Performance in 2019"), " ", "at", " ", __jsx("a", {
+    href: "https://www.hellomeets.com/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1283,
+      columnNumber: 19
+    }
+  }, "Hello Meets, Swiggy Office"))), __jsx("div", {
+    className: "talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1293,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.youtube.com/watch?v=2mX8hmefCRI",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "talk-video",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1294,
+      columnNumber: 17
+    }
+  }, __jsx("img", {
+    loading: "lazy",
+    alt: "Video of the talk",
+    src: "https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1300,
+      columnNumber: 19
+    }
+  })), __jsx("h6", {
+    className: "talk-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1306,
+      columnNumber: 17
+    }
+  }, __jsx("a", {
+    href: "https://www.swiggy.com",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1307,
+      columnNumber: 19
+    }
+  }, "Swiggy \u2665\uFE0F Web"), " at", " ", __jsx("a", {
+    href: "https://www.youtube.com/watch?time_continue=450&v=2mX8hmefCRI&feature=emb_title",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1308,
+      columnNumber: 19
+    }
+  }, "Keynote, Google for Mobile India 2019"))), __jsx("div", {
+    className: "talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1318,
+      columnNumber: 15
+    }
+  }, __jsx("img", {
+    loading: "lazy",
+    className: "talk-image",
+    src: "/img/react-2019.png",
+    alt: "Banner image for the talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1319,
+      columnNumber: 17
+    }
+  }), __jsx("h6", {
+    className: "talk-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1325,
+      columnNumber: 17
+    }
+  }, __jsx("a", {
+    href: "http://bit.ly/react-2019",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1326,
+      columnNumber: 19
+    }
+  }, "React in 2019"), " at", " ", __jsx("a", {
+    href: "https://www.meetup.com/ReactJS-Bangalore/events/255737841/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1327,
+      columnNumber: 19
+    }
+  }, "ReactJS Bangalore #41"))), __jsx("div", {
+    className: "talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1337,
+      columnNumber: 15
+    }
+  }, __jsx("img", {
+    loading: "lazy",
+    className: "talk-image",
+    src: "img/testing-with-jest.png",
+    alt: "Banner image for the talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1338,
+      columnNumber: 17
+    }
+  }), __jsx("h6", {
+    className: "talk-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1344,
+      columnNumber: 17
+    }
+  }, __jsx("a", {
+    href: "http://bit.ly/jest-04-2018",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1345,
+      columnNumber: 19
+    }
+  }, "Testing with Jest"), " at", " ", __jsx("a", {
+    href: "https://www.meetup.com/ReactJS-Bangalore/events/247773928/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1346,
+      columnNumber: 19
+    }
+  }, "ReactJS Bangalore #32"))), __jsx("div", {
+    className: "talk",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1356,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    href: "https://www.youtube.com/watch?v=lN8b_fXRC_A",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "talk-video",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1357,
+      columnNumber: 17
+    }
+  }, __jsx("img", {
+    loading: "lazy",
+    alt: "Video of the talk",
+    src: "https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1363,
+      columnNumber: 19
+    }
+  })), __jsx("h6", {
+    className: "talk-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1370,
+      columnNumber: 17
+    }
+  }, __jsx("a", {
+    href: "http://bit.ly/gddx-dec2017",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1371,
+      columnNumber: 19
+    }
+  }, "Delivering Fast Web-apps Fast"), " ", "at", " ", __jsx("a", {
+    href: "https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1375,
+      columnNumber: 19
+    }
+  }, "Google Developers' Day, Extended (Mumbai)"))))))), __jsx("div", {
+    className: "section blue",
+    style: {
+      zIndex: 13
+    },
+    id: "social",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1389,
+      columnNumber: 7
+    }
+  }, __jsx("h3", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1390,
+      columnNumber: 9
+    }
+  }, "Very Social"), __jsx("div", {
+    className: "container-fluid",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1391,
+      columnNumber: 9
+    }
+  }, __jsx("div", {
+    className: "row social-grid",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1392,
+      columnNumber: 11
+    }
+  }, __jsx("div", {
+    className: "col-md-6 text-center",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1393,
+      columnNumber: 13
+    }
+  }, __jsx("p", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1394,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//twitter.com/bogas04",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1395,
+      columnNumber: 17
+    }
+  }, "Twitter")), __jsx("p", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1403,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//instagram.com/bogas04",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1404,
+      columnNumber: 17
+    }
+  }, "Instagram"))), __jsx("div", {
+    className: "col-md-6 text-center",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1414,
+      columnNumber: 13
+    }
+  }, __jsx("p", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1415,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "//youtube.com/divjotbogas",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1416,
+      columnNumber: 17
+    }
+  }, "YouTube")), __jsx("p", {
+    className: "card-title",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1424,
+      columnNumber: 15
+    }
+  }, __jsx("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://medium.com/@bogas04",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 1425,
+      columnNumber: 17
+    }
+  }, "Medium")))))));
 }
 
-var __N_SSG = true;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BlogListing));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(HomePage));
 
 /***/ }),
 
-/***/ 4:
-/*!********************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fblog&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2Findex.tsx ***!
-  \********************************************************************************************************************************************************/
+/***/ 1:
+/*!*********************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Findex.tsx ***!
+  \*********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fblog&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fblog&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2Findex.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Findex.tsx!./");
 
 
 /***/ }),
@@ -5157,5 +7921,5 @@ module.exports = dll_c2e10d183b950a67d9e7;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=blog.js.map
+},[[1,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=index.js.map

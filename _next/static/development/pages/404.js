@@ -927,7 +927,7 @@ function Custom404Page() {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!**********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F404&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2F404.tsx ***!
   \**********************************************************************************************************************************************/
@@ -950,5 +950,5 @@ module.exports = dll_c2e10d183b950a67d9e7;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=404.js.map

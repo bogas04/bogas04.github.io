@@ -5050,7 +5050,6 @@ function BlogPost(_ref) {
       columnNumber: 7
     }
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    prefetch: true,
     href: "/",
     __self: this,
     __source: {
@@ -5067,7 +5066,6 @@ function BlogPost(_ref) {
     }
   }, "Divjot Singh")), " ", "|", " ", __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
     href: "/blog",
-    prefetch: true,
     __self: this,
     __source: {
       fileName: _jsxFileName,
@@ -5107,7 +5105,7 @@ var __N_SSG = true;
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!**************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fblog%2F%5Bslug%5D&absolutePagePath=%2FUsers%2Fdivjot.singh%2FWork%2Fbogas04.github.io%2Fsrc%2Fpages%2Fblog%2F%5Bslug%5D.tsx ***!
   \**************************************************************************************************************************************************************************/
@@ -5130,5 +5128,5 @@ module.exports = dll_c2e10d183b950a67d9e7;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[5,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[slug].js.map

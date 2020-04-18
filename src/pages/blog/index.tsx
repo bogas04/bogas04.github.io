@@ -119,7 +119,7 @@ function BlogListing({ posts }: IBlogListingProps) {
       <ul>
         {posts.map((post) => (
           <li className="post" key={post.title}>
-            <Link href={`blog/${post.slug}`}>
+            <Link href="blog/[slug]" as={`blog/${post.slug}`}>
               <a>
                 <div className="post-body">
                   <h2>{post.title}</h2>
