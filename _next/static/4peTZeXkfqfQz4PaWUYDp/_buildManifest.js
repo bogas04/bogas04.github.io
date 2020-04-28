@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST = (function(a){return {"/":[a],"/blog":[a],"/blog/[slug]":[a],"/index":[a],"/uses":[a]}}("static\u002Fchunks\u002F93004526f8ba9da68c0c0047c55de99bbc7156e0.30f2b96590aa32b25c62.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

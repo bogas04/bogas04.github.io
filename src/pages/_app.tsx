@@ -1,7 +1,10 @@
-import "../global.css";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
+import { ThemeProvider } from "styled-components";
+
+import "../global.css";
+import { theme } from "../theme";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -13,7 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Component {...pageProps} />
       <Head>
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -49,6 +52,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }}
         ></script>
       </Head>
-    </>
+    </ThemeProvider>
   );
 }

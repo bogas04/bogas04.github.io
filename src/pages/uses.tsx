@@ -3,6 +3,7 @@ import React, { memo } from "react";
 import Link from "next/link";
 
 import SeoTags from "../components/SeoTags";
+import Section from "../layout/section";
 
 function UsesPage() {
   return (
@@ -31,14 +32,6 @@ function UsesPage() {
     text-decoration: underline;
   }
 
-  .section {
-    position: relative;
-    min-height: 100vh;
-    color: white;
-    background-color: #673ab7;
-    padding: 2% 5%;
-    box-shadow: 0px 10px 50px 20px black;
-  }
 
   nav {
     width: 100%;
@@ -46,15 +39,6 @@ function UsesPage() {
     justify-content: space-evenly;
   }
 
-  .section h1 {
-    font-size: 8rem;
-    padding: 5% 0;
-  }
-
-  .section h2 {
-    font-size: 3em;
-    padding: 3% 0;
-  }
 
   small a {
     font-size: 4rem;
@@ -79,13 +63,6 @@ function UsesPage() {
   }
 
   @media screen and (max-width: 750px) {
-    .section h1 {
-      font-size: 4em;
-      padding: 5% 0;
-    }
-    .section h2 {
-      font-size: 2em;
-    }
     #main-title {
       align-items: flex-start;
     }
@@ -106,7 +83,7 @@ function UsesPage() {
         pageUrl="https://bogas04.github.io/uses"
       />
 
-      <div className="section" style={{ zIndex: 10 }}>
+      <Section style={{ zIndex: 10 }}>
         <h1 id="main-title">
           <img src="//github.com/bogas04.png" alt="👳🏽" />
           <Link href="/">
@@ -183,12 +160,12 @@ function UsesPage() {
                 href="https://www.apple.com/in/macbook-pro-16/"
                 target="_blank"
               >
-                💻 Macbook
+                💻 Macbook Pro
               </a>
             </li>
             <li>
               <a href="https://www.realme.com/in/realme-x" target="_blank">
-                📱 Android Phone
+                📱 Realme X (Android Phone)
               </a>
             </li>
             <li>
@@ -198,7 +175,7 @@ function UsesPage() {
             </li>
           </ul>
         </nav>
-      </div>
+      </Section>
     </>
   );
 }

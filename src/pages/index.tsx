@@ -8,6 +8,7 @@ import TwitterIcon from "../components/icons/twitter";
 import BlogIcon from "../components/icons/blog";
 import LinkedInIcon from "../components/icons/linkedin";
 import GithubIcon from "../components/icons/github";
+import Section from "../layout/section";
 
 function HomePage() {
   useEffect(() => {
@@ -58,15 +59,6 @@ function HomePage() {
 
   a {
     color: #3493f2;
-  }
-
-  .section {
-    position: relative;
-    min-height: 100vh;
-    color: white;
-    background-color: #673ab7;
-    padding: 2% 5%;
-    box-shadow: 0px 10px 50px 20px black;
   }
 
   .social-icons {
@@ -141,46 +133,6 @@ function HomePage() {
     align-items: center;
   }
 
-  .section.green {
-    background-color: #4caf50;
-  }
-
-  .section.green a {
-    color: #123886;
-  }
-
-  .section.grey {
-    background-color: rgb(52, 58, 64);
-  }
-
-  .section.blue {
-    background-color: #3f51b5;
-  }
-
-  .section.yellow {
-    background-color: #ffc107;
-    color: black;
-  }
-  .section h1 {
-    font-size: 8rem;
-    padding: 5% 0;
-  }
-
-  .section h3 {
-    font-size: 3.5rem;
-    padding: 2% 10px;
-    margin: 0 -20px;
-    position: sticky;
-    top: 0;
-    background-color: inherit;
-    z-index: 1;
-  }
-
-  .section h6 {
-    font-size: 2rem;
-    padding: 2% 0;
-  }
-
   .social-grid .card-title {
     height: 45vh;
     display: flex;
@@ -223,20 +175,6 @@ function HomePage() {
   }
 
   @media screen and (max-width: 750px) {
-    .section h1 {
-      font-size: 8em;
-      padding: 5% 0;
-    }
-    .section h3 {
-      font-size: 3.5em;
-      padding: 2% 10px;
-    }
-
-    .section h6 {
-      font-size: 2em;
-      padding: 2% 0;
-    }
-
     /* Better li padding for mobile */
     dd ul {
       padding-left: 10px !important;
@@ -280,7 +218,7 @@ function HomePage() {
         pageUrl="https://bogas04.github.io/"
       />
 
-      <div className="section" style={{ zIndex: 10 }}>
+      <Section style={{ zIndex: 10 }}>
         <h1 id="main-title">
           <img src="//github.com/bogas04.png" alt="👳🏽" />
           Divjot Singh
@@ -323,9 +261,9 @@ function HomePage() {
         <Link href="/uses">
           <a className="uses">/uses</a>
         </Link>
-      </div>
+      </Section>
 
-      <div className="section grey" style={{ zIndex: 12 }} id="work">
+      <Section color="grey" style={{ zIndex: 12 }} id="work">
         <h3>Such Work</h3>
 
         <div className="container-fluid">
@@ -844,9 +782,9 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
-      <div className="section yellow" style={{ zIndex: 11 }} id="education">
+      <Section color="yellow" style={{ zIndex: 11 }} id="education">
         <h3>Much Education</h3>
 
         <div className="container-fluid">
@@ -1261,9 +1199,9 @@ function HomePage() {
             </dl>
           </div>
         </div>
-      </div>
+      </Section>
 
-      <div className="section green" style={{ zIndex: 13 }} id="talks">
+      <Section color="green" style={{ zIndex: 13 }} id="talks">
         <h3>So Talkative</h3>
         <div className="container-fluid">
           <div className="row">
@@ -1384,9 +1322,9 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
-      <div className="section blue" style={{ zIndex: 13 }} id="social">
+      <Section color="blue" style={{ zIndex: 13 }} id="social">
         <h3>Very Social</h3>
         <div className="container-fluid">
           <div className="row social-grid">
@@ -1433,7 +1371,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
     </>
   );
 }
