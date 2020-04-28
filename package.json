@@ -1,7 +1,7 @@
 {
   "name": "bogas04.github.io",
   "description": "Divjot's personal website",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "dev": "next",
     "build": "next build",
