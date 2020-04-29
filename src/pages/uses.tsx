@@ -17,7 +17,7 @@ function UsesPage() {
   }
 
   #main-title img {
-    background-image: url(//github.com/bogas04.png);
+    background-image: url(/profile.png);
     border-radius: 50%;
     border: 5px solid white;
     min-width: 100px;
@@ -79,13 +79,13 @@ function UsesPage() {
       <SeoTags
         title="What does Divjot Singh use?"
         description="List of all the things Divjot Singh uses in his day to day life."
-        imageUrl="https://github.com/bogas04.png"
+        imageUrl="/profile.png"
         pageUrl="https://bogas04.github.io/uses"
       />
 
       <Section style={{ zIndex: 10 }}>
         <h1 id="main-title">
-          <img src="//github.com/bogas04.png" alt="👳🏽" />
+          <img src="/profile.png" alt="👳🏽" />
           <Link href="/">
             <a>Divjot Singh</a>
           </Link>{" "}

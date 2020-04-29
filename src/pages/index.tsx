@@ -22,7 +22,7 @@ function HomePage() {
   }
 
   #main-title img {
-    background-image: url(//github.com/bogas04.png);
+    background-image: url(/profile.png);
     border-radius: 50%;
     border: 5px solid white;
     min-width: 100px;
@@ -194,13 +194,13 @@ function HomePage() {
       <SeoTags
         title="Divjot Singh | Frontend Engineer | Vegan | Sikh"
         description="Frontend Engineer, Sikh & a Vegan residing in Bengaluru, India."
-        imageUrl="https://github.com/bogas04.png"
+        imageUrl="/profile.png"
         pageUrl="https://bogas04.github.io/"
       />
 
       <Section style={{ zIndex: 10 }}>
         <h1 id="main-title">
-          <img src="//github.com/bogas04.png" alt="👳🏽" />
+          <img src="/profile.png" alt="👳🏽" />
           Divjot Singh
         </h1>
 
