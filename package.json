@@ -9,14 +9,14 @@
     "start": "next"
   },
   "dependencies": {
-    "next": "^9.3.4",
+    "next": "^9.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@types/node": "^13.11.0",
-    "@types/react": "^16.9.32",
+    "@types/node": "^13.13.5",
+    "@types/react": "^16.9.35",
     "@types/styled-components": "^5.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "slugify": "^1.4.0",
