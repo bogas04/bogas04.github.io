@@ -33,13 +33,13 @@ Refer to [this](https://www.cnet.com/how-to/macos-mojave-shows-recent-apps-in-th
 
 Spotlight history is of no good use really, and that key combination can be utilized for a better purpose that we'll talk about later.
 
-![Screenshot of spotlight keyboard settings](/img/spotlight-history.png)
+![Screenshot of spotlight keyboard settings](/img/blog/spotlight-history.png)
 
 - Use Caps lock as Escape (System Preferences -> Keyboard -> Modifier Keys)
 
 As a vim user, I'm used to keeping Caps Lock as Escape key.
 
-![Screenshot of capslock modifier](/img/caps-escape.png)
+![Screenshot of capslock modifier](/img/blog/caps-escape.png)
 
 - Turn on key repeating
 
