@@ -61,7 +61,7 @@ I prefer tap over physical clicks.
 A big cursor is easier to find and makes things easy to move around.
 
 - Enable dragging with three fingers (System Preferences -> Accessibility -> Trackpad -> Trackpad Options)
-  - Click and hold is worse experience in my opinion.
+- Click and hold is worse experience in my opinion.
 
 ## Application stuff
 

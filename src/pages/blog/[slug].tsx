@@ -42,9 +42,17 @@ function BlogPost({ post }: IBlogPostProps) {
       <style>
         {`
   .content h2 {
-    font-size: 1.4em;
+    font-size: 1.6em;
+    margin: 1em 0;
     font-weight: 500;
   }
+
+  .content h3 {
+    font-size: 1.2em;
+    margin: 0.8em 0;
+    font-weight: 500;
+  }
+
   .content img,
   .content h4 {
     margin: 1em 0;
@@ -79,6 +87,9 @@ function BlogPost({ post }: IBlogPostProps) {
   h4 {
     text-transform: capitalize;
     margin-bottom: 2em;
+  }
+  h4 p{
+    margin: 0.4em 0;
   }`}
       </style>
 
@@ -101,7 +112,7 @@ function BlogPost({ post }: IBlogPostProps) {
         </Link>{" "}
         | {new Date(post.date).toDateString()}
         <br />
-        {keywords}
+        <p>{keywords}</p>
       </h4>
 
       <div
