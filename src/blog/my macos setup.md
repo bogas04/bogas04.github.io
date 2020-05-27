@@ -78,3 +78,7 @@ Configure it to use `cmd+option+arrow-key` for top/left/right/bottom and `cmd+op
 
 Clipboard management of my choice.
 Configure it to use `cmd+option+v` for menu.
+
+## dot-files
+
+If you're interested in my dot-files, you can view them [here](https://github.com/bogas04/dot-files).
