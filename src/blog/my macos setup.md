@@ -43,7 +43,7 @@ As a vim user, I'm used to keeping Caps Lock as Escape key.
 
 - Turn on key repeating
 
-```
+```bash
 # Open Terminal.app and past the following command.
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```

@@ -1,5 +1,7 @@
 import slugify from "slugify";
-import snarkdown from "snarkdown";
+import remark from "remark";
+// @ts-ignore
+import html from "remark-html";
 
 export const sanitize = (str: string) =>
   str.replace(/  /gi, " ").replace(/['"]/gi, "").trim();
@@ -51,7 +53,7 @@ export function parseHead(rawHead: string) {
 }
 
 export function toMarkdown(content: string) {
-  return snarkdown(content);
+  return remark().use(html).processSync(content).toString();
 }
 export function getHeroImage(html: string) {
   try {
