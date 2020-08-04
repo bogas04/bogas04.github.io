@@ -46,7 +46,15 @@ function HomePage() {
     display: flex;
     justify-content: space-between;
     padding: 2em;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .social-icons::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
   .social-icons a {
     display: flex;
     flex-direction: column;
@@ -161,7 +169,8 @@ function HomePage() {
     }
 
     #main-title {
-      align-items: flex-start;
+      text-align: center;
+      font-size: 6rem;
     }
 
     .talks {
@@ -181,6 +190,24 @@ function HomePage() {
 
     .social-icons-svg {
       transform: scale(0.8);
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #main-title {
+      align-items: center;
+      font-size: 5rem;
+      text-align: center;
+    }
+
+    .social-icons {
+      margin: 0 -5%;
+      width: 100vw;
+    }
+
+    .social-icons-svg {
+      margin-bottom: 0;
+      transform: scale(0.7);
     }
   }
 
@@ -1305,7 +1332,7 @@ function HomePage() {
       </Section>
 
       <Section color="blue" style={{ zIndex: 13 }} id="social">
-        <h3>Very Social</h3>
+        <h3>Somewhat Social</h3>
         <div className="container-fluid">
           <div className="row social-grid">
             <div className="col-md-6 text-center">
@@ -1318,17 +1345,7 @@ function HomePage() {
                   Twitter
                 </a>
               </p>
-              <p className="card-title">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="//instagram.com/bogas04"
-                >
-                  Instagram
-                </a>
-              </p>
             </div>
-
             <div className="col-md-6 text-center">
               <p className="card-title">
                 <a
@@ -1339,14 +1356,10 @@ function HomePage() {
                   YouTube
                 </a>
               </p>
-              <p className="card-title">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://medium.com/@bogas04"
-                >
-                  Medium
-                </a>
+            </div>
+            <div className="col-md-12 text-center">
+              <p className="card-title" style={{ fontSize: 120 }}>
+                🤷‍♂️
               </p>
             </div>
           </div>
