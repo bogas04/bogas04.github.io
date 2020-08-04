@@ -1,15 +1,16 @@
 {
   "name": "bogas04.github.io",
   "description": "Divjot's personal website",
-  "version": "0.0.18",
+  "version": "0.0.17",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "export": "next export && rm -rf _next blog img && mv out/* ./",
+    "deploy": "make m='chore: build files' deploy",
     "start": "next"
   },
   "dependencies": {
-    "next": "^9.4.0",
+    "next": "^9.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.0"
