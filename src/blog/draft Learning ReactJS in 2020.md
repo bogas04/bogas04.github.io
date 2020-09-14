@@ -206,7 +206,12 @@ Originally, we only had class based components as the only viable option as only
 
 Since it's much simpler to understand functional components, we'll go through them first so that you can contribute ASAP. When we discuss lifecycle methods, we'll learn more about the differences.
 
-[https://codesandbox.io/s/stoic-ptolemy-n2h8r?fontsize=12&hidenavigation=1&theme=light](https://codesandbox.io/s/stoic-ptolemy-n2h8r?fontsize=12&hidenavigation=1&theme=light)
+<iframe src="https://codesandbox.io/embed/stoic-ptolemy-n2h8r?fontsize=14&hidenavigation=1&theme=dark"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="stoic-ptolemy-n2h8r"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ### Lifecycles and Side-effects
 
@@ -590,7 +595,7 @@ There are some caveats though:
 
 - Our React tree will now have a `LoaderContainer` above each component using this HOC.
 - We can't add this behavior dynamically or conditionally, at build time we make the choice either to wrap a component in an HOC or not.
-- Passing a `[ref](https://reactjs.org/docs/refs-and-the-dom.html)` won't give us [ref](https://reactjs.org/docs/refs-and-the-dom.html) of our `Component`, but rather of `LoaderContainer`. To mitigate this most developers usually manually connect a `innerRef` prop to the inner component.
+- Passing a [ref](https://reactjs.org/docs/refs-and-the-dom.html) won't give us [ref](https://reactjs.org/docs/refs-and-the-dom.html) of our `Component`, but rather of `LoaderContainer`. To mitigate this most developers usually manually connect a `innerRef` prop to the inner component.
 
 ```tsx
 function withLoader(Component) {

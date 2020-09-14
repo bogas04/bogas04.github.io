@@ -23,8 +23,10 @@
     "babel-plugin-styled-components": "^1.10.7",
     "prism-themes": "^1.4.0",
     "remark": "^12.0.0",
+    "remark-autolink-headings": "^6.0.1",
     "remark-html": "^11.0.2",
     "remark-prism": "^1.1.10",
+    "remark-slug": "^6.0.0",
     "slugify": "^1.4.0",
     "typescript": "^3.8.3"
   },

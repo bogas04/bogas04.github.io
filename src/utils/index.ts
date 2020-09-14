@@ -5,6 +5,10 @@ import remark from "remark";
 import html from "remark-html";
 // @ts-ignore
 import prism from "remark-prism";
+// @ts-ignore
+import headings from "remark-autolink-headings";
+// @ts-ignore
+import slug from "remark-slug";
 
 export const sanitize = (str: string) =>
   str.replace(/  /gi, " ").replace(/['"]/gi, "").trim();
@@ -56,7 +60,20 @@ export function parseHead(rawHead: string) {
 }
 
 export function toMarkdown(content: string) {
-  return remark().use(prism).use(html).processSync(content).toString();
+  return remark()
+    .use(prism)
+    .use(slug)
+    .use(headings, {
+      behavior: "prepend",
+      content: {
+        type: "element",
+        tagName: "span",
+        children: [{ type: "text", value: "🔗 " }],
+      },
+    })
+    .use(html)
+    .processSync(content)
+    .toString();
 }
 export function getHeroImage(html: string) {
   try {
