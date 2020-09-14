@@ -9,7 +9,7 @@ keywords: []
 slug: ""
 ---
 
-![A weird screenshot showing Swiggy’s Desktop website](img/blog/1__3sVFY7SBNW9xRiFmSFF__uA.png)
+![A weird screenshot showing Swiggy’s Desktop website](/img/blog/1__3sVFY7SBNW9xRiFmSFF__uA.png)
 A weird screenshot showing Swiggy’s Desktop website
 
 Most companies don’t take the effort to build and maintain a good webapp. The focus has always been on getting your users to download a huge piece of software to get maximum engagement. Only, it isn’t a very nice approach.
@@ -32,18 +32,18 @@ Read more about the architecture of our PWA [here](https://bytes.swiggy.com/swig
 
 ####
 
-![](img/blog/1__tG9r8R94VFoKyde0oAws__g.gif)
-![](img/blog/1__HlLIbHI0Bxf6tRiDMtqBaA.gif)
+![](/img/blog/1__tG9r8R94VFoKyde0oAws__g.gif)
+![](/img/blog/1__HlLIbHI0Bxf6tRiDMtqBaA.gif)
 
 #### A comment on design
 
 Humans don’t like abrupt changes, the “gaps” in a journey bother our brain too much. Consider tapping a button and suddenly seeing a white screen, clicking a drop down and suddenly seeing a new layout.
 
-![](img/blog/1__jyjt1qAnIltmgTFsitTGFg.png)
+![](/img/blog/1__jyjt1qAnIltmgTFsitTGFg.png)
 
 When you design your PWA, or even your application, try to have subtle loading states to give feedback to your user that you did register their input.
 
-![](img/blog/1__QDe5rZ2qH__fLP2L1wfjW3w.gif)
+![](/img/blog/1__QDe5rZ2qH__fLP2L1wfjW3w.gif)
 
 In our apps, you can see it everywhere. Tap a button and you might see a ripple, or a progress bar on top of page, or a loading within the button itself.
 

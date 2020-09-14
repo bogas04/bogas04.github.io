@@ -63,7 +63,22 @@ function BlogListing({ posts }: IBlogListingProps) {
     align-content: space-between;
   }
 
-  .post-body p,
+  .post-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .post-title small {
+    padding: 4px;
+    margin-left: 10px;
+    color: black;
+    background-color: gold;
+    font-weight: bold;
+    font-size: 8px;
+    text-transform: uppercase;
+  }
+
+  .post-body p ,
   .post-body span {
     color: initial;
   }
@@ -118,11 +133,16 @@ function BlogListing({ posts }: IBlogListingProps) {
 
       <ul>
         {posts.map((post) => (
-          <li className="post" key={post.title}>
+          <li
+            className={`post  ${post.isDraft ? "draft" : ""}`}
+            key={post.title}
+          >
             <Link href="blog/[slug]" as={`blog/${post.slug}`}>
               <a>
                 <div className="post-body">
-                  <h2>{post.title}</h2>
+                  <h2 className="post-title">
+                    {post.title} {post.isDraft && <small>draft</small>}
+                  </h2>
 
                   <p>{post.description}</p>
                   <span>{new Date(post.date).toDateString()}</span>

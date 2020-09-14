@@ -53,22 +53,25 @@ function BlogPost({ post }: IBlogPostProps) {
     font-weight: 500;
   }
 
+  .content video {
+    max-width: 100%;
+  }
+
   .content img,
+  .content video,
   .content h4 {
     margin: 1em 0;
   }
 
   .content pre {
-    background-color: #f9f9f9;
-    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.05);
-    padding: 0.5em;
-    border-radius: 2px;
+    padding: 10px;
+    font-size: 20px;
+    line-height: 26px;
     overflow-x: auto;
-  }
+  } 
 
   .content pre code {
-    background-color: transparent;
-    padding: 0;
+    background-color: initial;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -90,7 +93,8 @@ function BlogPost({ post }: IBlogPostProps) {
   }
   h4 p{
     margin: 0.4em 0;
-  }`}
+  }
+  `}
       </style>
 
       <SeoTags

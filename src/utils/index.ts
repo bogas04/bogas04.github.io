@@ -1,7 +1,10 @@
 import slugify from "slugify";
 import remark from "remark";
+
 // @ts-ignore
 import html from "remark-html";
+// @ts-ignore
+import prism from "remark-prism";
 
 export const sanitize = (str: string) =>
   str.replace(/  /gi, " ").replace(/['"]/gi, "").trim();
@@ -53,12 +56,12 @@ export function parseHead(rawHead: string) {
 }
 
 export function toMarkdown(content: string) {
-  return remark().use(html).processSync(content).toString();
+  return remark().use(prism).use(html).processSync(content).toString();
 }
 export function getHeroImage(html: string) {
   try {
     return html.match(/<img\b[^>]+?src\s*=\s*['"]?([^\s'"?#>]+)/)[1];
   } catch (err) {
-    return;
+    return null;
   }
 }

@@ -7,6 +7,7 @@ import path from "path";
 export interface IBlogPost extends IBlogPostMeta {
   html: string;
   image: string;
+  isDraft?: boolean;
 }
 
 export function getBlogPosts(): IBlogPost[] {
@@ -21,12 +22,16 @@ export function getBlogPosts(): IBlogPost[] {
       // filter out mds
       .filter((fileName) => /\.md$/.test(fileName))
       // filter out drafts
-      .filter((fileName) => !/^draft /.test(fileName))
-      // get contents
-      .map((fileName) =>
-        fs.readFileSync(pathJoin(blogDataFolder, fileName), "utf-8")
+      .filter(
+        (fileName) =>
+          !(process.env.NODE_ENV === "production" && isDraft(fileName))
       )
-      .map((content) => {
+      // get contents
+      .map((fileName) => [
+        fs.readFileSync(pathJoin(blogDataFolder, fileName), "utf-8"),
+        fileName,
+      ])
+      .map(([content, fileName]) => {
         // parse front matter
         const [, head, body] = content.split("---");
         const meta = parseHead(head);
@@ -35,12 +40,15 @@ export function getBlogPosts(): IBlogPost[] {
         // construct posts data
         return {
           ...meta,
+          isDraft: isDraft(fileName),
           image: getHeroImage(html),
           html,
         };
       })
       // sort by date
       // @ts-ignore
-      .sort((a, b) => a.date < b.date)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   );
 }
+
+const isDraft = (fileName: string) => /^draft /.test(fileName);

@@ -7,6 +7,8 @@ keywords: []
 slug: ""
 ---
 
+![unDraw illustration for job search](/img/blog/jobs.png)
+
 > I recently switched my job and this post is all about it.
 
 A portion of my reader base (0/n% = 0%) might be aware that I recently switched my job. For those who aren’t aware of this change (n/n% = 100%), here’s some background.

@@ -2,9 +2,11 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-
-import "../global.css";
 import { theme } from "../theme";
+
+import "prismjs/themes/prism.css";
+import "prism-themes/themes/prism-ghcolors.css";
+import "../global.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
