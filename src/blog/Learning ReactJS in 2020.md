@@ -1034,8 +1034,6 @@ class Library extends React.Component {
 
 **NOTE:** Writing `shouldComponentUpdate` by hand can cause more harm if a bug in logic prevents component from re-rendering. Relying on `PureComponent` is preferred, however if the component is simple, a re-render might be as good as comparison checks before render.
 
----
-
 ## Basic JavaScript syntax
 
 If you want to learn from a book, this is a great one [https://exploringjs.com/impatient-js/toc.html](https://exploringjs.com/impatient-js/toc.html)
