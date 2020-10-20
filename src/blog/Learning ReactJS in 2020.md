@@ -1062,7 +1062,7 @@ const myFunction = function myFunction() {};
 // anonymous function
 const myFunction = function () {};
 
-// array function
+// arrow function
 const myFunction = () => {};
 ```
 
@@ -1417,5 +1417,3 @@ export default a; // imported as import a from "./my-package";
 
 export * from "./some-other-package"; // exports evertyhing in some-other-package
 ```
-
-[https://reactnative.dev/docs/assets/diagram_ios-android-views.svg](https://reactnative.dev/docs/assets/diagram_ios-android-views.svg)
