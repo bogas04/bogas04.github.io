@@ -287,6 +287,24 @@ function HomePage() {
             <dl className="dl-horizontal">
               <dt>Duration:</dt>
               <dd>April 2020 - Present</dd>
+              <dd>
+                <ul>
+                  <li>
+                    Working on a webpack based framework to power websites
+                    internally.
+                  </li>
+                  <li>
+                    Working on performance optimizations for the main website.
+                  </li>
+                  <li>
+                    Revamped Order Details Experience for React Native and Web.
+                  </li>
+                  <li>
+                    Improved perceived performance using Skeleton UIs in React
+                    Native app.
+                  </li>
+                </ul>
+              </dd>
             </dl>
           </div>
 
