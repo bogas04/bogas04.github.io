@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { BLOG_URL } from "../../constants";
 import SeoTags from "../../components/SeoTags";
 import { getBlogPosts, IBlogPost } from "../../utils/blog";

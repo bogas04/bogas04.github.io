@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import Head from "next/head";
 
 export interface ISeoTagsProps {

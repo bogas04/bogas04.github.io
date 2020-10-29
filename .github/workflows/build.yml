@@ -1,0 +1,28 @@
+name: "🚀 build and commit"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 checkout
+        uses: actions/checkout@v2.1.1
+      - name: 🟢 node
+        uses: actions/setup-node@v1.4.2
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+      - name: ⬇️ download dependencies
+        run: npm ci
+      - name: 🛠 build project
+        run: npm run build
+      - name: 🚀 commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: build files"
+          file_pattern: docs/*

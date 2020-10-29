@@ -1,6 +1,5 @@
-import React from "react";
-
 import Link from "next/link";
+import { memo } from "react";
 
 import SeoTags from "../components/SeoTags";
 
@@ -1369,4 +1368,4 @@ function HomePage() {
   );
 }
 
-export default React.memo(HomePage);
+export default memo(HomePage);

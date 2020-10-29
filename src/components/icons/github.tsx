@@ -1,4 +1,4 @@
-import React, { SVGAttributes } from "react";
+import { SVGAttributes } from "react";
 
 const GithubIcon = (props: SVGAttributes<SVGElement>) => (
   <svg viewBox="0 0 24 24" width={97.75} height={97.75} {...props}>

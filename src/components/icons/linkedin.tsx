@@ -1,4 +1,4 @@
-import React, { SVGAttributes } from "react";
+import { SVGAttributes } from "react";
 
 const LinkedInIcon = (props: SVGAttributes<SVGElement>) => (
   <svg width={97.75} height={97.75} {...props}>

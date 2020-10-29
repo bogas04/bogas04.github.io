@@ -1,6 +1,6 @@
-import React, { SFC } from "react";
+import { FC } from "react";
 
-const BlogLayout: SFC = ({ children }) => {
+const BlogLayout: FC = ({ children }) => {
   return (
     <>
       <style>{`

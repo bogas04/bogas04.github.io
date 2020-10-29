@@ -1,5 +1,3 @@
-import React from "react";
-
 import SeoTags from "../components/SeoTags";
 
 export default function Custom404Page() {

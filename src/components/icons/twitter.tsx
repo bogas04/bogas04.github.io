@@ -1,4 +1,4 @@
-import React, { SVGAttributes } from "react";
+import { SVGAttributes } from "react";
 
 const TwitterIcon = (props: SVGAttributes<SVGElement>) => (
   <svg viewBox="0 0 512 512" width={97.75} height={97.75} {...props}>
