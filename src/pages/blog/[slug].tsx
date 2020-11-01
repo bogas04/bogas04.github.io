@@ -76,6 +76,41 @@ function BlogPost({ post }: IBlogPostProps) {
     background-color: initial;
   }
 
+  blockquote {
+    position: relative;
+    font-style: italic;
+  }
+
+  blockquote::before {
+    content: "“";
+    position: absolute;
+    margin: -0.5em;
+    color: #333333;
+    font-size: 3em;
+    left: 0;
+    top: 0;
+  }
+
+  blockquote::after {
+    content: "”";
+    position: absolute;
+    margin: -0.5em;
+    color: #333333;
+    font-size: 3em;
+    right: 0;
+    bottom: 0;
+  }
+
+  blockquote ~ p > a {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  blockquote ~ p > a::before {
+    content: "— ";
+    white-space: pre;
+  }
+
   @media (prefers-color-scheme: dark) {
     .content pre {
       color: black;
