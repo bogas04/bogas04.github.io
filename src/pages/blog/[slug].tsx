@@ -8,6 +8,7 @@ import { getBlogPosts, IBlogPost } from "../../utils/blog";
 import SeoTags from "../../components/SeoTags";
 import BlogLayout from "../../layout/blog";
 import Link from "next/link";
+import { ShareLinks } from "../../components/ShareLinks/ShareLinks";
 
 export async function getStaticPaths() {
   const posts = getBlogPosts();
@@ -101,12 +102,12 @@ function BlogPost({ post }: IBlogPostProps) {
     bottom: 0;
   }
 
-  blockquote ~ p > a {
+  blockquote + p > a {
     display: flex;
     justify-content: flex-end;
   }
 
-  blockquote ~ p > a::before {
+  blockquote + p > a::before {
     content: "— ";
     white-space: pre;
   }
@@ -154,6 +155,8 @@ function BlogPost({ post }: IBlogPostProps) {
         | {new Date(post.date).toDateString()}
         <br />
         <p>{keywords}</p>
+        <br />
+        <ShareLinks url={postUrl} description={post.description} />
       </h4>
 
       <div
