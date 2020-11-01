@@ -15,6 +15,14 @@ Pretty much all developers know how synchronous blocking code isn't really ideal
 
 ![Image comparing how synchronously processes stall the pipeline while asynchronous processes do not do so](/img/blog/asynchronous-vs-synchronous.png)
 
+- Make it easy for other person to reply quickly, for example:
+- - A yes/no question can be answered faster than an ambiguous monologue.
+- - Scheduling a meeting in advance (after checking their calendar) is better than asking "are you free?" and waiting for hours.
+- - Sharing relevant details/attachments is better than waiting for them to ask you for that.
+- Sharing a deadline in your ask gives other person time to organize their week plans better.
+- Expect delays in replies, that's the norm, not an exception.
+- Keep some extra chores at hand while you wait for a reply, so as to not stay blocked until you receive one.
+
 ## Clear Articulate Communication
 
 > Effective written communication becomes critical the more companies embrace remote work. With an aversion to "jumping on calls" at a whim, and a preference for asynchronous communication, most of remote-friendly company's communications are text-based, and so articulate and timely articulation becomes key.
@@ -42,5 +50,11 @@ Now that we've established that the first message is basically reserved for emer
 ### Open Communication
 
 Now that we understand importance of asynchronous and clear articulate communication, last thing that we need is open communication. There's no need to discuss in small silos when you know there are several of employees who might be facing the same issue, might have fixed it somehow and might have better ideas than the person you're taking help from. So asking for helping to your favorite goto person for xyz type of issue is only going to wear them out and give you less imaginative solutions. Discuss in open as much as possible, albeit in a clear articulate fashion, so as to enable meaningful discussion for systematic solutions.
+
+- Try to discuss in channels & groups, not just DMs.
+- Realize that asking questions in open doesn't reflect poorly on you.
+- Fear of conflicting opinions is a [net negative for a team](https://www.entrepreneur.com/article/238993).
+- Sharing your progress timely with the concerned audience helps in avoiding working in isolation.
+- Gathering continuous feedback from multiple people helps in adapting to changing requirements.
 
 I hope this post made some sense to you and encourages you to form [boundaries](https://www.careercontessa.com/advice/healthy-boundaries-at-work/) for your sanity and that of your team members. I'll highly recommend you to go through the links I've shared in this blog to learn more.
