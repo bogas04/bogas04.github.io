@@ -7,7 +7,7 @@ keywords: [react, react-native, react-native-web]
 slug: ""
 ---
 
-**Prerequisites**: Working knowledge of JavaScript, ES6 features (classes, arrow functions at least). Here's a [cheatsheet](/blog/javascript-cheatsheet-in-2020) for same.
+**Prerequisites**: Working knowledge of JavaScript, ES6 features (classes, arrow functions at least). Here's a [cheatsheet](/blog/javascript-cheatsheet-in-2020-9-14-2020) for same.
 
 ## Why do we even need React?
 
