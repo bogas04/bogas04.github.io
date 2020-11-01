@@ -29,7 +29,7 @@ The first message is essentially shoulder tap equivalent of office. You complete
 
 [Source](http://www.differencebetween.net/science/nature/difference-between-urgence-and-emergency/)
 
-I hope we can all agree that first message should be reserved ONLY for emergency. If we keep crying foul, like calling a person to help with some bug that hasn't even been released, or some help with an upcoming demo, what eventually happen is that employees will lose seriousness and start skipping calls, which can be catastrophic when you really have an emergency, like a huge outage or critical crash that's costing millions of dollars.
+I hope we can all agree that first message should be reserved ONLY for emergency. If we keep crying foul, like calling a person to help with some bug that hasn't even been released, or some help with an upcoming demo, what eventually happens is that employees lose seriousness and start skipping calls, which can be catastrophic when you really have an emergency, like a huge outage or critical crash that's costing millions of dollars.
 
 Now that the first message is basically reserved for emergencies, let's see why the second message isn't ideal either. The problem is that it's focused only getting the fix with minimum effort. It's basically, asking someone to take over and fix your issue. This is detrimental in several ways;
 
