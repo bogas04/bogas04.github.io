@@ -116,6 +116,10 @@ function BlogPost({ post }: IBlogPostProps) {
     .content pre {
       color: black;
     }
+
+    blockquote::after, blockquote::before {
+      color: white;
+    }
   }
 
   .content ul {

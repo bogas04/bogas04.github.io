@@ -84,6 +84,10 @@ function BlogListing({ posts }: IBlogListingProps) {
   }
 
   @media (prefers-color-scheme: dark) {
+    .post {
+      border-color: #555555;
+    }
+
     .post-body p,
     .post-body span {
       color: white;
