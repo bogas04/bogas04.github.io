@@ -2,8 +2,8 @@ import SeoTags from "../components/SeoTags";
 
 export default function Custom404Page() {
   const status = "Page not found | 404 ";
-  let message = "Oopsie dooppsie this page is a poopsie!";
-  let image = "img/errors/404.png";
+  const message = "Oopsie dooppsie this page is a poopsie!";
+  const image = "/img/errors/404.png";
 
   return (
     <>
