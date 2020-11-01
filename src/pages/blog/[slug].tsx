@@ -155,14 +155,21 @@ function BlogPost({ post }: IBlogPostProps) {
         | {new Date(post.date).toDateString()}
         <br />
         <p>{keywords}</p>
-        <br />
-        <ShareLinks url={postUrl} description={post.description} />
       </h4>
 
       <div
         className="content"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
+
+      <hr />
+
+      <section>
+        Like the article?
+        <div style={{ marginTop: 12 }}>
+          <ShareLinks url={postUrl} description={post.description} />
+        </div>
+      </section>
     </BlogLayout>
   );
 }
