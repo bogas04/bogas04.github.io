@@ -47,6 +47,8 @@ Now that we've established that the first message is basically reserved for emer
 - It negatively effects the mood of the other person because deep down everyone wants to help each other, but they've to make a choice between being polite and slacking off in their job. That's a tough one and not everyone would be assertive enough to triage help.
 - Chances are, by the time you read the error message, Google a bit, read documentation and try certain fixes, you might have found the fix.
 
+Even if you are using the third message format, take some time to type out the entire thing, and re-read it yourself once. Not only you'll avoid spamming, you'll also get an opportunity for some self-reflection. Sometimes you just need to see a gist of the whole thing for something to "click".
+
 ### Open Communication
 
 Now that we understand importance of asynchronous and clear articulate communication, last thing that we need is open communication. There's no need to discuss in small silos when you know there are several of employees who might be facing the same issue, might have fixed it somehow and might have better ideas than the person you're taking help from. So asking for helping to your favorite goto person for xyz type of issue is only going to wear them out and give you less imaginative solutions. Discuss in open as much as possible, albeit in a clear articulate fashion, so as to enable meaningful discussion for systematic solutions.
