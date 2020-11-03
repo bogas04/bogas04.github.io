@@ -166,14 +166,33 @@ function BlogPost({ post }: IBlogPostProps) {
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 
-      <hr />
-
-      <section>
-        Like the article?
-        <div style={{ marginTop: 12 }}>
+      <footer
+        style={{
+          borderTop: "1px solid black",
+          marginTop: 48,
+          paddingTop: 24,
+          paddingBottom: 24,
+        }}
+      >
+        <section
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>Like the article?</div>
+          <a
+            href={`https://github.com/bogas04/bogas04.github.io/tree/master/src/blog/${post.fileName}`}
+            target="_blank"
+          >
+            [Edit]
+          </a>
+        </section>
+        <div style={{ marginTop: 24 }}>
           <ShareLinks url={postUrl} description={post.description} />
         </div>
-      </section>
+      </footer>
     </BlogLayout>
   );
 }

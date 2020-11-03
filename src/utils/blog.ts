@@ -8,6 +8,7 @@ export interface IBlogPost extends IBlogPostMeta {
   html: string;
   image: string;
   isDraft?: boolean;
+  fileName: string;
 }
 
 export function getBlogPosts(): IBlogPost[] {
@@ -43,6 +44,7 @@ export function getBlogPosts(): IBlogPost[] {
           isDraft: isDraft(fileName),
           image: getHeroImage(html),
           html,
+          fileName,
         };
       })
       // sort by date
