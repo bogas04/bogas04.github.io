@@ -37,7 +37,7 @@ interface IBlogPostProps {
 function BlogPost({ post }: IBlogPostProps) {
   const postTitle = `${post.title} | Blog | Divjot Singh`;
   const postUrl = `${BLOG_URL}/${post.slug}`;
-  const postImage = `${WEBSITE_URL}/${post.image}`;
+  const postImage = `${WEBSITE_URL}${post.image}`;
   const keywords = ((post.keywords || []) as string[]).join(", ");
 
   return (
