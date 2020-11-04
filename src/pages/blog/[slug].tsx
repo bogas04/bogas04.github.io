@@ -182,12 +182,23 @@ function BlogPost({ post }: IBlogPostProps) {
           }}
         >
           <div>Like the article?</div>
-          <a
-            href={`https://github.com/bogas04/bogas04.github.io/tree/master/src/blog/${post.fileName}`}
-            target="_blank"
-          >
-            [Edit]
-          </a>
+          <div>
+            [
+            <a
+              href={`https://github.com/bogas04/bogas04.github.io/blame/main/src/blog/${post.fileName}`}
+              target="_blank"
+            >
+              History
+            </a>
+            ] [
+            <a
+              href={`https://github.com/bogas04/bogas04.github.io/blob/main/src/blog/${post.fileName}`}
+              target="_blank"
+            >
+              Edit
+            </a>
+            ]
+          </div>
         </section>
         <div style={{ marginTop: 24 }}>
           <ShareLinks url={postUrl} description={post.description} />
