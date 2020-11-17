@@ -651,7 +651,7 @@ class UserDataFetcher extends React.Component {
 function App () {
   return <UserDataFetcher>{(loading, data) => {
     return <UserPage loading={loading} data={data} />
-   }}</WithUserData>
+   }}</UserDataFetcher>
 }
 ```
 
