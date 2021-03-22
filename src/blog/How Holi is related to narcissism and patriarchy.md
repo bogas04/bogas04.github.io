@@ -12,11 +12,11 @@ slug: ""
 
 With Holi coming up and me witnessing a lot of turmoil in my personal life, I was forced to think about Holi in a very specific way. At risk of over-simplifying and appropriating the narrative, here are my unpopular views on the epic of Bhagat Prahlad and how it relates with [narcissism](https://www.psychologytoday.com/us/blog/victim-victor/202011/is-how-narcissists-think) and toxic [patriarchy](https://www.psychologytoday.com/us/blog/acquired-spontaneity/201708/why-patriarchy-is-not-about-men).
 
-![Bhagat Prahlad in pyre chanting Ram Ram while his father watches him burn](/img/blog/prahlad-1.jpg)
+![Prahlad in lap of his angry father](/img/blog/prahlad-1.jpg)
 
 If you are to believe the ancient epic of Bhagat Prahlad and Hirnaykashyap, AKA Harnaakash in Sikhi, you'll find some interesting things around patriarchal family dynamics. There was an ideological difference between Prahlad and his father. His father felt superior and he felt that he was worthy of worship. This inflated self-view was further exemplified by the fact that his province &amp; society agreed, thanks to his boon of invincibility.
 
-![Prahlad in lap of his angry father](/img/blog/prahlad-2.jpg)
+![Bhagat Prahlad in pyre chanting Ram Ram while his father watches him burn](/img/blog/prahlad-2.jpg)
 
 Prahlad, on other hand, by grace of his own wisdom given by Narad, believed Vishnu to be his God. This was completely unacceptable to his narcissist father. Prahlad's defiance was followed by series of attempts by his father to get his son to conform to his ideology.
 
