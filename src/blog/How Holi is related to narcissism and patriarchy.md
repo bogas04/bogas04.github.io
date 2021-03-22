@@ -10,7 +10,7 @@ slug: ""
 
 > Originally a [Twitter Thread](https://twitter.com/i/status/1373926490279178245).
 
-With Holi coming up and me witnessing a lot of turmoil in my personal life, I was forced to think about Holi in a very specific way. At risk of over-simplifying and appropriating the narrative, here are my unpopular views on the epic of Bhagat Prahlad and how it relates with narcissism and toxic patriarchy.
+With Holi coming up and me witnessing a lot of turmoil in my personal life, I was forced to think about Holi in a very specific way. At risk of over-simplifying and appropriating the narrative, here are my unpopular views on the epic of Bhagat Prahlad and how it relates with [narcissism](https://www.psychologytoday.com/us/blog/victim-victor/202011/is-how-narcissists-think) and toxic [patriarchy](https://www.psychologytoday.com/us/blog/acquired-spontaneity/201708/why-patriarchy-is-not-about-men).
 
 ![Bhagat Prahlad in pyre chanting Ram Ram while his father watches him burn](/img/blog/prahlad-1.jpg)
 
@@ -48,6 +48,6 @@ In my opinion, the notion that children must be obedient to their parents is rej
 
 The number of times Prahlad's story is mentioned in Sikhi, makes me feel that Gurus didn't really want Sikhs to become obedient children of their parents, but rather be autonomous and sovereign. Defiance against old systems is pretty much a norm in Sikhi.
 
-Controlling parents and emotional abuse by narcissistic parents is not a new story, and it even needed intervention by Vishnu themself to save Prahlad.
+Controlling parents and [emotional abuse by narcissistic parents](https://www.psychologytoday.com/us/blog/insight-is-2020/201405/narcissistic-parents-psychological-effect-their-children) is not a new story, and it even needed intervention by Vishnu themself to save Prahlad.
 
-If you're a victim of such emotional abuse by controlling parents, you may take inspiration from this epic.
+If [you're a victim](https://www.psychologytoday.com/us/blog/the-legacy-distorted-love/201802/the-real-effect-narcissistic-parenting-children) of such emotional abuse by controlling parents, you may take inspiration from this epic.
