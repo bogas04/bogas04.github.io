@@ -8,7 +8,7 @@ keywords:
 slug: ""
 ---
 
-> Originally a [Twitter Thread](https://twitter.com/i/status/1373926490279178245).
+## Originally a [Twitter Thread](https://twitter.com/i/status/1373926490279178245).
 
 With Holi coming up and me witnessing a lot of turmoil in my personal life, I was forced to think about Holi in a very specific way. At risk of over-simplifying and appropriating the narrative, here are my unpopular views on the epic of Bhagat Prahlad and how it relates with [narcissism](https://www.psychologytoday.com/us/blog/victim-victor/202011/is-how-narcissists-think) and toxic [patriarchy](https://www.psychologytoday.com/us/blog/acquired-spontaneity/201708/why-patriarchy-is-not-about-men).
 
