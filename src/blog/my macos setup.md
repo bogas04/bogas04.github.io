@@ -50,6 +50,11 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 
 I don't know why this isn't the default behaviour. I don't have much use for macOS's character suggestions on holding a key.
 
+## Expanded TouchBar
+
+I prefer expanded touch bar over app specific touchbar.
+System Preferences > Keyboard > "Touch Bar shows" - Expanded Control Strip.
+
 ## Trackpad stuff
 
 ### Enable tap to click (System Preferences -> Trackpad)
