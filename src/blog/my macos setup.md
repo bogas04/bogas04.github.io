@@ -84,6 +84,10 @@ Configure it to use `cmd+option+v` for menu.
 
 *Update:* Clipy isn't optimized for M1 yet, so you can use [Maccy](https://maccy.app/) instead.
 
+### [Itsycal](https://www.mowglii.com/itsycal/)
+
+Statusbar calendar of my choice.
+
 ## dot-files
 
 If you're interested in my dot-files, you can view them [here](https://github.com/bogas04/dot-files).
