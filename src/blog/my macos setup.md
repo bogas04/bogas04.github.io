@@ -17,15 +17,11 @@ I dislike macOS's fullscreen mode, so in order to get maximum screen real estate
 
 Refer to [this](https://www.cnet.com/how-to/how-to-hide-the-menu-bar-in-os-x-el-capitan/) article.
 
-![Screenshot explaining how to turn autohide on](https://cnet2.cbsistatic.com/img/RQSE25g_jYlO_HOi_cgFHsoxtvc=/770x578/2015/07/17/ae679c9d-f02d-4656-8d6f-d909c0b4d43e/el-capitan-hide-menu-bar-setting-edit.jpg)
-
 ### Autohide dock & disable recent applications
 
 I also like a clean setup, so I keep only essential items in the dock for quick access, for rest I use spotlight.
 
 Refer to [this](https://www.cnet.com/how-to/macos-mojave-shows-recent-apps-in-the-dock-heres-how-to-hide-them/) article.
-
-![Screenshot explaining how to autohide dock and recent apps](https://cnet4.cbsistatic.com/img/AMTFPky98yMg5ihkaVH7-IzaHkk=/2018/07/13/ee1b1337-a22c-4aed-a4c9-ab291868faae/mojave-show-recent-apps-in-dock.png)
 
 ## Keyboard stuff
 
@@ -79,10 +75,14 @@ In my setup, I don't need use spotlight to open files, so indexing them (_cough_
 This window management utility is helpful and highly configurable.
 Configure it to use `cmd+option+arrow-key` for top/left/right/bottom and `cmd+option+space` for maximize
 
-### Install [Clippy](https://github.com/Clipy/Clipy/releases)
+*Update:* ShiftIt isn't optimized for M1 yet, so you can use [Rectangle](https://rectangleapp.com/) instead.
+
+### Install [Clipy](https://github.com/Clipy/Clipy/releases)
 
 Clipboard management of my choice.
 Configure it to use `cmd+option+v` for menu.
+
+*Update:* Clipy isn't optimized for M1 yet, so you can use [Maccy](https://maccy.app/) instead.
 
 ## dot-files
 
