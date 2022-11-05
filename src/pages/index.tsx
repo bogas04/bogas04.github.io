@@ -288,21 +288,31 @@ function HomePage() {
               <dt>Duration:</dt>
               <dd>April 2020 - Present</dd>
               <dd>
+                <p>Management:</p>
                 <ul>
-                  <li>
-                    Working on a webpack based framework to power websites
-                    internally.
-                  </li>
-                  <li>
-                    Working on performance optimizations for the main website.
-                  </li>
-                  <li>
-                    Revamped Order Details Experience for React Native and Web.
-                  </li>
-                  <li>
-                    Improved perceived performance using Skeleton UIs in React
-                    Native app.
-                  </li>
+                  <li>Lead a core UI platform team of four very talented developers</li>
+                  <li>Planned and delivered quarterly roadmaps with data-driven tasks and output</li>
+                  <li>Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...).</li>
+                  <li>Consecutively won two "Lead without authority" knolskape leadering programmes</li>
+                </ul>
+              </dd>
+              <dd>
+                <p>Individual Contributions:</p>
+                <ul>
+                  <li>Reduced react-native codepush bundle size by 20% by optimizing image assets</li>
+                  <li>Improved app startup time by 75% (P90), thus improving conversions to 2nd page by 35%.</li>
+                  <li>Updated internal react-native+react-native-web framework to use functional components with specialized hooks.</li>
+                  <li>Built Year In Review screens for 2020 & 2021.</li>
+                  <li>Deployed a webview fallback for react-native screens for quicker resolution during outages.</li>
+                  <li>Drove improvements for developer experience initiatives by adding CI checks, pre-commit hooks and dev compiler optimizations.</li>
+                  <li>Refactored tightly coupled internal library into individual npm packages in a mono-repo.</li>
+                  <li>Used extensive A/B testing to drive higher (3.6 to 4.4) app store ratings using a strategically placed prompt.</li>
+                  <li>Revamped udaan's homepage with 60fps animations and better SEO.</li>
+                  <li>Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.</li>
+                  <li>Worked supporting lazy loading of react-native+react-native-web screens.</li>
+                  <li>Worked on an internal framework for creating SSR based React apps (using webpack+node)</li>
+                  <li>Worked on adding systematic changes to allow Animated Skeleton Screens for faster perceived performance on React Native and Web App.</li>
+                  <li>Revamped Order Details Experience for React Native and Web.</li>
                 </ul>
               </dd>
             </dl>
