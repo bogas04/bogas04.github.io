@@ -218,8 +218,8 @@ function HomePage() {
       </style>
 
       <SeoTags
-        title="Divjot Singh | Frontend Engineer | Vegan | Sikh"
-        description="Frontend Engineer, Sikh & a Vegan residing in Bengaluru, India."
+        title="Divjot Singh"
+        description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
         imageUrl="/profile.png"
         pageUrl="https://bogas04.github.io/"
       />
