@@ -15,7 +15,7 @@ jobs:
       - name: 🟢 node
         uses: actions/setup-node@v1.4.4
         with:
-          node-version: 15
+          node-version: 18
       - name: ⬇️ download dependencies
         run: npm ci
       - name: 🛠 build project
