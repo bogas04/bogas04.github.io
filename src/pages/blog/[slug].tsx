@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import "prismjs/themes/prism.css";
 import "prism-themes/themes/prism-ghcolors.css";
 
@@ -40,6 +40,24 @@ function BlogPost({ post }: IBlogPostProps) {
   const postImage = `${WEBSITE_URL}${post.image}`;
   const keywords = ((post.keywords || []) as string[]).join(", ");
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.innerHTML = `
+            var disqus_config = function () {
+              this.page.url = "${postUrl}";
+              this.page.identifier = "${post.slug}";
+            };
+            (function () {
+              // DON'T EDIT BELOW THIS LINE
+              var d = document,
+                s = d.createElement("script");
+              s.src = "https://https-bogas04-github-io.disqus.com/embed.js";
+              s.setAttribute("data-timestamp", +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+        `;
+    document.body.appendChild(script);
+  }, []);
   return (
     <BlogLayout>
       <style>
@@ -196,6 +214,9 @@ function BlogPost({ post }: IBlogPostProps) {
         </section>
         <div style={{ marginTop: 24 }}>
           <ShareLinks url={postUrl} description={post.description} />
+        </div>
+        <div style={{ marginTop: 24 }}>
+          <div id="disqus_thread" />
         </div>
       </footer>
     </BlogLayout>
