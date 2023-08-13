@@ -6,9 +6,10 @@ import SeoTags from "../components/SeoTags";
 import Section from "../layout/section";
 
 function UsesPage() {
-  return <>
-    <style>
-      {`
+  return (
+    <>
+      <style>
+        {`
 #main-title {
   display: flex;
   flex-direction: column;
@@ -73,109 +74,110 @@ ul ol li {
     margin-left: 0;
   }
 }`}
-    </style>
+      </style>
 
-    <SeoTags
-      title="What does Divjot Singh use?"
-      description="List of all the things Divjot Singh uses in his day to day life."
-      imageUrl="/profile.png"
-      pageUrl="https://bogas04.github.io/uses"
-    />
+      <SeoTags
+        title="What does Divjot Singh use?"
+        description="List of all the things Divjot Singh uses in his day to day life."
+        imageUrl="/profile.png"
+        pageUrl="https://bogas04.github.io/uses"
+      />
 
-    <Section style={{ zIndex: 10 }}>
-      <h1 id="main-title">
-        <img src="/profile.png" alt="👳🏽" />
-        <Link href="/">
-          Divjot Singh
-        </Link>{" "}
-        <small>
-          <a href="http://uses.tech" target="_blank">
-            /uses
-          </a>
-        </small>
-      </h1>
+      <Section style={{ zIndex: 10 }}>
+        <h1 id="main-title">
+          <img src="/profile.png" alt="👳🏽" />
+          <Link href="/">Divjot Singh</Link>{" "}
+          <small>
+            <a href="http://uses.tech" target="_blank">
+              /uses
+            </a>
+          </small>
+        </h1>
 
-      <nav>
-        <ul>
-          <h2>Software</h2>
-          <li>
-            <a href="https://code.visualstudio.com" target="_blank">
-              👨‍💻 VS Code
-            </a>{" "}
-            with
-            <ol>
-              <li>
-                <a
-                  href="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"
-                  target="_blank"
-                >
-                  Night Owl Light
-                </a>{" "}
-                theme
-              </li>
-              <li>
-                <a
-                  href="https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions"
-                  target="_blank"
-                >
-                  Fira Code
-                </a>{" "}
-                font
-              </li>
-              <li>
-                <a
-                  href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim"
-                  target="_blank"
-                >
-                  Vim
-                </a>{" "}
-                key bindings
-              </li>
-            </ol>
-          </li>
-          <li>
-            <a
-              href="https://www.mozilla.org/en-US/firefox/developer"
-              target="_blank"
-            >
-              🌏 Firefox Developer Edition
-            </a>
-          </li>
-          <li>
-            <a href="https://soundcloud.com" target="_blank">
-              🎵 Soundcloud
-            </a>
-          </li>
-          <li>
-            <a href="https://ohmyz.sh" target="_blank">
-              🖥 ZSH
-            </a>
-          </li>
-        </ul>
-        <ul>
-          <h2>Gadgets</h2>
-          <li>
-            <a
-              href="https://www.apple.com/in/macbook-pro-16/"
-              target="_blank"
-            >
-              💻 Macbook Pro
-            </a>
-          </li>
-          <li>
-            <a href="https://www.realme.com/in/realme-x" target="_blank">
-              📱 Realme X (Android Phone)
-            </a>
-          </li>
-          <li>
-            <a href="https://www.mi.com/redmiairdots" target="_blank">
-              🎧 Mi AirDots
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </Section>
-  </>;
+        <nav>
+          <ul>
+            <h2>Software</h2>
+            <li>
+              <a href="https://code.visualstudio.com" target="_blank">
+                👨‍💻 VS Code
+              </a>{" "}
+              with
+              <ol>
+                <li>
+                  <a
+                    href="https://marketplace.visualstudio.com/items?itemName=ChadBaileyVh.oled-pure-black---vscode"
+                    target="_blank"
+                  >
+                    Dark+ Pure Black (OLED)
+                  </a>{" "}
+                  theme
+                </li>
+                <li>
+                  <a
+                    href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim"
+                    target="_blank"
+                  >
+                    Vim
+                  </a>{" "}
+                  key bindings
+                </li>
+              </ol>
+            </li>
+            <li>
+              <a href="http://arc.net/" target="_blank">
+                🌏 Arc Browser
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.mozilla.org/en-US/firefox/browsers/mobile/android/"
+                target="_blank"
+              >
+                🌏 Firefox for Android
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <h2>Gadgets</h2>
+            <li>
+              <a href="https://www.apple.com/macbook-pro-13" target="_blank">
+                💻 Macbook Pro (2020)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.rtings.com/tv/reviews/lg/c1-oled"
+                target="_blank"
+              >
+                📺 LG C1 OLED 48 inch
+              </a>
+            </li>
+            <li>
+              <a href="https://www.playstation.com/en-in/ps5/" target="_blank">
+                🎮 PlayStation 5
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.xbox.com/consoles/xbox-series-x"
+                target="_blank"
+              >
+                🎮 Xbox Series X
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.gsmarena.com/motorola_edge_30-11500.php"
+                target="_blank"
+              >
+                📱 Motorala Edge 30 (Android Phone)
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </Section>
+    </>
+  );
 }
 
 export default memo(UsesPage);
