@@ -130,7 +130,7 @@ function BlogListing({ posts }: IBlogListingProps) {
 
       <h1>
         <Link href="/">
-          <a>Divjot Singh</a>
+          Divjot Singh
         </Link>{" "}
         | Blog
       </h1>
@@ -142,19 +142,19 @@ function BlogListing({ posts }: IBlogListingProps) {
             key={post.title}
           >
             <Link href="blog/[slug]" as={`blog/${post.slug}`}>
-              <a>
-                <div className="post-body">
-                  <h2 className="post-title">
-                    {post.title} {post.isDraft && <small>draft</small>}
-                  </h2>
 
-                  <p>{post.description}</p>
-                  <span>{new Date(post.date).toDateString()}</span>
-                </div>
-                {post.image && (
-                  <img src={post.image} alt="Image for the post" />
-                )}
-              </a>
+              <div className="post-body">
+                <h2 className="post-title">
+                  {post.title} {post.isDraft && <small>draft</small>}
+                </h2>
+
+                <p>{post.description}</p>
+                <span>{new Date(post.date).toDateString()}</span>
+              </div>
+              {post.image && (
+                <img src={post.image} alt="Image for the post" />
+              )}
+
             </Link>
           </li>
         ))}

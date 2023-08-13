@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const BlogLayout: FC = ({ children }) => {
+const BlogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <style>{`

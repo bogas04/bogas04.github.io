@@ -149,14 +149,8 @@ function BlogPost({ post }: IBlogPostProps) {
 
       <h1>{post.title}</h1>
       <h4>
-        <Link href="/">
-          <a>Divjot Singh</a>
-        </Link>{" "}
-        |{" "}
-        <Link href="/blog">
-          <a>Blog</a>
-        </Link>{" "}
-        | {new Date(post.date).toDateString()}
+        <Link href="/">Divjot Singh</Link> | <Link href="/blog">Blog</Link> |{" "}
+        {new Date(post.date).toDateString()}
         <br />
         <p>{keywords}</p>
       </h4>
