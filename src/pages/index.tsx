@@ -83,7 +83,7 @@ a {
 .talks {
   display: grid;
   grid-gap: 50px;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
   width: 100%;
 }
 
@@ -92,10 +92,16 @@ a {
   height: 50vh;
   width: 100%;
   object-fit: cover;
+  border-radius: 16px;
+  border: 3px solid black;
 }
 
 .talk-video {
   position: relative;
+}
+
+.talk-video:hover img {
+  border-color: white;
 }
 
 .talk-video:hover::after {
@@ -1320,6 +1326,37 @@ dd ul {
                     rel="noopener noreferrer"
                   >
                     Upfront91 2024, Make My Trip Office
+                  </a>
+                </h6>
+              </div>
+
+              <div className="talk">
+                <a
+                  href="https://youtu.be/es-oXFtKshI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="talk-video"
+                >
+                  <img
+                    loading="lazy"
+                    alt="Video of the talk"
+                    src="/img/designs-of-coder.png"
+                  />
+                </a>
+                <h6 className="talk-title">
+                  <a
+                    href="https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing"
+                    target="_blank"
+                  >
+                    Designs of a Coder (2021)
+                  </a>{" "}
+                  at{" "}
+                  <a
+                    href="https://pesto.tech/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pesto
                   </a>
                 </h6>
               </div>
