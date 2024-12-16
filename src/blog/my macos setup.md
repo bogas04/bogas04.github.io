@@ -23,6 +23,18 @@ I also like a clean setup, so I keep only essential items in the dock for quick 
 
 Refer to [this](https://www.cnet.com/how-to/macos-mojave-shows-recent-apps-in-the-dock-heres-how-to-hide-them/) article.
 
+## Git default push to current branch
+
+```bash
+git config push.default current --global
+```
+
+## Oh My ZSH with Auto Suggest
+
+[Oh my ZSH](https://ohmyz.sh/)
+
+[zsh-autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh)
+
 ## Keyboard stuff
 
 - Disable `cmd+option+space` for spotlight history (System Preferences -> Spotlight -> Keyboard Shortcuts)
@@ -75,14 +87,14 @@ In my setup, I don't need use spotlight to open files, so indexing them (_cough_
 This window management utility is helpful and highly configurable.
 Configure it to use `cmd+option+arrow-key` for top/left/right/bottom and `cmd+option+space` for maximize
 
-*Update:* ShiftIt isn't optimized for M1 yet, so you can use [Rectangle](https://rectangleapp.com/) instead.
+_Update:_ ShiftIt isn't optimized for M1 yet, so you can use [Rectangle](https://rectangleapp.com/) instead.
 
 ### Install [Clipy](https://github.com/Clipy/Clipy/releases)
 
 Clipboard management of my choice.
 Configure it to use `cmd+option+v` for menu.
 
-*Update:* Clipy isn't optimized for M1 yet, so you can use [Maccy](https://maccy.app/) instead.
+_Update:_ Clipy isn't optimized for M1 yet, so you can use [Maccy](https://maccy.app/) instead.
 
 ### [Itsycal](https://www.mowglii.com/itsycal/)
 
