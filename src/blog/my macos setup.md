@@ -82,23 +82,14 @@ A big cursor is easier to find and makes things easy to move around.
 
 In my setup, I don't need use spotlight to open files, so indexing them (_cough_ `node_modules` _cough_) is unnecessary waste of resources.
 
-### Install [ShiftIt](https://github.com/fikovnik/ShiftIt/releases)
+### Install [Rectangle](https://rectangleapp.com/)
 
-This window management utility is helpful and highly configurable.
+This window management utility works with newer versions of macOS (even though now macOS supports tiling, it still sucks).
 Configure it to use `cmd+option+arrow-key` for top/left/right/bottom and `cmd+option+space` for maximize
 
-_Update:_ ShiftIt isn't optimized for M1 yet, so you can use [Rectangle](https://rectangleapp.com/) instead.
+### Install [Maccy](https://github.com/p0deje/Maccy)
 
-### Install [Clipy](https://github.com/Clipy/Clipy/releases)
-
-Clipboard management of my choice.
-Configure it to use `cmd+option+v` for menu.
-
-_Update:_ Clipy isn't optimized for M1 yet, so you can use [Maccy](https://maccy.app/) instead.
-
-### [Itsycal](https://www.mowglii.com/itsycal/)
-
-Statusbar calendar of my choice.
+Clipboard management of my choice. I've started accepting the default options for my peace of mind.
 
 ## dot-files
 
