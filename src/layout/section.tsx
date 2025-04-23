@@ -29,7 +29,7 @@ const styleMap = {
 
 const Section = styled.section<{ color?: keyof typeof styleMap }>((props) => ({
   position: "relative",
-  minHeight: "100vh",
+  minHeight: "85vh",
   padding: "2% 5%",
   boxShadow: "0px 10px 50px 20px black",
   ...styleMap[props.color || "default"],
