@@ -83,7 +83,7 @@ a {
 .talks {
   display: grid;
   grid-gap: 50px;
-  grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   width: 100%;
 }
 
