@@ -21,7 +21,7 @@ function HomePage() {
 }
 
 #main-title img {
-  background-image: url(/profile.png);
+  background-color: white;
   border-radius: 50%;
   border: 5px solid white;
   min-width: 100px;
