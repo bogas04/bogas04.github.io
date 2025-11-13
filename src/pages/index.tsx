@@ -819,7 +819,7 @@ dd ul {
               <dd>October 2013 - October 2014</dd>
               <dt>Description:</dt>
               <dd>
-                Co-founding team member. Managed JavaScript head of the tool.
+                Co-founding member. Managed JavaScript head of the tool.
                 <ul>
                   <li>
                     Health Report tool for analyzes all clients statistically
