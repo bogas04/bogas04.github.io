@@ -284,9 +284,9 @@ dd ul {
                 rel="noopener noreferrer"
                 href="https://udaan.com"
               >
-                Udaan, Bengaluru
+                udaan, Bengaluru
               </a>
-              , Software Engineer
+              , Software Architect
             </div>
             <dl className="dl-horizontal">
               <dt>Duration:</dt>
@@ -317,6 +317,34 @@ dd ul {
               <dd>
                 <p>Individual Contributions:</p>
                 <ul>
+                  <li>
+                    Published{" "}
+                    <a href="https://vitadrop.in" rel="noopener noreferrer">
+                      vitadrop.in
+                    </a>{" "}
+                    and{" "}
+                    <a href="https://annabhumi.com" rel="noopener noreferrer">
+                      annabhumi.com
+                    </a>{" "}
+                    AI assisted brand websites.
+                  </li>
+                  <li>
+                    Developed{" "}
+                    <a href="https://wondermart.com" rel="noopener noreferrer">
+                      wondermart
+                    </a>{" "}
+                    app from scratch in 1 month for b2c vertical.
+                  </li>
+                  <li>
+                    Fixed a{" "}
+                    <a
+                      href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a"
+                      rel="noopener noreferrer"
+                    >
+                      2400ms
+                    </a>{" "}
+                    re-rendering linked stutter caused on add to cart action.
+                  </li>
                   <li>
                     Reduced react-native codepush bundle size by 20% by
                     optimizing image assets
