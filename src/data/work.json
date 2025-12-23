@@ -1,0 +1,177 @@
+[
+  {
+    "id": "udaan",
+    "company": "udaan, Bengaluru",
+    "companyUrl": "https://udaan.com",
+    "position": "Software Architect",
+    "duration": "April 2020 - Present",
+    "team": null,
+    "sections": [
+      {
+        "title": "Management:",
+        "items": [
+          "Lead a core UI platform team of four very talented developers",
+          "Planned and delivered quarterly roadmaps with data-driven tasks and output",
+          "Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...).",
+          "Consecutively won two \"Lead without authority\" knolskape leadering programmes"
+        ]
+      },
+      {
+        "title": "Individual Contributions:",
+        "items": [
+          "Published and AI assisted brand websites.",
+          "Developed app from scratch in 1 month for b2c vertical.",
+          "Fixed a re-rendering linked stutter caused on add to cart action.",
+          "Reduced react-native codepush bundle size by 20% by optimizing image assets",
+          "Improved app startup time by 75% (P90), thus improving conversions to 2nd page by 35%.",
+          "Updated internal react-native+react-native-web framework to use functional components with specialized hooks.",
+          "Built Year In Review screens for 2020 & 2021.",
+          "Deployed a webview fallback for react-native screens for quicker resolution during outages.",
+          "Drove improvements for developer experience initiatives by adding CI checks, pre-commit hooks and dev compiler optimizations.",
+          "Refactored tightly coupled internal library into individual npm packages in a mono-repo.",
+          "Used extensive A/B testing to drive higher (3.6 to 4.4) app store ratings using a strategically placed prompt.",
+          "Revamped udaan's homepage with 60fps animations and better SEO.",
+          "Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.",
+          "Worked supporting lazy loading of react-native+react-native-web screens.",
+          "Worked on an internal framework for creating SSR based React apps (using webpack+node)",
+          "Worked on adding systematic changes to allow Animated Skeleton Screens for faster perceived performance on React Native and Web App.",
+          "Revamped Order Details Experience for React Native and Web."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "swiggy-sde3",
+    "company": "Swiggy, Bengaluru",
+    "companyUrl": "https://swiggy.com",
+    "position": "Software Development Engineer III",
+    "duration": "November 2019 - April 2020",
+    "team": "@SwiggyTech - New Initiatives Team (Web)",
+    "teamUrl": "https://www.twitter.com/SwiggyTech",
+    "sections": [
+      {
+        "title": "Projects:",
+        "items": [
+          "Lead the release of Timeline shareability on Swiggy Go.",
+          "Lead the release of Swiggy Stores PWA.",
+          "Lead the release of Swiggy Single Page Checkout for Food.",
+          "Developed new PL driven UI for Swiggy Stores.",
+          "Developed new Swiggy Genie.",
+          "Developed a system for incorporating Origin Trials for our PWAs, starting with and ."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "swiggy-sde2",
+    "company": "Swiggy, Bengaluru",
+    "companyUrl": "https://swiggy.com",
+    "position": "Software Development Engineer II",
+    "duration": "January 2018 - November 2019",
+    "team": "@SwiggyTech - Web Team",
+    "teamUrl": "https://www.twitter.com/SwiggyTech",
+    "sections": [
+      {
+        "title": "Projects:",
+        "items": []
+      },
+      {
+        "title": "Major Achievements:",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "housing",
+    "company": "Housing.com, Mumbai",
+    "companyUrl": "https://housing.com",
+    "position": "Senior Software Development Engineer",
+    "duration": "October 2017 - January 2018",
+    "team": "@HousingEngg - Frontend team",
+    "teamUrl": "https://twitter.com/HousingEngg",
+    "sections": [
+      {
+        "title": "Description:",
+        "text": "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements;",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "samsung-rnd",
+    "company": "Samsung R&D Institute, Bengaluru",
+    "companyUrl": "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
+    "position": "Software Developer",
+    "duration": "June 2016 - October 2017",
+    "team": "@SamsungInternet team",
+    "teamUrl": "https://twitter.com/SamsungInternet",
+    "sections": [
+      {
+        "title": "Projects:",
+        "items": []
+      },
+      {
+        "title": "Major Achievements:",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "fizzyfood",
+    "company": "Fizzy Food Lab's, Mumbai",
+    "companyUrl": "http://chefsbasket.com",
+    "position": "Fullstack JavaScript Developer",
+    "duration": "December 2015 - January 2016",
+    "sections": [
+      {
+        "title": "Description:",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "samsung-trainee",
+    "company": "Samsung Research Institute, Bengaluru",
+    "companyUrl": "//www.samsung.com/in/sri-b/siso.html",
+    "position": "Student Trainee",
+    "duration": "June 2015 - August 2015",
+    "sections": [
+      {
+        "title": "Description:",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "refiral",
+    "company": "Refiral, New Delhi",
+    "companyUrl": "//refiral.com",
+    "position": "Product Developer",
+    "duration": "October 2013 - October 2014",
+    "sections": [
+      {
+        "title": "Description:",
+        "text": "Co-founding member. Managed JavaScript head of the tool.",
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "frrole",
+    "company": "Frrole, Remote",
+    "companyUrl": "//frrole.com",
+    "position": "Frontend Development Intern",
+    "duration": "November 2013 - January 2014",
+    "sections": [
+      {
+        "title": "Description:",
+        "text": "Buzzometer - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie."
+      }
+    ]
+  },
+  {
+    "id": "more",
+    "company": "And much more, meet up for a ☕ coffee if my work interests you",
+    "isSpecial": true
+  }
+]

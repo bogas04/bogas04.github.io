@@ -1,0 +1,55 @@
+[
+  {
+    "id": "upfront91-2024",
+    "title": "",
+    "event": "",
+    "videoUrl": "https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912",
+    "imageUrl": "/img/upfront91-2024.png",
+    "imageAlt": "Video of the talk"
+  },
+  {
+    "id": "designs-of-coder",
+    "title": "",
+    "event": "",
+    "videoUrl": "https://youtu.be/es-oXFtKshI",
+    "imageUrl": "/img/designs-of-coder.png",
+    "imageAlt": "Video of the talk"
+  },
+  {
+    "id": "blazing-fast-web",
+    "title": "",
+    "event": "",
+    "imageUrl": "/img/blazing-fast-web.png",
+    "imageAlt": "Banner image for the talk"
+  },
+  {
+    "id": "react-native-2018",
+    "title": "",
+    "event": "",
+    "videoUrl": "https://www.youtube.com/watch?v=2mX8hmefCRI",
+    "imageUrl": "https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg",
+    "imageAlt": "Video of the talk"
+  },
+  {
+    "id": "react-2019",
+    "title": "",
+    "event": "",
+    "imageUrl": "/img/react-2019.png",
+    "imageAlt": "Banner image for the talk"
+  },
+  {
+    "id": "testing-with-jest",
+    "title": "",
+    "event": "",
+    "imageUrl": "img/testing-with-jest.png",
+    "imageAlt": "Banner image for the talk"
+  },
+  {
+    "id": "pwa-2017",
+    "title": "",
+    "event": "",
+    "videoUrl": "https://www.youtube.com/watch?v=lN8b_fXRC_A",
+    "imageUrl": "https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg",
+    "imageAlt": "Video of the talk"
+  }
+]

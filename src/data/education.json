@@ -1,0 +1,95 @@
+[
+  {
+    "id": "professional",
+    "title": "Professionally Me",
+    "url": "https://linkedin.com/in/bogas04",
+    "type": "professional",
+    "details": {
+      "resume": {
+        "label": "Resume:",
+        "url": "/resume",
+        "text": "Download resume"
+      },
+      "programmingLanguages": {
+        "label": "Programming Languages:",
+        "text": "C, TypeScript, JavaScript (ES2015+), PHP, Java,"
+      },
+      "stacks": {
+        "label": "Stacks/Technologies:",
+        "items": [
+          { "text": "(P)", "url": "https://preactjs.com/" },
+          { "text": "ReactJS", "url": "https://facebook.github.io/react/" },
+          { "text": "Redux", "url": "https://redux.js.org/" },
+          { "text": "AngularJS", "url": "https://angularjs.org/" },
+          { "text": "BootStrap", "url": "https://getbootstrap.com/" },
+          { "text": "jQuery", "url": "https://jquery.org/" },
+          { "text": "NodeJS", "url": "httpss://nodejs.org/" },
+          { "text": "ExpressJS", "url": "https://expressjs.com/" },
+          { "text": "Slim MicroFramework", "url": "https://www.slimframework.com/" }
+        ]
+      },
+      "databases": {
+        "label": "Databases",
+        "items": [
+          { "text": "PostgreSQL", "url": "https://www.postgresql.org/" },
+          { "text": "MySQL", "url": "https://www.mysql.com/" },
+          { "text": "MongoDB", "url": "https://www.mongodb.com/" }
+        ]
+      },
+      "tools": {
+        "label": "Tools",
+        "items": [
+          { "text": "npm", "url": "https://www.npmjs.com/" },
+          { "text": "git", "url": "https://git-scm.com/" },
+          { "text": "webpack", "url": "http://webpack.js.org/" },
+          { "text": "rollup", "url": "https://rollupjs.org/" },
+          { "text": "babel", "url": "http://babeljs.io/" },
+          { "text": "Jest", "url": "https://jestjs.io/" },
+          { "text": "Styleguidist", "url": "https://react-styleguidist.js.org/" },
+          { "text": "heroku", "url": "https://www.heroku.com/" },
+          { "text": "grunt", "url": "https://gruntjs.com/" },
+          { "text": "lerna", "url": "https://lerna.js.org/" },
+          { "text": "gulp", "url": "https://gulpjs.com/" },
+          { "text": "bower", "url": "https://bower.io/" },
+          { "text": "Visual Studio Code", "url": "https://code.visualstudio.com/" },
+          { "text": "Vim", "url": "https://vim.sourceforge.io/" },
+          { "text": "IntelliJ IDEA", "url": "https://www.jetbrains.com/idea/" },
+          { "text": "Eclipse", "url": "https://www.eclipse.org/" }
+        ]
+      },
+      "otherLanguages": {
+        "label": "Other Languages 🤷‍♂️ :",
+        "text": "HTML, CSS, XML, YAML, Stylus"
+      }
+    }
+  },
+  {
+    "id": "nsit",
+    "title": "Netaji Subhas Institute of Technology",
+    "url": "//nsit.ac.in/",
+    "type": "academic",
+    "details": {
+      "batch": "2012 - 2016",
+      "performance": {
+        "percentage": "79.48%",
+        "position": "5th position in entire department (~190 students)"
+      },
+      "major": "Computer Engineering",
+      "achievements": [],
+      "societies": []
+    }
+  },
+  {
+    "id": "st-marys",
+    "title": "St. Mary's School",
+    "url": "http://www.stmarysschooldwarka.com/",
+    "type": "school",
+    "details": {
+      "batch": "2002- 2012",
+      "board": "CBSE",
+      "performance12": "95.2%",
+      "performance10": "9.8 CGPA ~ 93.1%",
+      "achievements": []
+    }
+  }
+]
