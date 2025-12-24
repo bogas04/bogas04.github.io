@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../theme";
 
-import "../global.css";
+import "../app.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
