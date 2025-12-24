@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { memo } from "react";
+import { memo, useState } from "react";
 
 import SeoTags from "../components/SeoTags";
 
@@ -37,7 +37,7 @@ function HomePage() {
 }
 
 a {
-  color: #3493f2;
+  color: #bcddff;
 }
 
 .social-icons {
@@ -213,6 +213,10 @@ a {
   .social-icons-svg {
     margin-bottom: 0;
     transform: scale(0.7);
+  }
+
+  .travel-map {
+    display: none;
   }
 }
 
@@ -905,7 +909,134 @@ dd ul {
         </div>
       </Section>
 
-      <Section color="yellow" style={{ zIndex: 11 }} id="education">
+      <Section color="yellow" style={{ zIndex: 11 }} id="travel">
+        <h3>Many Travels</h3>
+
+        <div
+          className="travel-map"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "2rem",
+            position: "relative",
+          }}
+        >
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <img
+              src="/img/map.png"
+              style={{ filter: "grayscale(1) brightness(1.5)", width: "80vw" }}
+            />
+            {/* Travel markers */}
+            {(() => {
+              // Utility function to convert lat/lng to percentage position on Equirectangular projection
+              const coordsToPosition = (lat: number, lng: number) => ({
+                x: ((lng + 180) / 360) * 100,
+                y: ((90 - lat) / 180) * 100 + 10,
+              });
+
+              // Travel destinations with coordinates and info
+              return destinations.map((destination, index) => {
+                const position = coordsToPosition(
+                  destination.lat,
+                  destination.lng
+                );
+
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      position: "absolute",
+                      left: `${position.x}%`,
+                      top: `${position.y}%`,
+                      transform: "translate(-50%, -50%)",
+                      zIndex: 10,
+                    }}
+                  >
+                    <button
+                      style={
+                        {
+                          appearance: "none",
+                          background: "none",
+                          position: "relative",
+                          backgroundColor: "white",
+                          height: 10,
+                          width: 10,
+                          display: "flex",
+                          border: "1px solid black",
+                          borderRadius: "50%",
+                          fontSize: 36,
+                          cursor: "pointer",
+                          transition: "transform 0.2s ease",
+                          // @ts-ignore
+                          anchorName: `--anchor-${index}`,
+                        } as React.CSSProperties
+                      }
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "scale(1.5)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                      }}
+                      // @ts-ignore - popover API is newer than TypeScript definitions
+                      popoverTarget={`popover-${destination.name}`}
+                      id={`popover-btn-${destination.name}`}
+                    >
+                      <span style={{ position: "absolute", top: -38 }}>📌</span>
+                    </button>
+                    <div
+                      id={`popover-${destination.name}`}
+                      // @ts-ignore - popover API is newer than TypeScript definitions
+                      popover="auto"
+                      style={
+                        {
+                          // @ts-ignore
+                          positionAnchor: `--anchor-${index}`,
+                          // @ts-ignore
+                          left: "anchor(right)",
+                          // @ts-ignore
+                          top: "anchor(top)",
+                          margin: "0",
+                          border: "none",
+                          overflow: "hidden",
+                          backgroundColor: "transparent",
+                          width: 300,
+                          zIndex: 1000,
+                        } as React.CSSProperties
+                      }
+                    >
+                      <PopOver destination={destination} />
+                    </div>
+                  </div>
+                );
+              });
+            })()}
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "1rem",
+            padding: "2rem",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+        >
+          {destinations.map((destination) => (
+            <div style={{ textAlign: "left", color: "white" }}>
+              <h4 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
+                {destination.name}
+              </h4>
+              <p style={{ margin: "0", fontSize: "1.2rem", opacity: 0.8 }}>
+                {destination.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section color="pink" style={{ zIndex: 11 }} id="education">
         <h3>Much Education</h3>
 
         <div className="container-fluid">
@@ -1555,3 +1686,237 @@ dd ul {
 }
 
 export default memo(HomePage);
+
+const destinations = [
+  {
+    name: "🇰🇷 South Korea",
+    description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
+    images: [
+      "img/travel/sk/sk-1.jpg",
+      "img/travel/sk/sk-10.jpg",
+      "img/travel/sk/sk-11.jpg",
+      "img/travel/sk/sk-12.jpg",
+      "img/travel/sk/sk-2.jpg",
+      "img/travel/sk/sk-3.jpg",
+      "img/travel/sk/sk-4.jpg",
+      "img/travel/sk/sk-5.jpg",
+      "img/travel/sk/sk-6.jpg",
+      "img/travel/sk/sk-7.jpg",
+      "img/travel/sk/sk-8.jpg",
+      "img/travel/sk/sk-9.jpg",
+    ],
+    lat: 37.5665,
+    lng: 126.978,
+    color: "#ff6b6b",
+  },
+  {
+    name: "🇲🇻 Maldives",
+    description: "2023\n• Island Paradise",
+    images: [
+      "img/travel/maldives/maldives-1.jpg",
+      "img/travel/maldives/maldives-2.jpg",
+      "img/travel/maldives/maldives-3.jpg",
+      "img/travel/maldives/maldives-4.jpg",
+    ],
+    lat: 4.1755,
+    lng: 73.5093,
+    color: "#4ecdc4",
+  },
+  {
+    name: "🇹🇭 Thailand",
+    description: "2024, 2025\n• Vegan food, road trips and beautiful sights",
+    images: [
+      "img/travel/thailand/thailand-1.jpg",
+      "img/travel/thailand/thailand-2.jpg",
+      "img/travel/thailand/thailand-3.jpg",
+      "img/travel/thailand/thailand-4.jpg",
+      "img/travel/thailand/thailand-5.jpg",
+      "img/travel/thailand/thailand-6.jpg",
+      "img/travel/thailand/thailand-7.jpg",
+      "img/travel/thailand/thailand-8.jpg",
+    ],
+    lat: 13.7563,
+    lng: 100.5018,
+    color: "#45b7d1",
+  },
+  {
+    name: "🇲🇾 Malaysia",
+    description: "2024\n• Beautiful temples, George Town",
+    images: [],
+    lat: 3.139,
+    lng: 101.6869,
+    color: "#f9ca24",
+  },
+  {
+    name: "🇮🇩 Bali, Indonesia",
+    images: [
+      "img/travel/bali/bali-1.jpg",
+      "img/travel/bali/bali-2.jpg",
+      "img/travel/bali/bali-3.jpg",
+      "img/travel/bali/bali-4.jpg",
+      "img/travel/bali/bali-5.jpg",
+      "img/travel/bali/bali-6.jpg",
+    ],
+    description:
+      "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
+    lat: -8.65,
+    lng: 115.2167,
+    color: "#6c5ce7",
+  },
+  {
+    name: "🇹🇼 Taiwan",
+    images: [
+      "img/travel/taiwan/taiwan-1.jpg",
+      "img/travel/taiwan/taiwan-10.jpg",
+      "img/travel/taiwan/taiwan-11.jpg",
+      "img/travel/taiwan/taiwan-2.jpg",
+      "img/travel/taiwan/taiwan-3.jpg",
+      "img/travel/taiwan/taiwan-4.jpg",
+      "img/travel/taiwan/taiwan-5.jpg",
+      "img/travel/taiwan/taiwan-6.jpg",
+      "img/travel/taiwan/taiwan-7.jpg",
+      "img/travel/taiwan/taiwan-8.jpg",
+      "img/travel/taiwan/taiwan-9.jpg",
+    ],
+    description: "2024, 2025\n• Amazing Buddhist culture, vegan food",
+    lat: 25.033,
+    lng: 121.5654,
+    color: "#a29bfe",
+  },
+  {
+    name: "🇬🇧 UK",
+    images: [
+      "img/travel/uk/uk-1.jpg",
+      "img/travel/uk/uk-10.jpg",
+      "img/travel/uk/uk-11.jpg",
+      "img/travel/uk/uk-12.jpg",
+      "img/travel/uk/uk-13.jpg",
+      "img/travel/uk/uk-14.jpg",
+      "img/travel/uk/uk-15.jpg",
+      "img/travel/uk/uk-16.jpg",
+      "img/travel/uk/uk-17.jpg",
+      "img/travel/uk/uk-18.jpg",
+      "img/travel/uk/uk-19.jpg",
+      "img/travel/uk/uk-2.jpg",
+      "img/travel/uk/uk-3.jpg",
+      "img/travel/uk/uk-4.jpg",
+      "img/travel/uk/uk-5.jpg",
+      "img/travel/uk/uk-6.jpg",
+      "img/travel/uk/uk-7.jpg",
+      "img/travel/uk/uk-8.jpg",
+      "img/travel/uk/uk-9.jpg",
+    ],
+    description: "2025\n• History & Heritage and lots of pies!",
+    lat: 51.5074,
+    lng: -0.1278,
+    color: "#fd79a8",
+  },
+  {
+    name: "🇮🇪 Ireland",
+    images: [
+      "img/travel/ireland/ireland-1.jpg",
+      "img/travel/ireland/ireland-10.jpg",
+      "img/travel/ireland/ireland-11.jpg",
+      "img/travel/ireland/ireland-2.jpg",
+      "img/travel/ireland/ireland-3.jpg",
+      "img/travel/ireland/ireland-4.jpg",
+      "img/travel/ireland/ireland-5.jpg",
+      "img/travel/ireland/ireland-6.jpg",
+      "img/travel/ireland/ireland-7.jpg",
+      "img/travel/ireland/ireland-8.jpg",
+      "img/travel/ireland/ireland-9.jpg",
+    ],
+    description: "2025\n• History & Heritage and lots of pies!",
+    lat: 53.3498,
+    lng: -6.2603,
+    color: "#00b894",
+  },
+];
+
+function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
+  const [rotateBy, setRotateBy] = useState(0);
+
+  const rotatedArray = rotateArray(
+    [...destination.images.reverse()],
+    rotateBy % destination.images.length
+  );
+  return (
+    <button
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "scale(1.01)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+      }}
+      style={{
+        appearance: "none",
+        border: "none",
+        background: "transparent",
+        position: "relative",
+        marginTop: 32,
+        cursor: "pointer",
+        height: 300,
+        padding: "0 64px",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: 32,
+      }}
+      onClick={(e) => {
+        setRotateBy((x) => x + 1);
+        e.currentTarget.style.transform = "scale(1.05)";
+      }}
+    >
+      {rotatedArray.map((x, i, arr) => (
+        <>
+          <img
+            src={x}
+            style={{
+              transform: `rotate(${
+                i === arr.length - 1 ? 0 : (5 * i * 5) / arr.length
+              }deg)`,
+              width: "calc(100% - 64px)",
+              alignSelf: "center",
+              aspectRatio: 1,
+              backgroundColor: "white",
+              objectFit: "cover",
+              position: "absolute",
+              padding: 12,
+              paddingBottom: i === arr.length - 1 ? 64 : 12,
+              border: "1px solid black",
+            }}
+          />
+        </>
+      ))}
+      <div
+        style={{
+          position: "absolute",
+          width: 200,
+          height: 52,
+          bottom: 64 + 12,
+          left: 32 + 12,
+        }}
+      >
+        <h4 style={{ margin: "0 0 4px 0", fontSize: "16px" }}>
+          {destination.name} ({(rotateBy % destination.images.length) + 1}/
+          {destination.images.length}){" "}
+          <button
+            onClick={() => {
+              window.open(rotatedArray.at(-1));
+            }}
+          >
+            Enlarge
+          </button>
+        </h4>
+        <p style={{ margin: "0", fontSize: "12px", color: "#666" }}>
+          {destination.description}
+        </p>
+      </div>
+    </button>
+  );
+}
+
+const rotateArray = (arr: any[], count = 1) => [
+  ...arr.slice(count),
+  ...arr.slice(0, count),
+];

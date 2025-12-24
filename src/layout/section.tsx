@@ -25,6 +25,10 @@ const styleMap = {
     backgroundColor: "#ffc107",
     color: "black",
   },
+  pink: {
+    backgroundColor: "#e91e63",
+    color: "white",
+  },
 };
 
 const Section = styled.section<{ color?: keyof typeof styleMap }>((props) => ({
