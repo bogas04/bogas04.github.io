@@ -1,5 +1,7 @@
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 body {
@@ -9,6 +11,8 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 h1,
