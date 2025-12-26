@@ -811,7 +811,7 @@ function Travel() {
       <div className="travel-map grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
         {destinations.map((destination) => (
           <button
-            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
+            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20 flex flex-col align-top"
             onClick={() => {
               setShownCard(destination);
             }}
@@ -1681,12 +1681,12 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
           }}
         />
       ))}
-      <div className="absolute w-[200px] h-[52px] bottom-7">
+      <div className="absolute w-[240px] px-2 h-[52px] bottom-[64px] left-8">
         <h4 className="m-0 mb-1 text-base">
           {destination.name} ({(rotateBy % destination.images.length) + 1}/
           {destination.images.length}){" "}
           <button
-            className="border rounded-md px-2 py-1 bg-gray-100 text-sm"
+            className="border rounded-md px-2 py-[2px] bg-gray-100 text-xs"
             onClick={(e) => {
               e.stopPropagation();
               window.open(rotatedArray.at(-1));
