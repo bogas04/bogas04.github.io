@@ -1681,7 +1681,7 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
           }}
         />
       ))}
-      <div className="absolute w-[240px] px-2 h-[52px] bottom-[64px] left-8">
+      <div className="absolute w-[240px] px-2 h-[52px] top-[180px] left-8">
         <h4 className="m-0 mb-1 text-base">
           {destination.name} ({(rotateBy % destination.images.length) + 1}/
           {destination.images.length}){" "}
