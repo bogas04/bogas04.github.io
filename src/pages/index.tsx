@@ -9,288 +9,9 @@ import LinkedInIcon from "../components/icons/linkedin";
 import GithubIcon from "../components/icons/github";
 import Section from "../layout/section";
 
-const globalCss = `
-#main-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-
-#main-title img {
-  background-color: white;
-  border-radius: 50%;
-  border: 5px solid white;
-  min-width: 100px;
-  min-height: 100px;
-  width: 1.5em;
-  height: 1.5em;
-  position: relative;
-}
-
-.popover-card {
-  appearance: none;
-  border: none;
-  background: transparent;
-  position: relative;
-  margin-top: 32px;
-  cursor: pointer;
-  height: 300px;
-  padding: 0 64px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 32px;
-}
-.popover-card:hover {
-  transform: scale(1.02);
-}
-.popover-card:active {
-  transform: scale(1.01);
-}
-
-.row {
-  background-color: transparent;
-  border: none;
-}
-
-a {
-  color: #bcddff;
-}
-
-.social-icons {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 2em;
-  overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.social-icons::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-.social-icons a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  text-transform: lowercase;
-}
-
-.social-icons-svg {
-  filter: invert(100%);
-  margin-bottom: 0.5em;
-}
-
-.uses {
-  font-size: 2rem;
-  display: block;
-  font-style: italic;
-  color: #ffc600;
-  text-decoration: underline #eb4471;
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 10vh;
-}
-
-.talks {
-  display: grid;
-  grid-gap: 50px;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  width: 100%;
-}
-
-.talk-video img,
-.talk-image {
-  height: 50vh;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 3px solid black;
-}
-
-.talk-video {
-  position: relative;
-}
-
-.talk-video:hover img {
-  border-color: white;
-}
-
-.talk-video:hover::after {
-  transform: scale(5);
-  background: rgba(100, 100, 100, 0.6);
-}
-
-.talk-video::after {
-  content: "▶";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  color: white;
-  border-radius: 50%;
-  background: rgba(100, 100, 100, 0.4);
-  transform: scale(4.7);
-  height: 2em;
-  width: 2em;
-  display: flex;
-  justify-content: center;
-  transition: transform ease 0.2s;
-  align-items: center;
-}
-
-.social-grid .card-title {
-  height: 45vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.social-grid a {
-  color: inherit;
-}
-
-.card-title {
-  font-size: 154%;
-  font-weight: bold;
-  padding-bottom: 15px;
-  text-transform: uppercase;
-}
-
-#work .row.card {
-  box-shadow: -20px 0 0px -17px grey;
-  margin-left: -15px;
-  padding-left: 15px;
-  box-shadow: -20px 16px 0px -17px #808080;
-}
-
-#work .row.card::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: #939393;
-  display: block;
-  position: absolute;
-  left: -11px;
-  border-radius: 50%;
-  top: 8px;
-}
-
-#work .row.card:first-child::before {
-  background-color: #4dbf9a;
-}
-
-@media screen and (max-width: 750px) {
-  /* Better li padding for mobile */
-  dd ul {
-    padding-left: 10px !important;
-  }
-
-  #main-title {
-    text-align: center;
-    font-size: 6rem;
-  }
-
-  .talks {
-    display: grid;
-    grid-gap: 50px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-  .talk-video,
-  .talk-image {
-    height: 50vh;
-    width: 100%;
-  }
-
-  .social-icons {
-    padding: 0.5em;
-  }
-
-  .social-icons-svg {
-    transform: scale(0.8);
-  }
-}
-.travel-card-button {
-  cursor: pointer;
-  text-align: left;
-  background-color: transparent;
-  color: white;
-  border-radius: 12px;
-  border: 2px solid rgba(255,255,255,0.5);
-  padding: 12px;
-}
-.travel-card-button:hover {
-  background-color: rgba(255,255,255,0.4);
-}
-.travel-card-button:active {
-  background-color: rgba(255,255,255,0.2);
-}
-
-.travel-marker {
-  appearance: none;
-  background: none;
-  position: relative;
-  background-color: white;
-  height: 10px;
-  width: 10px;
-  display: flex;
-  border: 1px solid black;
-  border-radius: 50%;
-  font-size: 36px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.travel-marker:hover {
-  transform: scale(1.5);
-}
-
-.travel-marker:active {
-  transform: scale(1.4);
-}
-
-.travel-map-mobile {
-  display: none !important;
-}
-
-@media screen and (max-width: 450px) {
-  #main-title {
-    align-items: center;
-    font-size: 5rem;
-    text-align: center;
-  }
-
-  .social-icons {
-    margin: 0 -5%;
-    width: 100vw;
-  }
-
-  .social-icons-svg {
-    margin-bottom: 0;
-    transform: scale(0.7);
-  }
-
-  .travel-map {
-    display: none !important;
-  }
-  .travel-map-mobile {
-    display: flex !important;
-  }
-}
-
-/* Misc change to better align things */
-dd ul {
-  padding-left: 20px;
-}
-`;
-
 function HomePage() {
   return (
     <>
-      <style>{globalCss}</style>
       <SeoTags
         title="Divjot Singh"
         description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
@@ -312,44 +33,57 @@ export default HomePage;
 function Hero() {
   return (
     <Section style={{ zIndex: 10 }}>
-      <h1 id="main-title">
-        <img src="/profile.png" alt="👳🏽" />
+      <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
+        <img
+          src="/profile.png"
+          alt="👳🏽"
+          className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
+        />
         Divjot Singh
       </h1>
 
-      <nav className="social-icons">
+      <nav className="w-full flex justify-between p-8 overflow-auto max-lg:p-2 max-sm:mx-[-5%] max-sm:w-screen [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <a
           href="https://linkedin.com/in/bogas04"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex flex-col items-center text-white lowercase"
         >
-          <LinkedInIcon className="social-icons-svg" />
+          <LinkedInIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
           LinkedIn
         </a>
         <a
           href="https://twitter.com/bogas04"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex flex-col items-center text-white lowercase"
         >
-          <TwitterIcon className="social-icons-svg" />
+          <TwitterIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
           Twitter
         </a>
 
-        <Link href="/blog">
-          <BlogIcon className="social-icons-svg" />
+        <Link
+          href="/blog"
+          className="flex flex-col items-center text-white lowercase"
+        >
+          <BlogIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
           /blog
         </Link>
         <a
           href="https://github.com/bogas04"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex flex-col items-center text-white lowercase"
         >
-          <GithubIcon className="social-icons-svg" />
+          <GithubIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
           Github
         </a>
       </nav>
 
-      <Link href="/uses" className="uses">
+      <Link
+        href="/uses"
+        className="text-2xl block italic text-[#ffc600] underline decoration-[#eb4471] text-center w-full absolute left-0 bottom-20"
+      >
         /uses
       </Link>
     </Section>
@@ -361,8 +95,8 @@ function Work() {
       <h3>Such Work</h3>
 
       <div className="container-fluid">
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-emerald-400 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -487,8 +221,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -554,8 +288,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -619,8 +353,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -674,8 +408,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -850,8 +584,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -883,8 +617,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -915,8 +649,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a target="_blank" rel="noopener noreferrer" href="//refiral.com">
               Refiral, New Delhi
             </a>
@@ -956,8 +690,8 @@ function Work() {
             </dd>
           </dl>
         </div>
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a target="_blank" rel="noopener noreferrer" href="//frrole.com">
               Frrole, Remote
             </a>
@@ -975,8 +709,8 @@ function Work() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+          <div className="text-2xl font-bold pb-4 uppercase">
             And much more, meet up for a &#9749; coffee if my work interests you
           </div>
         </div>
@@ -1006,22 +740,20 @@ function Travel() {
     return (
       <div
         key={destination.name}
+        className="absolute transform -translate-x-1/2 -translate-y-1/2 z-[11]"
         style={{
-          position: "absolute",
           left: `${position.x}%`,
           top: `${position.y}%`,
-          transform: "translate(-50%, -50%)",
-          zIndex: 11,
         }}
       >
         <button
-          className="travel-marker"
+          className="appearance-none bg-transparent relative bg-white h-2.5 w-2.5 flex border border-black rounded-full text-4xl cursor-pointer transition-transform duration-200 ease-in-out hover:scale-150 active:scale-[1.4]"
           onClick={(e) => {
             e.stopPropagation();
             setShownCard(destination);
           }}
         >
-          <span style={{ position: "absolute", top: -38 }}>📌</span>
+          <span className="absolute -top-10">📌</span>
         </button>
       </div>
     );
@@ -1031,38 +763,26 @@ function Travel() {
     <Section color="yellow" style={{ zIndex: 11 }} id="travel">
       <h3>Many Travels</h3>
 
-      <div className="h-200 w-200 bg-red-50" />
-
       <div
-        className="travel-map"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "2rem",
-          position: "relative",
-        }}
+        className="flex justify-center p-8 relative max-sm:hidden "
         onClick={(e) => {
           e.stopPropagation();
           setShownCard(null);
         }}
       >
-        <div style={{ position: "relative", display: "inline-block" }}>
+        <div className="relative inline-block">
           <img
             src="/img/map.png"
-            style={{ filter: "grayscale(1) brightness(1.5)", width: "80vw" }}
+            className="grayscale brightness-150 w-[80vw]"
           />
           {markers}
 
           {shownCard ? (
             <div
+              className="absolute overflow-hidden bg-transparent w-[300px] z-[1000]"
               style={{
-                position: "absolute",
                 top: coordsToPosition(shownCard.lat, shownCard.lng).y + "%",
                 left: coordsToPosition(shownCard.lat, shownCard.lng).x + "%",
-                overflow: "hidden",
-                backgroundColor: "transparent",
-                width: 300,
-                zIndex: 1000,
               }}
             >
               <PopOver destination={shownCard} />
@@ -1071,17 +791,12 @@ function Travel() {
         </div>
       </div>
 
-      <div
-        className="travel-map-mobile"
-        style={{
-          flexDirection: "column",
-          gap: "12px",
-          padding: "2rem",
-          margin: "0 auto",
-        }}
-      >
+      <div className="hidden max-sm:flex flex-col gap-3 mx-auto">
         {destinations.map((destination) => (
-          <div className="travel-card-button" key={destination.name}>
+          <div
+            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
+            key={destination.name}
+          >
             <ImageGallery images={destination.images} />
             <h4 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
               {destination.name}
@@ -1093,28 +808,16 @@ function Travel() {
         ))}
       </div>
 
-      <div
-        className="travel-map"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "1rem",
-          padding: "2rem",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div className="travel-map grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
         {destinations.map((destination) => (
           <button
-            className="travel-card-button"
+            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
             onClick={() => {
               setShownCard(destination);
             }}
             key={destination.name}
           >
-            <h4 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
-              {destination.name}
-            </h4>
+            <h4 className="text-3xl text-black">{destination.name}</h4>
             <p style={{ margin: "0", fontSize: "1.2rem", opacity: 0.8 }}>
               {destination.description}
             </p>
@@ -1129,9 +832,9 @@ function Education() {
     <Section color="pink" style={{ zIndex: 11 }} id="education">
       <h3>Much Education</h3>
 
-      <div className="container-fluid">
-        <div className="row card">
-          <div className="card-title">
+      <div className="container-fluid [&_a]:text-yellow-300 [&_a:hover]:text-gray-200 [&_a:visited]:text-gray-100">
+        <div className="bg-transparent border-none flex flex-col relative">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               href="https://linkedin.com/in/bogas04"
               target="_blank"
@@ -1384,8 +1087,8 @@ function Education() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a target="_blank" rel="noopener noreferrer" href="//nsit.ac.in/">
               Netaji Subhas Institute of Technology
             </a>
@@ -1497,8 +1200,8 @@ function Education() {
           </dl>
         </div>
 
-        <div className="row card">
-          <div className="card-title">
+        <div className="bg-transparent border-none flex flex-col relative">
+          <div className="text-2xl font-bold pb-4 uppercase">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -1548,193 +1251,191 @@ function Talks() {
   return (
     <Section color="green" style={{ zIndex: 13 }} id="talks">
       <h3>So Talkative</h3>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="talks">
-            <div className="talk">
+      <div className="row">
+        <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+          <div>
+            <a
+              href="https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                loading="lazy"
+                className="object-cover rounded-xl aspect-[4/3]"
+                alt="Video of the talk"
+                src="/img/upfront91-2024.png"
+              />
+            </a>
+            <h6 className="text-lg font-semibold mt-4">
+              <a
+                href="https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ"
+                target="_blank"
+              >
+                Surviving the Crunch
+              </a>{" "}
+              at{" "}
               <a
                 href="https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="talk-video"
               >
-                <img
-                  loading="lazy"
-                  alt="Video of the talk"
-                  src="/img/upfront91-2024.png"
-                />
+                Upfront91 2024, Make My Trip Office
               </a>
-              <h6 className="talk-title">
-                <a
-                  href="https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ"
-                  target="_blank"
-                >
-                  Surviving the Crunch
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Upfront91 2024, Make My Trip Office
-                </a>
-              </h6>
-            </div>
+            </h6>
+          </div>
 
-            <div className="talk">
-              <a
-                href="https://youtu.be/es-oXFtKshI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="talk-video"
-              >
-                <img
-                  loading="lazy"
-                  alt="Video of the talk"
-                  src="/img/designs-of-coder.png"
-                />
-              </a>
-              <h6 className="talk-title">
-                <a
-                  href="https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing"
-                  target="_blank"
-                >
-                  Designs of a Coder (2021)
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://pesto.tech/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Pesto
-                </a>
-              </h6>
-            </div>
-
-            <div className="talk">
-              <img
-                className="talk-image"
-                loading="lazy"
-                src="/img/blazing-fast-web.png"
-                alt="Banner image for the talk"
-              />
-              <h6 className="talk-title">
-                <a href="http://bit.ly/web-performance-2019" target="_blank">
-                  Web Performance in 2019
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.hellomeets.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Hello Meets, Swiggy Office
-                </a>
-              </h6>
-            </div>
-
-            <div className="talk">
-              <a
-                href="https://www.youtube.com/watch?v=2mX8hmefCRI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="talk-video"
-              >
-                <img
-                  loading="lazy"
-                  alt="Video of the talk"
-                  src="https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg"
-                />
-              </a>
-              <h6 className="talk-title">
-                <a href="https://www.swiggy.com" target="_blank">
-                  Swiggy ♥️ Web
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.youtube.com/watch?time_continue=450&v=2mX8hmefCRI&feature=emb_title"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Keynote, Google for Mobile India 2019
-                </a>
-              </h6>
-            </div>
-
-            <div className="talk">
+          <div>
+            <a
+              href="https://youtu.be/es-oXFtKshI"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 loading="lazy"
-                className="talk-image"
-                src="/img/react-2019.png"
-                alt="Banner image for the talk"
+                className="object-cover rounded-xl aspect-[4/3]"
+                alt="Video of the talk"
+                src="/img/designs-of-coder.png"
               />
-              <h6 className="talk-title">
-                <a href="http://bit.ly/react-2019" target="_blank">
-                  React in 2019
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ReactJS Bangalore #41
-                </a>
-              </h6>
-            </div>
-
-            <div className="talk">
-              <img
-                loading="lazy"
-                className="talk-image"
-                src="img/testing-with-jest.png"
-                alt="Banner image for the talk"
-              />
-              <h6 className="talk-title">
-                <a href="http://bit.ly/jest-04-2018" target="_blank">
-                  Testing with Jest
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ReactJS Bangalore #32
-                </a>
-              </h6>
-            </div>
-
-            <div className="talk">
+            </a>
+            <h6>
               <a
-                href="https://www.youtube.com/watch?v=lN8b_fXRC_A"
+                href="https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing"
+                target="_blank"
+              >
+                Designs of a Coder (2021)
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://pesto.tech/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="talk-video"
               >
-                <img
-                  loading="lazy"
-                  alt="Video of the talk"
-                  src="https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg"
-                />
+                Pesto
               </a>
+            </h6>
+          </div>
 
-              <h6 className="talk-title">
-                <a href="http://bit.ly/gddx-dec2017" target="_blank">
-                  Delivering Fast Web-apps Fast
-                </a>{" "}
-                at{" "}
-                <a
-                  href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Google Developers' Day, Extended (Mumbai)
-                </a>
-              </h6>
-            </div>
+          <div>
+            <img
+              className="object-cover rounded-xl aspect-[4/3]"
+              loading="lazy"
+              src="/img/blazing-fast-web.png"
+              alt="Banner image for the talk"
+            />
+            <h6>
+              <a href="http://bit.ly/web-performance-2019" target="_blank">
+                Web Performance in 2019
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://www.hellomeets.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hello Meets, Swiggy Office
+              </a>
+            </h6>
+          </div>
+
+          <div>
+            <a
+              href="https://www.youtube.com/watch?v=2mX8hmefCRI"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                loading="lazy"
+                className="object-cover rounded-xl aspect-[4/3]"
+                alt="Video of the talk"
+                src="https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg"
+              />
+            </a>
+            <h6>
+              <a href="https://www.swiggy.com" target="_blank">
+                Swiggy ♥️ Web
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://www.youtube.com/watch?time_continue=450&v=2mX8hmefCRI&feature=emb_title"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Keynote, Google for Mobile India 2019
+              </a>
+            </h6>
+          </div>
+
+          <div>
+            <img
+              loading="lazy"
+              className="object-cover rounded-xl aspect-[4/3]"
+              src="/img/react-2019.png"
+              alt="Banner image for the talk"
+            />
+            <h6>
+              <a href="http://bit.ly/react-2019" target="_blank">
+                React in 2019
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ReactJS Bangalore #41
+              </a>
+            </h6>
+          </div>
+
+          <div>
+            <img
+              loading="lazy"
+              className="object-cover rounded-xl aspect-[4/3]"
+              src="img/testing-with-jest.png"
+              alt="Banner image for the talk"
+            />
+            <h6>
+              <a href="http://bit.ly/jest-04-2018" target="_blank">
+                Testing with Jest
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ReactJS Bangalore #32
+              </a>
+            </h6>
+          </div>
+
+          <div>
+            <a
+              href="https://www.youtube.com/watch?v=lN8b_fXRC_A"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                loading="lazy"
+                className="object-cover rounded-xl aspect-[4/3]"
+                alt="Video of the talk"
+                src="https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg"
+              />
+            </a>
+
+            <h6>
+              <a href="http://bit.ly/gddx-dec2017" target="_blank">
+                Delivering Fast Web-apps Fast
+              </a>{" "}
+              at{" "}
+              <a
+                href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Developers' Day, Extended (Mumbai)
+              </a>
+            </h6>
           </div>
         </div>
       </div>
@@ -1747,12 +1448,13 @@ function Social() {
     <Section color="blue" style={{ zIndex: 13 }} id="social">
       <h3>Somewhat Social</h3>
       <div className="container-fluid">
-        <div className="row social-grid">
+        <div className="row">
           <div className="col-md-6 text-center">
-            <p className="card-title">
+            <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-blue-50"
                 href="//twitter.com/bogas04"
               >
                 Twitter
@@ -1760,10 +1462,11 @@ function Social() {
             </p>
           </div>
           <div className="col-md-6 text-center">
-            <p className="card-title">
+            <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-blue-50"
                 href="//youtube.com/divjotbogas"
               >
                 YouTube
@@ -1771,21 +1474,13 @@ function Social() {
             </p>
           </div>
           <div className="col-md-12 text-center">
-            <p className="card-title" style={{ fontSize: 120 }}>
-              🤷‍♂️
-            </p>
+            <p className="text-8xl text-center text-[120px]">🤷‍♂️</p>
           </div>
         </div>
       </div>
     </Section>
   );
 }
-
-const getPopoverBtnId = (destination: (typeof destinations)[number]) =>
-  `popover-btn-${destination.name}`;
-
-const getPopoverId = (destination: (typeof destinations)[number]) =>
-  `popover-${destination.name}`;
 
 // Utility function to convert lat/lng to percentage position on Equirectangular projection
 const coordsToPosition = (lat: number, lng: number) => ({
@@ -1940,32 +1635,13 @@ const destinations = [
 function ImageGallery({ images }: { images: string[] }) {
   // image carousel using css, overflow, scroll snap, mobile friendly
   return (
-    <div
-      style={{
-        display: "flex",
-        overflowX: "auto",
-        scrollSnapType: "x mandatory",
-        gap: "8px",
-        paddingBottom: "8px",
-        marginBottom: "1rem",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-      className="image-gallery"
-    >
+    <div className="image-gallery flex overflow-x-auto [scroll-snap-type:x_mandatory] gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {images.map((image, index) => (
         <img
           key={index}
           src={image}
           alt={`Gallery image ${index + 1}`}
-          style={{
-            minWidth: "120px",
-            height: "80px",
-            objectFit: "cover",
-            borderRadius: "8px",
-            scrollSnapAlign: "start",
-            border: "1px solid rgba(255,255,255,0.2)",
-          }}
+          className="w-[80%] aspect-[16/12] object-cover rounded-lg [scroll-snap-align:start] border border-white/20"
           loading="lazy"
         />
       ))}
@@ -1986,7 +1662,7 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
   );
   return (
     <button
-      className="popover-card"
+      className="appearance-none border-none bg-transparent relative mt-8 cursor-pointer h-72 px-16 w-full flex flex-col mb-8 hover:scale-[1.02] active:scale-[1.01]"
       onClick={(e) => {
         e.stopPropagation();
         setRotateBy((x) => x + 1);
@@ -1996,15 +1672,8 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
         <img
           key={x}
           src={x}
+          className="w-[calc(100%-64px)] self-center aspect-square bg-white object-cover absolute p-3 border border-solid border-black"
           style={{
-            width: "calc(100% - 64px)",
-            alignSelf: "center",
-            aspectRatio: 1,
-            backgroundColor: "white",
-            objectFit: "cover",
-            position: "absolute",
-            padding: 12,
-            border: "1px solid black",
             transform: `rotate(${
               i === arr.length - 1 ? 0 : (5 * i * 5) / arr.length
             }deg)`,
@@ -2012,19 +1681,12 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
           }}
         />
       ))}
-      <div
-        style={{
-          position: "absolute",
-          width: 200,
-          height: 52,
-          bottom: 64 + 12,
-          left: 32 + 12,
-        }}
-      >
-        <h4 style={{ margin: "0 0 4px 0", fontSize: "16px" }}>
+      <div className="absolute w-[200px] h-[52px] bottom-7">
+        <h4 className="m-0 mb-1 text-base">
           {destination.name} ({(rotateBy % destination.images.length) + 1}/
           {destination.images.length}){" "}
           <button
+            className="border rounded-md px-2 py-1 bg-gray-100 text-sm"
             onClick={(e) => {
               e.stopPropagation();
               window.open(rotatedArray.at(-1));
@@ -2033,9 +1695,7 @@ function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
             Zoom
           </button>
         </h4>
-        <p style={{ margin: "0", fontSize: "12px", color: "#666" }}>
-          {destination.description}
-        </p>
+        <p className="m-0 text-xs text-gray-700">{destination.description}</p>
       </div>
     </button>
   );
