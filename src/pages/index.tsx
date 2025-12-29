@@ -111,7 +111,7 @@ function Work() {
             <dd>April 2020 - Present</dd>
             <dd>
               <p>Management:</p>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Lead a core UI platform team of four very talented developers
                 </li>
@@ -133,7 +133,7 @@ function Work() {
             </dd>
             <dd>
               <p>Individual Contributions:</p>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Published{" "}
                   <a href="https://vitadrop.in" rel="noopener noreferrer">
@@ -248,7 +248,7 @@ function Work() {
             </dd>
             <dt>Projects:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>Lead the release of Timeline shareability on Swiggy Go.</li>
                 <li>Lead the release of Swiggy Stores PWA.</li>
                 <li>
@@ -315,7 +315,7 @@ function Work() {
             </dd>
             <dt>Projects:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>Designed and developed multi-tenant payments module</li>
                 <li>
                   Designed and developed website generator (Gauntlet). 10+
@@ -346,7 +346,7 @@ function Work() {
             </dd>
             <dt>Major Achievements:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>Awards: MVP (Oct 2018)</li>
               </ul>
             </dd>
@@ -382,7 +382,7 @@ function Work() {
             <dd>
               As part of frontend team, I worked on improving performance of
               housing PWA. This was achieved by following enhancements;
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Migrated to React 16 from version 15. 50% win for{" "}
                   <code>renderToString</code> completion time.
@@ -435,7 +435,7 @@ function Work() {
             </dd>
             <dt>Projects:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   <strong>
                     <a
@@ -447,7 +447,7 @@ function Work() {
                     </a>{" "}
                   </strong>
                   Starting June 2016
-                  <ul>
+                  <ul className="list-disc pl-6">
                     <li>
                       Revamped the extension codebase by switching to modern
                       JavaScript paradigms, UI overhaul and performance
@@ -489,7 +489,7 @@ function Work() {
                     </a>{" "}
                   </strong>
                   Starting March 2017
-                  <ul>
+                  <ul className="list-disc pl-6">
                     <li>
                       Designed and developed the web application in ReactJS +
                       Redux +{" "}
@@ -541,7 +541,7 @@ function Work() {
                     </a>{" "}
                   </strong>
                   April 2017 – July 2017
-                  <ul>
+                  <ul className="list-disc pl-6">
                     <li>
                       Wrote JSGF gram files for Samsung Internet domain. [
                       <a
@@ -562,7 +562,7 @@ function Work() {
             </dd>
             <dt>Major Achievements:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   <strong>Employee of the Month (December 2016)</strong> Awarded
                   as Employee of the Month for supporting and developing Samsung
@@ -600,7 +600,7 @@ function Work() {
             <dd>December 2015 - January 2016</dd>
             <dt>Description:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Developed an{" "}
                   <a
@@ -633,7 +633,7 @@ function Work() {
             <dd>June 2015 - August 2015</dd>
             <dt>Description:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Developed tile based map server using NodeJS, mapnik and
                   TileMill
@@ -662,7 +662,7 @@ function Work() {
             <dt>Description:</dt>
             <dd>
               Co-founding member. Managed JavaScript head of the tool.
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Health Report tool for analyzes all clients statistically and
                   constantly check for API health status, hence benefiting in
@@ -1108,7 +1108,7 @@ function Education() {
             <dd>Computer Engineering</dd>
             <dt>Major Achievements:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>Granted merit scholarship for all four years.</li>
                 <li>
                   Consistently stood in top 10 performing students of the
@@ -1164,7 +1164,7 @@ function Education() {
             </dd>
             <dt>Societies:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   <a
                     target="_blank"
@@ -1227,7 +1227,7 @@ function Education() {
             <dd>9.8 CGPA ~ 93.1%</dd>
             <dt>Major Achievements:</dt>
             <dd>
-              <ul>
+              <ul className="list-disc pl-6">
                 <li>
                   Granted merit scholarship for 3 years: 10
                   <sup>th</sup>- 12
@@ -1251,7 +1251,7 @@ function Talks() {
   return (
     <Section color="green" style={{ zIndex: 13 }} id="talks">
       <h3>So Talkative</h3>
-      <div className="row">
+      <div className="row px-4">
         <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
           <div>
             <a
