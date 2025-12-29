@@ -718,6 +718,7 @@ function Work() {
     </Section>
   );
 }
+
 function Travel() {
   const [shownCard, setShownCard] = useState(null);
 
@@ -734,7 +735,7 @@ function Travel() {
   }, []);
 
   // Travel destinations with coordinates and info
-  const markers = destinations.map((destination, index) => {
+  const markers = travelDestinations.map((destination, index) => {
     const position = coordsToPosition(destination.lat, destination.lng);
 
     return (
@@ -792,7 +793,7 @@ function Travel() {
       </div>
 
       <div className="hidden max-sm:flex flex-col gap-3 mx-auto">
-        {destinations.map((destination) => (
+        {travelDestinations.map((destination) => (
           <div
             className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
             key={destination.name}
@@ -809,7 +810,7 @@ function Travel() {
       </div>
 
       <div className="grid max-sm:hidden travel-map grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
-        {destinations.map((destination) => (
+        {travelDestinations.map((destination) => (
           <button
             className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20 flex flex-col align-top"
             onClick={() => {
@@ -827,6 +828,7 @@ function Travel() {
     </Section>
   );
 }
+
 function Education() {
   return (
     <Section color="pink" style={{ zIndex: 11 }} id="education">
@@ -1253,190 +1255,44 @@ function Talks() {
       <h3>So Talkative</h3>
       <div className="row px-4">
         <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
-          <div>
-            <a
-              href="https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          {talks.map((talk) => {
+            const img = (
               <img
                 loading="lazy"
                 className="object-cover rounded-xl aspect-[4/3]"
                 alt="Video of the talk"
-                src="/img/upfront91-2024.png"
+                src={talk.image}
               />
-            </a>
-            <h6 className="text-lg font-semibold mt-4">
-              <a
-                href="https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ"
-                target="_blank"
-              >
-                Surviving the Crunch
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Upfront91 2024, Make My Trip Office
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <a
-              href="https://youtu.be/es-oXFtKshI"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                loading="lazy"
-                className="object-cover rounded-xl aspect-[4/3]"
-                alt="Video of the talk"
-                src="/img/designs-of-coder.png"
-              />
-            </a>
-            <h6>
-              <a
-                href="https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing"
-                target="_blank"
-              >
-                Designs of a Coder (2021)
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://pesto.tech/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pesto
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <img
-              className="object-cover rounded-xl aspect-[4/3]"
-              loading="lazy"
-              src="/img/blazing-fast-web.png"
-              alt="Banner image for the talk"
-            />
-            <h6>
-              <a href="http://bit.ly/web-performance-2019" target="_blank">
-                Web Performance in 2019
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.hellomeets.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Hello Meets, Swiggy Office
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <a
-              href="https://www.youtube.com/watch?v=2mX8hmefCRI"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                loading="lazy"
-                className="object-cover rounded-xl aspect-[4/3]"
-                alt="Video of the talk"
-                src="https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg"
-              />
-            </a>
-            <h6>
-              <a href="https://www.swiggy.com" target="_blank">
-                Swiggy ♥️ Web
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.youtube.com/watch?time_continue=450&v=2mX8hmefCRI&feature=emb_title"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Keynote, Google for Mobile India 2019
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <img
-              loading="lazy"
-              className="object-cover rounded-xl aspect-[4/3]"
-              src="/img/react-2019.png"
-              alt="Banner image for the talk"
-            />
-            <h6>
-              <a href="http://bit.ly/react-2019" target="_blank">
-                React in 2019
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.meetup.com/ReactJS-Bangalore/events/255737841/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ReactJS Bangalore #41
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <img
-              loading="lazy"
-              className="object-cover rounded-xl aspect-[4/3]"
-              src="img/testing-with-jest.png"
-              alt="Banner image for the talk"
-            />
-            <h6>
-              <a href="http://bit.ly/jest-04-2018" target="_blank">
-                Testing with Jest
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.meetup.com/ReactJS-Bangalore/events/247773928/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ReactJS Bangalore #32
-              </a>
-            </h6>
-          </div>
-
-          <div>
-            <a
-              href="https://www.youtube.com/watch?v=lN8b_fXRC_A"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                loading="lazy"
-                className="object-cover rounded-xl aspect-[4/3]"
-                alt="Video of the talk"
-                src="https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg"
-              />
-            </a>
-
-            <h6>
-              <a href="http://bit.ly/gddx-dec2017" target="_blank">
-                Delivering Fast Web-apps Fast
-              </a>{" "}
-              at{" "}
-              <a
-                href="https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Developers' Day, Extended (Mumbai)
-              </a>
-            </h6>
-          </div>
+            );
+            return (
+              <div>
+                {talk.video ? (
+                  <a
+                    href={talk.video}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {img}
+                  </a>
+                ) : (
+                  img
+                )}
+                <h6 className="text-lg font-semibold mt-4">
+                  <a href={talk.link} target="_blank">
+                    {talk.title}
+                  </a>
+                  {" at "}
+                  <a
+                    href={talk.eventLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {talk.event}
+                  </a>
+                </h6>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Section>
@@ -1449,30 +1305,20 @@ function Social() {
       <h3>Somewhat Social</h3>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6 text-center">
-            <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-50"
-                href="//twitter.com/bogas04"
-              >
-                Twitter
-              </a>
-            </p>
-          </div>
-          <div className="col-md-6 text-center">
-            <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-50"
-                href="//youtube.com/divjotbogas"
-              >
-                YouTube
-              </a>
-            </p>
-          </div>
+          {socialLinks.map((link) => (
+            <div className="col-md-6 text-center" key={link.url}>
+              <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-50"
+                  href={link.url}
+                >
+                  {link.title}
+                </a>
+              </p>
+            </div>
+          ))}
           <div className="col-md-12 text-center">
             <p className="text-8xl text-center text-[120px]">🤷‍♂️</p>
           </div>
@@ -1488,7 +1334,72 @@ const coordsToPosition = (lat: number, lng: number) => ({
   y: ((90 - lat) / 180) * 100 + 10,
 });
 
-const destinations = [
+const socialLinks = [
+  { title: "Twitter", url: "//twitter.com/bogas04" },
+  { title: "YouTube", url: "//youtube.com/divjotbogas" },
+];
+
+const talks = [
+  {
+    image: "/img/upfront91-2024.png",
+    title: "Surviving the Crunch",
+    link: "https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ",
+    event: "Upfront91 2024, Make My Trip Office",
+    eventLink: "https://upfront91.makemytrip.com/",
+    video:
+      "https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912",
+  },
+  {
+    image: "/img/designs-of-coder.png",
+    title: "Designs of a Coder (2021)",
+    link: "https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing",
+    event: "Pesto",
+    eventLink: "https://pesto.tech/",
+    video: "https://youtu.be/es-oXFtKshI",
+  },
+  {
+    image: "/img/blazing-fast-web.png",
+    title: "Web Performance in 2019",
+    link: "http://bit.ly/web-performance-2019",
+    eventLink: "https://www.hellomeets.com/",
+    event: "Hello Meets, Swiggy Office",
+  },
+  {
+    image:
+      "https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg",
+    title: "Swiggy ♥️ Web",
+    link: "https://www.swiggy.com",
+    event: "Keynote, Google for Mobile India 2019",
+    eventLink: "https://www.youtube.com/watch?v=2mX8hmefCRI",
+    video:
+      "https://www.youtube.com/watch?time_continue=450&amp;v=2mX8hmefCRI&amp;feature=emb_title",
+  },
+  {
+    image: "/img/react-2019.png",
+    title: "React in 2019",
+    link: "http://bit.ly/react-2019",
+    eventLink: "https://www.meetup.com/reactjs-bangalore/events/255737841/",
+    event: "ReactJS Bangalore #41",
+  },
+  {
+    image: "img/testing-with-jest.png",
+    title: "Testing with Jest",
+    link: "http://bit.ly/jest-04-2018",
+    eventLink: "https://www.meetup.com/ReactJS-Bangalore/events/247773928",
+    event: "ReactJS Bangalore #32",
+  },
+  {
+    image:
+      "https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg",
+    video: "https://www.youtube.com/watch?v=lN8b_fXRC_A",
+    title: "Delivering Fast Web-apps Fast",
+    link: "http://bit.ly/gddx-dec2017",
+    eventLink:
+      "https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA",
+    event: "Google Developers' Day, Extended (Mumbai)",
+  },
+];
+const travelDestinations = [
   {
     name: "South Korea",
     description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
@@ -1653,7 +1564,11 @@ function ImageGallery({ images }: { images: string[] }) {
     </div>
   );
 }
-function PopOver({ destination }: { destination: (typeof destinations)[0] }) {
+function PopOver({
+  destination,
+}: {
+  destination: (typeof travelDestinations)[0];
+}) {
   const [rotateBy, setRotateBy] = useState(0);
 
   const rotatedArray = rotateArray(
