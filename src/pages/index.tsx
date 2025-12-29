@@ -79,13 +79,6 @@ function Hero() {
           Github
         </a>
       </nav>
-
-      <Link
-        href="/uses"
-        className="text-2xl block italic text-[#ffc600] underline decoration-[#eb4471] text-center w-full absolute left-0 bottom-20"
-      >
-        /uses
-      </Link>
     </Section>
   );
 }
