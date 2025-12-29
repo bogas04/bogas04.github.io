@@ -808,7 +808,7 @@ function Travel() {
         ))}
       </div>
 
-      <div className="travel-map grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
+      <div className="grid max-sm:hidden travel-map grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
         {destinations.map((destination) => (
           <button
             className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20 flex flex-col align-top"
