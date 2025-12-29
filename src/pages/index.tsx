@@ -838,413 +838,201 @@ function Education() {
         <div className="bg-transparent border-none flex flex-col relative">
           <div className="text-2xl font-bold pb-4 uppercase">
             <a
-              href="https://linkedin.com/in/bogas04"
+              href={educationData.professionalInfo.link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Professionally Me
+              {educationData.professionalInfo.title}
             </a>
           </div>
 
           <dl className="dl-horizontal">
             <dt>Resume:</dt>
             <dd>
-              <a target="_blank" rel="noopener noreferrer" href="/resume">
-                Download resume
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={educationData.professionalInfo.resume.link}
+              >
+                {educationData.professionalInfo.resume.text}
               </a>
             </dd>
             <dt>Programming Languages:</dt>
-            <dd>C, TypeScript, JavaScript (ES2015+), PHP, Java,</dd>
+            <dd>
+              {educationData.professionalInfo.programmingLanguages.join(", ")},
+            </dd>
             <dt>Stacks/Technologies:</dt>
             <dd>
-              <a
-                href="https://preactjs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                (P)
-              </a>
-              <a
-                href="https://facebook.github.io/react/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ReactJS
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://redux.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://angularjs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                AngularJS
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://getbootstrap.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                BootStrap
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://jquery.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                jQuery
-              </a>{" "}
-              ,{" "}
-              <a
-                href="httpss://nodejs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                NodeJS
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://expressjs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ExpressJS
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.slimframework.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Slim MicroFramework
-              </a>
+              {educationData.professionalInfo.stacksTechnologies.map(
+                (tech, index) => (
+                  <span key={tech.name}>
+                    <a
+                      href={tech.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {tech.name}
+                    </a>
+                    {index <
+                    educationData.professionalInfo.stacksTechnologies.length - 1
+                      ? ", "
+                      : ""}
+                  </span>
+                )
+              )}
             </dd>
             <dt>Databases</dt>
             <dd>
-              <a
-                href="https://www.postgresql.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                PostgreSQL
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.mysql.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                MySQL
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.mongodb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                MongoDB
-              </a>
+              {educationData.professionalInfo.databases.map((db, index) => (
+                <span key={db.name}>
+                  <a href={db.link} target="_blank" rel="noopener noreferrer">
+                    {db.name}
+                  </a>
+                  {index < educationData.professionalInfo.databases.length - 1
+                    ? " , "
+                    : ""}
+                </span>
+              ))}
             </dd>
             <dt>Tools</dt>
             <dd>
-              <a
-                href="https://www.npmjs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                npm
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://git-scm.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                git
-              </a>{" "}
-              ,{" "}
-              <a
-                href="http://webpack.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                webpack
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://rollupjs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                rollup
-              </a>{" "}
-              ,{" "}
-              <a
-                href="http://babeljs.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                babel
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://jestjs.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Jest
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://react-styleguidist.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Styleguidist
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.heroku.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                heroku
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://gruntjs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                grunt
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://lerna.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                lerna
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://gulpjs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                gulp
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://bower.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                bower
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://code.visualstudio.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visual Studio Code
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://vim.sourceforge.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Vim
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.jetbrains.com/idea/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                IntelliJ IDEA
-              </a>{" "}
-              ,{" "}
-              <a
-                href="https://www.eclipse.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Eclipse
-              </a>
+              {educationData.professionalInfo.tools.map((tool, index) => (
+                <span key={tool.name}>
+                  <a href={tool.link} target="_blank" rel="noopener noreferrer">
+                    {tool.name}
+                  </a>
+                  {index < educationData.professionalInfo.tools.length - 1
+                    ? " , "
+                    : ""}
+                </span>
+              ))}
             </dd>
             <dt>Other Languages 🤷‍♂️ :</dt>
-            <dd>HTML, CSS, XML, YAML, Stylus</dd>
+            <dd>{educationData.professionalInfo.otherLanguages.join(", ")}</dd>
           </dl>
         </div>
 
-        <div className="bg-transparent border-none flex flex-col relative">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a target="_blank" rel="noopener noreferrer" href="//nsit.ac.in/">
-              Netaji Subhas Institute of Technology
-            </a>
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Batch:</dt>
-            <dd>2012 - 2016</dd>
-            <dt>Performance:</dt>
-            <dd>
-              79.48%
-              <small>
-                5<sup>th</sup>
-                position in entire department (~190 students)
-              </small>
-            </dd>
-            <dt>Majored In:</dt>
-            <dd>Computer Engineering</dd>
-            <dt>Major Achievements:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>Granted merit scholarship for all four years.</li>
-                <li>
-                  Consistently stood in top 10 performing students of the
-                  department.
-                </li>
-                <li>
-                  Mentored class of 30 in an IEEE NSIT SIG for Web Development
-                  and Design
-                </li>
-                <li>
-                  Wrote a report on <a href="/Rapes.pdf">Rapes</a>
-                </li>
-                <li>
-                  Successfully completed projects like :{" "}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//github.com/bogas04/mvp-generator"
-                  >
-                    MVP Generator
-                  </a>{" "}
-                  |{" "}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//github.com/bogas04/collnet"
-                  >
-                    CollNet
-                  </a>{" "}
-                  |{" "}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//github.com/bogas04/cloudkeeper"
-                  >
-                    CloudKeeper
-                  </a>{" "}
-                  |{" "}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//github.com/bogas04/Attendance-System"
-                  >
-                    Student Attendance System
-                  </a>{" "}
-                  , and more...
-                </li>
-                <li>
-                  Worked on a research project under Vidhi Khanduja (Assistant
-                  Professor) on a database watermarking scheme.
-                </li>
-              </ul>
-            </dd>
-            <dt>Societies:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//ieeensit.org"
-                  >
-                    IEEE NSIT
-                  </a>
-                  - Web Developer
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//junoonnsit.com"
-                  >
-                    Junoon - The Official Photography Club
-                  </a>
-                  - Core Member
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="//collegespace.in"
-                  >
-                    CollegeSpace
-                  </a>
-                  - Tech Head
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
+        {educationData.institutions.map((institution) => (
+          <div
+            key={institution.name}
+            className="bg-transparent border-none flex flex-col relative"
+          >
+            <div className="text-2xl font-bold pb-4 uppercase">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={institution.link}
+              >
+                {institution.name}
+              </a>
+            </div>
+            <dl className="dl-horizontal">
+              <dt>Batch:</dt>
+              <dd>{institution.batch}</dd>
 
-        <div className="bg-transparent border-none flex flex-col relative">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="http://www.stmarysschooldwarka.com/"
-            >
-              St. Mary's School
-            </a>
+              {institution.type === "school" && institution.board && (
+                <>
+                  <dt>Board:</dt>
+                  <dd>{institution.board}</dd>
+                </>
+              )}
+
+              <dt>
+                {institution.type === "school"
+                  ? "Performance in 12th"
+                  : "Performance"}
+                :
+              </dt>
+              <dd>
+                {institution.type === "school" ? (
+                  institution.performance.grade12
+                ) : (
+                  <>
+                    {institution.performance.percentage}
+                    <small>{institution.performance.rank}</small>
+                  </>
+                )}
+              </dd>
+
+              {institution.type === "school" &&
+                institution.performance.grade10 && (
+                  <>
+                    <dt>
+                      Performance in 10<sup>th</sup>:
+                    </dt>
+                    <dd>{institution.performance.grade10}</dd>
+                  </>
+                )}
+
+              {institution.major && (
+                <>
+                  <dt>Majored In:</dt>
+                  <dd>{institution.major}</dd>
+                </>
+              )}
+
+              <dt>Major Achievements:</dt>
+              <dd>
+                <ul className="list-disc pl-6">
+                  {institution.achievements.map((achievement, index) => (
+                    <li key={index}>
+                      {typeof achievement === "string" ? (
+                        achievement
+                      ) : achievement.projects ? (
+                        <>
+                          {achievement.text}{" "}
+                          {achievement.projects.map((project, projectIndex) => (
+                            <span key={project.name}>
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={project.link}
+                              >
+                                {project.name}
+                              </a>
+                              {projectIndex < achievement.projects.length - 1
+                                ? " | "
+                                : ", and more..."}
+                            </span>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          Wrote a report on{" "}
+                          <a href={achievement.link}>
+                            {achievement.text.replace("Wrote a report on ", "")}
+                          </a>
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+
+              {institution.societies && (
+                <>
+                  <dt>Societies:</dt>
+                  <dd>
+                    <ul className="list-disc pl-6">
+                      {institution.societies.map((society) => (
+                        <li key={society.name}>
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={society.link}
+                          >
+                            {society.name}
+                          </a>
+                          - {society.role}
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </>
+              )}
+            </dl>
           </div>
-          <dl className="dl-horizontal">
-            <dt>Batch:</dt>
-            <dd>2002- 2012</dd>
-            <dt>Board:</dt>
-            <dd>CBSE</dd>
-            <dt>
-              Performance in 12
-              <sup>th</sup>
-            </dt>
-            <dd>95.2%</dd>
-            <dt>
-              Performance in 10
-              <sup>th</sup>
-            </dt>
-            <dd>9.8 CGPA ~ 93.1%</dd>
-            <dt>Major Achievements:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  Granted merit scholarship for 3 years: 10
-                  <sup>th</sup>- 12
-                  <sup>th</sup>
-                  grades
-                </li>
-                <li>
-                  Topped Science department in 12
-                  <sup>th</sup>
-                  Grade
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
+        ))}
       </div>
     </Section>
   );
@@ -1334,6 +1122,120 @@ const coordsToPosition = (lat: number, lng: number) => ({
   y: ((90 - lat) / 180) * 100 + 10,
 });
 
+const educationData = {
+  professionalInfo: {
+    title: "Professionally Me",
+    link: "https://linkedin.com/in/bogas04",
+    resume: {
+      text: "Download resume",
+      link: "/resume",
+    },
+    programmingLanguages: [
+      "C",
+      "TypeScript",
+      "JavaScript (ES2015+)",
+      "PHP",
+      "Java",
+    ],
+    stacksTechnologies: [
+      { name: "(P)", link: "https://preactjs.com/" },
+      { name: "ReactJS", link: "https://facebook.github.io/react/" },
+      { name: "Redux", link: "https://redux.js.org/" },
+      { name: "AngularJS", link: "https://angularjs.org/" },
+      { name: "BootStrap", link: "https://getbootstrap.com/" },
+      { name: "jQuery", link: "https://jquery.org/" },
+      { name: "NodeJS", link: "httpss://nodejs.org/" },
+      { name: "ExpressJS", link: "https://expressjs.com/" },
+      { name: "Slim MicroFramework", link: "https://www.slimframework.com/" },
+    ],
+    databases: [
+      { name: "PostgreSQL", link: "https://www.postgresql.org/" },
+      { name: "MySQL", link: "https://www.mysql.com/" },
+      { name: "MongoDB", link: "https://www.mongodb.com/" },
+    ],
+    tools: [
+      { name: "npm", link: "https://www.npmjs.com/" },
+      { name: "git", link: "https://git-scm.com/" },
+      { name: "webpack", link: "http://webpack.js.org/" },
+      { name: "rollup", link: "https://rollupjs.org/" },
+      { name: "babel", link: "http://babeljs.io/" },
+      { name: "Jest", link: "https://jestjs.io/" },
+      { name: "Styleguidist", link: "https://react-styleguidist.js.org/" },
+      { name: "heroku", link: "https://www.heroku.com/" },
+      { name: "grunt", link: "https://gruntjs.com/" },
+      { name: "lerna", link: "https://lerna.js.org/" },
+      { name: "gulp", link: "https://gulpjs.com/" },
+      { name: "bower", link: "https://bower.io/" },
+      { name: "Visual Studio Code", link: "https://code.visualstudio.com/" },
+      { name: "Vim", link: "https://vim.sourceforge.io/" },
+      { name: "IntelliJ IDEA", link: "https://www.jetbrains.com/idea/" },
+      { name: "Eclipse", link: "https://www.eclipse.org/" },
+    ],
+    otherLanguages: ["HTML", "CSS", "XML", "YAML", "Stylus"],
+  },
+  institutions: [
+    {
+      name: "Netaji Subhas Institute of Technology",
+      link: "//nsit.ac.in/",
+      type: "college",
+      batch: "2012 - 2016",
+      performance: {
+        percentage: "79.48%",
+        rank: "5th position in entire department (~190 students)",
+      },
+      major: "Computer Engineering",
+      achievements: [
+        "Granted merit scholarship for all four years.",
+        "Consistently stood in top 10 performing students of the department.",
+        "Mentored class of 30 in an IEEE NSIT SIG for Web Development and Design",
+        {
+          text: "Wrote a report on Rapes",
+          link: "/Rapes.pdf",
+        },
+        {
+          text: "Successfully completed projects like :",
+          projects: [
+            {
+              name: "MVP Generator",
+              link: "//github.com/bogas04/mvp-generator",
+            },
+            { name: "CollNet", link: "//github.com/bogas04/collnet" },
+            { name: "CloudKeeper", link: "//github.com/bogas04/cloudkeeper" },
+            {
+              name: "Student Attendance System",
+              link: "//github.com/bogas04/Attendance-System",
+            },
+          ],
+        },
+        "Worked on a research project under Vidhi Khanduja (Assistant Professor) on a database watermarking scheme.",
+      ],
+      societies: [
+        { name: "IEEE NSIT", link: "//ieeensit.org", role: "Web Developer" },
+        {
+          name: "Junoon - The Official Photography Club",
+          link: "//junoonnsit.com",
+          role: "Core Member",
+        },
+        { name: "CollegeSpace", link: "//collegespace.in", role: "Tech Head" },
+      ],
+    },
+    {
+      name: "St. Mary's School",
+      link: "http://www.stmarysschooldwarka.com/",
+      type: "school",
+      batch: "2002- 2012",
+      board: "CBSE",
+      performance: {
+        grade12: "95.2%",
+        grade10: "9.8 CGPA ~ 93.1%",
+      },
+      achievements: [
+        "Granted merit scholarship for 3 years: 10th- 12th grades",
+        "Topped Science department in 12th Grade",
+      ],
+    },
+  ],
+};
 const socialLinks = [
   { title: "Twitter", url: "//twitter.com/bogas04" },
   { title: "YouTube", url: "//youtube.com/divjotbogas" },
