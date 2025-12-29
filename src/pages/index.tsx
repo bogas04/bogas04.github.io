@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import SeoTags from "../components/SeoTags";
 
@@ -95,621 +95,78 @@ function Work() {
       <h3>Such Work</h3>
 
       <div className="container-fluid">
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-emerald-400 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://udaan.com"
-            >
-              udaan, Bengaluru
-            </a>
-            , Software Architect
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>April 2020 - Present</dd>
-            <dd>
-              <p>Management:</p>
-              <ul className="list-disc pl-6">
-                <li>
-                  Lead a core UI platform team of four very talented developers
-                </li>
-                <li>
-                  Planned and delivered quarterly roadmaps with data-driven
-                  tasks and output
-                </li>
-                <li>
-                  Identified and worked around common problems faced in leading
-                  a team (consistent deliverables, team morale, measuring
-                  impact, breaking down long running issues, scoping tasks,
-                  asynchronous communication, ...).
-                </li>
-                <li>
-                  Consecutively won two "Lead without authority" knolskape
-                  leadering programmes
-                </li>
-              </ul>
-            </dd>
-            <dd>
-              <p>Individual Contributions:</p>
-              <ul className="list-disc pl-6">
-                <li>
-                  Published{" "}
-                  <a href="https://vitadrop.in" rel="noopener noreferrer">
-                    vitadrop.in
-                  </a>{" "}
-                  and{" "}
-                  <a href="https://annabhumi.com" rel="noopener noreferrer">
-                    annabhumi.com
-                  </a>{" "}
-                  AI assisted brand websites.
-                </li>
-                <li>
-                  Developed{" "}
-                  <a href="https://wondermart.com" rel="noopener noreferrer">
-                    wondermart
-                  </a>{" "}
-                  app from scratch in 1 month for b2c vertical.
-                </li>
-                <li>
-                  Fixed a{" "}
-                  <a
-                    href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a"
-                    rel="noopener noreferrer"
-                  >
-                    2400ms
-                  </a>{" "}
-                  re-rendering linked stutter caused on add to cart action.
-                </li>
-                <li>
-                  Reduced react-native codepush bundle size by 20% by optimizing
-                  image assets
-                </li>
-                <li>
-                  Improved app startup time by 75% (P90), thus improving
-                  conversions to 2nd page by 35%.
-                </li>
-                <li>
-                  Updated internal react-native+react-native-web framework to
-                  use functional components with specialized hooks.
-                </li>
-                <li>Built Year In Review screens for 2020 & 2021.</li>
-                <li>
-                  Deployed a webview fallback for react-native screens for
-                  quicker resolution during outages.
-                </li>
-                <li>
-                  Drove improvements for developer experience initiatives by
-                  adding CI checks, pre-commit hooks and dev compiler
-                  optimizations.
-                </li>
-                <li>
-                  Refactored tightly coupled internal library into individual
-                  npm packages in a mono-repo.
-                </li>
-                <li>
-                  Used extensive A/B testing to drive higher (3.6 to 4.4) app
-                  store ratings using a strategically placed prompt.
-                </li>
-                <li>
-                  Revamped udaan's homepage with 60fps animations and better
-                  SEO.
-                </li>
-                <li>
-                  Collaborated to make find.udaan.com during 2nd wave of covid19
-                  in India to facilitate in finding essential medicines.
-                </li>
-                <li>
-                  Worked supporting lazy loading of
-                  react-native+react-native-web screens.
-                </li>
-                <li>
-                  Worked on an internal framework for creating SSR based React
-                  apps (using webpack+node)
-                </li>
-                <li>
-                  Worked on adding systematic changes to allow Animated Skeleton
-                  Screens for faster perceived performance on React Native and
-                  Web App.
-                </li>
-                <li>
-                  Revamped Order Details Experience for React Native and Web.
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://swiggy.com"
-            >
-              Swiggy, Bengaluru
-            </a>
-            , Software Development Engineer III
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>November 2019 - April 2020</dd>
-            <dt>Team:</dt>
-            <dd>
+        {workExperience.map((job) => (
+          <div
+            key={job.id}
+            className={`bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full before:top-2 ${
+              job.isCurrent ? "before:bg-emerald-400" : "before:bg-gray-600"
+            }`}
+          >
+            <div className="text-2xl font-bold pb-4 uppercase">
               <a
-                href="https://www.twitter.com/SwiggyTech"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                @SwiggyTech
-              </a>{" "}
-              - New Initiatives Team (Web)
-            </dd>
-            <dt>Projects:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>Lead the release of Timeline shareability on Swiggy Go.</li>
-                <li>Lead the release of Swiggy Stores PWA.</li>
-                <li>
-                  Lead the release of Swiggy Single Page Checkout for Food.
-                </li>
-                <li>Developed new PL driven UI for Swiggy Stores.</li>
-                <li>Developed new Swiggy Genie.</li>
-                <li>
-                  Developed a system for incorporating Origin Trials for our
-                  PWAs, starting with{" "}
-                  <a
-                    href="https://web.dev/sms-receiver-api-announcement/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    SMS Receiver API
-                  </a>{" "}
-                  &{" "}
-                  <a
-                    href="https://web.dev/contact-picker/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Contacts API
-                  </a>
-                  .
-                </li>
-                <li>
-                  Deprecated legacy systems and ported the same to modern
-                  services.
-                </li>
-                <li>
-                  Regularly worked with and maintained HAProxy configuration.
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://swiggy.com"
-            >
-              Swiggy, Bengaluru
-            </a>
-            , Software Development Engineer II
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>January 2018 - November 2019</dd>
-            <dt>Team:</dt>
-            <dd>
-              <a
-                href="https://www.twitter.com/SwiggyTech"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                @SwiggyTech
-              </a>{" "}
-              - Web Team
-            </dd>
-            <dt>Projects:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>Designed and developed multi-tenant payments module</li>
-                <li>
-                  Designed and developed website generator (Gauntlet). 10+
-                  dashboards.
-                </li>
-                <li>
-                  Designed and developed static site serving system for legal
-                  pages.
-                </li>
-                <li>
-                  Designed Hotstar-Pop integration and scaled codepath for 120k
-                  RPM.
-                </li>
-                <li>
-                  Moved codebase to a monorepo for improved developer
-                  experience.
-                </li>
-                <li>
-                  Developed automatic UA based asset serving system for smaller
-                  bundle sizes. (20%)
-                </li>
-                <li>
-                  Developed Restaurant Hygiene Pages for PWA and as webview for
-                  apps.
-                </li>
-                <li>Developed Everyday Offers Feature for mobile PWA.</li>
-              </ul>
-            </dd>
-            <dt>Major Achievements:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>Awards: MVP (Oct 2018)</li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://housing.com"
-            >
-              Housing.com, Mumbai
-            </a>
-            , Senior Software Development Engineer
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>October 2017 - January 2018</dd>
-            <dt>Team:</dt>
-            <dd>
-              <a
-                href="https://twitter.com/HousingEngg"
                 target="_blank"
                 rel="noopener noreferrer"
+                href={job.companyUrl}
               >
-                @HousingEngg
-              </a>{" "}
-              - Frontend team
-            </dd>
-            <dt>Description:</dt>
-            <dd>
-              As part of frontend team, I worked on improving performance of
-              housing PWA. This was achieved by following enhancements;
-              <ul className="list-disc pl-6">
-                <li>
-                  Migrated to React 16 from version 15. 50% win for{" "}
-                  <code>renderToString</code> completion time.
-                </li>
-                <li>
-                  Migrated to NodeJS version 8 from version 6 gave another 50%
-                  win for above.
-                </li>
-                <li>
-                  Reduced asset size by roughly 20% using Brotli compression.
-                </li>
-                <li>
-                  Optimized PNGs, JPEGs, converted to SVGs wherever possible to
-                  reduce overall page size.
-                </li>
-                <li>
-                  Improved scroll performance of listing page by using{" "}
-                  <code>will-change</code> CSS rule, along with disabling{" "}
-                  <code>pointer-events</code> on scroll.
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html"
-            >
-              Samsung R&D Institute, Bengaluru
-            </a>
-            , Software Developer
+                {job.company}
+              </a>
+              , {job.position}
+            </div>
+            <dl className="dl-horizontal">
+              <dt>Duration:</dt>
+              <dd>{job.duration}</dd>
+              {job.team && (
+                <>
+                  <dt>Team:</dt>
+                  <dd dangerouslySetInnerHTML={{ __html: job.team }} />
+                </>
+              )}
+              {job.descriptions.map((desc, index) => (
+                <React.Fragment key={index}>
+                  <dt>{desc.title}:</dt>
+                  <dd>
+                    {desc.title === "Description" &&
+                    desc.items.length === 1 &&
+                    !desc.items[0].includes("<li>") ? (
+                      <div
+                        dangerouslySetInnerHTML={{ __html: desc.items[0] }}
+                      />
+                    ) : (
+                      <>
+                        {desc.title !== "Description" && <p>{desc.title}:</p>}
+                        <ul className="list-disc pl-6">
+                          {desc.items.map((item, itemIndex) => (
+                            <li
+                              key={itemIndex}
+                              dangerouslySetInnerHTML={{ __html: item }}
+                            />
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </dd>
+                </React.Fragment>
+              ))}
+              {job.achievements && (
+                <>
+                  <dt>Major Achievements:</dt>
+                  <dd>
+                    <ul className="list-disc pl-6">
+                      {job.achievements.map((achievement, index) => (
+                        <li
+                          key={index}
+                          dangerouslySetInnerHTML={{ __html: achievement }}
+                        />
+                      ))}
+                    </ul>
+                  </dd>
+                </>
+              )}
+            </dl>
           </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>June 2016 - October 2017</dd>
-            <dt>Team:</dt>
-            <dd>
-              <a
-                href="https://twitter.com/SamsungInternet"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @SamsungInternet
-              </a>{" "}
-              team
-            </dd>
-            <dt>Projects:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  <strong>
-                    <a
-                      href="https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Samsung Internet PC Extension
-                    </a>{" "}
-                  </strong>
-                  Starting June 2016
-                  <ul className="list-disc pl-6">
-                    <li>
-                      Revamped the extension codebase by switching to modern
-                      JavaScript paradigms, UI overhaul and performance
-                      optimizations. Improved localization of strings and helped
-                      in{" "}
-                      <a
-                        href="https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        rebranding
-                      </a>{" "}
-                      for version 2.0.
-                    </li>
-                    <li>
-                      Successfully shipped version 2.0 in March which received
-                      great response (chrome web store rating increased from 2.7
-                      to 3.7 post launch).
-                    </li>
-                    <li>
-                      Currently working on adding new features and improving
-                      sync performance.
-                    </li>
-                    <li>
-                      Userbase increased from 8,000 to 60,000 monthly active
-                      users (~8x) within 4 months of 2.0 release.
-                    </li>
-                  </ul>
-                </li>
+        ))}
 
-                <li>
-                  <strong>
-                    <a
-                      href="https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Gaana Web App
-                    </a>{" "}
-                  </strong>
-                  Starting March 2017
-                  <ul className="list-disc pl-6">
-                    <li>
-                      Designed and developed the web application in ReactJS +
-                      Redux +{" "}
-                      <a
-                        href="https://github.com/styled-components/styled-components"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Styled-Components
-                      </a>{" "}
-                      (later replaced with{" "}
-                      <a
-                        href="https://github.com/tkstrong4/emotion"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Emotion
-                      </a>{" "}
-                      for perf wins).
-                    </li>
-                    <li>
-                      Challenges like performance on low end devices, inter-op
-                      between Tizen APIs and Web Platform were tackled along
-                      with the team.
-                    </li>
-                    <li>
-                      Successfully launched first phase of app within MyGalaxy
-                      on Tizen in Late May.
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <strong>
-                    <a
-                      href="https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Samsung Internet
-                    </a>{" "}
-                    -{" "}
-                    <a
-                      href="http://www.samsung.com/global/galaxy/apps/bixby/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Bixby
-                    </a>{" "}
-                  </strong>
-                  April 2017 – July 2017
-                  <ul className="list-disc pl-6">
-                    <li>
-                      Wrote JSGF gram files for Samsung Internet domain. [
-                      <a
-                        href="https://www.youtube.com/watch?v=k2IM_wHrSQ8"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        video
-                      </a>
-                      ]
-                    </li>
-                    <li>
-                      Helped in bringing accuracy to 95%+ for Bixby US launch.
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </dd>
-            <dt>Major Achievements:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  <strong>Employee of the Month (December 2016)</strong> Awarded
-                  as Employee of the Month for supporting and developing Samsung
-                  Internet PC Extension v2.0 in HQ.
-                </li>
-                <li>
-                  <strong>Samsung Citizen Award (March 2017)</strong>{" "}
-                  <em>
-                    "Though a fresher and new to product development, [he] took
-                    up one of the key components of Samsung Internet browser,
-                    viz Samsung Internet Extension for Chrome and commercialized
-                    it flawlessly. All through the project, [he] has displayed
-                    enormous passion with a clear goal of making it much
-                    better."
-                  </em>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="http://chefsbasket.com"
-            >
-              Fizzy Food Lab's, Mumbai
-            </a>
-            , Fullstack JavaScript Developer
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>December 2015 - January 2016</dd>
-            <dt>Description:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  Developed an{" "}
-                  <a
-                    href="http://chefsbasket.herokuapp.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    SPA
-                  </a>{" "}
-                  using ReactJS, NodeJS and Postgresql
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="//www.samsung.com/in/sri-b/siso.html"
-            >
-              Samsung Research Institute, Bengaluru
-            </a>
-            , Student Trainee
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>June 2015 - August 2015</dd>
-            <dt>Description:</dt>
-            <dd>
-              <ul className="list-disc pl-6">
-                <li>
-                  Developed tile based map server using NodeJS, mapnik and
-                  TileMill
-                </li>
-                <li>
-                  Set up Mongodb cluster (3 systems), developed scripts to
-                  convert data from mongodb to CSVs and CSVs to JSON to-and-from
-                  a Hadoop cluster, and a web app to display results of the road
-                  anlaysis done by Hadoop.
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a target="_blank" rel="noopener noreferrer" href="//refiral.com">
-              Refiral, New Delhi
-            </a>
-            , Product Developer
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>October 2013 - October 2014</dd>
-            <dt>Description:</dt>
-            <dd>
-              Co-founding member. Managed JavaScript head of the tool.
-              <ul className="list-disc pl-6">
-                <li>
-                  Health Report tool for analyzes all clients statistically and
-                  constantly check for API health status, hence benefiting in
-                  tracking downtimes and losses.
-                </li>
-                <li>
-                  Performance improvements by deploying faster routes to server
-                  calls. (300-400ms win)
-                </li>
-                <li>Expanding support to several e-commerce platforms.</li>
-                <li>
-                  Extending help in creating the internal API. Made its use to
-                  make several customizable popouts, providing more options than
-                  industry.
-                </li>
-                <li>
-                  Integration with social networks to enable the tool. Studied
-                  Facebook documentation to leverage best out of its Graph API.
-                </li>
-                <li>
-                  Helped in strategy and planning of the tool in its initial
-                  phase.
-                </li>
-              </ul>
-            </dd>
-          </dl>
-        </div>
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            <a target="_blank" rel="noopener noreferrer" href="//frrole.com">
-              Frrole, Remote
-            </a>
-            , Frontend Development Intern
-          </div>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>November 2013 - January 2014</dd>
-            <dt>Description:</dt>
-            <dd>
-              Buzzometer - Created an interactive and responsive web app using
-              the APIs of Frrole using jQuery, PHP and XML for analyzing the
-              buzz created by a particular movie.
-            </dd>
-          </dl>
-        </div>
-
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 shadow-[-20px_16px_0px_-17px_#808080] before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
+        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
           <div className="text-2xl font-bold pb-4 uppercase">
             And much more, meet up for a &#9749; coffee if my work interests you
           </div>
@@ -1122,6 +579,233 @@ const coordsToPosition = (lat: number, lng: number) => ({
   y: ((90 - lat) / 180) * 100 + 10,
 });
 
+const workExperience = [
+  {
+    id: "udaan",
+    company: "udaan, Bengaluru",
+    companyUrl: "https://udaan.com",
+    position: "Software Architect",
+    duration: "April 2020 - Present",
+    team: undefined,
+    isCurrent: true,
+    descriptions: [
+      {
+        title: "Management",
+        items: [
+          "Lead a core UI platform team of four very talented developers",
+          "Planned and delivered quarterly roadmaps with data-driven tasks and output",
+          "Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...).",
+          'Consecutively won two "Lead without authority" knolskape leadering programmes',
+        ],
+      },
+      {
+        title: "Individual Contributions",
+        items: [
+          'Published <a href="https://vitadrop.in" rel="noopener noreferrer">vitadrop.in</a> and <a href="https://annabhumi.com" rel="noopener noreferrer">annabhumi.com</a> AI assisted brand websites.',
+          'Developed <a href="https://wondermart.com" rel="noopener noreferrer">wondermart</a> app from scratch in 1 month for b2c vertical.',
+          'Fixed a <a href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a" rel="noopener noreferrer">2400ms</a> re-rendering linked stutter caused on add to cart action.',
+          "Reduced react-native codepush bundle size by 20% by optimizing image assets",
+          "Improved app startup time by 75% (P90), thus improving conversions to 2nd page by 35%.",
+          "Updated internal react-native+react-native-web framework to use functional components with specialized hooks.",
+          "Built Year In Review screens for 2020 & 2021.",
+          "Deployed a webview fallback for react-native screens for quicker resolution during outages.",
+          "Drove improvements for developer experience initiatives by adding CI checks, pre-commit hooks and dev compiler optimizations.",
+          "Refactored tightly coupled internal library into individual npm packages in a mono-repo.",
+          "Used extensive A/B testing to drive higher (3.6 to 4.4) app store ratings using a strategically placed prompt.",
+          "Revamped udaan's homepage with 60fps animations and better SEO.",
+          "Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.",
+          "Worked supporting lazy loading of react-native+react-native-web screens.",
+          "Worked on an internal framework for creating SSR based React apps (using webpack+node)",
+          "Worked on adding systematic changes to allow Animated Skeleton Screens for faster perceived performance on React Native and Web App.",
+          "Revamped Order Details Experience for React Native and Web.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "swiggy-sde3",
+    company: "Swiggy, Bengaluru",
+    companyUrl: "https://swiggy.com",
+    position: "Software Development Engineer III",
+    duration: "November 2019 - April 2020",
+    team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - New Initiatives Team (Web)',
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "Lead the release of Timeline shareability on Swiggy Go.",
+          "Lead the release of Swiggy Stores PWA.",
+          "Lead the release of Swiggy Single Page Checkout for Food.",
+          "Developed new PL driven UI for Swiggy Stores.",
+          "Developed new Swiggy Genie.",
+          'Developed a system for incorporating Origin Trials for our PWAs, starting with <a href="https://web.dev/sms-receiver-api-announcement/" target="_blank" rel="noopener noreferrer">SMS Receiver API</a> & <a href="https://web.dev/contact-picker/" target="_blank" rel="noopener noreferrer">Contacts API</a>.',
+          "Deprecated legacy systems and ported the same to modern services.",
+          "Regularly worked with and maintained HAProxy configuration.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "swiggy-sde2",
+    company: "Swiggy, Bengaluru",
+    companyUrl: "https://swiggy.com",
+    position: "Software Development Engineer II",
+    duration: "January 2018 - November 2019",
+    team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - Web Team',
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "Designed and developed multi-tenant payments module",
+          "Designed and developed website generator (Gauntlet). 10+ dashboards.",
+          "Designed and developed static site serving system for legal pages.",
+          "Designed Hotstar-Pop integration and scaled codepath for 120k RPM.",
+          "Moved codebase to a monorepo for improved developer experience.",
+          "Developed automatic UA based asset serving system for smaller bundle sizes. (20%)",
+          "Developed Restaurant Hygiene Pages for PWA and as webview for apps.",
+          "Developed Everyday Offers Feature for mobile PWA.",
+        ],
+      },
+    ],
+    achievements: ["Awards: MVP (Oct 2018)"],
+  },
+  {
+    id: "housing",
+    company: "Housing.com, Mumbai",
+    companyUrl: "https://housing.com",
+    position: "Senior Software Development Engineer",
+    duration: "October 2017 - January 2018",
+    team: '<a href="https://twitter.com/HousingEngg" target="_blank" rel="noopener noreferrer">@HousingEngg</a> - Frontend team',
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements:",
+          "Migrated to React 16 from version 15. 50% win for <code>renderToString</code> completion time.",
+          "Migrated to NodeJS version 8 from version 6 gave another 50% win for above.",
+          "Reduced asset size by roughly 20% using Brotli compression.",
+          "Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.",
+          "Improved scroll performance of listing page by using <code>will-change</code> CSS rule, along with disabling <code>pointer-events</code> on scroll.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "samsung",
+    company: "Samsung R&D Institute, Bengaluru",
+    companyUrl:
+      "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
+    position: "Software Developer",
+    duration: "June 2016 - October 2017",
+    team: '<a href="https://twitter.com/SamsungInternet" target="_blank" rel="noopener noreferrer">@SamsungInternet</a> team',
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          '<strong><a href="https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh" target="_blank" rel="noopener noreferrer">Samsung Internet PC Extension</a></strong> Starting June 2016: Revamped the extension codebase by switching to modern JavaScript paradigms, UI overhaul and performance optimizations. Improved localization of strings and helped in <a href="https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e" target="_blank" rel="noopener noreferrer">rebranding</a> for version 2.0.',
+          "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from 2.7 to 3.7 post launch).",
+          "Currently working on adding new features and improving sync performance.",
+          "Userbase increased from 8,000 to 60,000 monthly active users (~8x) within 4 months of 2.0 release.",
+          '<strong><a href="https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/" target="_blank" rel="noopener noreferrer">Gaana Web App</a></strong> Starting March 2017: Designed and developed the web application in ReactJS + Redux + <a href="https://github.com/styled-components/styled-components" target="_blank" rel="noopener noreferrer">Styled-Components</a> (later replaced with <a href="https://github.com/tkstrong4/emotion" target="_blank" rel="noopener noreferrer">Emotion</a> for perf wins).',
+          "Challenges like performance on low end devices, inter-op between Tizen APIs and Web Platform were tackled along with the team.",
+          "Successfully launched first phase of app within MyGalaxy on Tizen in Late May.",
+          '<strong><a href="https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser" target="_blank" rel="noopener noreferrer">Samsung Internet</a> - <a href="http://www.samsung.com/global/galaxy/apps/bixby/" target="_blank" rel="noopener noreferrer">Bixby</a></strong> April 2017 – July 2017: Wrote JSGF gram files for Samsung Internet domain. [<a href="https://www.youtube.com/watch?v=k2IM_wHrSQ8" target="_blank" rel="noopener noreferrer">video</a>]',
+          "Helped in bringing accuracy to 95%+ for Bixby US launch.",
+        ],
+      },
+    ],
+    achievements: [
+      "<strong>Employee of the Month (December 2016)</strong> Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ.",
+      '<strong>Samsung Citizen Award (March 2017)</strong> <em>"Though a fresher and new to product development, [he] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, [he] has displayed enormous passion with a clear goal of making it much better."</em>',
+    ],
+  },
+  {
+    id: "fizzy",
+    company: "Fizzy Food Lab's, Mumbai",
+    companyUrl: "http://chefsbasket.com",
+    position: "Fullstack JavaScript Developer",
+    duration: "December 2015 - January 2016",
+    team: undefined,
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          'Developed an <a href="http://chefsbasket.herokuapp.com" target="_blank" rel="noopener noreferrer">SPA</a> using ReactJS, NodeJS and Postgresql',
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "samsung-trainee",
+    company: "Samsung Research Institute, Bengaluru",
+    companyUrl: "//www.samsung.com/in/sri-b/siso.html",
+    position: "Student Trainee",
+    duration: "June 2015 - August 2015",
+    team: undefined,
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "Developed tile based map server using NodeJS, mapnik and TileMill",
+          "Set up Mongodb cluster (3 systems), developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road analysis done by Hadoop.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "refiral",
+    company: "Refiral, New Delhi",
+    companyUrl: "//refiral.com",
+    position: "Product Developer",
+    duration: "October 2013 - October 2014",
+    team: undefined,
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "Co-founding member. Managed JavaScript head of the tool.",
+          "Health Report tool for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses.",
+          "Performance improvements by deploying faster routes to server calls. (300-400ms win)",
+          "Expanding support to several e-commerce platforms.",
+          "Extending help in creating the internal API. Made its use to make several customizable popouts, providing more options than industry.",
+          "Integration with social networks to enable the tool. Studied Facebook documentation to leverage best out of its Graph API.",
+          "Helped in strategy and planning of the tool in its initial phase.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+  {
+    id: "frrole",
+    company: "Frrole, Remote",
+    companyUrl: "//frrole.com",
+    position: "Frontend Development Intern",
+    duration: "November 2013 - January 2014",
+    team: undefined,
+    isCurrent: false,
+    descriptions: [
+      {
+        title: "Description",
+        items: [
+          "Buzzometer - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie.",
+        ],
+      },
+    ],
+    achievements: undefined,
+  },
+];
 const educationData = {
   professionalInfo: {
     title: "Professionally Me",
