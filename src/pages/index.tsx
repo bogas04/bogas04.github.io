@@ -191,7 +191,7 @@ function Travel() {
     return (
       <div
         key={destination.name}
-        className="absolute transform -translate-x-1/2 -translate-y-1/2 z-[11]"
+        className="absolute transform -translate-x-1/2 -translate-y-1/2 z-[0]"
         style={{
           left: `${position.x}%`,
           top: `${position.y}%`,
