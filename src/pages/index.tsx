@@ -1120,7 +1120,7 @@ const travelDestinations = [
     lat: 53.3498,
     lng: -6.2603,
   },
-];
+].reverse();
 
 function ImageGallery({ images }: { images: string[] }) {
   // image carousel using css, overflow, scroll snap, mobile friendly
