@@ -1129,6 +1129,7 @@ function ImageGallery({ images }: { images: string[] }) {
       {images.map((image, index) => (
         <img
           key={index}
+          onClick={(e) => window.open(e.currentTarget.src)}
           src={image}
           alt={`Gallery image ${index + 1}`}
           className="w-[80%] aspect-[16/12] object-cover rounded-lg [scroll-snap-align:start] border border-white/20"
