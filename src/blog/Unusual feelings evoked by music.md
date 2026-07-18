@@ -21,7 +21,7 @@ What does a _fairly straightforward_ upbringing like this, though highly lucrati
 
 Naturally, in this very monochromatic world, the cosmic dance of vibrations and the fractal strings of alphabets, becomes objective. 
 
-Not only the child develops an _acceptable_ taste in music, and seeks out music that _earns_ validation in the eyes of their caretakers, peers, and every single person they want to impress, silently, a very loud playlist gets developed that the child subjectively enjoys but tried very hard to hide by objectively looking down at people who like such music. 
+Not only the child develops an _acceptable_ taste in music, and seeks out music that _earns_ validation in the eyes of their caretakers, peers, and every single person they want to impress, silently, a very loud playlist gets developed that the child subjectively enjoys but tries very hard to hide by objectively looking down at people who like such music. 
 
 With this background, as I was recovering from what seemed to be fever after a fall from bike on slippery curvy hilly roads of sleeper town of Munduk in Bali, a day before Nyepi, the auspicious Hindu festival of silence, when even airports are shut and almost no hotels provide any service, turned out to be actually entirely unrelated to the fall, and was simply the worst fever I've ever had, for it was the first sign of a very common viral infection of dengue. 
 
