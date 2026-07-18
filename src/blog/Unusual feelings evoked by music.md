@@ -1,3 +1,12 @@
+---
+title: Unusual feelings evoked by music
+description: On learning to let yourself enjoy the bliss of subjectivity
+date: "2026-07-18T11:20:20Z"
+categories: []
+keywords: [music, emotions, subjectivity]
+slug: ""
+---
+
 So this is my entry to a prompt "Write about an album that got you through a hard time". 
 
 Without thinking much, my mind instantly thought about my unusual relationship with the music I've been listening to lately. I firmly believe that our choice in music reveals multiple layers about our experiences. 
@@ -21,4 +30,4 @@ In such a catatonic state, the guards of that child lowered, and he finally allo
 
 And soothed he, the child, was. He can't explain why he loves this music, it makes his stoic persona want to dance, it makes him happy even though the lyrics are far from his acquired personality, but he feels an unexplainable connection to it which his objectivity cannot rationalize. 
 
-And that's how I got through a hard time, by learning to let that child enjoy the bliss of subjectivity. 
+And that's how I got through a hard time, by learning to let that child enjoy the bliss of subjectivity.
