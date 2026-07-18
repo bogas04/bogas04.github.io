@@ -5,13 +5,15 @@
   "scripts": {
     "start": "next",
     "build": "make build",
+    "generate:rss": "node -r ts-node/register ./scripts/generate-rss.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "next": "^13.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "feed": "^4.2.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.35",
@@ -29,7 +31,8 @@
     "remark-slug": "^6.0.0",
     "slugify": "^1.5.0",
     "tailwindcss": "^3.4.19",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "ts-node": "^10.9.1"
   },
   "prettier": {
     "semi": true,
