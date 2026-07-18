@@ -1,0 +1,1 @@
+If you've spent some time reading opinions of Indians on India online, you would've come across a phrase like "if you can leave, do it ASAP"
