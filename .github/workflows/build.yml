@@ -16,8 +16,8 @@ jobs:
         uses: actions/setup-node@v1.4.4
         with:
           node-version: 18
-      - name: ⬇️ download dependencies
-        run: npm ci
+      - name: ⬇️ install dependencies
+        run: npm install
       - name: 🛠 build project
         run: npm run build
       - name: 🚀 commit and push
