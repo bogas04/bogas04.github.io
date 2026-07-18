@@ -89,13 +89,16 @@ function Work() {
 
       <div className="container-fluid">
         {workExperience.map((job) => (
-          <div
+          <details
             key={job.id}
-            className={`bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full before:top-2 ${
-              job.isCurrent ? "before:bg-emerald-400" : "before:bg-gray-600"
+            open={job.isCurrent}
+            className={`flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full ${
+              job.isCurrent
+                ? "bg-transparent border-none before:top-2 before:bg-emerald-400"
+                : "mb-4 rounded-xl border border-slate-600 bg-slate-800/80 pr-4 py-3 text-slate-100 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg open:border-slate-500 open:bg-slate-700/90 open:shadow-lg before:top-1/2 before:-translate-y-1/2 before:bg-slate-500"
             }`}
           >
-            <div className="text-2xl font-bold pb-4 uppercase">
+            <summary className="text-2xl font-bold pb-2 uppercase cursor-pointer list-none [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -104,7 +107,12 @@ function Work() {
                 {job.company}
               </a>
               , {job.position}
-            </div>
+              {!job.isCurrent && (
+                <span className="block pt-1 text-base font-medium normal-case text-slate-300">
+                  {job.duration} · {job.summary}
+                </span>
+              )}
+            </summary>
             <dl className="dl-horizontal">
               <dt>Duration:</dt>
               <dd>{job.duration}</dd>
@@ -156,7 +164,7 @@ function Work() {
                 </>
               )}
             </dl>
-          </div>
+          </details>
         ))}
 
         <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
@@ -579,6 +587,7 @@ const workExperience = [
     companyUrl: "https://udaan.com",
     position: "Software Architect",
     duration: "April 2020 - Present",
+    summary: "Leading the core UI platform team and improving web and app experiences.",
     team: undefined,
     isCurrent: true,
     descriptions: [
@@ -622,6 +631,7 @@ const workExperience = [
     companyUrl: "https://swiggy.com",
     position: "Software Development Engineer III",
     duration: "November 2019 - April 2020",
+    summary: "Led launches across Swiggy Go, Stores, checkout, and Genie.",
     team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - New Initiatives Team (Web)',
     isCurrent: false,
     descriptions: [
@@ -647,6 +657,7 @@ const workExperience = [
     companyUrl: "https://swiggy.com",
     position: "Software Development Engineer II",
     duration: "January 2018 - November 2019",
+    summary: "Built payments, platform tooling, and high-scale PWA features.",
     team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - Web Team',
     isCurrent: false,
     descriptions: [
@@ -672,6 +683,7 @@ const workExperience = [
     companyUrl: "https://housing.com",
     position: "Senior Software Development Engineer",
     duration: "October 2017 - January 2018",
+    summary: "Improved Housing's PWA performance, rendering, and page weight.",
     team: '<a href="https://twitter.com/HousingEngg" target="_blank" rel="noopener noreferrer">@HousingEngg</a> - Frontend team',
     isCurrent: false,
     descriptions: [
@@ -696,6 +708,7 @@ const workExperience = [
       "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
     position: "Software Developer",
     duration: "June 2016 - October 2017",
+    summary: "Shipped Samsung Internet extension, Gaana, and Bixby web experiences.",
     team: '<a href="https://twitter.com/SamsungInternet" target="_blank" rel="noopener noreferrer">@SamsungInternet</a> team',
     isCurrent: false,
     descriptions: [
@@ -725,6 +738,7 @@ const workExperience = [
     companyUrl: "http://chefsbasket.com",
     position: "Fullstack JavaScript Developer",
     duration: "December 2015 - January 2016",
+    summary: "Built a React, Node.js, and PostgreSQL single-page application.",
     team: undefined,
     isCurrent: false,
     descriptions: [
@@ -743,6 +757,7 @@ const workExperience = [
     companyUrl: "//www.samsung.com/in/sri-b/siso.html",
     position: "Student Trainee",
     duration: "June 2015 - August 2015",
+    summary: "Built map-data infrastructure and analysis tooling during a student internship.",
     team: undefined,
     isCurrent: false,
     descriptions: [
@@ -762,6 +777,7 @@ const workExperience = [
     companyUrl: "//refiral.com",
     position: "Product Developer",
     duration: "October 2013 - October 2014",
+    summary: "Co-founded and built product, analytics, and platform integrations.",
     team: undefined,
     isCurrent: false,
     descriptions: [
@@ -786,6 +802,7 @@ const workExperience = [
     companyUrl: "//frrole.com",
     position: "Frontend Development Intern",
     duration: "November 2013 - January 2014",
+    summary: "Built a responsive movie-buzz analytics web application.",
     team: undefined,
     isCurrent: false,
     descriptions: [
