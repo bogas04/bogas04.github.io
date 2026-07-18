@@ -51,10 +51,26 @@ function BlogListing({ posts }: IBlogListingProps) {
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  .post img {
+  .post-media {
     margin: 0;
     min-width: 30%;
     max-width: 30%;
+    object-fit: cover;
+  }
+
+  .post-placeholder {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    background: #e2e8f0;
+  }
+
+  .post-placeholder-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    transform: rotate(-8deg);
   }
 
   .post-body {
@@ -111,8 +127,9 @@ function BlogListing({ posts }: IBlogListingProps) {
     .post a {
       flex-direction: column-reverse;
     }
-    .post img {
+    .post-media {
       min-width: calc(100% + 2em);
+      max-width: calc(100% + 2em);
       padding: 0;
       margin: -1em -1em 1em;
       height: 300px;
@@ -151,8 +168,16 @@ function BlogListing({ posts }: IBlogListingProps) {
                 <p>{post.description}</p>
                 <span>{new Date(post.date).toDateString()}</span>
               </div>
-              {post.image && (
-                <img src={post.image} alt="Image for the post" />
+              {post.image ? (
+                <img
+                  className="post-media"
+                  src={post.image}
+                  alt={`Image for ${post.title}`}
+                />
+              ) : (
+                <div className="post-media post-placeholder" aria-hidden="true">
+                  <span className="post-placeholder-icon">🤷🏽‍♂️</span>
+                </div>
               )}
 
             </Link>
