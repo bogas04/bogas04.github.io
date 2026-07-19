@@ -266,12 +266,12 @@ function Travel() {
       </div>
 
       <div className="hidden max-sm:flex flex-col gap-3 mx-auto">
-        {travelDestinations.map((destination) => (
+        {travelDestinations.map((destination, index) => (
           <div
             className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
             key={destination.name}
           >
-            <ImageGallery images={destination.images} />
+            <ImageGallery images={destination.images} priority={index === 0} />
             <h4 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
               {destination.name}
             </h4>
@@ -1154,7 +1154,13 @@ const travelDestinations = [
   },
 ].reverse();
 
-function ImageGallery({ images }: { images: string[] }) {
+function ImageGallery({
+  images,
+  priority = false,
+}: {
+  images: string[];
+  priority?: boolean;
+}) {
   // image carousel using css, overflow, scroll snap, mobile friendly
   return (
     <div className="image-gallery flex overflow-x-auto [scroll-snap-type:x_mandatory] gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -1165,7 +1171,8 @@ function ImageGallery({ images }: { images: string[] }) {
           src={image}
           alt={`Gallery image ${index + 1}`}
           className="w-[80%] aspect-[16/12] object-cover rounded-lg [scroll-snap-align:start] border border-white/20"
-          loading="lazy"
+          loading={priority && index === 0 ? "eager" : "lazy"}
+          decoding="async"
         />
       ))}
       <style jsx>{`
