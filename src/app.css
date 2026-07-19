@@ -192,6 +192,26 @@ a {
   -webkit-text-decoration-skip: objects;
 }
 
+/*
+ * Keep keyboard focus unmistakable on every coloured section. The white inner
+ * ring is visible on the dark and saturated surfaces, while the dark outer
+ * ring preserves contrast against the yellow travel section and light media.
+ */
+:where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [role="button"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 6px #111111 !important;
+}
+
 code,
 kbd,
 pre,

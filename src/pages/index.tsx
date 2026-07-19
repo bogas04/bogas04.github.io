@@ -89,82 +89,7 @@ function Work() {
 
       <div className="container-fluid">
         {workExperience.map((job) => (
-          <details
-            key={job.id}
-            open={job.isCurrent}
-            className={`flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full ${
-              job.isCurrent
-                ? "bg-transparent border-none before:top-2 before:bg-emerald-400"
-                : "mb-4 rounded-xl border border-slate-600 bg-slate-800/80 pr-4 py-3 text-slate-100 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg open:border-slate-500 open:bg-slate-700/90 open:shadow-lg before:top-1/2 before:-translate-y-1/2 before:bg-slate-500"
-            }`}
-          >
-            <summary className="text-2xl font-bold pb-2 uppercase cursor-pointer list-none [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={job.companyUrl}
-              >
-                {job.company}
-              </a>
-              , {job.position}
-              {!job.isCurrent && (
-                <span className="block pt-1 text-base font-medium normal-case text-slate-300">
-                  {job.duration} · {job.summary}
-                </span>
-              )}
-            </summary>
-            <dl className="dl-horizontal">
-              <dt>Duration:</dt>
-              <dd>{job.duration}</dd>
-              {job.team && (
-                <>
-                  <dt>Team:</dt>
-                  <dd dangerouslySetInnerHTML={{ __html: job.team }} />
-                </>
-              )}
-              {job.descriptions.map((desc, index) => (
-                <React.Fragment key={index}>
-                  <dt>{desc.title}:</dt>
-                  <dd>
-                    {desc.title === "Description" &&
-                    desc.items.length === 1 &&
-                    !desc.items[0].includes("<li>") ? (
-                      <div
-                        dangerouslySetInnerHTML={{ __html: desc.items[0] }}
-                      />
-                    ) : (
-                      <>
-                        {desc.title !== "Description" && <p>{desc.title}:</p>}
-                        <ul className="list-disc pl-6">
-                          {desc.items.map((item, itemIndex) => (
-                            <li
-                              key={itemIndex}
-                              dangerouslySetInnerHTML={{ __html: item }}
-                            />
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                  </dd>
-                </React.Fragment>
-              ))}
-              {job.achievements && (
-                <>
-                  <dt>Major Achievements:</dt>
-                  <dd>
-                    <ul className="list-disc pl-6">
-                      {job.achievements.map((achievement, index) => (
-                        <li
-                          key={index}
-                          dangerouslySetInnerHTML={{ __html: achievement }}
-                        />
-                      ))}
-                    </ul>
-                  </dd>
-                </>
-              )}
-            </dl>
-          </details>
+          <WorkExperience key={job.id} job={job} />
         ))}
 
         <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
@@ -174,6 +99,96 @@ function Work() {
         </div>
       </div>
     </Section>
+  );
+}
+
+function WorkExperience({ job }: { job: (typeof workExperience)[number] }) {
+  const [isExpanded, setIsExpanded] = useState(job.isCurrent);
+  const contentId = `work-experience-${job.id}`;
+
+  return (
+    <article
+      className={`flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full ${
+        job.isCurrent
+          ? "bg-transparent border-none before:top-2 before:bg-emerald-400"
+          : "mb-4 rounded-xl border border-slate-600 bg-slate-800/80 pr-4 py-3 text-slate-100 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg before:top-1/2 before:-translate-y-1/2 before:bg-slate-500"
+      }`}
+    >
+      <div>
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          aria-controls={contentId}
+          onClick={() => setIsExpanded((expanded) => !expanded)}
+          className="text-left text-2xl font-bold pb-2 uppercase cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700"
+        >
+          {job.company}, {job.position}
+          <span className="block pt-2 text-sm font-medium normal-case underline underline-offset-2">
+            {isExpanded ? "Read less" : "Read more"}
+          </span>
+        </button>
+        <p className="pt-1 text-base normal-case text-slate-300">
+          <span className="font-normal italic">{job.duration}</span>
+          {!job.isCurrent && <> · {job.summary}</>}
+        </p>
+        <a
+          href={job.companyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${job.company}'s website`}
+          className="inline-block pt-1 text-sm underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700"
+        >
+          Website
+        </a>
+      </div>
+      {isExpanded && (
+        <div id={contentId}>
+          <dl className="dl-horizontal">
+            <dt>Duration:</dt>
+            <dd>{job.duration}</dd>
+            {job.team && (
+              <>
+                <dt>Team:</dt>
+                <dd dangerouslySetInnerHTML={{ __html: job.team }} />
+              </>
+            )}
+            {job.descriptions.map((desc, index) => (
+              <React.Fragment key={index}>
+                <dt>{desc.title}:</dt>
+                <dd>
+                  {desc.title === "Description" &&
+                  desc.items.length === 1 &&
+                  !desc.items[0].includes("<li>") ? (
+                    <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
+                  ) : (
+                    <>
+                      {desc.title !== "Description" && <p>{desc.title}:</p>}
+                      <ul className="list-disc pl-6">
+                        {desc.items.map((item, itemIndex) => (
+                          <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </dd>
+              </React.Fragment>
+            ))}
+            {job.achievements && (
+              <>
+                <dt>Major Achievements:</dt>
+                <dd>
+                  <ul className="list-disc pl-6">
+                    {job.achievements.map((achievement, index) => (
+                      <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />
+                    ))}
+                  </ul>
+                </dd>
+              </>
+            )}
+          </dl>
+        </div>
+      )}
+    </article>
   );
 }
 
