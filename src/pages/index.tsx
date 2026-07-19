@@ -164,6 +164,11 @@ function WorkExperience({
     ? rolesInChronologicalOrder.map((role) => role.position)
     : roleProgressions[job.id] ?? [job.position];
   const toggleDetails = () => setIsExpanded((expanded) => !expanded);
+  const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
+    const hasTextSelection = window.getSelection()?.type === "Range";
+    if (event.defaultPrevented || hasTextSelection || (event.target as Element).closest("a, button")) return;
+    toggleDetails();
+  };
   const [isExpanded, setIsExpanded] = useState(job.isCurrent);
   const [isMobileFocused, setIsMobileFocused] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
@@ -201,7 +206,8 @@ function WorkExperience({
   return (
     <article
       ref={cardRef}
-      className={`mb-10 flex flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme}`}
+      onClick={handleCardClick}
+      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme}`}
     >
       <div>
         <h3 className="m-0">
