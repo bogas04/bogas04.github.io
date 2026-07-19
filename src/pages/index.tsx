@@ -946,7 +946,7 @@ const educationData = {
   ],
 };
 const socialLinks = [
-  { title: "Twitter", url: "//twitter.com/bogas04" },
+  { title: "What I'm playing", url: "https://trello.com/b/Ctw7Er15/games" },
   { title: "YouTube", url: "//youtube.com/divjotbogas" },
 ];
 
@@ -1222,7 +1222,7 @@ function PopOver({
             Zoom
           </button>
         </h4>
-        <p className="m-0 text-xs text-gray-700">{destination.description}</p>
+        <p className="m-0 text-sm text-gray-700">{destination.description}</p>
       </div>
     </button>
   );

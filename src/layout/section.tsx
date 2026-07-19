@@ -36,10 +36,12 @@ const Section = styled.section<{ color?: keyof typeof styleMap }>((props) => ({
   minHeight: "85vh",
   padding: "2% 5%",
   boxShadow: "0px 10px 50px 20px black",
+  fontSize: "1.25rem",
+  lineHeight: 1.6,
   ...styleMap[props.color || "default"],
 
   "& h1": {
-    fontSize: "8rem",
+    fontSize: "clamp(4.5rem, 10vw, 8rem)",
     padding: "5% 0",
   },
   "& h2": {
@@ -48,7 +50,7 @@ const Section = styled.section<{ color?: keyof typeof styleMap }>((props) => ({
   },
 
   "& h3": {
-    fontSize: "3.5rem",
+    fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
     padding: "2% 10px",
     margin: "0 -20px",
     position: "sticky",
@@ -58,22 +60,22 @@ const Section = styled.section<{ color?: keyof typeof styleMap }>((props) => ({
   },
 
   "& h6": {
-    fontSize: "2rem",
+    fontSize: "1.25rem",
     padding: "2% 0",
   },
 
   "@media (max-width: 750px)": {
     "& h1": {
-      fontSize: "8em",
+      fontSize: "4.5rem",
       padding: "5% 0",
     },
     "& h3": {
-      fontSize: "3.5em",
+      fontSize: "2.25rem",
       padding: "2% 10px",
     },
 
     "& h6": {
-      fontSize: "2em",
+      fontSize: "1.25rem",
       padding: "2% 0",
     },
   },
