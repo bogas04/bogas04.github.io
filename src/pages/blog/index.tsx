@@ -86,21 +86,6 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
     object-fit: cover;
   }
 
-  .post-placeholder {
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #64748b;
-    background: #e2e8f0;
-  }
-
-  .post-placeholder-icon {
-    font-size: 4.5rem;
-    line-height: 1;
-    transform: rotate(-8deg);
-  }
-
   .post-body {
     display: flex;
     flex-direction: column;
@@ -209,9 +194,11 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                   alt={`Image for ${post.title}`}
                 />
               ) : (
-                <div className="post-media post-placeholder" aria-hidden="true">
-                  <span className="post-placeholder-icon">🤷🏽‍♂️</span>
-                </div>
+                <img
+                  className="post-media"
+                  src="/img/travel/uk/uk-14.jpg"
+                  alt=""
+                />
               )}
 
             </Link>

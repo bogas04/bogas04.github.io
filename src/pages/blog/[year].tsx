@@ -21,6 +21,8 @@ import Link from "next/link";
 import { ShareLinks } from "../../components/ShareLinks/ShareLinks";
 import BlogArchive from "../../components/BlogArchive";
 
+const BLOG_PLACEHOLDER_IMAGE = "/img/travel/uk/uk-14.jpg";
+
 export async function getStaticPaths() {
   const posts = getBlogPostSummaries(true);
   const publishedPosts = getBlogPostSummaries();
@@ -72,7 +74,7 @@ interface IBlogRouteProps {
 function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
   const postTitle = `${post.title} | Blog | Divjot Singh`;
   const postUrl = `${WEBSITE_URL}${getBlogPostPath(post)}`;
-  const postImage = `${WEBSITE_URL}${post.image}`;
+  const postImage = `${WEBSITE_URL}${post.image || BLOG_PLACEHOLDER_IMAGE}`;
   const keywords = ((post.keywords || []) as string[]).join(", ");
   const tags = (post.keywords || []) as string[];
   const dateParts = getBlogDateParts(post.date);
@@ -120,6 +122,13 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
     font-size: 1.6em;
     margin: 1em 0;
     font-weight: 500;
+  }
+
+  .blog-placeholder-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 2em;
   }
 
   .content h3 {
@@ -274,6 +283,14 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
           </ul>
         )}
       </header>
+
+      {!post.image && (
+        <img
+          className="blog-placeholder-image"
+          src={BLOG_PLACEHOLDER_IMAGE}
+          alt=""
+        />
+      )}
 
       <div
         className="content"
