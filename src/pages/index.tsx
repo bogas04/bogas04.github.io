@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 
 import SeoTags from "../components/SeoTags";
 
@@ -1192,29 +1193,92 @@ function PopOver({
   const [pendingDirection, setPendingDirection] = useState<
     "previous" | "next" | null
   >(null);
+  const [preparingDirection, setPreparingDirection] = useState<
+    "previous" | "next" | null
+  >(null);
+  const imageReadyPromises = useRef(new Map<string, Promise<void>>());
   const activeImageIndex = rotateBy % destination.images.length;
   const activeImage = destination.images[activeImageIndex];
   const polaroidCount = Math.min(destination.images.length, 3);
-  const polaroidImages = Array.from({ length: polaroidCount }, (_, index) => {
-    const offset = polaroidCount - 1 - index;
-    return destination.images[
-      (activeImageIndex - offset + destination.images.length) %
-        destination.images.length
-    ];
-  });
+  const getImageIndex = useCallback(
+    (direction: "previous" | "next") =>
+      (activeImageIndex +
+        (direction === "next" ? 1 : -1) +
+        destination.images.length) %
+      destination.images.length,
+    [activeImageIndex, destination.images.length]
+  );
+  const preloadImage = useCallback((source: string) => {
+    const existingPromise = imageReadyPromises.current.get(source);
+    if (existingPromise) return existingPromise;
+
+    const readyPromise = new Promise<void>((resolve) => {
+      const image = new Image();
+      const finishLoading = () => {
+        if (typeof image.decode === "function") {
+          image.decode().catch(() => {}).then(resolve);
+          return;
+        }
+        resolve();
+      };
+
+      image.onload = finishLoading;
+      image.onerror = () => resolve();
+      image.src = source;
+      if (image.complete) finishLoading();
+    });
+
+    imageReadyPromises.current.set(source, readyPromise);
+    return readyPromise;
+  }, []);
+
+  useEffect(() => {
+    void preloadImage(destination.images[getImageIndex("previous")]);
+    void preloadImage(destination.images[getImageIndex("next")]);
+  }, [destination.images, getImageIndex, preloadImage]);
+
+  const polaroidImages = Array.from(
+    { length: polaroidCount - 1 },
+    (_, index) => {
+      const offset = polaroidCount - 1 - index;
+      return destination.images[
+        (activeImageIndex - offset + destination.images.length) %
+          destination.images.length
+      ];
+    }
+  );
+  const incomingImage = pendingDirection
+    ? destination.images[getImageIndex(pendingDirection)]
+    : null;
   const backgroundTransforms = [
     "translateX(-50%) translate(-10%, 4%) rotate(-6deg)",
     "translateX(-50%) translate(10%, 2%) rotate(5deg)",
   ];
-  const showPreviousPhoto = () => {
-    if (!pendingDirection) {
-      setPendingDirection("previous");
+  const showPhoto = async (direction: "previous" | "next") => {
+    if (pendingDirection || preparingDirection) return;
+
+    setPreparingDirection(direction);
+    const nextImageIndex = getImageIndex(direction);
+    await preloadImage(destination.images[nextImageIndex]);
+
+    const viewTransitionDocument = document as Document & {
+      startViewTransition?: (update: () => void) => { finished: Promise<void> };
+    };
+
+    if (viewTransitionDocument.startViewTransition) {
+      document.documentElement.dataset.travelPhotoDirection = direction;
+      const transition = viewTransitionDocument.startViewTransition(() => {
+        flushSync(() => setRotateBy(nextImageIndex));
+      });
+      transition.finished.finally(() => {
+        delete document.documentElement.dataset.travelPhotoDirection;
+        setPreparingDirection(null);
+      });
+      return;
     }
-  };
-  const showNextPhoto = () => {
-    if (!pendingDirection) {
-      setPendingDirection("next");
-    }
+
+    setPreparingDirection(null);
+    setPendingDirection(direction);
   };
   const finishCardTransition = () => {
     if (!pendingDirection) {
@@ -1234,7 +1298,7 @@ function PopOver({
       className="relative mt-8 h-[clamp(24rem,45vw,38rem)] w-full text-black"
       onClick={(e) => e.stopPropagation()}
     >
-      {polaroidImages.slice(0, -1).map((image, index) => (
+      {polaroidImages.map((image, index) => (
         <div
           key={`${image}-${index}`}
           aria-hidden="true"
@@ -1248,27 +1312,50 @@ function PopOver({
         </div>
       ))}
 
+      {incomingImage ? (
+        <div
+          aria-hidden="true"
+          className={`polaroid-card--incoming polaroid-card--incoming-${pendingDirection} absolute left-1/2 top-0 z-[9] h-[94%] w-[88%] bg-white p-4 shadow-xl`}
+        >
+          <img src={incomingImage} alt="" className="h-[70%] w-full object-contain" />
+        </div>
+      ) : null}
+
       <div
         className={`polaroid-card absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] flex-col bg-white p-4 shadow-xl ${
           pendingDirection ? `polaroid-card--${pendingDirection}` : ""
         }`}
+        style={{ viewTransitionName: "travel-photo" }}
         onAnimationEnd={finishCardTransition}
       >
-        <button
-          type="button"
-          className="block h-[70%] w-full cursor-pointer appearance-none border-0 bg-slate-100 p-0 focus-visible:scale-[1.01]"
-          onClick={(e) => {
-            e.stopPropagation();
-            showNextPhoto();
-          }}
-          aria-label={`Show next photo of ${destination.name}`}
-        >
+        <div className="relative h-[70%] w-full bg-slate-100">
           <img
+            key={activeImage}
             src={activeImage}
             alt={`${destination.name}, photo ${activeImageIndex + 1}`}
             className="h-full w-full object-contain"
           />
-        </button>
+          <button
+            type="button"
+            className="absolute inset-y-0 left-0 w-1/2 cursor-w-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
+            onClick={(e) => {
+              e.stopPropagation();
+              void showPhoto("previous");
+            }}
+            disabled={Boolean(pendingDirection || preparingDirection)}
+            aria-label={`Show previous photo of ${destination.name}`}
+          />
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 w-1/2 cursor-e-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
+            onClick={(e) => {
+              e.stopPropagation();
+              void showPhoto("next");
+            }}
+            disabled={Boolean(pendingDirection || preparingDirection)}
+            aria-label={`Show next photo of ${destination.name}`}
+          />
+        </div>
 
         <div className="flex min-h-0 flex-1 flex-col pt-5">
           <div className="flex items-start justify-between gap-4">
@@ -1300,7 +1387,7 @@ function PopOver({
               className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
               onClick={(e) => {
                 e.stopPropagation();
-                showPreviousPhoto();
+                void showPhoto("previous");
               }}
             >
               <span aria-hidden="true">👈</span>
@@ -1312,7 +1399,7 @@ function PopOver({
               className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
               onClick={(e) => {
                 e.stopPropagation();
-                showNextPhoto();
+                void showPhoto("next");
               }}
             >
               <span aria-hidden="true">👉</span>
@@ -1333,6 +1420,17 @@ function PopOver({
           animation: toss-previous 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
+        .polaroid-card--incoming {
+          opacity: 0;
+          pointer-events: none;
+          transform: translateX(-50%) scale(0.98);
+        }
+
+        .polaroid-card--incoming-next,
+        .polaroid-card--incoming-previous {
+          animation: receive-photo 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
         @keyframes toss-next {
           to {
             opacity: 0;
@@ -1347,10 +1445,74 @@ function PopOver({
           }
         }
 
+        @keyframes receive-photo {
+          0%, 35% {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.98);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .polaroid-card--next,
           .polaroid-card--previous {
             animation-duration: 1ms;
+          }
+        }
+      `}</style>
+      <style jsx global>{`
+        @supports (view-transition-name: travel-photo) {
+          ::view-transition-old(root),
+          ::view-transition-new(root) {
+            animation: none;
+          }
+
+          ::view-transition-group(travel-photo) {
+            animation-duration: 180ms;
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          html[data-travel-photo-direction="next"]::view-transition-old(travel-photo) {
+            animation: travel-photo-exit-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
+          }
+
+          html[data-travel-photo-direction="next"]::view-transition-new(travel-photo) {
+            animation: travel-photo-enter-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
+          }
+
+          html[data-travel-photo-direction="previous"]::view-transition-old(travel-photo) {
+            animation: travel-photo-exit-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
+          }
+
+          html[data-travel-photo-direction="previous"]::view-transition-new(travel-photo) {
+            animation: travel-photo-enter-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
+          }
+
+          @keyframes travel-photo-exit-right {
+            to { opacity: 0; transform: translateX(18%) rotate(5deg); }
+          }
+
+          @keyframes travel-photo-enter-left {
+            from { opacity: 0; transform: translateX(-18%) rotate(-5deg); }
+          }
+
+          @keyframes travel-photo-exit-left {
+            to { opacity: 0; transform: translateX(-18%) rotate(-5deg); }
+          }
+
+          @keyframes travel-photo-enter-right {
+            from { opacity: 0; transform: translateX(18%) rotate(5deg); }
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          ::view-transition-group(travel-photo),
+          ::view-transition-old(travel-photo),
+          ::view-transition-new(travel-photo) {
+            animation-duration: 1ms !important;
           }
         }
       `}</style>
