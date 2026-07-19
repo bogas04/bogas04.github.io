@@ -5,7 +5,7 @@ description:
   in our monthly active users (~8k to 75k). We also observed…
 date: "2017-03-09T06:02:13.793Z"
 categories: []
-keywords: [google chrome, chrome extension, samsung, samsung internet, bookmarks]
+keywords: [chrome extensions, samsung internet, bookmarks]
 slug: /@bogas04/release-of-samsung-internet-chrome-extension-v2-644e7b97096e
 ---
 

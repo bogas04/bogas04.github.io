@@ -1,8 +1,10 @@
-import { memo } from "react";
+import { memo, useEffect, useState, type ReactNode } from "react";
+import { useRouter } from "next/router";
 import { BLOG_URL } from "../../constants";
 import SeoTags from "../../components/SeoTags";
 import { getBlogPosts, IBlogPost } from "../../utils/blog";
-import BlogLayout from "../../layout/blog";
+import { formatBlogDatePath, getBlogPostPath } from "../../utils/blogDate";
+import BlogLayout, { BlogBreadcrumbItem } from "../../layout/blog";
 
 import Link from "next/link";
 
@@ -14,13 +16,39 @@ export async function getStaticProps() {
   };
 }
 
-interface IBlogListingProps {
+export interface IBlogListingProps {
   posts: IBlogPost[];
+  heading?: ReactNode;
+  breadcrumbs?: BlogBreadcrumbItem[];
 }
 
-function BlogListing({ posts }: IBlogListingProps) {
+export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) {
+  const router = useRouter();
+  const showDrafts = router.query["be-more-vulnerable"] === "1";
+  const [drafts, setDrafts] = useState<IBlogPost[]>([]);
+
+  useEffect(() => {
+    if (!showDrafts) return;
+
+    fetch("/_be-more-vulnerable.json")
+      .then((response) => response.json())
+      .then(setDrafts)
+      .catch(() => setDrafts([]));
+  }, [showDrafts]);
+
+  const visiblePosts = showDrafts
+    ? [...posts, ...drafts].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      )
+    : posts;
+
   return (
-    <BlogLayout>
+    <BlogLayout
+      breadcrumbs={breadcrumbs || [
+        { href: "/", label: "Divjot Singh" },
+        { label: "Blog" },
+      ]}
+    >
       <style>
         {`
   ul {
@@ -145,20 +173,15 @@ function BlogListing({ posts }: IBlogListingProps) {
         pageUrl={BLOG_URL}
       />
 
-      <h1>
-        <Link href="/">
-          Divjot Singh
-        </Link>{" "}
-        | Blog
-      </h1>
+      {heading && <p>{heading}</p>}
 
       <ul>
-        {posts.map((post) => (
+        {visiblePosts.map((post) => (
           <li
             className={`post  ${post.isDraft ? "draft" : ""}`}
             key={post.title}
           >
-            <Link href="blog/[slug]" as={`blog/${post.slug}`}>
+            <Link href={getBlogPostPath(post)}>
 
               <div className="post-body">
                 <h2 className="post-title">
@@ -166,7 +189,18 @@ function BlogListing({ posts }: IBlogListingProps) {
                 </h2>
 
                 <p>{post.description}</p>
-                <span>{new Date(post.date).toDateString()}</span>
+                <span>
+                  <time dateTime={post.date}>
+                    {formatBlogDatePath(post.date)}
+                  </time>{" "}
+                  |{" "}
+                  <time
+                    dateTime={`PT${post.readingTimeMinutes}M`}
+                    aria-label={`${post.readingTimeMinutes} minute estimated reading time`}
+                  >
+                    {post.readingTimeMinutes} min read
+                  </time>
+                </span>
               </div>
               {post.image ? (
                 <img

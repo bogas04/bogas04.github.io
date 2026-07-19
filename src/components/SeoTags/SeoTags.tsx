@@ -7,6 +7,7 @@ export interface ISeoTagsProps {
   pageUrl?: string;
   description?: string;
   imageUrl?: string;
+  noIndex?: boolean;
 }
 
 function SeoTags({
@@ -15,12 +16,14 @@ function SeoTags({
   pageUrl,
   description,
   imageUrl,
+  noIndex,
 }: ISeoTagsProps) {
   return (
     <Head>
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
+      {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {keywords && keywords.length !== 0 && (
         <meta name="keywords" content={keywords} />

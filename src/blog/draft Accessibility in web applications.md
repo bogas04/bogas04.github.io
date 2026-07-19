@@ -3,7 +3,7 @@ title: Accessibility in React Web Apps
 description: Often we solely rely on a linter to help us avoid accessibility issues in our codebase, however it isn't always obvious how to deal with it.
 date: "2020-01-27T11:48:44.318Z"
 categories: []
-keywords: [react, html, accessibility]
+keywords: [react, web platform, accessibility]
 slug: /@bogas04/living-in-suwon-korea-1b3afd88a2ab
 ---
 

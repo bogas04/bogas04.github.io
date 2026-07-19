@@ -6,6 +6,7 @@
     "start": "next",
     "build": "make build",
     "generate:rss": "ts-node --compiler-options '{\"module\":\"commonjs\"}' ./scripts/generate-rss.ts",
+    "generate:sitemap": "ts-node --compiler-options '{\"module\":\"commonjs\"}' ./scripts/generate-sitemap.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

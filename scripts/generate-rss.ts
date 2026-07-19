@@ -3,6 +3,8 @@ import path from "path";
 // parse5 v6 does not ship TypeScript declarations.
 // @ts-ignore
 import * as parse5 from "parse5";
+import { getBlogPosts } from "../src/utils/blog";
+import { getBlogPostPath } from "../src/utils/blogDate";
 
 const WEBSITE_URL = "https://bogas04.github.io";
 const BLOG_URL = `${WEBSITE_URL}/blog`;
@@ -10,7 +12,6 @@ const BLOG_URL = `${WEBSITE_URL}/blog`;
 // redirects it to HTTPS, but the validator compares against the requested URL.
 const RSS_SELF_URL = "http://bogas04.github.io/blog.xml";
 const ATOM_SELF_URL = `${WEBSITE_URL}/blog.atom`;
-const DOCS_BLOG = path.join(process.cwd(), "docs", "blog");
 
 interface RssItem {
   title: string;
@@ -18,55 +19,6 @@ interface RssItem {
   description: string;
   content: string;
   link: string;
-}
-
-function readHtmlFiles(directory: string): string[] {
-  try {
-    return fs.readdirSync(directory).filter((file) => file.endsWith(".html"));
-  } catch (error) {
-    console.error("Could not read docs/blog directory:", error.message);
-    return [];
-  }
-}
-
-function extractTitle(html: string): string | null {
-  const match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  return match ? match[1].replace(/\s+/g, " ").trim() : null;
-}
-
-function extractContentHtml(html: string): string | null {
-  const match = html.match(/<div[^>]*class=["']content["'][^>]*>([\s\S]*?)<\/div>/i);
-  return match ? match[1].trim() : null;
-}
-
-function extractDescription(html: string): string {
-  let match = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
-  if (match) return match[1].trim();
-
-  const content = extractContentHtml(html);
-  if (content) {
-    match = content.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-    if (match) return match[1].replace(/<[^>]+>/g, "").trim();
-  }
-  return "";
-}
-
-function extractDate(html: string, fileStats: fs.Stats): Date {
-  const datePatterns = [
-    /\b[A-Z][a-z]{2}\s+[A-Z][a-z]{2,8}\s+\d{1,2}\s+\d{4}\b/,
-    /\b[A-Z][a-z]{2,8}\s+\d{1,2},?\s+\d{4}\b/,
-    /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\b/,
-    /\b\d{4}-\d{1,2}-\d{1,2}\b/,
-  ];
-
-  for (const pattern of datePatterns) {
-    const match = html.match(pattern);
-    if (!match) continue;
-    const date = new Date(match[0].replace(/,/g, ""));
-    if (!Number.isNaN(date.getTime())) return date;
-  }
-
-  return fileStats.mtime;
 }
 
 function toCData(value: string): string {
@@ -151,28 +103,32 @@ function buildAtom(items: RssItem[]): string {
 }
 
 function main(): void {
-  const posts: RssItem[] = readHtmlFiles(DOCS_BLOG).map((fileName) => {
-    const fullPath = path.join(DOCS_BLOG, fileName);
-    const html = fs.readFileSync(fullPath, "utf8");
-    const basename = fileName.replace(/\.html$/, "");
-
-    return {
-      title: extractTitle(html) || basename,
-      date: extractDate(html, fs.statSync(fullPath)),
-      description: extractDescription(html),
-      content: extractContentHtml(html) || "",
-      link: `${BLOG_URL}/${basename}`,
-    };
-  });
+  const drafts = getBlogPosts(true).filter((post) => post.isDraft);
+  const posts: RssItem[] = getBlogPosts(true)
+    .filter((post) => !post.isDraft)
+    .map((post) => ({
+    title: post.title || post.slug || "Untitled post",
+    date: new Date(post.date),
+    description: post.description || "",
+    content: post.html,
+    link: `${WEBSITE_URL}${getBlogPostPath(post)}`,
+    }));
 
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());
   const recentPosts = posts.slice(0, 20);
   const rssOutputPath = path.join(process.cwd(), "docs", "blog.xml");
   const atomOutputPath = path.join(process.cwd(), "docs", "blog.atom");
+  const draftPreviewOutputPath = path.join(
+    process.cwd(),
+    "docs",
+    "_be-more-vulnerable.json"
+  );
   fs.writeFileSync(rssOutputPath, buildRss(recentPosts), "utf8");
   fs.writeFileSync(atomOutputPath, buildAtom(recentPosts), "utf8");
+  fs.writeFileSync(draftPreviewOutputPath, JSON.stringify(drafts), "utf8");
   console.log("Wrote RSS to", rssOutputPath);
   console.log("Wrote Atom to", atomOutputPath);
+  console.log("Wrote draft preview data to", draftPreviewOutputPath);
 }
 
 main();

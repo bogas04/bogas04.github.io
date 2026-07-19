@@ -1,6 +1,12 @@
 import fs from "fs";
 
-import { toMarkdown, parseHead, getHeroImage, IBlogPostMeta } from "./";
+import {
+  toMarkdown,
+  parseHead,
+  getHeroImage,
+  IBlogPostMeta,
+  linkBlogImages,
+} from "./";
 
 import path from "path";
 
@@ -9,9 +15,10 @@ export interface IBlogPost extends IBlogPostMeta {
   image: string;
   isDraft?: boolean;
   fileName: string;
+  readingTimeMinutes: number;
 }
 
-export function getBlogPosts(): IBlogPost[] {
+export function getBlogPosts(includeDrafts = false): IBlogPost[] {
   const pathJoin = path.join;
 
   const blogDataFolder = pathJoin(process.cwd(), "src", "blog");
@@ -24,7 +31,11 @@ export function getBlogPosts(): IBlogPost[] {
     // filter out drafts
     .filter(
       (fileName) =>
-        !(process.env.NODE_ENV === "production" && isDraft(fileName))
+        !(
+          process.env.NODE_ENV === "production" &&
+          isDraft(fileName) &&
+          !includeDrafts
+        )
     )
     // get contents
     .map((fileName) => [
@@ -35,7 +46,7 @@ export function getBlogPosts(): IBlogPost[] {
       // parse front matter
       const [, head, body] = content.split("---");
       const meta = parseHead(head);
-      const html = toMarkdown(body);
+      const html = linkBlogImages(toMarkdown(body));
 
       // construct posts data
       return {
@@ -44,6 +55,7 @@ export function getBlogPosts(): IBlogPost[] {
         image: getHeroImage(html),
         html,
         fileName,
+        readingTimeMinutes: getReadingTimeMinutes(body),
       };
     })
     // sort by date
@@ -52,3 +64,12 @@ export function getBlogPosts(): IBlogPost[] {
 }
 
 const isDraft = (fileName: string) => /^draft /.test(fileName);
+
+function getReadingTimeMinutes(markdown: string): number {
+  const prose = markdown
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`[^`]*`/g, "");
+  const wordCount = prose.match(/\b[\w'-]+\b/g)?.length || 0;
+
+  return Math.max(1, Math.ceil(wordCount / 200));
+}

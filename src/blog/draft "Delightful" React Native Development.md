@@ -2,7 +2,7 @@
 title: Delightful React Native Development
 description:
   Coming from Web Developemnt, while semantics of React Native might seem familiar, the environment and tooling can be quite intimidating. Here are some ways to make it *tolerable*.
-date: "2022-05-30T012:55:58.095Z"
+date: "2022-05-30T12:55:58.095Z"
 categories: []
 keywords: [react, react-native, android]
 ---

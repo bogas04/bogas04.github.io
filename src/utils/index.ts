@@ -20,11 +20,14 @@ export const sanitizeDate = (date: string) => {
 export const slugifiyTitleDate = (title: string, date: string) =>
   `${slugify(title)}-${sanitizeDate(date)}`.toLowerCase();
 
+export const slugifyTitle = (title: string) => slugify(title).toLowerCase();
+
 export interface IBlogPostMeta {
   keywords?: string | string[];
   date?: string;
   title?: string;
   slug?: string;
+  legacySlug?: string;
   description?: string;
 }
 
@@ -52,9 +55,11 @@ export function parseHead(rawHead: string) {
     .trim()
     .slice(1, -1)
     .split(",")
-    .map((e) => e.trim());
+    .map((e) => e.trim())
+    .filter(Boolean);
 
-  meta.slug = slugifiyTitleDate(meta.title, meta.date);
+  meta.slug = slugifyTitle(meta.title);
+  meta.legacySlug = slugifiyTitleDate(meta.title, meta.date);
 
   return meta;
 }
@@ -75,6 +80,17 @@ export function toMarkdown(content: string) {
     .processSync(content)
     .toString();
 }
+
+export function linkBlogImages(html: string) {
+  return html.replace(
+    /<img\b([^>]*?)\bsrc=("[^"]*"|'[^']*')([^>]*)>/gi,
+    (image, beforeSrc, quotedSource, afterSrc) => {
+      const source = quotedSource.slice(1, -1);
+      return `<a class="blog-image-link" href="${source}" target="_blank" rel="noopener noreferrer">${image}</a>`;
+    }
+  );
+}
+
 export function getHeroImage(html: string) {
   try {
     return html.match(/<img\b[^>]+?src\s*=\s*['"]?([^\s'"?#>]+)/)[1];

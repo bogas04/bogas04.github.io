@@ -3,7 +3,7 @@ title: JavaScript cheat sheet in 2020
 description: List of snippets to learn basics of JavaScript
 date: "2020-09-14T06:02:13.793Z"
 categories: []
-keywords: [javascript, ecmascript, es2015]
+keywords: [javascript]
 slug: ""
 ---
 

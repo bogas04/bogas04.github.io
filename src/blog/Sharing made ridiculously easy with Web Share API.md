@@ -5,7 +5,7 @@ description:
   becoming top priority for web apps. Oddly enough, sharing has…
 date: "2017-09-22T16:27:20.946Z"
 categories: []
-keywords: [web share api, web apis, browser, DOM, PWA, web apps]
+keywords: [web share api, web platform, browser, PWA]
 slug: /@bogas04/sharing-made-ridiculously-easy-with-web-share-api-33f6c9189d04
 ---
 

@@ -87,7 +87,7 @@ function Work() {
     <Section color="grey" style={{ zIndex: 12 }} id="work">
       <h3>Such Work</h3>
 
-      <div className="container-fluid">
+      <div className="container-fluid pt-3">
         {workExperience.map((job) => (
           <WorkExperience key={job.id} job={job} />
         ))}
@@ -108,10 +108,10 @@ function WorkExperience({ job }: { job: (typeof workExperience)[number] }) {
 
   return (
     <article
-      className={`flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:rounded-full ${
+      className={`mb-4 flex flex-col relative -ml-4 border border-slate-600 bg-slate-800/80 py-3 pr-4 pl-4 text-slate-100 rounded-xl shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2 before:rounded-full ${
         job.isCurrent
-          ? "bg-transparent border-none before:top-2 before:bg-emerald-400"
-          : "mb-4 rounded-xl border border-slate-600 bg-slate-800/80 pr-4 py-3 text-slate-100 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg before:top-1/2 before:-translate-y-1/2 before:bg-slate-500"
+          ? "before:bg-emerald-400"
+          : "before:bg-slate-500"
       }`}
     >
       <div>
@@ -129,7 +129,7 @@ function WorkExperience({ job }: { job: (typeof workExperience)[number] }) {
         </button>
         <p className="pt-1 text-base normal-case text-slate-300">
           <span className="font-normal italic">{job.duration}</span>
-          {!job.isCurrent && <> · {job.summary}</>}
+          <> · {job.summary}</>
         </p>
         <a
           href={job.companyUrl}
