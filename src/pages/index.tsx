@@ -560,11 +560,11 @@ function Talks() {
                   img
                 )}
                 <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
-                  <a href={talk.link} target="_blank">
+                  <a className="block w-fit rounded bg-[#14532d] px-3 py-2 text-white no-underline hover:bg-[#166534]" href={talk.link} target="_blank" rel="noopener noreferrer">
                     {talk.title}
                   </a>
-                  {" at "}
                   <a
+                    className="mt-2 block w-fit rounded bg-[#134e4a] px-2 py-1 text-[0.65em] font-medium text-teal-50 no-underline hover:bg-[#115e59]"
                     href={talk.eventLink}
                     target="_blank"
                     rel="noopener noreferrer"
