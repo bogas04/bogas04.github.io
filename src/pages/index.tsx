@@ -88,7 +88,7 @@ function Work() {
     <Section color="grey" style={{ zIndex: 12 }} id="work">
       <h3>such work</h3>
 
-      <div className="container-fluid pt-3">
+      <div className="w-full px-4 pt-3">
         {workExperience.map((job) => (
           <WorkExperience key={job.id} job={job} />
         ))}
@@ -515,7 +515,7 @@ function Talks() {
   return (
     <Section color="green" style={{ zIndex: 13 }} id="talks">
       <h3>so talkative</h3>
-      <div className="row px-4">
+      <div className="px-4">
         <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
           {talks.map((talk) => {
             const img = (
@@ -565,10 +565,10 @@ function Social() {
   return (
     <Section color="blue" style={{ zIndex: 13 }} id="social">
       <h3>somewhat social</h3>
-      <div className="container-fluid">
-        <div className="row">
+      <div className="w-full px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           {socialLinks.map((link) => (
-            <div className="col-md-6 text-center" key={link.url}>
+            <div className="px-4 text-center" key={link.url}>
               <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
                 <a
                   target="_blank"
@@ -581,7 +581,7 @@ function Social() {
               </p>
             </div>
           ))}
-          <div className="col-md-12 text-center">
+          <div className="col-span-full px-4 text-center">
             <p className="text-8xl text-center text-[120px]">🤷‍♂️</p>
           </div>
         </div>
