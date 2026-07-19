@@ -45,7 +45,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       const pushToBlog = async () => {
         const navigated = await Router.push(href, undefined, { scroll: false });
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        // `behavior: "auto"` inherits the site's CSS `scroll-behavior`, which
+        // is smooth. Temporarily override it so the new page starts at the top
+        // before its view-transition snapshot is taken.
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        root.style.scrollBehavior = previousScrollBehavior;
         return navigated;
       };
 
@@ -86,43 +93,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     };
     document.addEventListener("click", handleBlogNavigation, true);
     return () => document.removeEventListener("click", handleBlogNavigation, true);
-  }, []);
-  useEffect(() => {
-    Router.beforePopState(({ as }) => {
-      const sourcePostSlug = document.querySelector<HTMLElement>(
-        "[data-blog-transition-slug]"
-      )?.dataset.blogTransitionSlug;
-      const viewTransitionDocument = document as Document & {
-        startViewTransition?: (
-          update: () => Promise<boolean>
-        ) => NativeViewTransition;
-      };
-
-      if (
-        !sourcePostSlug ||
-        !as.startsWith("/blog") ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-        !viewTransitionDocument.startViewTransition
-      ) {
-        return true;
-      }
-
-      setPendingBlogPostTransition(sourcePostSlug);
-      document.documentElement.dataset.blogViewTransition = "true";
-      const transition = viewTransitionDocument.startViewTransition(async () => {
-        const navigated = await Router.replace(as, as, { scroll: false });
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        return navigated;
-      });
-      void transition.finished.then(
-        () => delete document.documentElement.dataset.blogViewTransition,
-        () => delete document.documentElement.dataset.blogViewTransition
-      );
-
-      return false;
-    });
-
-    return () => Router.beforePopState(() => true);
   }, []);
   return (
     <>
