@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { getBlogPosts, IBlogPost } from "../../../utils/blog";
+import { getBlogPostSummaries, IBlogPostSummary } from "../../../utils/blog";
 import {
   BLOG_TAG_ALIASES,
   getBlogTagColors,
@@ -13,10 +13,10 @@ import BlogArchive from "../../../components/BlogArchive";
 export async function getStaticPaths() {
   const tags = Array.from(
     new Set(
-      getBlogPosts()
+      getBlogPostSummaries()
         .flatMap((post) => (post.keywords || []) as string[])
-        .map(getBlogTagSlug)
-    )
+        .map(getBlogTagSlug),
+    ),
   );
 
   return {
@@ -32,14 +32,15 @@ export async function getStaticProps(context: { params: { tag: string } }) {
   const redirectTo = BLOG_TAG_ALIASES[tag];
   if (redirectTo) return { props: { tag, redirectTo } };
 
-  const posts = getBlogPosts().filter((post) =>
+  const posts = getBlogPostSummaries().filter((post) =>
     ((post.keywords || []) as string[]).some(
-      (keyword) => getBlogTagSlug(keyword) === tag
-    )
+      (keyword) => getBlogTagSlug(keyword) === tag,
+    ),
   );
-  const tagName = posts
-    .flatMap((post) => (post.keywords || []) as string[])
-    .find((keyword) => getBlogTagSlug(keyword) === tag) || tag;
+  const tagName =
+    posts
+      .flatMap((post) => (post.keywords || []) as string[])
+      .find((keyword) => getBlogTagSlug(keyword) === tag) || tag;
 
   return {
     props: { tag, tagName, posts },
@@ -49,7 +50,7 @@ export async function getStaticProps(context: { params: { tag: string } }) {
 interface TagArchiveProps {
   tag: string;
   tagName?: string;
-  posts?: IBlogPost[];
+  posts?: IBlogPostSummary[];
   redirectTo?: string;
 }
 
@@ -66,7 +67,10 @@ function TagArchive({ tag, tagName, posts, redirectTo }: TagArchiveProps) {
       <>
         <Head>
           <meta httpEquiv="refresh" content={`0;url=${destination}`} />
-          <link rel="canonical" href={`https://bogas04.github.io${destination}`} />
+          <link
+            rel="canonical"
+            href={`https://bogas04.github.io${destination}`}
+          />
         </Head>
         <p>
           This tag has moved. <a href={destination}>Continue to the tag</a>.

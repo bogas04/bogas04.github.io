@@ -11,15 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📚 checkout
-        uses: actions/checkout@v2.1.1
-      - name: 🟢 node
-        uses: actions/setup-node@v1.4.4
+        uses: actions/checkout@v4
+      - name: Enable pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 18
+          version: 10.33.0
+      - name: 🟢 node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
       - name: ⬇️ install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
       - name: 🛠 build project
-        run: npm run build
+        run: pnpm run build
       - name: 🚀 commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

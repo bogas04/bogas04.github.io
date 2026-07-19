@@ -2,14 +2,14 @@ import { memo, useEffect, useState, type ReactNode } from "react";
 import { useRouter } from "next/router";
 import { BLOG_URL } from "../../constants";
 import SeoTags from "../../components/SeoTags";
-import { getBlogPosts, IBlogPost } from "../../utils/blog";
+import { getBlogPostSummaries, IBlogPostSummary } from "../../utils/blog";
 import { formatBlogDatePath, getBlogPostPath } from "../../utils/blogDate";
 import BlogLayout, { BlogBreadcrumbItem } from "../../layout/blog";
 
 import Link from "next/link";
 
 export async function getStaticProps() {
-  const posts = getBlogPosts();
+  const posts = getBlogPostSummaries();
 
   return {
     props: { posts },
@@ -17,7 +17,7 @@ export async function getStaticProps() {
 }
 
 export interface IBlogListingProps {
-  posts: IBlogPost[];
+  posts: IBlogPostSummary[];
   heading?: ReactNode;
   breadcrumbs?: BlogBreadcrumbItem[];
 }
@@ -25,7 +25,7 @@ export interface IBlogListingProps {
 export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) {
   const router = useRouter();
   const showDrafts = router.query["be-more-vulnerable"] === "1";
-  const [drafts, setDrafts] = useState<IBlogPost[]>([]);
+  const [drafts, setDrafts] = useState<IBlogPostSummary[]>([]);
 
   useEffect(() => {
     if (!showDrafts) return;
@@ -63,7 +63,6 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
     overflow: hidden;
     border: 1px solid #cbcbcb;
     margin: 1em;
-    transition: all 0.2s;
   }
 
   .post a {
@@ -72,6 +71,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    transition: background-color 0.2s;
   }
 
   .post a:hover,

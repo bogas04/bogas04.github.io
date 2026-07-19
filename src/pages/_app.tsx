@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../theme";
 
 import "../app.css";
 
@@ -16,7 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Component {...pageProps} />
       <Head>
         <meta
@@ -31,6 +29,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta content="#333333" name="theme-color" />
       </Head>
-    </ThemeProvider>
+    </>
   );
 }

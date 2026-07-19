@@ -4,4 +4,4 @@ build:
 	# use profile image as favicon
 	cp public/profile.png public/favicon.ico
 	# build website
-	npx next build && npx next export -o docs && npm run generate:rss && npm run generate:sitemap && touch docs/.nojekyll
+	pnpm exec next build && pnpm run generate:rss && pnpm run generate:sitemap && touch docs/.nojekyll

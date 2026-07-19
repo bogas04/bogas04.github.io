@@ -1,7 +1,4 @@
 module.exports = {
-  compiler: {
-    styledComponents: {
-      ssr: true,
-    },
-  },
+  output: "export",
+  distDir: "docs",
 };

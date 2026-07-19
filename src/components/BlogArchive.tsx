@@ -1,11 +1,11 @@
 import BlogListing from "../pages/blog";
 import type { BlogBreadcrumbItem } from "../layout/blog";
-import type { IBlogPost } from "../utils/blog";
+import type { IBlogPostSummary } from "../utils/blog";
 import type { ReactNode } from "react";
 
 interface BlogArchiveProps {
   heading: ReactNode;
-  posts: IBlogPost[];
+  posts: IBlogPostSummary[];
   breadcrumbs?: BlogBreadcrumbItem[];
 }
 

@@ -1,11 +1,11 @@
-import { getBlogPosts, IBlogPost } from "../../../utils/blog";
+import { getBlogPostSummaries, IBlogPostSummary } from "../../../utils/blog";
 import { getBlogDateParts } from "../../../utils/blogDate";
 import BlogArchive from "../../../components/BlogArchive";
 
 export async function getStaticPaths() {
   const paths = Array.from(
     new Set(
-      getBlogPosts().map((post) => {
+      getBlogPostSummaries().map((post) => {
         const dateParts = getBlogDateParts(post.date);
         return dateParts && `${dateParts.year}/${dateParts.month}`;
       })
@@ -22,7 +22,7 @@ export async function getStaticProps(context: {
   params: { year: string; month: string };
 }) {
   const { year, month } = context.params;
-  const posts = getBlogPosts().filter((post) => {
+  const posts = getBlogPostSummaries().filter((post) => {
     const dateParts = getBlogDateParts(post.date);
     return dateParts?.year === year && dateParts.month === month;
   });
@@ -35,7 +35,7 @@ export async function getStaticProps(context: {
 }
 
 interface MonthArchiveProps {
-  posts: IBlogPost[];
+  posts: IBlogPostSummary[];
   monthName: string;
   year: string;
   month: string;

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import BlogLayout from "../../../layout/blog";
-import { getBlogPosts } from "../../../utils/blog";
+import { getBlogPostSummaries } from "../../../utils/blog";
 import { getBlogTagColors, getBlogTagSlug } from "../../../utils/blogTag";
 
 export async function getStaticProps() {
-  const tagCounts = getBlogPosts().reduce<Record<string, number>>(
+  const tagCounts = getBlogPostSummaries().reduce<Record<string, number>>(
     (counts, post) => {
       ((post.keywords || []) as string[]).forEach((tag) => {
         counts[tag] = (counts[tag] || 0) + 1;

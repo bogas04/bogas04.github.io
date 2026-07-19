@@ -3,8 +3,8 @@ import path from "path";
 // parse5 v6 does not ship TypeScript declarations.
 // @ts-ignore
 import * as parse5 from "parse5";
-import { getBlogPosts } from "../src/utils/blog";
-import { getBlogPostPath } from "../src/utils/blogDate";
+import { getBlogPosts, getBlogPostSummaries } from "../src/utils/blog.ts";
+import { getBlogPostPath } from "../src/utils/blogDate.ts";
 
 const WEBSITE_URL = "https://bogas04.github.io";
 const BLOG_URL = `${WEBSITE_URL}/blog`;
@@ -103,7 +103,7 @@ function buildAtom(items: RssItem[]): string {
 }
 
 function main(): void {
-  const drafts = getBlogPosts(true).filter((post) => post.isDraft);
+  const drafts = getBlogPostSummaries(true).filter((post) => post.isDraft);
   const posts: RssItem[] = getBlogPosts(true)
     .filter((post) => !post.isDraft)
     .map((post) => ({

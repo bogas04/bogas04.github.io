@@ -6,7 +6,11 @@ import "prism-themes/themes/prism-ghcolors.css";
 
 import { WEBSITE_URL } from "../../constants";
 
-import { getBlogPosts, IBlogPost } from "../../utils/blog";
+import {
+  getBlogPostSummaries,
+  IBlogPost,
+  IBlogPostSummary,
+} from "../../utils/blog";
 import { getBlogTagColors, getBlogTagSlug } from "../../utils/blogTag";
 import {
   getBlogDateParts,
@@ -19,8 +23,8 @@ import { ShareLinks } from "../../components/ShareLinks/ShareLinks";
 import BlogArchive from "../../components/BlogArchive";
 
 export async function getStaticPaths() {
-  const posts = getBlogPosts(true);
-  const publishedPosts = getBlogPosts();
+  const posts = getBlogPostSummaries(true);
+  const publishedPosts = getBlogPostSummaries();
   const years = Array.from(
     new Set(publishedPosts.map((post) => new Date(post.date).getFullYear()))
   );
@@ -36,7 +40,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: { params: { year: string } }) {
-  const legacyPost = getBlogPosts(true).find((p) => {
+  const legacyPost = getBlogPostSummaries(true).find((p) => {
     return p.legacySlug === context.params.year;
   });
   if (legacyPost) {
@@ -44,7 +48,7 @@ export async function getStaticProps(context: { params: { year: string } }) {
   }
 
   const year = context.params.year;
-  const posts = getBlogPosts().filter(
+  const posts = getBlogPostSummaries().filter(
     (candidate) => String(new Date(candidate.date).getFullYear()) === year
   );
 
@@ -60,7 +64,7 @@ interface IBlogPostProps {
 
 interface IBlogRouteProps {
   post?: IBlogPost;
-  posts?: IBlogPost[];
+  posts?: IBlogPostSummary[];
   year?: string;
   legacyDestination?: string;
   tagCounts?: Record<string, number>;
