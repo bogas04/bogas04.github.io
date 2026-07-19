@@ -22,6 +22,7 @@ import { ShareLinks } from "../../components/ShareLinks/ShareLinks";
 import BlogArchive from "../../components/BlogArchive";
 
 const BLOG_PLACEHOLDER_IMAGE = "/img/travel/uk/uk-14.jpg";
+const BLOG_PLACEHOLDER_ALT = "DJ shrugging infront of Awkward Hill Cottage in UK";
 
 export async function getStaticPaths() {
   const posts = getBlogPostSummaries(true);
@@ -288,7 +289,7 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
         <img
           className="blog-placeholder-image"
           src={BLOG_PLACEHOLDER_IMAGE}
-          alt=""
+          alt={BLOG_PLACEHOLDER_ALT}
         />
       )}
 

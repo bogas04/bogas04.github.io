@@ -26,6 +26,9 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
   const router = useRouter();
   const showDrafts = router.query["be-more-vulnerable"] === "1";
   const [drafts, setDrafts] = useState<IBlogPostSummary[]>([]);
+  const [selectedDraft, setSelectedDraft] = useState<IBlogPostSummary | null>(
+    null
+  );
 
   useEffect(() => {
     if (!showDrafts) return;
@@ -41,6 +44,9 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       )
     : posts;
+  const selectedDraftUrl = selectedDraft
+    ? `https://github.com/bogas04/bogas04.github.io/blob/main/src/blog/${encodeURIComponent(selectedDraft.fileName)}`
+    : "";
 
   return (
     <BlogLayout
@@ -112,6 +118,47 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
     color: initial;
   }
 
+  .draft-modal-backdrop {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .draft-modal {
+    width: min(100%, 30rem);
+    border: 2px solid currentColor;
+    padding: 1.5rem;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .draft-modal h2 { margin-top: 0; }
+  .draft-modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .draft-modal-actions a,
+  .draft-modal-actions button {
+    border: 1px solid currentColor;
+    border-radius: 0;
+    padding: 0.5rem 0.75rem;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .draft-modal-actions a { background: CanvasText; color: Canvas; }
+
   @media (prefers-color-scheme: dark) {
     .post {
       border-color: #555555;
@@ -166,7 +213,14 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
             className={`post  ${post.isDraft ? "draft" : ""}`}
             key={post.title}
           >
-            <Link href={getBlogPostPath(post)}>
+            <Link
+              href={getBlogPostPath(post)}
+              onClick={(event) => {
+                if (!post.isDraft) return;
+                event.preventDefault();
+                setSelectedDraft(post);
+              }}
+            >
 
               <div className="post-body">
                 <h2 className="post-title">
@@ -197,7 +251,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                 <img
                   className="post-media"
                   src="/img/travel/uk/uk-14.jpg"
-                  alt=""
+                  alt="DJ shrugging infront of Awkward Hill Cottage in UK"
                 />
               )}
 
@@ -205,6 +259,32 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
           </li>
         ))}
       </ul>
+
+      {selectedDraft && (
+        <div
+          className="draft-modal-backdrop"
+          role="presentation"
+          onMouseDown={() => setSelectedDraft(null)}
+        >
+          <section
+            className="draft-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="draft-modal-title"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <h2 id="draft-modal-title">Uh-uh-uh!</h2>
+            <p>You are attempting to read a draft, which would be unpolished.</p>
+            <p>Are you sure you want to read it?</p>
+            <div className="draft-modal-actions">
+              <a href={selectedDraftUrl}>Yes, take me to the draft</a>
+              <button type="button" onClick={() => setSelectedDraft(null)}>
+                No, take me back
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </BlogLayout>
   );
 }
