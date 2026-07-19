@@ -99,7 +99,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <Head>
         <meta
-          content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+          content="width=device-width,initial-scale=1,viewport-fit=cover"
           name="viewport"
         />
         <meta name="format-detection" content="telephone=no" />

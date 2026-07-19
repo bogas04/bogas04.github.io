@@ -29,12 +29,14 @@ function HomePage() {
         imageUrl="/profile.png"
         pageUrl="https://bogas04.github.io/"
       />
-      <Hero />
-      <Work />
-      <Travel />
-      <Education />
-      <Talks />
-      <Social />
+      <main>
+        <Hero />
+        <Work />
+        <Travel />
+        <Education />
+        <Talks />
+        <Social />
+      </main>
     </>
   );
 }
@@ -47,7 +49,7 @@ function Hero() {
       <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
         <img
           src="/profile.png"
-          alt="👳🏽"
+          alt="Portrait of Divjot Singh"
           className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
         />
         Divjot Singh
@@ -96,7 +98,7 @@ function Hero() {
 function Work() {
   return (
     <Section color="grey" style={{ zIndex: 12 }} id="work">
-      <h3>such work</h3>
+      <h2>such work</h2>
 
       <div className="w-full px-4 pt-3">
         {workExperience.map((job) => (
@@ -126,18 +128,20 @@ function WorkExperience({ job }: { job: (typeof workExperience)[number] }) {
       }`}
     >
       <div>
-        <button
+        <h3 className="m-0">
+          <button
           type="button"
           aria-expanded={isExpanded}
           aria-controls={contentId}
           onClick={() => setIsExpanded((expanded) => !expanded)}
           className="text-left text-2xl font-bold pb-2 uppercase cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700"
-        >
-          {job.company}, {job.position}
-          <span className="block pt-2 text-sm font-medium normal-case underline underline-offset-2">
-            {isExpanded ? "Read less" : "Read more"}
-          </span>
-        </button>
+          >
+            {job.company}, {job.position}
+            <span className="block pt-2 text-sm font-medium normal-case underline underline-offset-2">
+              {isExpanded ? "Read less" : "Read more"}
+            </span>
+          </button>
+        </h3>
         <p className="pt-1 text-base normal-case text-slate-300">
           <span className="font-normal italic">{job.duration}</span>
           <> · {job.summary}</>
@@ -233,6 +237,7 @@ function Travel() {
       >
         <button
           className="appearance-none bg-transparent relative bg-white h-2.5 w-2.5 flex border border-black rounded-full text-4xl cursor-pointer transition-transform duration-200 ease-in-out hover:scale-150 active:scale-[1.4]"
+          aria-label={`Show photos from ${destination.name}`}
           onClick={(e) => {
             e.stopPropagation();
             setShownCard(destination);
@@ -246,7 +251,7 @@ function Travel() {
 
   return (
     <Section className="select-none" color="yellow" style={{ zIndex: 11 }} id="travel">
-      <h3>many travels</h3>
+      <h2>many travels</h2>
 
       <div
         className="flex justify-center p-8 relative max-sm:hidden "
@@ -258,6 +263,7 @@ function Travel() {
         <div className="relative inline-block">
           <img
             src="/img/map.png"
+            alt="Grayscale world map used as the background for interactive pins marking Divjot Singh's travel destinations"
             className="grayscale brightness-150 w-[80vw]"
           />
           {markers}
@@ -282,10 +288,14 @@ function Travel() {
             className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
             key={destination.name}
           >
-            <ImageGallery images={destination.images} priority={index === 0} />
-            <h4 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
+            <ImageGallery
+              destination={destination.name}
+              images={destination.images}
+              priority={index === 0}
+            />
+            <h3 style={{ marginBottom: "0.5rem", fontSize: "1.6rem" }}>
               {destination.name}
-            </h4>
+            </h3>
             <p style={{ margin: "0", fontSize: "1.2rem", opacity: 0.8 }}>
               {destination.description}
             </p>
@@ -302,7 +312,7 @@ function Travel() {
             }}
             key={destination.name}
           >
-            <h4 className="text-3xl text-black">{destination.name}</h4>
+            <h3 className="text-3xl text-black">{destination.name}</h3>
             <p style={{ margin: "0", fontSize: "1.2rem", opacity: 0.8 }}>
               {destination.description}
             </p>
@@ -316,11 +326,11 @@ function Travel() {
 function Education() {
   return (
     <Section color="pink" style={{ zIndex: 11 }} id="education">
-      <h3>much education</h3>
+      <h2>much education</h2>
 
-      <div className="container-fluid [&_a]:text-yellow-300 [&_a:hover]:text-gray-200 [&_a:visited]:text-gray-100">
+      <div className="container-fluid [&_a]:text-yellow-200 [&_a:hover]:text-white [&_a:visited]:text-yellow-100">
         <div className="bg-transparent border-none flex flex-col relative">
-          <div className="text-2xl font-bold pb-4 uppercase">
+          <h3 className="text-2xl font-bold pb-4 uppercase">
             <a
               href={educationData.professionalInfo.link}
               target="_blank"
@@ -328,7 +338,7 @@ function Education() {
             >
               {educationData.professionalInfo.title}
             </a>
-          </div>
+          </h3>
 
           <dl className="dl-horizontal">
             <dt>Resume:</dt>
@@ -401,7 +411,7 @@ function Education() {
             key={institution.name}
             className="bg-transparent border-none flex flex-col relative"
           >
-            <div className="text-2xl font-bold pb-4 uppercase">
+            <h3 className="text-2xl font-bold pb-4 uppercase">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -409,7 +419,7 @@ function Education() {
               >
                 {institution.name}
               </a>
-            </div>
+            </h3>
             <dl className="dl-horizontal">
               <dt>Batch:</dt>
               <dd>{institution.batch}</dd>
@@ -524,7 +534,7 @@ function Education() {
 function Talks() {
   return (
     <Section color="green" style={{ zIndex: 13 }} id="talks">
-      <h3>so talkative</h3>
+      <h2>so talkative</h2>
       <div className="px-4">
         <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
           {talks.map((talk) => {
@@ -532,12 +542,12 @@ function Talks() {
               <img
                 loading="lazy"
                 className="object-cover rounded-xl aspect-[4/3]"
-                alt="Video of the talk"
+                alt={`Thumbnail for ${talk.title}`}
                 src={talk.image}
               />
             );
             return (
-              <div>
+              <div key={talk.title}>
                 {talk.video ? (
                   <a
                     href={talk.video}
@@ -549,7 +559,7 @@ function Talks() {
                 ) : (
                   img
                 )}
-                <h4 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
+                <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
                   <a href={talk.link} target="_blank">
                     {talk.title}
                   </a>
@@ -561,7 +571,7 @@ function Talks() {
                   >
                     {talk.event}
                   </a>
-                </h4>
+                </h3>
               </div>
             );
           })}
@@ -574,7 +584,7 @@ function Talks() {
 function Social() {
   return (
     <Section color="blue" style={{ zIndex: 13 }} id="social">
-      <h3>somewhat social</h3>
+      <h2>somewhat social</h2>
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {socialLinks.map((link) => (
@@ -1166,9 +1176,11 @@ const travelDestinations = [
 ].reverse();
 
 function ImageGallery({
+  destination,
   images,
   priority = false,
 }: {
+  destination: string;
   images: string[];
   priority?: boolean;
 }) {
@@ -1176,15 +1188,21 @@ function ImageGallery({
   return (
     <div className="image-gallery flex overflow-x-auto [scroll-snap-type:x_mandatory] gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {images.map((image, index) => (
-        <img
-          key={index}
-          onClick={(e) => window.open(e.currentTarget.src)}
-          src={image}
-          alt={`Gallery image ${index + 1}`}
-          className="w-[80%] aspect-[16/12] object-cover rounded-lg [scroll-snap-align:start] border border-white/20"
-          loading={priority && index === 0 ? "eager" : "lazy"}
-          decoding="async"
-        />
+        <button
+          type="button"
+          key={image}
+          className="w-[80%] shrink-0 cursor-zoom-in rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          onClick={() => window.open(image, "_blank", "noopener,noreferrer")}
+          aria-label={`Open photo ${index + 1} from ${destination} in a new tab`}
+        >
+          <img
+            src={image}
+            alt={`${destination}, photo ${index + 1}`}
+            className="aspect-[16/12] w-full object-cover rounded-lg border border-white/20"
+            loading={priority && index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </button>
       ))}
     </div>
   );
@@ -1371,10 +1389,10 @@ function PopOver({
         <div className="flex min-h-0 flex-1 flex-col pt-5">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <h4 className="m-0 text-xl font-semibold leading-tight">
+              <h3 className="m-0 text-xl font-semibold leading-tight">
                 {destination.name} ({activeImageIndex + 1}/
                 {destination.images.length})
-              </h4>
+              </h3>
               <p className="m-0 mt-2 break-words text-lg leading-snug text-gray-700">
                 {destination.description}
               </p>
