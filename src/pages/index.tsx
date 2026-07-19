@@ -253,7 +253,7 @@ function Travel() {
 
           {shownCard ? (
             <div
-              className="absolute overflow-hidden bg-transparent w-[300px] z-[1000]"
+              className="absolute z-[1000] w-[min(34rem,78vw)] -translate-x-1/2 overflow-visible"
               style={{
                 top: coordsToPosition(shownCard.lat, shownCard.lng).y + "%",
                 left: coordsToPosition(shownCard.lat, shownCard.lng).x + "%",
@@ -1182,53 +1182,115 @@ function PopOver({
   destination: (typeof travelDestinations)[0];
 }) {
   const [rotateBy, setRotateBy] = useState(0);
-
-  const rotatedArray = rotateArray(
-    [...destination.images.reverse()],
-    rotateBy % destination.images.length
-  );
+  const activeImageIndex = rotateBy % destination.images.length;
+  const activeImage = destination.images[activeImageIndex];
+  const polaroidCount = Math.min(destination.images.length, 3);
+  const polaroidImages = Array.from({ length: polaroidCount }, (_, index) => {
+    const offset = polaroidCount - 1 - index;
+    return destination.images[
+      (activeImageIndex - offset + destination.images.length) %
+        destination.images.length
+    ];
+  });
+  const backgroundTransforms = [
+    "translateX(-50%) translate(-10%, 4%) rotate(-6deg)",
+    "translateX(-50%) translate(10%, 2%) rotate(5deg)",
+  ];
+  const showPreviousPhoto = () => {
+    setRotateBy(
+      (current) =>
+        (current - 1 + destination.images.length) % destination.images.length
+    );
+  };
+  const showNextPhoto = () => {
+    setRotateBy((current) => (current + 1) % destination.images.length);
+  };
   return (
-    <button
-      className="appearance-none border-none bg-transparent relative mt-8 cursor-pointer h-72 px-16 w-full flex flex-col mb-8 hover:scale-[1.02] active:scale-[1.01]"
-      onClick={(e) => {
-        e.stopPropagation();
-        setRotateBy((x) => x + 1);
-      }}
+    <div
+      className="relative mt-8 h-[clamp(24rem,45vw,38rem)] w-full text-black"
+      onClick={(e) => e.stopPropagation()}
     >
-      {rotatedArray.map((x, i, arr) => (
-        <img
-          key={x}
-          src={x}
-          className="w-[calc(100%-64px)] self-center aspect-square bg-white object-cover absolute p-3 border border-solid border-black"
+      {polaroidImages.slice(0, -1).map((image, index) => (
+        <div
+          key={`${image}-${index}`}
+          aria-hidden="true"
+          className="absolute left-1/2 top-0 h-[90%] w-[84%] bg-white p-3 shadow-lg"
           style={{
-            transform: `rotate(${
-              i === arr.length - 1 ? 0 : (5 * i * 5) / arr.length
-            }deg)`,
-            paddingBottom: i === arr.length - 1 ? 64 : 12,
+            transform: backgroundTransforms[index],
+            zIndex: index,
           }}
-        />
+        >
+          <img src={image} alt="" className="h-full w-full object-contain" />
+        </div>
       ))}
-      <div className="absolute w-[240px] px-2 h-[52px] top-[180px] left-8">
-        <h4 className="m-0 mb-1 text-base">
-          {destination.name} ({(rotateBy % destination.images.length) + 1}/
-          {destination.images.length}){" "}
-          <button
-            className="border rounded-md px-2 py-[2px] bg-gray-100 text-xs"
-            onClick={(e) => {
-              e.stopPropagation();
-              window.open(rotatedArray.at(-1));
-            }}
-          >
-            Zoom
-          </button>
-        </h4>
-        <p className="m-0 text-sm text-gray-700">{destination.description}</p>
+
+      <div className="absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] -translate-x-1/2 flex-col bg-white p-4 shadow-xl">
+        <button
+          type="button"
+          className="block h-[70%] w-full cursor-pointer appearance-none border-0 bg-slate-100 p-0 focus-visible:scale-[1.01]"
+          onClick={(e) => {
+            e.stopPropagation();
+            showNextPhoto();
+          }}
+          aria-label={`Show next photo of ${destination.name}`}
+        >
+          <img
+            src={activeImage}
+            alt={`${destination.name}, photo ${activeImageIndex + 1}`}
+            className="h-full w-full object-contain"
+          />
+        </button>
+
+        <div className="flex min-h-0 flex-1 flex-col pt-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <h4 className="m-0 text-xl font-semibold leading-tight">
+                {destination.name} ({activeImageIndex + 1}/
+                {destination.images.length})
+              </h4>
+              <p className="m-0 mt-2 break-words text-lg leading-snug text-gray-700">
+                {destination.description}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="shrink-0 rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-base font-medium hover:bg-gray-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(activeImage, "_blank", "noopener,noreferrer");
+              }}
+            >
+              Zoom
+            </button>
+          </div>
+          <div className="mt-auto flex items-center gap-2 pt-3">
+            <button
+              type="button"
+              aria-label="Show previous photo"
+              title="Previous photo"
+              className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                showPreviousPhoto();
+              }}
+            >
+              <span aria-hidden="true">👈</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Show next photo"
+              title="Next photo"
+              className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                showNextPhoto();
+              }}
+            >
+              <span aria-hidden="true">👉</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </button>
+    </div>
   );
 }
-
-const rotateArray = (arr: any[], count = 1) => [
-  ...arr.slice(count),
-  ...arr.slice(0, count),
-];
