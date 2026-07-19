@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 import { BLOG_URL } from "../../constants";
 import SeoTags from "../../components/SeoTags";
 import { getBlogPostSummaries, IBlogPostSummary } from "../../utils/blog";
-import { formatBlogDatePath, getBlogPostPath } from "../../utils/blogDate";
+import { getBlogPostPath } from "../../utils/blogDate";
+import { getBlogTagColors, getBlogTagSlug } from "../../utils/blogTag";
+import { consumePendingBlogPostTransition } from "../../utils/blogViewTransition";
 import BlogLayout, { BlogBreadcrumbItem } from "../../layout/blog";
 
 import Link from "next/link";
+import { flushSync } from "react-dom";
 
 export async function getStaticProps() {
   const posts = getBlogPostSummaries();
@@ -22,12 +25,25 @@ export interface IBlogListingProps {
   breadcrumbs?: BlogBreadcrumbItem[];
 }
 
+const formatBlogPreviewDate = (date: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(date));
+
+const getBlogPreviewTags = (keywords: IBlogPostSummary["keywords"]) =>
+  Array.isArray(keywords) ? keywords : keywords ? [keywords] : [];
+
 export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) {
   const router = useRouter();
   const showDrafts = router.query["be-more-vulnerable"] === "1";
   const [drafts, setDrafts] = useState<IBlogPostSummary[]>([]);
   const [selectedDraft, setSelectedDraft] = useState<IBlogPostSummary | null>(
     null
+  );
+  const [transitioningPostSlug, setTransitioningPostSlug] = useState<string | null>(
+    consumePendingBlogPostTransition
   );
 
   useEffect(() => {
@@ -55,149 +71,6 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
         { label: "Blog" },
       ]}
     >
-      <style>
-        {`
-  ul {
-    margin: 2em 1em;
-    padding: 0;
-    line-height: 1.5;
-  }
-
-  .post {
-    list-style: none;
-    border-radius: 5px;
-    overflow: hidden;
-    border: 1px solid #cbcbcb;
-    margin: 1em;
-  }
-
-  .post a {
-    text-decoration: none;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    transition: background-color 0.2s;
-  }
-
-  .post a:hover,
-  .post a:focus {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .post-media {
-    margin: 0;
-    min-width: 30%;
-    max-width: 30%;
-    object-fit: cover;
-  }
-
-  .post-body {
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-  }
-
-  .post-title {
-    display: flex;
-    align-items: center;
-  }
-
-  .post-title small {
-    padding: 4px;
-    margin-left: 10px;
-    color: black;
-    background-color: gold;
-    font-weight: bold;
-    font-size: 8px;
-    text-transform: uppercase;
-  }
-
-  .post-body p ,
-  .post-body span {
-    color: initial;
-  }
-
-  .draft-modal-backdrop {
-    position: fixed;
-    z-index: 10;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.55);
-  }
-
-  .draft-modal {
-    width: min(100%, 30rem);
-    border: 2px solid currentColor;
-    padding: 1.5rem;
-    background: Canvas;
-    color: CanvasText;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
-  }
-
-  .draft-modal h2 { margin-top: 0; }
-  .draft-modal-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-
-  .draft-modal-actions a,
-  .draft-modal-actions button {
-    border: 1px solid currentColor;
-    border-radius: 0;
-    padding: 0.5rem 0.75rem;
-    color: inherit;
-    background: transparent;
-    font: inherit;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .draft-modal-actions a { background: CanvasText; color: Canvas; }
-
-  @media (prefers-color-scheme: dark) {
-    .post {
-      border-color: #555555;
-    }
-
-    .post-body p,
-    .post-body span {
-      color: white;
-    }
-
-    .post:hover,
-    .post:focus {
-      box-shadow: none;
-    }
-
-    .post a:hover,
-    .post a:focus {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  @media (max-width: 800px) {
-    ul {
-      margin: 2em -1em;
-    }
-    .post a {
-      flex-direction: column-reverse;
-    }
-    .post-media {
-      min-width: calc(100% + 2em);
-      max-width: calc(100% + 2em);
-      padding: 0;
-      margin: -1em -1em 1em;
-      height: 300px;
-      object-fit: cover;
-    }
-  }`}
-      </style>
-
       <SeoTags
         title="Blog | Divjot Singh"
         description="My thoughts on work, life and world."
@@ -207,78 +80,120 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
 
       {heading && <p>{heading}</p>}
 
-      <ul>
-        {visiblePosts.map((post) => (
+      <ul className="mx-0 my-[2em] p-0 leading-normal">
+        {visiblePosts.map((post) => {
+          const tags = getBlogPreviewTags(post.keywords);
+          const articleHref = getBlogPostPath(post);
+          const handlePostClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+            if (post.isDraft) {
+              event.preventDefault();
+              setSelectedDraft(post);
+              return;
+            }
+            flushSync(() => setTransitioningPostSlug(post.slug));
+          };
+
+          return (
           <li
-            className={`post  ${post.isDraft ? "draft" : ""}`}
+            className="my-[1em] list-none overflow-hidden rounded-[5px] border border-[#cbcbcb] dark:border-[#555]"
             key={post.title}
           >
-            <Link
-              href={getBlogPostPath(post)}
-              onClick={(event) => {
-                if (!post.isDraft) return;
-                event.preventDefault();
-                setSelectedDraft(post);
-              }}
-            >
-
-              <div className="post-body">
-                <h2 className="post-title">
-                  {post.title} {post.isDraft && <small>draft</small>}
-                </h2>
-
-                <p>{post.description}</p>
-                <span>
-                  <time dateTime={post.date}>
-                    {formatBlogDatePath(post.date)}
-                  </time>{" "}
-                  |{" "}
-                  <time
-                    dateTime={`PT${post.readingTimeMinutes}M`}
-                    aria-label={`${post.readingTimeMinutes} minute estimated reading time`}
+            <div className="flex flex-col-reverse items-start justify-between p-[1em] transition-colors hover:bg-black/10 focus-within:bg-black/10 dark:hover:bg-black/50 dark:focus-within:bg-black/50 min-[801px]:flex-row">
+              <div className="flex flex-col content-between">
+                <Link
+                  href={articleHref}
+                  data-blog-transition={!post.isDraft || undefined}
+                  className="no-underline"
+                  onClick={handlePostClick}
+                >
+                  <h2
+                    className="flex items-center pb-2 font-bold"
+                    style={
+                      transitioningPostSlug === post.slug
+                        ? { viewTransitionName: "blog-title" }
+                        : undefined
+                    }
                   >
-                    {post.readingTimeMinutes} min read
-                  </time>
-                </span>
+                    {post.title} {post.isDraft && <small className="ml-2.5 bg-yellow-400 p-1 text-[8px] font-bold uppercase text-black">draft</small>}
+                  </h2>
+                </Link>
+
+                {tags.length > 0 && (
+                  <div className="mb-2 flex flex-wrap gap-1.5" aria-label="Tags">
+                    {tags.map((tag) => {
+                      const colors = getBlogTagColors(tag);
+                      return (
+                        <Link
+                          href={`/blog/tags/${getBlogTagSlug(tag)}`}
+                          className="blog-preview-tag"
+                          key={tag}
+                          style={{
+                            "--tag-background-color": colors.backgroundColor,
+                            "--tag-text-color": colors.textColor,
+                            "--tag-background-color-dark": colors.darkBackgroundColor,
+                            "--tag-text-color-dark": colors.darkTextColor,
+                          } as React.CSSProperties}
+                        >
+                          {tag}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <Link href={articleHref} data-blog-transition={!post.isDraft || undefined} className="no-underline" onClick={handlePostClick}>
+                  <p className="dark:text-white">{post.description}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-200">
+                    <time className="rounded-full bg-slate-100 px-2 py-1 dark:bg-white/10" dateTime={post.date}>
+                      {formatBlogPreviewDate(post.date)}
+                    </time>
+                    <time
+                      className="rounded-full bg-slate-100 px-2 py-1 dark:bg-white/10"
+                      dateTime={`PT${post.readingTimeMinutes}M`}
+                      aria-label={`${post.readingTimeMinutes} ${post.readingTimeMinutes === 1 ? "minute" : "minutes"} estimated reading time`}
+                    >
+                      {post.readingTimeMinutes} {post.readingTimeMinutes === 1 ? "min" : "mins"} read
+                    </time>
+                  </div>
+                </Link>
               </div>
-              {post.image ? (
+              <Link href={articleHref} data-blog-transition={!post.isDraft || undefined} className="mb-[1em] h-[300px] w-[calc(100%+2em)] max-w-[calc(100%+2em)] -mx-[1em] min-[801px]:m-0 min-[801px]:h-auto min-[801px]:min-w-[30%] min-[801px]:max-w-[30%]" onClick={handlePostClick}>
                 <img
-                  className="post-media"
-                  src={post.image}
+                  className="h-full w-full object-cover"
+                  style={
+                    transitioningPostSlug === post.slug
+                      ? { viewTransitionName: "blog-image" }
+                      : undefined
+                  }
+                  src={post.image || "/img/travel/uk/uk-14.jpg"}
                   alt={`Image for ${post.title}`}
                 />
-              ) : (
-                <img
-                  className="post-media"
-                  src="/img/travel/uk/uk-14.jpg"
-                  alt="DJ shrugging infront of Awkward Hill Cottage in UK"
-                />
-              )}
-
-            </Link>
+              </Link>
+            </div>
           </li>
-        ))}
+          );
+        })}
       </ul>
 
       {selectedDraft && (
         <div
-          className="draft-modal-backdrop"
+          className="fixed inset-0 z-10 grid place-items-center bg-black/55 p-4"
           role="presentation"
           onMouseDown={() => setSelectedDraft(null)}
         >
           <section
-            className="draft-modal"
+            className="w-full max-w-[30rem] border-2 border-current bg-[Canvas] p-6 text-[CanvasText] shadow-[8px_8px_0_rgba(0,0,0,0.3)]"
             role="dialog"
             aria-modal="true"
             aria-labelledby="draft-modal-title"
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <h2 id="draft-modal-title">Uh-uh-uh!</h2>
+            <h2 id="draft-modal-title" className="mt-0">Uh-uh-uh!</h2>
             <p>You are attempting to read a draft, which would be unpolished.</p>
             <p>Are you sure you want to read it?</p>
-            <div className="draft-modal-actions">
-              <a href={selectedDraftUrl}>Yes, take me to the draft</a>
-              <button type="button" onClick={() => setSelectedDraft(null)}>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a className="cursor-pointer border border-current bg-[CanvasText] px-3 py-2 no-underline text-[Canvas]" href={selectedDraftUrl}>Yes, take me to the draft</a>
+              <button className="cursor-pointer rounded-none border border-current bg-transparent px-3 py-2 font-inherit text-inherit" type="button" onClick={() => setSelectedDraft(null)}>
                 No, take me back
               </button>
             </div>

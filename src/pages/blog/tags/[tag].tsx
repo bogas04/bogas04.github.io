@@ -88,25 +88,16 @@ function TagArchive({ tag, tagName, posts, redirectTo }: TagArchiveProps) {
         <>
           Posts tagged{" "}
           <span
+            className="blog-tag"
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              border: `1px solid ${colors.textColor}`,
-              padding: 0,
-              color: colors.textColor,
-              background: colors.backgroundColor,
-            }}
+              "--tag-background-color": colors.backgroundColor,
+              "--tag-text-color": colors.textColor,
+              "--tag-background-color-dark": colors.darkBackgroundColor,
+              "--tag-text-color-dark": colors.darkTextColor,
+            } as React.CSSProperties}
           >
-            <span style={{ padding: "0.2em 0.45em" }}>{displayName}</span>
-            <span
-              style={{
-                display: "inline-flex",
-                alignSelf: "stretch",
-                alignItems: "center",
-                borderLeft: `1px solid ${colors.textColor}`,
-                padding: "0 0.45em",
-              }}
-            >
+            <span className="tag-name">{displayName}</span>
+            <span className="tag-count">
               {posts?.length || 0}
             </span>
           </span>

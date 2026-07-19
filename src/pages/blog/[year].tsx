@@ -102,6 +102,7 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
     <BlogLayout
       title={post.title}
       readingTimeMinutes={post.readingTimeMinutes}
+      transitionSlug={post.slug}
       breadcrumbs={[
         { href: "/", label: "Divjot Singh" },
         { href: "/blog", label: "Blog" },
@@ -117,144 +118,6 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
         { label: "This post" },
       ]}
     >
-      <style>
-        {`
-  .content h2 {
-    font-size: 1.6em;
-    margin: 1em 0;
-    font-weight: 500;
-  }
-
-  .blog-placeholder-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 0 2em;
-  }
-
-  .content h3 {
-    font-size: 1.2em;
-    margin: 0.8em 0;
-    font-weight: 500;
-  }
-
-  .content video {
-    max-width: 100%;
-  }
-
-  .content img,
-  .content video,
-  .content h4 {
-    margin: 1em 0;
-  }
-
-  .content .blog-image-link {
-    display: block;
-    cursor: zoom-in;
-  }
-
-  .content pre {
-    padding: 10px;
-    font-size: 20px;
-    line-height: 26px;
-    overflow-x: auto;
-  } 
-
-  .content pre code {
-    background-color: initial;
-  }
-
-  blockquote {
-    position: relative;
-    font-style: italic;
-  }
-
-  blockquote::before {
-    content: "“";
-    position: absolute;
-    margin: -0.5em;
-    color: #333333;
-    font-size: 3em;
-    left: 0;
-    top: 0;
-  }
-
-  blockquote::after {
-    content: "”";
-    position: absolute;
-    margin: -0.5em;
-    color: #333333;
-    font-size: 3em;
-    right: 0;
-    bottom: 0;
-  }
-
-  blockquote + p > a {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  blockquote + p > a::before {
-    content: "— ";
-    white-space: pre;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .content pre {
-      color: black;
-    }
-
-    blockquote::after, blockquote::before {
-      color: white;
-    }
-  }
-
-  .content ul {
-    line-height: 1.5;
-  }
-
-  .content li {
-    margin: 0 0 0.5em 0;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    margin: 0.4em 0 2em;
-    padding: 0;
-    list-style: none;
-  }
-
-  .tags li {
-    margin: 0;
-  }
-
-  .tags a {
-    min-height: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border-radius: 0;
-    border: 1px solid var(--tag-text-color);
-    padding: 0;
-    font-size: 0.85em;
-    color: var(--tag-text-color);
-    background: var(--tag-background-color);
-    text-decoration: none;
-  }
-
-  .tags .tag-name { padding: 0.2em 0.45em; }
-  .tags .tag-count {
-    align-self: stretch;
-    display: inline-flex;
-    align-items: center;
-    border-left: 1px solid currentColor;
-    padding: 0 0.45em;
-  }
-  `}
-      </style>
-
       <SeoTags
         title={postTitle}
         description={post.description}
@@ -266,14 +129,17 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
 
       <header>
         {tags.length > 0 && (
-          <ul className="tags" aria-label="Tags">
+          <ul className="blog-tags" aria-label="Tags">
             {tags.map((tag) => (
               <li key={tag}>
                 <Link
                   href={`/blog/tags/${getBlogTagSlug(tag)}`}
+                  className="!text-[var(--tag-text-color)] dark:!text-[var(--tag-text-color-dark)]"
                   style={{
                     "--tag-background-color": getBlogTagColors(tag).backgroundColor,
                     "--tag-text-color": getBlogTagColors(tag).textColor,
+                    "--tag-background-color-dark": getBlogTagColors(tag).darkBackgroundColor,
+                    "--tag-text-color-dark": getBlogTagColors(tag).darkTextColor,
                   } as React.CSSProperties}
                 >
                   <span className="tag-name">{tag}</span>
@@ -294,7 +160,7 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
       )}
 
       <div
-        className="content"
+        className="blog-content"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 

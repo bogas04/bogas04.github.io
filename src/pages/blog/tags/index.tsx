@@ -36,57 +36,24 @@ function TagsIndex({ tags }: TagsIndexProps) {
         { label: "Tags" },
       ]}
     >
-      <style>{`
-        .tag-cloud {
-          display: flex;
-          flex-flow: row wrap;
-          gap: 1rem;
-          margin: 0;
-          padding: 0;
-          list-style: none;
-        }
-        .tag-cloud a {
-          display: inline-flex;
-          align-items: center;
-          border: 1px solid var(--tag-text-color);
-          padding: 0;
-          color: var(--tag-text-color);
-          background: var(--tag-background-color);
-          text-decoration: none;
-        }
-        .tag-cloud .tag-name { padding: 0.2em 0.45em; }
-        .tag-cloud .tag-count {
-          align-self: stretch;
-          display: inline-flex;
-          align-items: center;
-          border-left: 1px solid currentColor;
-          padding: 0 0.45em;
-        }
-
-        @supports (grid-template-rows: masonry) {
-          .tag-cloud {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-            grid-template-rows: masonry;
-            align-tracks: start;
-          }
-
-          .tag-cloud li { break-inside: avoid; }
-        }
-      `}</style>
-      <ul className="tag-cloud">
+      <ul className="m-0 flex flex-row flex-wrap gap-4 p-0 [@supports(grid-template-rows:masonry)]:grid [@supports(grid-template-rows:masonry)]:grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] [@supports(grid-template-rows:masonry)]:[grid-template-rows:masonry] [@supports(grid-template-rows:masonry)]:[align-tracks:start] [&>li]:[@supports(grid-template-rows:masonry)]:break-inside-avoid">
           {tags.map((tag) => (
             <li key={tag.name}>
               <Link
                 href={`/blog/tags/${getBlogTagSlug(tag.name)}`}
+                className="inline-flex items-center border border-[var(--tag-text-color)] bg-[var(--tag-background-color)] p-0 no-underline text-[var(--tag-text-color)] dark:!border-[var(--tag-text-color-dark)] dark:!bg-[var(--tag-background-color-dark)] dark:!text-[var(--tag-text-color-dark)]"
                 style={{
                   "--tag-background-color": getBlogTagColors(tag.name).backgroundColor,
                   "--tag-text-color": getBlogTagColors(tag.name).textColor,
+                  "--tag-background-color-dark": getBlogTagColors(tag.name).darkBackgroundColor,
+                  "--tag-text-color-dark": getBlogTagColors(tag.name).darkTextColor,
                   fontSize: `${0.9 + (tag.count / maxCount) * 0.9}em`,
                 } as React.CSSProperties}
               >
-                <span className="tag-name">{tag.name}</span>
-                <span className="tag-count">{tag.count}</span>
+                <span className="px-[0.45em] py-[0.2em]">{tag.name}</span>
+                <span className="inline-flex self-stretch items-center border-l border-current px-[0.45em]">
+                  {tag.count}
+                </span>
               </Link>
             </li>
           ))}

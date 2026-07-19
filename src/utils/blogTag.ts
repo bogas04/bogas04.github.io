@@ -27,6 +27,8 @@ export const BLOG_TAG_ALIASES: Record<string, string> = {
 export function getBlogTagColors(tag: string): {
   backgroundColor: string;
   textColor: string;
+  darkBackgroundColor: string;
+  darkTextColor: string;
 } {
   const hash = Array.from(tag.toLowerCase()).reduce(
     (value, character) => (value * 31 + character.charCodeAt(0)) >>> 0,
@@ -37,5 +39,7 @@ export function getBlogTagColors(tag: string): {
   return {
     backgroundColor: `hsl(${hue} 30% 88%)`,
     textColor: `hsl(${hue} 25% 30%)`,
+    darkBackgroundColor: `hsl(${hue} 24% 24%)`,
+    darkTextColor: `hsl(${hue} 32% 78%)`,
   };
 }

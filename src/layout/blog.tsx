@@ -11,20 +11,25 @@ interface BlogLayoutProps {
   breadcrumbs?: BlogBreadcrumbItem[];
   readingTimeMinutes?: number;
   title?: string;
+  transitionSlug?: string;
 }
+
+let cachedFontStep = 0;
 
 const BlogLayout = ({
   children,
   breadcrumbs,
   readingTimeMinutes,
   title,
+  transitionSlug,
 }: BlogLayoutProps) => {
-  const [fontStep, setFontStep] = useState(0);
+  const [fontStep, setFontStep] = useState(() => cachedFontStep);
   const fontScale = Math.pow(1.1, fontStep);
 
   useEffect(() => {
     const storedStep = Number(window.localStorage.getItem("blog-font-step"));
     if (Number.isInteger(storedStep) && storedStep >= -10 && storedStep <= 10) {
+      cachedFontStep = storedStep;
       setFontStep(storedStep);
     }
   }, []);
@@ -32,6 +37,7 @@ const BlogLayout = ({
   const updateFontStep = (amount: number) => {
     setFontStep((currentStep) => {
       const nextStep = Math.min(10, Math.max(-10, currentStep + amount));
+      cachedFontStep = nextStep;
       window.localStorage.setItem("blog-font-step", String(nextStep));
       return nextStep;
     });
@@ -39,68 +45,14 @@ const BlogLayout = ({
 
   const resetFontStep = () => {
     window.localStorage.removeItem("blog-font-step");
+    cachedFontStep = 0;
     setFontStep(0);
   };
 
   return (
-    <>
-      <style>{`
-        main {
-            position: relative;
-            max-width: 56em;
-            background-color: white;
-            padding: 2em;
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
-
-        img { width: 100%; }
-
-        .blog-breadcrumbs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4em;
-            margin: 0 0 0.75em;
-            padding: 0;
-            list-style: none;
-            font-size: 1.17em;
-            font-weight: bold;
-        }
-
-        .blog-breadcrumbs li { display: flex; align-items: center; }
-        .blog-breadcrumbs li + li::before { content: "/"; margin-right: 0.4em; opacity: 0.65; }
-
-        .text-size-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            margin: 0 0 1.5em;
-        }
-
-        .text-size-controls button {
-            min-width: auto;
-            min-height: auto;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0;
-            border: 1px solid currentColor;
-            padding: 0.15em 0.4em;
-            color: inherit;
-            background: transparent;
-            font: 0.8em inherit;
-            cursor: pointer;
-        }
-
-        .text-size-controls button:disabled { cursor: not-allowed; opacity: 0.5; }
-
-        @media (prefers-color-scheme: dark) {
-            body,
-            main { background: #333; color: white; }
-            a { color: lightsalmon; }
-        }
-      `}</style>
-      <main
+    <main
+        className="blog-page relative mx-auto box-border max-w-[56rem] bg-white p-8 dark:bg-[#333] dark:text-white [&_a]:dark:text-[lightsalmon] [&_img]:w-full"
+        data-blog-transition-slug={transitionSlug}
         style={{
           fontSize: `${fontScale}em`,
           maxWidth: "56rem",
@@ -109,9 +61,9 @@ const BlogLayout = ({
       >
         {breadcrumbs && (
           <header>
-            {title && <h1>{title}</h1>}
+            {title && <h1 className="blog-view-title pb-2 font-bold leading-[1.25]">{title}</h1>}
             <section
-              className="text-size-controls"
+              className="blog-view-reading-controls mb-6 flex items-center gap-2"
               aria-label="Reading controls"
               style={{ fontSize: `${1 / fontScale}em` }}
             >
@@ -121,15 +73,15 @@ const BlogLayout = ({
                 </time>
               )}
               {readingTimeMinutes && <span aria-hidden="true">|</span>}
-              <button type="button" onClick={() => updateFontStep(-1)} disabled={fontStep <= -10} aria-label="Decrease text size">Aa−</button>
-              <button type="button" onClick={() => updateFontStep(1)} disabled={fontStep >= 10} aria-label="Increase text size">Aa+</button>
-              <button type="button" onClick={resetFontStep} disabled={fontStep === 0} aria-label="Reset text size">Reset</button>
+              <button className="inline-flex min-h-0 min-w-0 items-center justify-center rounded-none border border-current bg-transparent px-[0.4em] py-[0.15em] text-[0.8em] disabled:cursor-not-allowed disabled:opacity-50" type="button" onClick={() => updateFontStep(-1)} disabled={fontStep <= -10} aria-label="Decrease text size">Aa−</button>
+              <button className="inline-flex min-h-0 min-w-0 items-center justify-center rounded-none border border-current bg-transparent px-[0.4em] py-[0.15em] text-[0.8em] disabled:cursor-not-allowed disabled:opacity-50" type="button" onClick={() => updateFontStep(1)} disabled={fontStep >= 10} aria-label="Increase text size">Aa+</button>
+              <button className="inline-flex min-h-0 min-w-0 items-center justify-center rounded-none border border-current bg-transparent px-[0.4em] py-[0.15em] text-[0.8em] disabled:cursor-not-allowed disabled:opacity-50" type="button" onClick={resetFontStep} disabled={fontStep === 0} aria-label="Reset text size">Reset</button>
             </section>
             <nav aria-label="Breadcrumb">
-              <ol className="blog-breadcrumbs">
+              <ol className="blog-view-breadcrumbs mb-3 flex list-none flex-wrap gap-[0.4em] p-0 text-[1.17em] font-bold [&_li]:flex [&_li]:items-center [&_li+li]:before:mr-[0.4em] [&_li+li]:before:content-['/'] [&_li+li]:before:opacity-65">
                 {breadcrumbs.map((item) => (
                   <li key={`${item.href || "current"}-${item.label}`}>
-                    {item.href ? <Link href={item.href}>{item.label}</Link> : item.label}
+                    {item.href ? <Link href={item.href} data-blog-transition>{item.label}</Link> : item.label}
                   </li>
                 ))}
               </ol>
@@ -137,8 +89,7 @@ const BlogLayout = ({
           </header>
         )}
         {children}
-      </main>
-    </>
+    </main>
   );
 };
 

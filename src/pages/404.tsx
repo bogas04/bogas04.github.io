@@ -7,53 +7,20 @@ export default function Custom404Page() {
 
   return (
     <>
-      <style>
-        {`
-  main {
-    text-align: center;
-    padding: 10vh 10vw;
-  }
-
-  img {
-    height: 40vh;
-    width: auto;
-  }
-  h1,
-  p {
-    margin: 0 auto;
-  }
-
-  h1 {
-    font-size: 4em;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
-  }
-
-  p {
-    margin: 1em auto;
-    font-size: 1.8em;
-  }
-
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 2.8em;
-    }
-    img {
-      width: 40vw;
-      height: auto;
-    }
-  }
-  `}
-      </style>
-
       <SeoTags title={status} />
 
-      <main>
-        <h1>{status}</h1>
+      <main className="px-[10vw] py-[10vh] text-center">
+        <h1 className="mx-auto mb-[0.5em] text-[2.8em] font-bold min-[481px]:text-[4em]">
+          {status}
+        </h1>
 
-        <img src={image} alt={status + " error code"} />
+        <img
+          src={image}
+          alt={status + " error code"}
+          className="h-auto w-[40vw] min-[481px]:h-[40vh] min-[481px]:w-auto"
+        />
 
-        <p>{message}</p>
+        <p className="mx-auto my-[1em] text-[1.8em]">{message}</p>
       </main>
     </>
   );

@@ -86,7 +86,7 @@ function Hero() {
 function Work() {
   return (
     <Section color="grey" style={{ zIndex: 12 }} id="work">
-      <h3>Such Work</h3>
+      <h3>such work</h3>
 
       <div className="container-fluid pt-3">
         {workExperience.map((job) => (
@@ -235,8 +235,8 @@ function Travel() {
   });
 
   return (
-    <Section color="yellow" style={{ zIndex: 11 }} id="travel">
-      <h3>Many Travels</h3>
+    <Section className="select-none" color="yellow" style={{ zIndex: 11 }} id="travel">
+      <h3>many travels</h3>
 
       <div
         className="flex justify-center p-8 relative max-sm:hidden "
@@ -306,7 +306,7 @@ function Travel() {
 function Education() {
   return (
     <Section color="pink" style={{ zIndex: 11 }} id="education">
-      <h3>Much Education</h3>
+      <h3>much education</h3>
 
       <div className="container-fluid [&_a]:text-yellow-300 [&_a:hover]:text-gray-200 [&_a:visited]:text-gray-100">
         <div className="bg-transparent border-none flex flex-col relative">
@@ -514,7 +514,7 @@ function Education() {
 function Talks() {
   return (
     <Section color="green" style={{ zIndex: 13 }} id="talks">
-      <h3>So Talkative</h3>
+      <h3>so talkative</h3>
       <div className="row px-4">
         <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
           {talks.map((talk) => {
@@ -539,7 +539,7 @@ function Talks() {
                 ) : (
                   img
                 )}
-                <h6 className="text-lg font-semibold mt-4">
+                <h4 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
                   <a href={talk.link} target="_blank">
                     {talk.title}
                   </a>
@@ -551,7 +551,7 @@ function Talks() {
                   >
                     {talk.event}
                   </a>
-                </h6>
+                </h4>
               </div>
             );
           })}
@@ -564,7 +564,7 @@ function Talks() {
 function Social() {
   return (
     <Section color="blue" style={{ zIndex: 13 }} id="social">
-      <h3>Somewhat Social</h3>
+      <h3>somewhat social</h3>
       <div className="container-fluid">
         <div className="row">
           {socialLinks.map((link) => (
@@ -1176,11 +1176,6 @@ function ImageGallery({
           decoding="async"
         />
       ))}
-      <style jsx>{`
-        .image-gallery::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   );
 }
@@ -1260,6 +1255,12 @@ function PopOver({
     setPreparingDirection(direction);
     const nextImageIndex = getImageIndex(direction);
     await preloadImage(destination.images[nextImageIndex]);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRotateBy(nextImageIndex);
+      setPreparingDirection(null);
+      return;
+    }
 
     const viewTransitionDocument = document as Document & {
       startViewTransition?: (update: () => void) => { finished: Promise<void> };
@@ -1407,115 +1408,6 @@ function PopOver({
           </div>
         </div>
       </div>
-      <style jsx>{`
-        .polaroid-card {
-          transform: translateX(-50%);
-        }
-
-        .polaroid-card--next {
-          animation: toss-next 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .polaroid-card--previous {
-          animation: toss-previous 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .polaroid-card--incoming {
-          opacity: 0;
-          pointer-events: none;
-          transform: translateX(-50%) scale(0.98);
-        }
-
-        .polaroid-card--incoming-next,
-        .polaroid-card--incoming-previous {
-          animation: receive-photo 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes toss-next {
-          to {
-            opacity: 0;
-            transform: translateX(-28%) translateY(-1rem) rotate(7deg);
-          }
-        }
-
-        @keyframes toss-previous {
-          to {
-            opacity: 0;
-            transform: translateX(-72%) translateY(-1rem) rotate(-7deg);
-          }
-        }
-
-        @keyframes receive-photo {
-          0%, 35% {
-            opacity: 0;
-            transform: translateX(-50%) scale(0.98);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .polaroid-card--next,
-          .polaroid-card--previous {
-            animation-duration: 1ms;
-          }
-        }
-      `}</style>
-      <style jsx global>{`
-        @supports (view-transition-name: travel-photo) {
-          ::view-transition-old(root),
-          ::view-transition-new(root) {
-            animation: none;
-          }
-
-          ::view-transition-group(travel-photo) {
-            animation-duration: 180ms;
-            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          }
-
-          html[data-travel-photo-direction="next"]::view-transition-old(travel-photo) {
-            animation: travel-photo-exit-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
-          }
-
-          html[data-travel-photo-direction="next"]::view-transition-new(travel-photo) {
-            animation: travel-photo-enter-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
-          }
-
-          html[data-travel-photo-direction="previous"]::view-transition-old(travel-photo) {
-            animation: travel-photo-exit-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
-          }
-
-          html[data-travel-photo-direction="previous"]::view-transition-new(travel-photo) {
-            animation: travel-photo-enter-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both;
-          }
-
-          @keyframes travel-photo-exit-right {
-            to { opacity: 0; transform: translateX(18%) rotate(5deg); }
-          }
-
-          @keyframes travel-photo-enter-left {
-            from { opacity: 0; transform: translateX(-18%) rotate(-5deg); }
-          }
-
-          @keyframes travel-photo-exit-left {
-            to { opacity: 0; transform: translateX(-18%) rotate(-5deg); }
-          }
-
-          @keyframes travel-photo-enter-right {
-            from { opacity: 0; transform: translateX(18%) rotate(5deg); }
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          ::view-transition-group(travel-photo),
-          ::view-transition-old(travel-photo),
-          ::view-transition-new(travel-photo) {
-            animation-duration: 1ms !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,6 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-utility: "DM Mono", "SFMono-Regular", Menlo, monospace;
+}
 
 html {
   scroll-behavior: smooth;
@@ -8,8 +16,7 @@ html {
 
 body {
   margin: 0;
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.5;
   color: #333;
@@ -22,7 +29,8 @@ h4,
 h5,
 h6 {
   margin: 0 0 0.5em 0;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -35,12 +43,19 @@ a {
 }
 
 code {
-  font-family: menlo, inconsolata, monospace;
+  font-family: var(--font-utility);
   font-size: calc(1em - 2px);
   color: #555;
   background-color: #f0f0f0;
   padding: 0.2em 0.4em;
   border-radius: 2px;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 @media (min-width: 400px) {
@@ -78,11 +93,8 @@ code {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --font-family-sans-serif: var(--font-body);
+  --font-family-monospace: var(--font-utility);
 }
 
 *,
@@ -116,9 +128,7 @@ section {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -238,7 +248,7 @@ h4,
 h5,
 h6 {
   margin-bottom: 0.5rem;
-  font-family: inherit;
+  font-family: var(--font-display);
   font-weight: 500;
   line-height: 1.2;
   color: inherit;
@@ -269,8 +279,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  font-family: var(--font-utility);
 }
 
 code {
@@ -398,4 +407,120 @@ code {
     flex: 0 0 50%;
     max-width: 50%;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-[#333] text-white;
+  }
+}
+
+.polaroid-card { transform: translateX(-50%); }
+.polaroid-card--next { animation: toss-next 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.polaroid-card--previous { animation: toss-previous 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.polaroid-card--incoming { opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.98); }
+.polaroid-card--incoming-next,
+.polaroid-card--incoming-previous { animation: receive-photo 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+@keyframes toss-next { to { opacity: 0; transform: translateX(-28%) translateY(-1rem) rotate(7deg); } }
+@keyframes toss-previous { to { opacity: 0; transform: translateX(-72%) translateY(-1rem) rotate(-7deg); } }
+@keyframes receive-photo {
+  0%, 35% { opacity: 0; transform: translateX(-50%) scale(0.98); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@supports (view-transition-name: travel-photo) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  ::view-transition-group(travel-photo) { animation: travel-photo-group 180ms cubic-bezier(0.4, 0, 0.2, 1); }
+  html[data-travel-photo-direction="next"]::view-transition-old(travel-photo) { animation: travel-photo-exit-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+  html[data-travel-photo-direction="next"]::view-transition-new(travel-photo) { animation: travel-photo-enter-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+  html[data-travel-photo-direction="previous"]::view-transition-old(travel-photo) { animation: travel-photo-exit-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+  html[data-travel-photo-direction="previous"]::view-transition-new(travel-photo) { animation: travel-photo-enter-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+}
+
+@keyframes travel-photo-group { from { opacity: 1; } to { opacity: 1; } }
+@keyframes travel-photo-exit-right { to { opacity: 0; transform: translateX(18%) rotate(5deg); } }
+@keyframes travel-photo-enter-left { from { opacity: 0; transform: translateX(-18%) rotate(-5deg); } }
+@keyframes travel-photo-exit-left { to { opacity: 0; transform: translateX(-18%) rotate(-5deg); } }
+@keyframes travel-photo-enter-right { from { opacity: 0; transform: translateX(18%) rotate(5deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after,
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.blog-content h2 { margin: 1em 0; font-size: 1.6em; font-weight: 500; }
+.blog-content h3 { margin: 0.8em 0; font-size: 1.2em; font-weight: 500; }
+.blog-content video { max-width: 100%; }
+.blog-content img, .blog-content video, .blog-content h4 { margin: 1em 0; }
+.blog-content .blog-image-link { display: block; cursor: zoom-in; }
+.blog-content pre { overflow-x: auto; padding: 10px; font-size: 20px; line-height: 26px; }
+.blog-content pre code { background-color: initial; }
+.blog-content blockquote { position: relative; font-style: italic; }
+.blog-content blockquote::before, .blog-content blockquote::after { position: absolute; margin: -0.5em; color: #333; font-size: 3em; }
+.blog-content blockquote::before { content: "“"; top: 0; left: 0; }
+.blog-content blockquote::after { content: "”"; right: 0; bottom: 0; }
+.blog-content blockquote + p > a { display: flex; justify-content: flex-end; }
+.blog-content blockquote + p > a::before { content: "— "; white-space: pre; }
+.blog-content ul { line-height: 1.5; }
+.blog-content li { margin: 0 0 0.5em; }
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 0.4em 0 2em; padding: 0; list-style: none; }
+.blog-tags li { margin: 0; }
+.blog-tag,
+.blog-tags a { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: auto; border: 1px solid var(--tag-text-color); border-radius: 0; padding: 0; color: var(--tag-text-color); background: var(--tag-background-color); font-size: 0.85em; text-decoration: none; }
+.blog-tag .tag-name,
+.blog-tags .tag-name { padding: 0.2em 0.45em; }
+.blog-tag .tag-count,
+.blog-tags .tag-count { display: inline-flex; align-items: center; align-self: stretch; border-left: 1px solid currentColor; padding: 0 0.45em; }
+.blog-preview-tag,
+.blog-tag,
+.blog-tags a,
+.blog-page time { font-family: var(--font-utility); }
+.blog-preview-tag { display: inline-flex; align-items: center; border: 1px solid #cbd5e1; padding: 0.125rem 0.5rem; color: #64748b; background: #f8fafc; font-size: 0.75rem; transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease; }
+.blog-preview-tag:hover { border-color: var(--tag-text-color); color: var(--tag-text-color); background: var(--tag-background-color); }
+.blog-placeholder-image { display: block; width: 100%; height: auto; margin: 0 0 2em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .blog-page { animation: blog-page-enter 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .blog-page > header { animation: blog-header-enter 220ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .blog-page .blog-content,
+  .blog-page .blog-placeholder-image { animation: blog-content-enter 240ms 35ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+@keyframes blog-page-enter { from { opacity: 0.82; } to { opacity: 1; } }
+@keyframes blog-header-enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes blog-content-enter { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+
+@supports (view-transition-name: blog-title) {
+  .blog-view-title { view-transition-name: blog-title; }
+  .blog-view-breadcrumbs { view-transition-name: blog-breadcrumbs; }
+  .blog-view-reading-controls { view-transition-name: blog-reading-controls; }
+  .blog-placeholder-image,
+  .blog-content img:first-of-type { view-transition-name: blog-image; }
+  html[data-blog-view-transition]::view-transition-old(root) { animation: blog-root-old 110ms ease-out both; }
+  html[data-blog-view-transition]::view-transition-new(root) { animation: blog-root-new 150ms ease-out both; }
+  ::view-transition-group(blog-title),
+  ::view-transition-group(blog-breadcrumbs),
+  ::view-transition-group(blog-reading-controls),
+  ::view-transition-group(blog-image) { animation-duration: 220ms; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  ::view-transition-old(blog-title), ::view-transition-old(blog-breadcrumbs), ::view-transition-old(blog-reading-controls), ::view-transition-old(blog-image) { animation: blog-view-old 180ms ease both; }
+  ::view-transition-new(blog-title), ::view-transition-new(blog-breadcrumbs), ::view-transition-new(blog-reading-controls), ::view-transition-new(blog-image) { animation: blog-view-new 220ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+@keyframes blog-view-old { to { opacity: 0; transform: translateY(-5px); } }
+@keyframes blog-view-new { from { opacity: 0; transform: translateY(7px); } }
+@keyframes blog-root-old { to { opacity: 0; } }
+@keyframes blog-root-new { from { opacity: 0; } }
+
+@media (prefers-color-scheme: dark) {
+  .blog-content pre { color: black; }
+  .blog-content blockquote::before, .blog-content blockquote::after { color: white; }
+  .blog-tag,
+  .blog-tags a { border-color: var(--tag-text-color-dark); background: var(--tag-background-color-dark); color: var(--tag-text-color-dark); }
+  .blog-preview-tag { border-color: rgb(255 255 255 / 20%); background: rgb(255 255 255 / 5%); color: #cbd5e1; }
+  .blog-preview-tag:hover { border-color: var(--tag-text-color-dark); color: var(--tag-text-color-dark); background: var(--tag-background-color-dark); }
 }
