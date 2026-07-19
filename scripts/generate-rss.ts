@@ -9,6 +9,7 @@ const BLOG_URL = `${WEBSITE_URL}/blog`;
 // Keep this equal to the URL submitted to the W3C Feed Validator. GitHub Pages
 // redirects it to HTTPS, but the validator compares against the requested URL.
 const RSS_SELF_URL = "http://bogas04.github.io/blog.xml";
+const ATOM_SELF_URL = `${WEBSITE_URL}/blog.atom`;
 const DOCS_BLOG = path.join(process.cwd(), "docs", "blog");
 
 interface RssItem {
@@ -130,6 +131,25 @@ function buildRss(items: RssItem[]): string {
   return `${header}${body}</channel>\n</rss>\n`;
 }
 
+function buildAtom(items: RssItem[]): string {
+  const updatedAt = (items[0]?.date || new Date(0)).toISOString();
+  const header = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<feed xmlns="http://www.w3.org/2005/Atom">\n` +
+    `<title>Divjot Singh — Blog</title>\n` +
+    `<id>${BLOG_URL}</id>\n` +
+    `<link href="${BLOG_URL}" />\n` +
+    `<link href="${ATOM_SELF_URL}" rel="self" type="application/atom+xml" />\n` +
+    `<updated>${updatedAt}</updated>\n` +
+    `<subtitle>My thoughts on work, life and world.</subtitle>\n`;
+  const body = items.map((item) => {
+    const publishedAt = item.date.toISOString();
+
+    return `<entry>\n<title>${toCData(item.title)}</title>\n<id>${item.link}</id>\n<link href="${item.link}" />\n<updated>${publishedAt}</updated>\n<published>${publishedAt}</published>\n<summary type="html">${toCData(item.description)}</summary>\n<content type="html">${toCData(prepareContentHtml(item.content, item.link))}</content>\n</entry>\n`;
+  }).join("\n");
+
+  return `${header}${body}</feed>\n`;
+}
+
 function main(): void {
   const posts: RssItem[] = readHtmlFiles(DOCS_BLOG).map((fileName) => {
     const fullPath = path.join(DOCS_BLOG, fileName);
@@ -146,9 +166,13 @@ function main(): void {
   });
 
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());
-  const outputPath = path.join(process.cwd(), "docs", "blog.xml");
-  fs.writeFileSync(outputPath, buildRss(posts.slice(0, 20)), "utf8");
-  console.log("Wrote RSS to", outputPath);
+  const recentPosts = posts.slice(0, 20);
+  const rssOutputPath = path.join(process.cwd(), "docs", "blog.xml");
+  const atomOutputPath = path.join(process.cwd(), "docs", "blog.atom");
+  fs.writeFileSync(rssOutputPath, buildRss(recentPosts), "utf8");
+  fs.writeFileSync(atomOutputPath, buildAtom(recentPosts), "utf8");
+  console.log("Wrote RSS to", rssOutputPath);
+  console.log("Wrote Atom to", atomOutputPath);
 }
 
 main();
