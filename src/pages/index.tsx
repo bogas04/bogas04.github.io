@@ -1182,6 +1182,9 @@ function PopOver({
   destination: (typeof travelDestinations)[0];
 }) {
   const [rotateBy, setRotateBy] = useState(0);
+  const [pendingDirection, setPendingDirection] = useState<
+    "previous" | "next" | null
+  >(null);
   const activeImageIndex = rotateBy % destination.images.length;
   const activeImage = destination.images[activeImageIndex];
   const polaroidCount = Math.min(destination.images.length, 3);
@@ -1197,13 +1200,27 @@ function PopOver({
     "translateX(-50%) translate(10%, 2%) rotate(5deg)",
   ];
   const showPreviousPhoto = () => {
-    setRotateBy(
-      (current) =>
-        (current - 1 + destination.images.length) % destination.images.length
-    );
+    if (!pendingDirection) {
+      setPendingDirection("previous");
+    }
   };
   const showNextPhoto = () => {
-    setRotateBy((current) => (current + 1) % destination.images.length);
+    if (!pendingDirection) {
+      setPendingDirection("next");
+    }
+  };
+  const finishCardTransition = () => {
+    if (!pendingDirection) {
+      return;
+    }
+
+    setRotateBy((current) => {
+      const step = pendingDirection === "next" ? 1 : -1;
+      return (
+        (current + step + destination.images.length) % destination.images.length
+      );
+    });
+    setPendingDirection(null);
   };
   return (
     <div
@@ -1224,7 +1241,12 @@ function PopOver({
         </div>
       ))}
 
-      <div className="absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] -translate-x-1/2 flex-col bg-white p-4 shadow-xl">
+      <div
+        className={`polaroid-card absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] flex-col bg-white p-4 shadow-xl ${
+          pendingDirection ? `polaroid-card--${pendingDirection}` : ""
+        }`}
+        onAnimationEnd={finishCardTransition}
+      >
         <button
           type="button"
           className="block h-[70%] w-full cursor-pointer appearance-none border-0 bg-slate-100 p-0 focus-visible:scale-[1.01]"
@@ -1291,6 +1313,40 @@ function PopOver({
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .polaroid-card {
+          transform: translateX(-50%);
+        }
+
+        .polaroid-card--next {
+          animation: toss-next 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .polaroid-card--previous {
+          animation: toss-previous 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes toss-next {
+          to {
+            opacity: 0;
+            transform: translateX(-28%) translateY(-1rem) rotate(7deg);
+          }
+        }
+
+        @keyframes toss-previous {
+          to {
+            opacity: 0;
+            transform: translateX(-72%) translateY(-1rem) rotate(-7deg);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .polaroid-card--next,
+          .polaroid-card--previous {
+            animation-duration: 1ms;
+          }
+        }
+      `}</style>
     </div>
   );
 }
