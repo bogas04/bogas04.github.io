@@ -1,4 +1,4 @@
-name: "🚀 build and commit"
+name: "🚀 build and deploy"
 
 on:
   push:
@@ -6,9 +6,11 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     name: workflow
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: 📚 checkout
         uses: actions/checkout@v4
@@ -25,8 +27,18 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: 🛠 build project
         run: pnpm run build
-      - name: 🚀 commit and push
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "chore: build files"
-          file_pattern: docs/*
+      - name: 🚀 publish generated site to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir deploy
+          cp -a docs/. deploy/
+          cd deploy
+          git init
+          git checkout -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git commit -m "chore: deploy site"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin gh-pages
