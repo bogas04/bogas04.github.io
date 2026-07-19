@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { memo, useEffect } from "react";
-import "prismjs/themes/prism.css";
 import "prism-themes/themes/prism-ghcolors.css";
 
 import { WEBSITE_URL } from "../../constants";
