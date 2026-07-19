@@ -81,7 +81,7 @@ const BlogLayout = ({
               <ol className="blog-view-breadcrumbs mb-3 flex list-none flex-wrap gap-[0.4em] p-0 text-[1.17em] font-bold [&_li]:flex [&_li]:items-center [&_li+li]:before:mr-[0.4em] [&_li+li]:before:content-['/'] [&_li+li]:before:opacity-65">
                 {breadcrumbs.map((item) => (
                   <li key={`${item.href || "current"}-${item.label}`}>
-                    {item.href ? <Link href={item.href} data-blog-transition>{item.label}</Link> : item.label}
+                    {item.href ? <Link href={item.href} data-blog-transition className="no-underline">{item.label}</Link> : item.label}
                   </li>
                 ))}
               </ol>
