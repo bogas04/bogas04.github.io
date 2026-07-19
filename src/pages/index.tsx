@@ -97,113 +97,195 @@ function Hero() {
 }
 function Work() {
   return (
-    <Section color="grey" style={{ zIndex: 12 }} id="work">
+    <Section
+      className="[&_h2]:!mx-[-5vw] [&_h2]:!px-[calc(5vw+10px)]"
+      color="grey"
+      style={{ zIndex: 12 }}
+      id="work"
+    >
       <h2>such work</h2>
 
       <div className="w-full px-4 pt-3">
-        {workExperience.map((job) => (
-          <WorkExperience key={job.id} job={job} />
+        {groupedWorkExperience.map((jobs) => (
+          <WorkExperience key={jobs[0].id} jobs={jobs} />
         ))}
 
-        <div className="bg-transparent border-none flex flex-col relative shadow-[-20px_0_0px_-17px_grey] -ml-4 pl-4 before:content-[''] before:w-5 before:h-5 before:bg-gray-600 before:block before:absolute before:-left-3 before:rounded-full before:top-2">
-          <div className="text-2xl font-bold pb-4 uppercase">
-            And much more, meet up for a &#9749; coffee if my work interests you
-          </div>
+        <div className="mt-12 pb-4 text-2xl font-bold uppercase">
+          And much more, meet up for a &#9749; coffee if my work interests you
         </div>
       </div>
     </Section>
   );
 }
 
-function WorkExperience({ job }: { job: (typeof workExperience)[number] }) {
+const workCardThemes: Record<string, string> = {
+  udaan: "bg-[#df1e3a]",
+  "swiggy-sde3": "bg-[#fc8019] text-slate-950",
+  "swiggy-sde2": "bg-[#fc8019] text-slate-950",
+  housing: "bg-[#6d28d9]",
+  samsung: "bg-[#1428a0]",
+  "samsung-trainee": "bg-[#1428a0]",
+};
+const defaultWorkCardTheme = "bg-[#673ab7]";
+const roleProgressions: Record<string, string[]> = {
+  udaan: ["SDE3", "SDE4", "UI Architect"],
+};
+
+const formatEmploymentLength = (duration: string) => {
+  const [start, end] = duration.split(/\s[-–]\s/);
+  const startDate = new Date(`${start} 1`);
+  const endDate = end === "Present" ? new Date() : new Date(`${end} 1`);
+
+  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    return null;
+  }
+
+  const totalMonths = Math.max(
+    0,
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+      endDate.getMonth() -
+      startDate.getMonth()
+  );
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  return [years && `${years}y`, months && `${months}m`].filter(Boolean).join(" ") || "0m";
+};
+
+function WorkExperience({
+  jobs,
+}: {
+  jobs: (typeof workExperience)[number][];
+}) {
+  const job = jobs[0];
+  const isGrouped = jobs.length > 1;
+  const rolesInChronologicalOrder = isGrouped ? [...jobs].reverse() : jobs;
+  const roleProgression = isGrouped
+    ? rolesInChronologicalOrder.map((role) => role.position)
+    : roleProgressions[job.id] ?? [job.position];
+  const toggleDetails = () => setIsExpanded((expanded) => !expanded);
   const [isExpanded, setIsExpanded] = useState(job.isCurrent);
+  const [isMobileFocused, setIsMobileFocused] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
   const contentId = `work-experience-${job.id}`;
+  const theme = workCardThemes[job.id] ?? defaultWorkCardTheme;
+  const combinedDuration = isGrouped
+    ? `${jobs[jobs.length - 1].duration.split(" - ")[0]} - ${job.duration.split(" - ")[1]}`
+    : job.duration;
+
+  useEffect(() => {
+    const card = cardRef.current;
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    let observer: IntersectionObserver | undefined;
+
+    const updateObserver = () => {
+      observer?.disconnect();
+      setIsMobileFocused(false);
+      if (!mediaQuery.matches || !card) return;
+
+      observer = new IntersectionObserver(
+        ([entry]) => setIsMobileFocused(entry.isIntersecting),
+        { rootMargin: "-40% 0px", threshold: 0 }
+      );
+      observer.observe(card);
+    };
+
+    updateObserver();
+    mediaQuery.addEventListener("change", updateObserver);
+    return () => {
+      observer?.disconnect();
+      mediaQuery.removeEventListener("change", updateObserver);
+    };
+  }, []);
 
   return (
     <article
-      className={`mb-4 flex flex-col relative -ml-4 border border-slate-600 bg-slate-800/80 py-3 pr-4 pl-4 text-slate-100 rounded-xl shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-700/90 hover:shadow-lg before:content-[''] before:w-5 before:h-5 before:block before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2 before:rounded-full ${
-        job.isCurrent
-          ? "before:bg-emerald-400"
-          : "before:bg-slate-500"
-      }`}
+      ref={cardRef}
+      className={`mb-10 flex flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme}`}
     >
       <div>
         <h3 className="m-0">
           <button
-          type="button"
-          aria-expanded={isExpanded}
-          aria-controls={contentId}
-          onClick={() => setIsExpanded((expanded) => !expanded)}
-          className="text-left text-2xl font-bold pb-2 uppercase cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700"
+            type="button"
+            aria-expanded={isExpanded}
+            aria-controls={contentId}
+            onClick={toggleDetails}
+            className="cursor-pointer font-body text-left text-[clamp(1.45rem,3vw,2.1rem)] font-extrabold leading-tight tracking-[-0.03em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
           >
-            {job.company}, {job.position}
-            <span className="block pt-2 text-sm font-medium normal-case underline underline-offset-2">
-              {isExpanded ? "Read less" : "Read more"}
+            {job.company}
+            <span className="mt-3 block font-body text-lg font-medium normal-case">
+              {roleProgression.join(" → ")}
             </span>
           </button>
         </h3>
-        <p className="pt-1 text-base normal-case text-slate-300">
-          <span className="font-normal italic">{job.duration}</span>
-          <> · {job.summary}</>
-        </p>
-        <a
-          href={job.companyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Visit ${job.company}'s website`}
-          className="inline-block pt-1 text-sm underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-700"
-        >
-          Website
-        </a>
+        <div className="mt-6 flex flex-wrap gap-3 font-body text-sm font-semibold">
+          <span className="bg-black/15 px-3 py-1.5">
+            {combinedDuration} ({formatEmploymentLength(combinedDuration)})
+          </span>
+          <a
+            href={job.companyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${job.company}'s website`}
+            className="bg-white/20 px-3 py-1.5 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+          >
+            Website ↗
+          </a>
+        </div>
+        <div className="mt-6 flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-5">
+          <button
+            type="button"
+            aria-expanded={isExpanded}
+            aria-controls={contentId}
+            onClick={toggleDetails}
+            className="flex min-h-11 shrink-0 items-center px-0 py-2 font-body text-base font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+          >
+            {isExpanded ? "Hide details ↑" : "Read highlights ↓"}
+          </button>
+          <p className="m-0 flex-1 font-body text-xl leading-relaxed normal-case">
+            {isGrouped ? rolesInChronologicalOrder.map((role) => role.summary).join(" ") : job.summary}
+          </p>
+        </div>
       </div>
       {isExpanded && (
-        <div id={contentId}>
-          <dl className="dl-horizontal">
-            <dt>Duration:</dt>
-            <dd>{job.duration}</dd>
-            {job.team && (
-              <>
-                <dt>Team:</dt>
-                <dd dangerouslySetInnerHTML={{ __html: job.team }} />
-              </>
-            )}
-            {job.descriptions.map((desc, index) => (
-              <React.Fragment key={index}>
-                <dt>{desc.title}:</dt>
-                <dd>
-                  {desc.title === "Description" &&
-                  desc.items.length === 1 &&
-                  !desc.items[0].includes("<li>") ? (
-                    <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
-                  ) : (
-                    <>
-                      {desc.title !== "Description" && <p>{desc.title}:</p>}
-                      <ul className="list-disc pl-6">
-                        {desc.items.map((item, itemIndex) => (
-                          <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </dd>
-              </React.Fragment>
-            ))}
-            {job.achievements && (
-              <>
-                <dt>Major Achievements:</dt>
-                <dd>
-                  <ul className="list-disc pl-6">
-                    {job.achievements.map((achievement, index) => (
-                      <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />
-                    ))}
-                  </ul>
-                </dd>
-              </>
-            )}
-          </dl>
+        <div id={contentId} className="mt-10">
+          {jobs.map((role, index) => (
+            <section key={role.id} className={index ? "mt-10" : ""}>
+              {isGrouped && <h4 className="mb-4 font-body text-xl font-semibold">{role.position}</h4>}
+              <WorkDetails job={role} />
+            </section>
+          ))}
         </div>
       )}
     </article>
+  );
+}
+
+function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
+  return (
+    <dl className="grid gap-x-8 gap-y-2 font-body md:grid-cols-[minmax(9rem,auto)_1fr] [&>dt]:self-start [&>dt]:py-1 [&>dt]:text-sm [&>dt]:font-semibold [&>dt]:uppercase [&>dt]:tracking-wide [&>dt]:opacity-75 [&>dd]:mb-6 [&>dd]:min-w-0 [&>dd]:py-1">
+      <dt>Duration:</dt>
+      <dd>{job.duration}</dd>
+      {job.team && <><dt>Team:</dt><dd dangerouslySetInnerHTML={{ __html: job.team }} /></>}
+      {job.descriptions.map((desc, index) => (
+        <React.Fragment key={index}>
+          <dt>{desc.title}:</dt>
+          <dd>
+            {desc.title === "Description" && desc.items.length === 1 && !desc.items[0].includes("<li>") ? (
+              <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
+            ) : (
+              <>
+                {desc.title !== "Description" && <p>{desc.title}:</p>}
+                <ul className="list-disc pl-6">
+                  {desc.items.map((item, itemIndex) => <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />)}
+                </ul>
+              </>
+            )}
+          </dd>
+        </React.Fragment>
+      ))}
+      {job.achievements && <><dt>Major Achievements:</dt><dd><ul className="list-disc pl-6">{job.achievements.map((achievement, index) => <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />)}</ul></dd></>}
+    </dl>
   );
 }
 
@@ -852,6 +934,30 @@ const workExperience = [
     achievements: undefined,
   },
 ];
+const companyGroupKey = (id: string) => {
+  if (id.startsWith("swiggy-")) return "swiggy";
+  if (id === "samsung" || id.startsWith("samsung-")) return "samsung";
+  return null;
+};
+
+const groupedWorkExperience = workExperience.reduce<
+  Array<(typeof workExperience)[number][]>
+>((groups, job) => {
+  const groupKey = companyGroupKey(job.id);
+  if (groupKey) {
+    const companyRoles = groups.find(
+      (group) => companyGroupKey(group[0].id) === groupKey
+    );
+    if (companyRoles) {
+      companyRoles.push(job);
+      return groups;
+    }
+  }
+
+  groups.push([job]);
+  return groups;
+}, []);
+
 const educationData = {
   professionalInfo: {
     title: "Professionally Me",
