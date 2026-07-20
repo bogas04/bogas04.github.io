@@ -3,11 +3,11 @@ title: Unusual feelings evoked by music
 description: On learning to let yourself enjoy the bliss of subjectivity
 date: "2026-07-18T11:20:20Z"
 categories: []
-keywords: [music, emotions, subjectivity]
+keywords: [music, emotions, subjectivity, indie-web]
 slug: ""
 ---
 
-So this is my entry to a prompt "Write about an album that got you through a hard time". 
+So this is my entry to a prompt "Write about an album that got you through a hard time" I got at [an Indie Web Meetup](https://indieweb.org/Bangalore).
 
 Without thinking much, my mind instantly thought about my unusual relationship with the music I've been listening to lately. I firmly believe that our choice in music reveals multiple layers about our experiences. 
 
