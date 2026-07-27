@@ -68,7 +68,7 @@
 .blog-content .blog-image-link { display: block; cursor: zoom-in; }
 .blog-content pre { overflow-x: auto; padding: 10px; font-size: 20px; line-height: 26px; }
 .blog-content pre code { background-color: initial; }
-.blog-content blockquote { position: relative; font-style: italic; }
+.blog-content blockquote { position: relative; margin-block: 3rem; font-style: italic; }
 .blog-content blockquote::before, .blog-content blockquote::after { position: absolute; margin: -0.5em; color: #333; font-size: 3em; }
 .blog-content blockquote::before { content: "“"; top: 0; left: 0; }
 .blog-content blockquote::after { content: "”"; right: 0; bottom: 0; }
@@ -114,7 +114,38 @@
 @keyframes blog-root-new { from { opacity: 0; } }
 
 @media (prefers-color-scheme: dark) {
-  .blog-content pre { color: black; }
+  .blog-content pre {
+    border: 1px solid #30363d;
+    border-radius: 0.75rem;
+    color: #e6edf3;
+    background: #161b22;
+  }
+  .blog-content pre code,
+  .blog-content pre code[class*="language-"] { color: inherit; }
+  .blog-content pre .token.comment,
+  .blog-content pre .token.prolog,
+  .blog-content pre .token.doctype,
+  .blog-content pre .token.cdata { color: #8b949e; }
+  .blog-content pre .token.string,
+  .blog-content pre .token.attr-value { color: #a5d6ff; }
+  .blog-content pre .token.punctuation,
+  .blog-content pre .token.operator { color: #c9d1d9; }
+  .blog-content pre .token.entity,
+  .blog-content pre .token.url,
+  .blog-content pre .token.symbol,
+  .blog-content pre .token.number,
+  .blog-content pre .token.boolean,
+  .blog-content pre .token.variable,
+  .blog-content pre .token.constant,
+  .blog-content pre .token.property,
+  .blog-content pre .token.regex,
+  .blog-content pre .token.inserted { color: #79c0ff; }
+  .blog-content pre .token.atrule,
+  .blog-content pre .token.keyword,
+  .blog-content pre .token.attr-name { color: #ff7b72; }
+  .blog-content pre .token.function { color: #d2a8ff; }
+  .blog-content pre .token.tag,
+  .blog-content pre .token.selector { color: #7ee787; }
   .blog-content blockquote::before, .blog-content blockquote::after { color: white; }
   .blog-tag, .blog-tags a { border-color: var(--tag-text-color-dark); background: var(--tag-background-color-dark); color: var(--tag-text-color-dark); }
   .blog-preview-tag { border-color: rgb(255 255 255 / 20%); background: rgb(255 255 255 / 5%); color: #cbd5e1; }
