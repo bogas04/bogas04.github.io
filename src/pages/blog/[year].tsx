@@ -73,7 +73,7 @@ interface IBlogRouteProps {
 }
 
 function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
-  const postTitle = `${post.title} | Blog | Divjot Singh`;
+  const postTitle = `${post.title} | blog | divjot singh`;
   const postUrl = `${WEBSITE_URL}${getBlogPostPath(post)}`;
   const postImage = `${WEBSITE_URL}${post.image || BLOG_PLACEHOLDER_IMAGE}`;
   const keywords = ((post.keywords || []) as string[]).join(", ");
@@ -104,8 +104,8 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
       readingTimeMinutes={post.readingTimeMinutes}
       transitionSlug={post.slug}
       breadcrumbs={[
-        { href: "/", label: "Divjot Singh" },
-        { href: "/blog", label: "Blog" },
+        { href: "/", label: "divjot" },
+        { href: "/blog", label: "blog" },
         ...(dateParts
           ? [
               { href: `/blog/${dateParts.year}`, label: dateParts.year },
@@ -115,7 +115,7 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
               },
             ]
           : []),
-        { label: "This post" },
+        { label: "this post" },
       ]}
     >
       <SeoTags
@@ -143,7 +143,6 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
                   } as React.CSSProperties}
                 >
                   <span className="tag-name">{tag}</span>
-                  <span className="tag-count">{tagCounts[tag] || 0}</span>
                 </Link>
               </li>
             ))}
@@ -240,8 +239,8 @@ function BlogRoute({ post, posts, year, legacyDestination, tagCounts }: IBlogRou
       heading={`Posts from ${year}`}
       posts={posts || []}
       breadcrumbs={[
-        { href: "/", label: "Divjot Singh" },
-        { href: "/blog", label: "Blog" },
+        { href: "/", label: "divjot" },
+        { href: "/blog", label: "blog" },
         { label: year || "" },
       ]}
     />

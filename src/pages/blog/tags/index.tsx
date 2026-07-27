@@ -29,11 +29,11 @@ function TagsIndex({ tags }: TagsIndexProps) {
 
   return (
     <BlogLayout
-      title="Blog tags"
+      title="blog tags"
       breadcrumbs={[
-        { href: "/", label: "Divjot Singh" },
-        { href: "/blog", label: "Blog" },
-        { label: "Tags" },
+        { href: "/", label: "divjot" },
+        { href: "/blog", label: "blog" },
+        { label: "tags" },
       ]}
     >
       <ul className="m-0 flex flex-row flex-wrap gap-4 p-0 [@supports(grid-template-rows:masonry)]:grid [@supports(grid-template-rows:masonry)]:grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] [@supports(grid-template-rows:masonry)]:[grid-template-rows:masonry] [@supports(grid-template-rows:masonry)]:[align-tracks:start] [&>li]:[@supports(grid-template-rows:masonry)]:break-inside-avoid">

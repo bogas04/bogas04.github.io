@@ -47,8 +47,8 @@ function MonthArchive({ posts, monthName, year, month }: MonthArchiveProps) {
       heading={`Posts from ${monthName}`}
       posts={posts}
       breadcrumbs={[
-        { href: "/", label: "Divjot Singh" },
-        { href: "/blog", label: "Blog" },
+        { href: "/", label: "divjot" },
+        { href: "/blog", label: "blog" },
         { href: `/blog/${year}`, label: year },
         { label: month },
       ]}

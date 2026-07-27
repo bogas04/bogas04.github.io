@@ -105,9 +105,9 @@ function TagArchive({ tag, tagName, posts, redirectTo }: TagArchiveProps) {
       }
       posts={posts || []}
       breadcrumbs={[
-        { href: "/", label: "Divjot Singh" },
-        { href: "/blog", label: "Blog" },
-        { href: "/blog/tags", label: "Tags" },
+        { href: "/", label: "divjot" },
+        { href: "/blog", label: "blog" },
+        { href: "/blog/tags", label: "tags" },
         { label: displayName },
       ]}
     />

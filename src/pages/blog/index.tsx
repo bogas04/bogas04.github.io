@@ -67,20 +67,30 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
   return (
     <BlogLayout
       breadcrumbs={breadcrumbs || [
-        { href: "/", label: "Divjot Singh" },
-        { label: "Blog" },
+        { href: "/", label: "divjot" },
+        { label: "blog" },
       ]}
+      title="divjot's blog"
     >
       <SeoTags
-        title="Blog | Divjot Singh"
+        title="blog | divjot singh"
         description="My thoughts on work, life and world."
         imageUrl=""
         pageUrl={BLOG_URL}
       />
 
-      {heading && <p>{heading}</p>}
+      {!heading && (
+        <p className="mb-10 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-200">
+          If you&apos;re interested in sporadic writing about react, react native
+          and emotions, then you&apos;ve come to the right place. There&apos;s{" "}
+          <a href="/blog.xml">/blog.xml</a> and <a href="/blog.atom">/blog.atom</a>{" "}
+          support as well!
+        </p>
+      )}
 
-      <ul className="mx-0 my-[2em] p-0 leading-normal">
+      {heading && <p className="mb-8 text-sm text-slate-500 lowercase dark:text-slate-300">{heading}</p>}
+
+      <ul className="m-0 p-0 leading-normal">
         {visiblePosts.map((post) => {
           const tags = getBlogPreviewTags(post.keywords);
           const articleHref = getBlogPostPath(post);
@@ -95,10 +105,10 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
 
           return (
           <li
-            className="my-[1em] list-none overflow-hidden rounded-[5px] border border-[#cbcbcb] dark:border-[#555]"
+            className="list-none border-b border-slate-200 py-8 first:pt-0 dark:border-white/15"
             key={post.title}
           >
-            <div className="flex flex-col-reverse items-start justify-between p-[1em] transition-colors hover:bg-black/10 focus-within:bg-black/10 dark:hover:bg-black/50 dark:focus-within:bg-black/50 min-[801px]:flex-row">
+            <div className="flex flex-col-reverse items-start justify-between gap-6 transition-colors min-[801px]:flex-row">
               <div className="flex flex-col content-between">
                 <Link
                   href={articleHref}
@@ -107,7 +117,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                   onClick={handlePostClick}
                 >
                   <h2
-                    className="flex items-center pb-2 font-bold"
+                    className="flex items-center pb-2 font-body text-xl font-semibold tracking-[-0.02em]"
                     style={
                       transitioningPostSlug === post.slug
                         ? { viewTransitionName: "blog-title" }
@@ -142,13 +152,13 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                 )}
 
                 <Link href={articleHref} data-blog-transition={!post.isDraft || undefined} className="no-underline" onClick={handlePostClick}>
-                  <p className="dark:text-white">{post.description}</p>
+                  <p className="mb-3 leading-relaxed text-slate-600 dark:text-slate-200">{post.description}</p>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-200">
-                    <time className="rounded-full bg-slate-100 px-2 py-1 dark:bg-white/10" dateTime={post.date}>
+                    <time dateTime={post.date}>
                       {formatBlogPreviewDate(post.date)}
                     </time>
                     <time
-                      className="rounded-full bg-slate-100 px-2 py-1 dark:bg-white/10"
+                      className="before:mr-2 before:content-['·']"
                       dateTime={`PT${post.readingTimeMinutes}M`}
                       aria-label={`${post.readingTimeMinutes} ${post.readingTimeMinutes === 1 ? "minute" : "minutes"} estimated reading time`}
                     >
@@ -157,7 +167,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                   </div>
                 </Link>
               </div>
-              <Link href={articleHref} data-blog-transition={!post.isDraft || undefined} className="mb-[1em] h-[300px] w-[calc(100%+2em)] max-w-[calc(100%+2em)] -mx-[1em] min-[801px]:m-0 min-[801px]:h-auto min-[801px]:min-w-[30%] min-[801px]:max-w-[30%]" onClick={handlePostClick}>
+              <Link href={articleHref} data-blog-transition={!post.isDraft || undefined} className="h-52 w-full overflow-hidden rounded-lg min-[801px]:h-auto min-[801px]:min-w-[30%] min-[801px]:max-w-[30%]" onClick={handlePostClick}>
                 <img
                   className="h-full w-full object-cover"
                   style={

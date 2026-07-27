@@ -8,6 +8,7 @@
 }
 
 @layer base {
+  html, body { overflow-x: clip; }
   body { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: #333; }
   h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
   h1 { font-size: 2em; }
@@ -57,8 +58,11 @@
 }
 
 /* Markdown is supplied as HTML, so these descendant rules remain intentionally global. */
-.blog-content h2 { margin: 1em 0; font-size: 1.6em; font-weight: 500; }
-.blog-content h3 { margin: 0.8em 0; font-size: 1.2em; font-weight: 500; }
+.blog-page h1, .blog-page h2, .blog-page h3, .blog-page h4 { font-family: var(--font-body); letter-spacing: -0.025em; }
+.blog-page h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; }
+.blog-content { font-size: 1.05em; line-height: 1.75; }
+.blog-content h2 { margin: 1.8em 0 0.7em; font-size: 1.45em; font-weight: 600; }
+.blog-content h3 { margin: 1.4em 0 0.6em; font-size: 1.2em; font-weight: 600; }
 .blog-content video { max-width: 100%; }
 .blog-content img, .blog-content video, .blog-content h4 { margin: 1em 0; }
 .blog-content .blog-image-link { display: block; cursor: zoom-in; }
@@ -76,11 +80,11 @@
 /* Tags receive their colour from content-specific CSS variables. */
 .blog-tags { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 0.4em 0 2em; padding: 0; list-style: none; }
 .blog-tags li { margin: 0; }
-.blog-tag, .blog-tags a { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--tag-text-color); border-radius: 0; padding: 0; color: var(--tag-text-color); background: var(--tag-background-color); font-family: var(--font-utility); font-size: 0.85em; text-decoration: none; }
+.blog-tag, .blog-tags a { display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; padding: 0; color: var(--tag-text-color); background: var(--tag-background-color); font-family: var(--font-body); font-size: 0.8em; text-decoration: none; }
 .blog-tag .tag-name, .blog-tags .tag-name { padding: 0.2em 0.45em; }
-.blog-tag .tag-count, .blog-tags .tag-count { display: inline-flex; align-items: center; align-self: stretch; border-left: 1px solid currentColor; padding: 0 0.45em; }
-.blog-preview-tag { display: inline-flex; align-items: center; border: 1px solid #cbd5e1; padding: 0.125rem 0.5rem; color: #64748b; background: #f8fafc; font-family: var(--font-utility); font-size: 0.75rem; text-decoration: none; transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease; }
-.blog-preview-tag:hover { border-color: var(--tag-text-color); color: var(--tag-text-color); background: var(--tag-background-color); }
+.blog-tag .tag-count, .blog-tags .tag-count { display: inline-flex; align-items: center; align-self: stretch; padding: 0 0.45em; }
+.blog-preview-tag { display: inline-flex; align-items: center; border: 0; border-radius: 999px; padding: 0.2rem 0.55rem; color: #64748b; background: #f1f5f9; font-family: var(--font-body); font-size: 0.75rem; text-decoration: none; transition: color 150ms ease, background-color 150ms ease; }
+.blog-preview-tag:hover { color: var(--tag-text-color); background: var(--tag-background-color); }
 .blog-page time { font-family: var(--font-utility); }
 .blog-placeholder-image { display: block; width: 100%; height: auto; margin: 0 0 2em; }
 

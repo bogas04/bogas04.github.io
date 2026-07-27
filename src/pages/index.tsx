@@ -24,7 +24,7 @@ function HomePage() {
   return (
     <>
       <SeoTags
-        title="Divjot Singh"
+        title="divjot singh"
         description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
         imageUrl="/profile.png"
         pageUrl="https://bogas04.github.io/"
@@ -52,10 +52,16 @@ function Hero() {
           alt="Portrait of Divjot Singh"
           className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
         />
-        Divjot Singh
+        divjot singh
       </h1>
 
-      <nav className="w-full flex justify-between p-8 overflow-auto max-lg:p-2 max-sm:mx-[-5%] max-sm:w-screen [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
+        Heylo! I&apos;m divjot (dj) or bogas04, software engineer by profession
+        with interest in veganism, single player gaming and psychology. I
+        sometimes write about unhinged emotional pieces and some cool tech work.
+      </p>
+
+      <nav className="w-full flex justify-between p-8 max-lg:p-2 max-sm:w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <a
           href="https://linkedin.com/in/bogas04"
           target="_blank"
@@ -63,7 +69,7 @@ function Hero() {
           className="flex flex-col items-center text-white lowercase"
         >
           <LinkedInIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
-          LinkedIn
+          linkedin
         </a>
         <a
           href="https://twitter.com/bogas04"
@@ -72,7 +78,7 @@ function Hero() {
           className="flex flex-col items-center text-white lowercase"
         >
           <TwitterIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
-          Twitter
+          twitter
         </a>
 
         <Link
@@ -80,7 +86,7 @@ function Hero() {
           className="flex flex-col items-center text-white lowercase"
         >
           <BlogIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
-          /blog
+          blog
         </Link>
         <a
           href="https://github.com/bogas04"
@@ -89,7 +95,7 @@ function Hero() {
           className="flex flex-col items-center text-white lowercase"
         >
           <GithubIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
-          Github
+          github
         </a>
       </nav>
     </Section>
@@ -169,7 +175,7 @@ function WorkExperience({
     if (event.defaultPrevented || hasTextSelection || (event.target as Element).closest("a, button")) return;
     toggleDetails();
   };
-  const [isExpanded, setIsExpanded] = useState(job.isCurrent);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isMobileFocused, setIsMobileFocused] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
   const contentId = `work-experience-${job.id}`;
