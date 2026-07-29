@@ -27,7 +27,7 @@ function HomePage() {
         title="divjot singh"
         description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
         imageUrl="/profile.png"
-        pageUrl="https://bogas04.github.io/"
+        pageUrl="https://bogas04.fyi/"
       />
       <main>
         <Hero />

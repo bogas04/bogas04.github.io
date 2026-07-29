@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const WEBSITE_URL = "https://bogas04.github.io";
+const WEBSITE_URL = "https://bogas04.fyi";
 const DOCS_DIRECTORY = path.join(process.cwd(), "docs");
 
 function findHtmlFiles(directory: string): string[] {

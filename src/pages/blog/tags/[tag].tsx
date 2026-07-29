@@ -69,7 +69,7 @@ function TagArchive({ tag, tagName, posts, redirectTo }: TagArchiveProps) {
           <meta httpEquiv="refresh" content={`0;url=${destination}`} />
           <link
             rel="canonical"
-            href={`https://bogas04.github.io${destination}`}
+            href={`https://bogas04.fyi${destination}`}
           />
         </Head>
         <p>

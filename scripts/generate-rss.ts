@@ -6,11 +6,9 @@ import * as parse5 from "parse5";
 import { getBlogPosts, getBlogPostSummaries } from "../src/utils/blog.ts";
 import { getBlogPostPath } from "../src/utils/blogDate.ts";
 
-const WEBSITE_URL = "https://bogas04.github.io";
+const WEBSITE_URL = "https://bogas04.fyi";
 const BLOG_URL = `${WEBSITE_URL}/blog`;
-// Keep this equal to the URL submitted to the W3C Feed Validator. GitHub Pages
-// redirects it to HTTPS, but the validator compares against the requested URL.
-const RSS_SELF_URL = "http://bogas04.github.io/blog.xml";
+const RSS_SELF_URL = `${WEBSITE_URL}/blog.xml`;
 const ATOM_SELF_URL = `${WEBSITE_URL}/blog.atom`;
 
 interface RssItem {

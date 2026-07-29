@@ -6,7 +6,7 @@ export default {
     picture: "https://www.github.com/bogas04.png",
     email: "divjot.singh@live.in",
     phone: "+91 9654987802",
-    website: "https://bogas04.github.io",
+    website: "https://bogas04.fyi",
     summary: "A summary of John Doe...",
     location: {
       city: "Bengaluru",

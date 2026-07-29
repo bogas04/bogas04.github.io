@@ -1,2 +1,2 @@
-export const WEBSITE_URL = "https://bogas04.github.io";
-export const BLOG_URL = "https://bogas04.github.io/blog";
+export const WEBSITE_URL = "https://bogas04.fyi";
+export const BLOG_URL = "https://bogas04.fyi/blog";
