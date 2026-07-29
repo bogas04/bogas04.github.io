@@ -131,6 +131,13 @@ const workCardThemes: Record<string, string> = {
   housing: "bg-[#6d28d9]",
   samsung: "bg-[#1428a0]",
   "samsung-trainee": "bg-[#1428a0]",
+  refiral: "bg-teal-600",
+};
+const workCardInteractionThemes: Record<
+  string,
+  { hover: string; intersection: string }
+> = {
+  fizzy: { hover: "md:hover:bg-black", intersection: "bg-black" },
 };
 const defaultWorkCardTheme = "bg-[#673ab7]";
 const roleProgressions: Record<string, string[]> = {
@@ -180,6 +187,7 @@ function WorkExperience({
   const cardRef = useRef<HTMLElement>(null);
   const contentId = `work-experience-${job.id}`;
   const theme = workCardThemes[job.id] ?? defaultWorkCardTheme;
+  const interactionTheme = workCardInteractionThemes[job.id];
   const combinedDuration = isGrouped
     ? `${jobs[jobs.length - 1].duration.split(" - ")[0]} - ${job.duration.split(" - ")[1]}`
     : job.duration;
@@ -213,7 +221,7 @@ function WorkExperience({
     <article
       ref={cardRef}
       onClick={handleCardClick}
-      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme}`}
+      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme} ${interactionTheme?.hover ?? ""} ${isMobileFocused ? interactionTheme?.intersection ?? "" : ""}`}
     >
       <div>
         <h3 className="m-0">
