@@ -45,7 +45,7 @@ export default HomePage;
 
 function Hero() {
   return (
-    <Section style={{ zIndex: 10 }}>
+    <Section className="min-h-[91vh]" style={{ zIndex: 10 }}>
       <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
         <img
           src="/profile.png"
@@ -61,40 +61,40 @@ function Hero() {
         sometimes write about unhinged emotional pieces and some cool tech work.
       </p>
 
-      <nav className="w-full flex justify-between p-8 max-lg:p-2 max-sm:w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <nav className="mt-6 grid w-full grid-cols-4 gap-2 p-8 max-lg:p-2">
         <a
           href="https://linkedin.com/in/bogas04"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center text-white lowercase"
+          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
         >
-          <LinkedInIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
+          <LinkedInIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           linkedin
         </a>
         <a
           href="https://twitter.com/bogas04"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center text-white lowercase"
+          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
         >
-          <TwitterIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
+          <TwitterIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           twitter
         </a>
 
         <Link
           href="/blog"
-          className="flex flex-col items-center text-white lowercase"
+          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
         >
-          <BlogIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
+          <BlogIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           blog
         </Link>
         <a
           href="https://github.com/bogas04"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center text-white lowercase"
+          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
         >
-          <GithubIcon className="invert mb-2 max-lg:scale-75 max-sm:mb-0 max-sm:scale-75" />
+          <GithubIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           github
         </a>
       </nav>
