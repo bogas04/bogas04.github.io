@@ -355,6 +355,20 @@ function Travel() {
     <Section className="select-none" color="yellow" style={{ zIndex: 11 }} id="travel">
       <h2>many travels</h2>
 
+      <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed sm:hidden">
+        We think travel is how we gain new perspectives, but, as one of my
+        favourite{" "}
+        <a
+          href="https://www.youtube.com/@fiascodagama1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          YouTubers
+        </a>{" "}
+        puts it, it&apos;s also when we loosen our grip on identity and leave much
+        of our baggage at home.
+      </p>
+
       <div
         className="flex justify-center p-8 relative max-sm:hidden "
         onClick={(e) => {
@@ -1317,14 +1331,14 @@ function ImageGallery({
         <button
           type="button"
           key={image}
-          className="w-[80%] shrink-0 cursor-zoom-in rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          className="h-[min(45vw,20rem)] shrink-0 cursor-zoom-in rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           onClick={() => window.open(image, "_blank", "noopener,noreferrer")}
           aria-label={`Open photo ${index + 1} from ${destination} in a new tab`}
         >
           <img
             src={image}
             alt={`${destination}, photo ${index + 1}`}
-            className="aspect-[16/12] w-full object-cover rounded-lg border border-white/20"
+            className="block h-full w-auto rounded-lg border border-white/20"
             loading={priority && index === 0 ? "eager" : "lazy"}
             decoding="async"
           />
