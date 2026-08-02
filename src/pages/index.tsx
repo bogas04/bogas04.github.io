@@ -52,7 +52,7 @@ function Hero() {
           alt="Portrait of divjot"
           className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
         />
-        divjot / bogas04
+        divjot
       </h1>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
