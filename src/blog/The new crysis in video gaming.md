@@ -33,4 +33,4 @@ So what does this mean? Will you be able to afford your gaming hobby, or will yo
 
 It certainly feels like a big reset moment: a transitional phase driven primarily by enshittification and the AI boom. I am not very hopeful about the future, but when I look at my backlog, I feel grateful to the developers of the past who put their time and energy into making these games.
 
-Maybe finally video games might only be made because the [developers want to play them](https://www.brainyquote.com/quotes/todd_howard_986086), not [sell them](https://www.youtube.com/watch?v=5U1_qzYsh_U), but going through this Crysis is the price we might pay to learn that lesson.
+Maybe finally video games might only be made because the [developers want to play them](https://www.brainyquote.com/quotes/todd_howard_986086), not [only to sell them](https://www.youtube.com/watch?v=5U1_qzYsh_U), but going through this Crysis is the price we might pay to learn that lesson.
