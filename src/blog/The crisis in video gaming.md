@@ -2,19 +2,9 @@
 title: The new crysis of video gaming
 description: My hobby is under threat yet again and that worries me
 date: "2026-08-02T00:00:00Z"
-categories: [video games, technology, culture]
-keywords:
-  [
-    video game industry,
-    game economy,
-    live service games,
-    game development,
-    gaming hardware,
-    cloud gaming,
-    AI boom,
-    indie games,
-  ]
-slug: /the-video-game-industrys-crisis-of-success
+categories: []
+keywords: [indie-web video game industry, AI boom]
+slug: /the-new-crysis-of-video-gaming
 ---
 
 ![abandonware need for speed underground on ROG Ally](/img/blog/need for speed underground on ROG Ally.jpg)
