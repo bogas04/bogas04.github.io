@@ -24,7 +24,7 @@ function HomePage() {
   return (
     <>
       <SeoTags
-        title="divjot singh"
+        title="divjot"
         description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
         imageUrl="/profile.png"
         pageUrl="https://bogas04.fyi/"
@@ -49,10 +49,10 @@ function Hero() {
       <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
         <img
           src="/profile.png"
-          alt="Portrait of Divjot Singh"
+          alt="Portrait of divjot"
           className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
         />
-        divjot singh
+        divjot / bogas04
       </h1>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
@@ -157,29 +157,33 @@ const formatEmploymentLength = (duration: string) => {
     0,
     (endDate.getFullYear() - startDate.getFullYear()) * 12 +
       endDate.getMonth() -
-      startDate.getMonth()
+      startDate.getMonth(),
   );
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
-  return [years && `${years}y`, months && `${months}m`].filter(Boolean).join(" ") || "0m";
+  return (
+    [years && `${years}y`, months && `${months}m`].filter(Boolean).join(" ") ||
+    "0m"
+  );
 };
 
-function WorkExperience({
-  jobs,
-}: {
-  jobs: (typeof workExperience)[number][];
-}) {
+function WorkExperience({ jobs }: { jobs: (typeof workExperience)[number][] }) {
   const job = jobs[0];
   const isGrouped = jobs.length > 1;
   const rolesInChronologicalOrder = isGrouped ? [...jobs].reverse() : jobs;
   const roleProgression = isGrouped
     ? rolesInChronologicalOrder.map((role) => role.position)
-    : roleProgressions[job.id] ?? [job.position];
+    : (roleProgressions[job.id] ?? [job.position]);
   const toggleDetails = () => setIsExpanded((expanded) => !expanded);
   const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
     const hasTextSelection = window.getSelection()?.type === "Range";
-    if (event.defaultPrevented || hasTextSelection || (event.target as Element).closest("a, button")) return;
+    if (
+      event.defaultPrevented ||
+      hasTextSelection ||
+      (event.target as Element).closest("a, button")
+    )
+      return;
     toggleDetails();
   };
   const [isExpanded, setIsExpanded] = useState(false);
@@ -204,7 +208,7 @@ function WorkExperience({
 
       observer = new IntersectionObserver(
         ([entry]) => setIsMobileFocused(entry.isIntersecting),
-        { rootMargin: "-40% 0px", threshold: 0 }
+        { rootMargin: "-40% 0px", threshold: 0 },
       );
       observer.observe(card);
     };
@@ -221,7 +225,7 @@ function WorkExperience({
     <article
       ref={cardRef}
       onClick={handleCardClick}
-      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme} ${interactionTheme?.hover ?? ""} ${isMobileFocused ? interactionTheme?.intersection ?? "" : ""}`}
+      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme} ${interactionTheme?.hover ?? ""} ${isMobileFocused ? (interactionTheme?.intersection ?? "") : ""}`}
     >
       <div>
         <h3 className="m-0">
@@ -263,7 +267,9 @@ function WorkExperience({
             {isExpanded ? "Hide details ↑" : "Read highlights ↓"}
           </button>
           <p className="m-0 flex-1 font-body text-xl leading-relaxed normal-case">
-            {isGrouped ? rolesInChronologicalOrder.map((role) => role.summary).join(" ") : job.summary}
+            {isGrouped
+              ? rolesInChronologicalOrder.map((role) => role.summary).join(" ")
+              : job.summary}
           </p>
         </div>
       </div>
@@ -271,7 +277,11 @@ function WorkExperience({
         <div id={contentId} className="mt-10">
           {jobs.map((role, index) => (
             <section key={role.id} className={index ? "mt-10" : ""}>
-              {isGrouped && <h4 className="mb-4 font-body text-xl font-semibold">{role.position}</h4>}
+              {isGrouped && (
+                <h4 className="mb-4 font-body text-xl font-semibold">
+                  {role.position}
+                </h4>
+              )}
               <WorkDetails job={role} />
             </section>
           ))}
@@ -286,25 +296,51 @@ function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
     <dl className="grid gap-x-8 gap-y-2 font-body md:grid-cols-[minmax(9rem,auto)_1fr] [&>dt]:self-start [&>dt]:py-1 [&>dt]:text-sm [&>dt]:font-semibold [&>dt]:uppercase [&>dt]:tracking-wide [&>dt]:opacity-75 [&>dd]:mb-6 [&>dd]:min-w-0 [&>dd]:py-1">
       <dt>Duration:</dt>
       <dd>{job.duration}</dd>
-      {job.team && <><dt>Team:</dt><dd dangerouslySetInnerHTML={{ __html: job.team }} /></>}
+      {job.team && (
+        <>
+          <dt>Team:</dt>
+          <dd dangerouslySetInnerHTML={{ __html: job.team }} />
+        </>
+      )}
       {job.descriptions.map((desc, index) => (
         <React.Fragment key={index}>
           <dt>{desc.title}:</dt>
           <dd>
-            {desc.title === "Description" && desc.items.length === 1 && !desc.items[0].includes("<li>") ? (
+            {desc.title === "Description" &&
+            desc.items.length === 1 &&
+            !desc.items[0].includes("<li>") ? (
               <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
             ) : (
               <>
                 {desc.title !== "Description" && <p>{desc.title}:</p>}
                 <ul className="list-disc pl-6">
-                  {desc.items.map((item, itemIndex) => <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />)}
+                  {desc.items.map((item, itemIndex) => (
+                    <li
+                      key={itemIndex}
+                      dangerouslySetInnerHTML={{ __html: item }}
+                    />
+                  ))}
                 </ul>
               </>
             )}
           </dd>
         </React.Fragment>
       ))}
-      {job.achievements && <><dt>Major Achievements:</dt><dd><ul className="list-disc pl-6">{job.achievements.map((achievement, index) => <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />)}</ul></dd></>}
+      {job.achievements && (
+        <>
+          <dt>Major Achievements:</dt>
+          <dd>
+            <ul className="list-disc pl-6">
+              {job.achievements.map((achievement, index) => (
+                <li
+                  key={index}
+                  dangerouslySetInnerHTML={{ __html: achievement }}
+                />
+              ))}
+            </ul>
+          </dd>
+        </>
+      )}
     </dl>
   );
 }
@@ -352,7 +388,12 @@ function Travel() {
   });
 
   return (
-    <Section className="select-none" color="yellow" style={{ zIndex: 11 }} id="travel">
+    <Section
+      className="select-none"
+      color="yellow"
+      style={{ zIndex: 11 }}
+      id="travel"
+    >
       <h2>many travels</h2>
 
       <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed sm:hidden">
@@ -365,8 +406,8 @@ function Travel() {
         >
           YouTubers
         </a>{" "}
-        puts it, it&apos;s also when we loosen our grip on identity and leave much
-        of our baggage at home.
+        puts it, it&apos;s also when we loosen our grip on identity and leave
+        much of our baggage at home.
       </p>
 
       <div
@@ -488,7 +529,7 @@ function Education() {
                       ? ", "
                       : ""}
                   </span>
-                )
+                ),
               )}
             </dd>
             <dt>Databases</dt>
@@ -676,7 +717,12 @@ function Talks() {
                   img
                 )}
                 <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
-                  <a className="block w-fit rounded bg-[#14532d] px-3 py-2 text-white no-underline hover:bg-[#166534]" href={talk.link} target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="block w-fit rounded bg-[#14532d] px-3 py-2 text-white no-underline hover:bg-[#166534]"
+                    href={talk.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {talk.title}
                   </a>
                   <a
@@ -739,7 +785,8 @@ const workExperience = [
     companyUrl: "https://udaan.com",
     position: "Software Architect",
     duration: "April 2020 - Present",
-    summary: "Leading the core UI platform team and improving web and app experiences.",
+    summary:
+      "Leading the core UI platform team and improving web and app experiences.",
     team: undefined,
     isCurrent: true,
     descriptions: [
@@ -860,7 +907,8 @@ const workExperience = [
       "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
     position: "Software Developer",
     duration: "June 2016 - October 2017",
-    summary: "Shipped Samsung Internet extension, Gaana, and Bixby web experiences.",
+    summary:
+      "Shipped Samsung Internet extension, Gaana, and Bixby web experiences.",
     team: '<a href="https://twitter.com/SamsungInternet" target="_blank" rel="noopener noreferrer">@SamsungInternet</a> team',
     isCurrent: false,
     descriptions: [
@@ -909,7 +957,8 @@ const workExperience = [
     companyUrl: "//www.samsung.com/in/sri-b/siso.html",
     position: "Student Trainee",
     duration: "June 2015 - August 2015",
-    summary: "Built map-data infrastructure and analysis tooling during a student internship.",
+    summary:
+      "Built map-data infrastructure and analysis tooling during a student internship.",
     team: undefined,
     isCurrent: false,
     descriptions: [
@@ -929,7 +978,8 @@ const workExperience = [
     companyUrl: "//refiral.com",
     position: "Product Developer",
     duration: "October 2013 - October 2014",
-    summary: "Co-founded and built product, analytics, and platform integrations.",
+    summary:
+      "Co-founded and built product, analytics, and platform integrations.",
     team: undefined,
     isCurrent: false,
     descriptions: [
@@ -980,7 +1030,7 @@ const groupedWorkExperience = workExperience.reduce<
   const groupKey = companyGroupKey(job.id);
   if (groupKey) {
     const companyRoles = groups.find(
-      (group) => companyGroupKey(group[0].id) === groupKey
+      (group) => companyGroupKey(group[0].id) === groupKey,
     );
     if (companyRoles) {
       companyRoles.push(job);
@@ -1369,7 +1419,7 @@ function PopOver({
         (direction === "next" ? 1 : -1) +
         destination.images.length) %
       destination.images.length,
-    [activeImageIndex, destination.images.length]
+    [activeImageIndex, destination.images.length],
   );
   const preloadImage = useCallback((source: string) => {
     const existingPromise = imageReadyPromises.current.get(source);
@@ -1379,7 +1429,10 @@ function PopOver({
       const image = new Image();
       const finishLoading = () => {
         if (typeof image.decode === "function") {
-          image.decode().catch(() => {}).then(resolve);
+          image
+            .decode()
+            .catch(() => {})
+            .then(resolve);
           return;
         }
         resolve();
@@ -1408,7 +1461,7 @@ function PopOver({
         (activeImageIndex - offset + destination.images.length) %
           destination.images.length
       ];
-    }
+    },
   );
   const incomingImage = pendingDirection
     ? destination.images[getImageIndex(pendingDirection)]
@@ -1486,7 +1539,11 @@ function PopOver({
           aria-hidden="true"
           className={`polaroid-card--incoming polaroid-card--incoming-${pendingDirection} absolute left-1/2 top-0 z-[9] h-[94%] w-[88%] bg-white p-4 shadow-xl`}
         >
-          <img src={incomingImage} alt="" className="h-[70%] w-full object-contain" />
+          <img
+            src={incomingImage}
+            alt=""
+            className="h-[70%] w-full object-contain"
+          />
         </div>
       ) : null}
 
