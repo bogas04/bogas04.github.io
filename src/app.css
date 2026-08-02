@@ -61,6 +61,7 @@
 .blog-page h1, .blog-page h2, .blog-page h3, .blog-page h4 { font-family: var(--font-body); letter-spacing: -0.025em; }
 .blog-page h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; }
 .blog-content { font-size: 1.05em; line-height: 1.75; }
+.blog-content p { margin: 0 0 1.25em; }
 .blog-content h2 { margin: 1.8em 0 0.7em; font-size: 1.45em; font-weight: 600; }
 .blog-content h3 { margin: 1.4em 0 0.6em; font-size: 1.2em; font-weight: 600; }
 .blog-content video { max-width: 100%; }
