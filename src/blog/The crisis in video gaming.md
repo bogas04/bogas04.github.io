@@ -3,13 +3,15 @@ title: The new crysis of video gaming
 description: My hobby is under threat yet again and that worries me
 date: "2026-08-02T00:00:00Z"
 categories: []
-keywords: [indie-web video game industry, AI boom]
+keywords: [indie-web, video game industry, AI boom]
 slug: /the-new-crysis-of-video-gaming
 ---
 
-![abandonware need for speed underground on ROG Ally](/img/blog/need for speed underground on ROG Ally.jpg)
-
 NOTE: I am not an analyst, just a gamer who consumes media on gaming and has some spit balling to share.
+
+![abandonware need for speed underground on ROG Ally](/img/blog/need%20for%20speed%20underground%20on%20ROG%20Ally.jpg)
+
+> _Me playing NFS Underground 2 on ROG Ally, a game that is delisted and abandoned by original publisher_
 
 I feel incredibly privileged to have been born into a time when video games existed, and to witness their maturity from Pong to pixel art to 3D graphics, and now seamless open worlds with incredibly detailed graphics and interconnected systems. Video games have always pushed hardware to its limits, whether in sound, storage, display, visual trickery, or even immersive narratives.
 
