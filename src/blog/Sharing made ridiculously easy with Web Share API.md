@@ -9,7 +9,7 @@ keywords: [web share api, web platform, browser, PWA]
 slug: /@bogas04/sharing-made-ridiculously-easy-with-web-share-api-33f6c9189d04
 ---
 
-![Image with icons of social media platforms](/img/blog/1__qp3z0ij8v372R__DVbuJB6Q.jpeg)
+![Image with icons of social media platforms](/gallery/blog/025/display.webp)
 
 > With growing mobile usage, performance and leanness (yeah, that’s a word) is becoming top priority for web apps. Oddly enough, sharing has never worked out well for web, until now (hopefully).
 
@@ -17,7 +17,7 @@ slug: /@bogas04/sharing-made-ridiculously-easy-with-web-share-api-33f6c9189d04
 
 Since the social network explosion, ad revenue on page views and obsession with [digg](http://digg.com/)\-ing websites, social sharing “widgets” have polluted our browsing experience with numerous flaws:
 
-![](/img/blog/1__rW9LubrRX5l06KUeRoCzsA.png)
+![](/gallery/blog/028/display.webp)
 
 - They came with a dozen of JavaScript SDK files for every-single-social-network.
 - They were usually “sticky”, because that’s so cool.
@@ -28,7 +28,7 @@ All these flaws became more prominent with rise of smartphones. SDKs burdened (a
 
 While solutions like lazy-loading and simpler designs helped a lot, it still is a painful job to find the right widget for your website, tweak it till the point it isn’t an eye-sore, only to find out that the users aren’t digg-ing it anymore (shameless pun-intended), and want to share it on XYZ messenger, which doesn’t have an [intent](https://faq.whatsapp.com/en/android/28000012) URL yet.
 
-![1990s called and it wants you to reply back.](/img/blog/1__4xpPKwDeI__BomsMMRntRTw.png)
+![1990s called and it wants you to reply back.](/gallery/blog/006/display.webp)
 1990s called and it wants you to reply back.
 
 Sadly, browsers haven’t cared enough to innovate much in this space lately. There were several attempts by Mozilla, Chrome and even [Windows 8](http://www.lovemysurface.net/using-windows-8-share-charm-surface/). While they still let you “email” your website on Desktop, and share to your favorite app on mobile, but that’s about it. Developer has no control over the shared title, content or the URL, which is a bigger problem when we talk about SPAs with fancy URLs.
@@ -49,7 +49,7 @@ And that’s it ! In order to use it, you need to meet following conditions tho
 
 The API is still a proposal, however it’s implemented in Chrome 61, which is the latest stable version at time of writing. Which means, in next 6 weeks, this API would be available on almost every other Android phone. If you’re still not sold and think intents are the way to go, you can head over to the [FAQ](https://github.com/WICG/web-share/blob/master/docs/explainer.md#frequently-asked-questions) section of the proposal to learn about some decent arguments.
 
-The [awesome PWA](http://mobile.twitter.com/) of [Twitter](https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3) already uses ![Web Share API for sharing tweets.](/img/blog/1__tGS6QdpXiL7m21oPm25v7A.png)
+The [awesome PWA](http://mobile.twitter.com/) of [Twitter](https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3) already uses ![Web Share API for sharing tweets.](/gallery/blog/031/display.webp)
 
 #### Future
 

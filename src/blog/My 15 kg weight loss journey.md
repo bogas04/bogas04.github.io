@@ -9,7 +9,7 @@ keywords: [weight loss, vegan, health]
 slug: /@bogas04/how-i-lost-15-kgs-82b2302f205e
 ---
 
-![A picture showing downward trend of my body weight from 90kg to 69kg over few months](/img/blog/1__AW6KCuaBBSUSWKu8dIrmLA.png)
+![A picture showing downward trend of my body weight from 90kg to 69kg over few months](/gallery/blog/008/display.webp)
 
 So coming to my story, I didn’t quite intend to lose weight, or follow any diet, or did a rigorous workout. I believe that it’s basically the result of negative-feedback in my brain. Sounds weird right? I’ll explain.
 
@@ -35,21 +35,21 @@ It’s like, you can starve for 2 months and lose plenty, but that one day when 
 
 So what started the chain of events was this app called [Google Fit](https://play.google.com/store/apps/details?id=com.google.android.apps.fitness). It’s a basic fitness app that uses your phone sensors to calculate steps/calories burnt/distance covered. That’s pretty much it.
 
-![23rd of February is when I installed the app, though it took 3 days to get me to work on my goal.](/img/blog/1__WFkALvcY68HD__PaoixgiiQ.png)
+![23rd of February is when I installed the app, though it took 3 days to get me to work on my goal.](/gallery/blog/033/display.webp)
 23rd of February is when I installed the app, though it took 3 days to get me to work on my goal.
 
 Annnnd I forgot about it for three days. I opened it one day to see that I actually completed the goal of 10,000 steps on a Saturday when I went for a walk by the lake. That was easy! What I also observed was that I roughly burnt 1,700 ~ 2,000 calories by doing nothing throughout the day. Even if the data isn’t accurate, the sensor and environment conditions remain the same, making it a reliable way to observe variations and not the absolute values.
 
 My brain was intrigued by these numbers. It’s almost how you add hashtags to Instagram posts to get more likes, and once you do get more, you overdo it, and the cycle continues. Just that, here you get likes from health!
 
-![VERY TECHNICAL. MUCH SCIENCE.](/img/blog/1__EmZytUAuspI__mycZ__o9OGw.png)
+![VERY TECHNICAL. MUCH SCIENCE.](/gallery/blog/014/display.webp)
 VERY TECHNICAL. MUCH SCIENCE.
 
 So the first thing I did was that I _reduced the goal to 9,000 steps_ to make myself feel better. And every week I increased it by 500–1000 steps as and when I started getting a good rhythm.
 
 The other thing that I did was that I took interest in knowing calories of things I ate daily. By learning that a spoon of oil has as many calories as a bowl of corn flakes, which in turn has as many calories as a can of cola, I somehow started making food at home to avoid the extra cheese/butter/oil the chefs put in.
 
-![Remember, one is a breakfast, one is a drink with a snack, and other is added to your lunch just like that!](/img/blog/1__UFCQ__sve25zCXqzQc__rYxA.png)
+![Remember, one is a breakfast, one is a drink with a snack, and other is added to your lunch just like that!](/gallery/blog/032/display.webp)
 Remember, one is a breakfast, one is a drink with a snack, and other is added to your lunch just like that!
 
 Again, didn’t intend to, it’s just my brain trying to optimize calorie intake.
@@ -58,7 +58,7 @@ Not only I became more aware of the calories that I put it, I also started reduc
 
 This number was insightful in an indirect way. Knowing that I was burning say 2000 calories daily, by ensuring low-calorie diet (without compromises), and burning more than the usual 2000, there was no way for me to not lose weight. And I did.
 
-![MILLIONS OF CALORIES](/img/blog/1__7emoMCCIFij0dncEASB94g.gif)
+![MILLIONS OF CALORIES](/gallery/blog/007/display.webp)
 MILLIONS OF CALORIES
 
 Losing weight is really no rocket-science. Either take in lesser calories or burn more than you eat or BOTH!
@@ -74,7 +74,7 @@ So to summarize, all I did was;
 
 ### The Results
 
-![Downward trend of weight](/img/blog/1__OHlYFf__A8U689ORGveNMHA.png)
+![Downward trend of weight](/gallery/blog/022/display.webp)
 
 - Age: 23 years and 1 month
 - Weight: 72 kilograms | 158.7 pounds
@@ -90,7 +90,7 @@ So to summarize, all I did was;
 
 I basically lost roughly 1 kilogram a week. At the same time I also went to grandma’s house (= fat rich food), ate out and ate heavy items (= too many calories), and even fall ill (= very little walk). I simply increased my steps for those days or did extra steps later. Basically, I didn’t change my lifestyle at all, apart from dedicating 2–3 hours to walk and cooking daily.
 
-![I meet my goals daily, and compensate whenever I eat outside.](/img/blog/1__B3QKpZdPXxmFaDsc9XQbdg.png)
+![I meet my goals daily, and compensate whenever I eat outside.](/gallery/blog/010/display.webp)
 I meet my goals daily, and compensate whenever I eat outside.
 
 So by minor changes in my lifestyle, I found myself becoming less lethargic, which only helped me improve it more and more. I could work for long hours, walk for 2 hours, then cook food and still feel active!

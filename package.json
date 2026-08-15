@@ -8,22 +8,31 @@
   },
   "scripts": {
     "start": "next dev",
-    "build": "make build",
+    "build": "pnpm run gallery:check && pnpm run gallery:build && pnpm run gallery:audit && pnpm run build:site",
+    "build:site": "make build",
     "generate:rss": "node --no-warnings ./scripts/generate-rss.ts",
     "generate:sitemap": "node --no-warnings ./scripts/generate-sitemap.ts",
+    "gallery:add": "node --no-warnings scripts/gallery-add.ts",
+    "gallery:prepare": "node --no-warnings scripts/gallery-prepare.ts",
+    "gallery:build": "node --no-warnings scripts/gallery-build.ts",
+    "gallery:check": "node --no-warnings scripts/gallery-check.ts",
+    "gallery:audit": "node --no-warnings scripts/gallery-audit.ts",
+    "prepare": "husky",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "next": "preview",
     "parse5": "^6.0.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "prism-themes": "^1.6.0",
     "remark": "^13.0.0",

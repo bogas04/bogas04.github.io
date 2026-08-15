@@ -30,18 +30,17 @@ must not include EXIF, GPS, XMP, IPTC, camera, author, or capture-time data.
 
 ```text
 gallery/
-  albums/
-    taiwan-2026/
-      album.md
-      001.md
-      002.md
   images/
     taiwan-2026/
+      index.md                 # album metadata
       001.jpg                  # sanitised, Git-tracked master
+      001.md                   # image metadata and caption
       002.jpg
+      002.md
   generated/                   # gitignored build manifest
 public/
   gallery/                     # gitignored generated image variants
+  assets/                      # non-gallery site artwork
 scripts/
   gallery-add.ts
   gallery-prepare.ts
@@ -50,15 +49,16 @@ scripts/
   gallery-audit.ts
 ```
 
-Only `gallery/albums/**` and `gallery/images/**` are committed. `public/gallery`
-and `gallery/generated` are recreated during every build and must be included
-in `.gitignore`.
+Only `gallery/images/**` is committed. `public/gallery` and
+`gallery/generated` are recreated during every build and must be included in
+`.gitignore`.
 
 ## Authoring model
 
-Each image has a Markdown sidecar with the same basename. For example,
-`gallery/images/taiwan-2026/001.jpg` is described by
-`gallery/albums/taiwan-2026/001.md`.
+Each album is a self-contained folder. `index.md` contains album-level
+metadata, and each image has a Markdown sidecar with the same basename. For
+example, `gallery/images/taiwan-2026/001.jpg` is described by
+`gallery/images/taiwan-2026/001.md`.
 
 ```md
 ---
@@ -76,8 +76,8 @@ A slow morning before the streets properly filled up.
 `takenAt` and `location` are intentional editorial metadata; neither is read
 from an image file. `alt` is required for every published image.
 
-`album.md` contains album-level title, summary, cover-photo ID, trip dates, and
-visibility.
+`index.md` contains album-level title, summary, cover-photo ID, category, trip
+dates, and visibility.
 
 ## Commands
 
@@ -103,7 +103,9 @@ pnpm gallery:add ~/Pictures/taiwan/001.jpg --album taiwan-2026
 
 It sanitises the selected local original before writing
 `gallery/images/taiwan-2026/001.jpg`, creates an adjacent caption template when
-needed, and never writes the unsanitised original to the repository.
+needed, and never writes the unsanitised original to the repository. If the
+album is new, it also creates a non-destructive `index.md` template beside the
+image.
 
 Use `sharp` to decode and re-encode the image without `withMetadata()`. This
 removes EXIF, GPS, XMP, IPTC, and other embedded metadata. Preserve only pixels,
@@ -111,9 +113,9 @@ orientation (baked into pixels), and colour profile as appropriate.
 
 ### `gallery:prepare`
 
-Scans `gallery/images` and creates a sidecar Markdown template for every image
-that lacks one. It never overwrites an existing Markdown file. Run it whenever
-images are copied in manually, before `git add`.
+Scans `gallery/images` and creates `index.md` plus a sidecar Markdown template
+for every image that lacks one. It never overwrites an existing Markdown file.
+Run it whenever images are copied in manually, before `git add`.
 
 ### `gallery:check`
 
@@ -205,12 +207,15 @@ only if build times become material.
 1. Add the gallery scripts, schema, `.gitignore` entries, and hooks.
 2. Implement `gallery:add` and verify it strips metadata before any image is
    committed.
-3. Move one small existing album into `gallery/images` with fresh Markdown
-   sidecars; use sanitised copies, not the existing files directly.
+3. Move one small existing album into a self-contained folder under
+   `gallery/images` with fresh Markdown sidecars; use sanitised copies, not the
+   existing files directly.
 4. Build the gallery UI and deploy it behind `/image-gallery/`.
 5. Add the Cloudflare redirect for `img.bogas04.fyi`.
 6. Migrate remaining gallery candidates and replace any currently served image
-   URLs with sanitized copies where practical.
+   URLs with sanitized copies where practical. Travel and blog images now use
+   the canonical gallery derivatives; homepage-only artwork remains under
+   `public/assets`.
 7. Decide separately whether public Git history needs rewriting to remove
    previously committed metadata-bearing originals. This is a disruptive action
    and should only be done after confirming the repository's visibility and

@@ -13,7 +13,7 @@ Thanks to COVID-19, working classes are either privileged to work remotely for t
 
 Pretty much all developers know how synchronous blocking code isn't really ideal, especially when multiple actors are involved. The same applies to a team of employees. If every problem requires another employee to stop what they're doing and help you out, it causes a pipeline stall. Because they've stalled what they were doing, dependents of their work would also be stalled. It isn't immediately obvious, but as the team scales without adopting asynchronous communication, productivity counter-intuitively decreases, despite the increase of workforce. In my opinion addition of new members doesn't also mean improvement of efficient communication amongst them.
 
-![Image comparing how synchronously processes stall the pipeline while asynchronous processes do not do so](/img/blog/asynchronous-vs-synchronous.png)
+![Image comparing how synchronously processes stall the pipeline while asynchronous processes do not do so](/gallery/blog/040/display.webp)
 
 - Make it easy for other person to reply quickly, for example:
 - - A yes/no question can be answered faster than an ambiguous monologue.
@@ -29,7 +29,7 @@ Pretty much all developers know how synchronous blocking code isn't really ideal
 
 [Source](https://medium.com/swlh/the-five-levels-of-remote-work-and-why-youre-probably-at-level-2-ccaf05a25b9c)
 
-![Image comparing 3 examples of articulation. First: _call the person directly to get answer_, Second: "a-fairly-large-module isn't working , can you join this meeting for 5 minutes?", Third: "Hey, I got complete-error-message error when running code-snippet. I've tried attempts-to-fix and saw links-to-documentation, but I'm still stuck. Here's my code branch if you want to checkout and debug.">](/img/blog/articulate-communication.png)
+![Image comparing 3 examples of articulation. First: _call the person directly to get answer_, Second: "a-fairly-large-module isn't working , can you join this meeting for 5 minutes?", Third: "Hey, I got complete-error-message error when running code-snippet. I've tried attempts-to-fix and saw links-to-documentation, but I'm still stuck. Here's my code branch if you want to checkout and debug.">](/gallery/blog/039/display.webp)
 
 The next problem is that folks prefer to communicate as little as possible about their issue, while expect an immediate fix for their issue. Observe the three scenarios above. The first message is essentially a [shoulder tap equivalent of office](https://chelseatroy.com/2018/04/17/but-what-if-i-cannot-tap-my-remote-employee-on-the-shoulder/). You completely break the flow of the other person, without being considerate about their time and their context switch. Please don't do this unless it's basically EMERGENT as well as URGENT. To understand the difference between the two, let's look at this quote:
 
