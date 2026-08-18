@@ -1193,8 +1193,7 @@ const talks = [
     link: "https://www.swiggy.com",
     event: "Keynote, Google for Mobile India 2019",
     eventLink: "https://www.youtube.com/watch?v=2mX8hmefCRI",
-    video:
-      "https://www.youtube.com/watch?time_continue=450&amp;v=2mX8hmefCRI&amp;feature=emb_title",
+    video: "https://www.youtube.com/watch?v=2mX8hmefCRI",
   },
   {
     image: "/img/react-2019.png",
