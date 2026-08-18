@@ -64,8 +64,12 @@
 .blog-content p { margin: 0 0 1.25em; }
 .blog-content h2 { margin: 1.8em 0 0.7em; font-size: 1.45em; font-weight: 600; }
 .blog-content h3 { margin: 1.4em 0 0.6em; font-size: 1.2em; font-weight: 600; }
+.blog-content .heading-permalink { display: inline-flex; align-items: baseline; gap: 0.25em; text-decoration: none; }
+.blog-content .heading-permalink-icon { font-size: 0.55em; }
+.blog-content .heading-permalink-text { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .blog-content video { max-width: 100%; }
 .blog-content img, .blog-content video, .blog-content h4 { margin: 1em 0; }
+.blog-content img, .blog-placeholder-image { border-radius: 0.5rem; }
 .blog-content .blog-image-link { display: block; cursor: zoom-in; }
 .blog-content pre { overflow-x: auto; padding: 10px; font-size: 20px; line-height: 26px; }
 .blog-content pre code { background-color: initial; }

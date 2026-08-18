@@ -65,7 +65,7 @@ export function parseHead(rawHead: string) {
 }
 
 export function toMarkdown(content: string) {
-  return remark()
+  const rendered = remark()
     .use(prism)
     .use(slug)
     .use(headings, {
@@ -73,12 +73,20 @@ export function toMarkdown(content: string) {
       content: {
         type: "element",
         tagName: "span",
-        children: [{ type: "text", value: "🔗 " }],
+        children: [{ type: "text", value: "🔗" }],
       },
     })
-    .use(html)
+    // Keep generated heading IDs aligned with their fragment links. `remark-html`
+    // otherwise applies its safe default `user-content-` prefix to every ID.
+    .use(html, { sanitize: { clobberPrefix: "" } })
     .processSync(content)
     .toString();
+
+  return rendered.replace(
+    /(<h([1-6])\b[^>]*\bid="([^"]+)"[^>]*>)<a href="#\3" aria-hidden="true" tabindex="-1"><span>🔗<\/span><\/a>((?:(?!<a\b)[\s\S])*?)<\/h\2>/g,
+    (_match, openingTag, level, id, headingContent) =>
+      `${openingTag}<a class="heading-permalink" href="#${id}" tabindex="0"><span class="heading-permalink-icon" aria-hidden="true">🔗</span><span class="heading-permalink-text">${headingContent}</span></a></h${level}>`
+  );
 }
 
 export function linkBlogImages(html: string) {
