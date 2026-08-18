@@ -68,7 +68,7 @@ function prepareContentHtml(html: string, itemUrl: string): string {
 function buildRss(items: RssItem[]): string {
   const header = `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n<channel>\n` +
-    `<title>Divjot Singh — Blog</title>\n` +
+    `<title>divjot — blog</title>\n` +
     `<link>${WEBSITE_URL}</link>\n` +
     `<description>My thoughts on work, life and world.</description>\n` +
     `<language>en-us</language>\n` +
@@ -85,7 +85,7 @@ function buildAtom(items: RssItem[]): string {
   const updatedAt = (items[0]?.date || new Date(0)).toISOString();
   const header = `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<feed xmlns="http://www.w3.org/2005/Atom">\n` +
-    `<title>Divjot Singh — Blog</title>\n` +
+    `<title>divjot — blog</title>\n` +
     `<id>${BLOG_URL}</id>\n` +
     `<link href="${BLOG_URL}" />\n` +
     `<link href="${ATOM_SELF_URL}" rel="self" type="application/atom+xml" />\n` +

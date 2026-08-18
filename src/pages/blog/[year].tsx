@@ -73,7 +73,7 @@ interface IBlogRouteProps {
 }
 
 function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
-  const postTitle = `${post.title} | blog | divjot singh`;
+  const postTitle = `${post.title} | blog | divjot`;
   const postUrl = `${WEBSITE_URL}${getBlogPostPath(post)}`;
   const postImage = `${WEBSITE_URL}${post.image || BLOG_PLACEHOLDER_IMAGE}`;
   const keywords = ((post.keywords || []) as string[]).join(", ");

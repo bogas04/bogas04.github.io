@@ -73,7 +73,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
       title="divjot's blog"
     >
       <SeoTags
-        title="blog | divjot singh"
+        title="blog | divjot"
         description="My thoughts on work, life and world."
         imageUrl=""
         pageUrl={BLOG_URL}
