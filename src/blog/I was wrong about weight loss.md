@@ -1,7 +1,6 @@
 ---
 title: I was wrong about weight loss
-description:
-	You might have read my previous blog about losing 15kg from a decade back, looking back I now realize I missed this one trick clickbaitpromax
+description: You might have read my previous blog about losing 15kg from a decade back, looking back I now realize I missed this one trick clickbaitpromax
 date: "2026-08-15T10:31:03.755Z"
 categories: []
 keywords: [weight loss, vegan, health, stress]
