@@ -1,6 +1,6 @@
 ---
 title: Forgive me father for I have vibed
-description: A cured poison with poison to cope with my own anxieties better
+description: I cured poison with poison to cope with my own anxieties better
 date: "2026-08-15T06:02:13.793Z"
 categories: []
 keywords: [indie-web, ai]

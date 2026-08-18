@@ -3,7 +3,7 @@ title: The new crysis of video gaming
 description: My hobby is under threat yet again and that worries me
 date: "2026-08-02T00:00:00Z"
 categories: []
-keywords: [indie-web, video game industry, AI boom]
+keywords: [indie-web, video game industry, ai]
 slug: /the-new-crysis-of-video-gaming
 ---
 
