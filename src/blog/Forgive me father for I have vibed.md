@@ -32,7 +32,7 @@ So to fight the daemon of anxiety triggered by AI, I used AI to create a todo ap
 
 I (asked the LLM to write) wrote it in Swift, even though I have 0 clue about how that language works. I wanted it for my mac using mac aesthetics, I didn't want to run electron, so Swift it was. Honestly, I had no cognitive batteries to really learn anything new or do anything, but I wanted a wonky gratitude journal that I would actually use.
 
-I also wanted to have pictures of Marianne North, after being enamored by her art as seen in [Kew Gardens](https://bogas04.fyi/#travel). So I got it added too. These calmed me.
+I also wanted to have [paintings by Marianne North](https://www.wikiart.org/en/marianne-north), after being enamored by her art as seen in [Kew Gardens](https://bogas04.fyi/#travel). So I got it added too. These calmed me.
 
 BTW, can we just talk about how cool and uber rich Marianne North was? Like she/they traveled 6 continents in her/their 40s, creating immense art and pursuing botany. Why can't the rich of 21st century do that instead?
 
