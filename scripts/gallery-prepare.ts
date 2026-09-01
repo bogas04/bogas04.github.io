@@ -2,10 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-  IMAGES_DIRECTORY,
+  ROOT_DIRECTORY,
   formatPath,
   isImageFile,
-  listDirectories,
+  readAlbumConfigs,
 } from "./gallery-lib.ts";
 
 function albumTemplateFor(albumId: string, coverId: string): string {
@@ -40,8 +40,9 @@ Write a caption for this photo.
 function main(): void {
   let createdAlbums = 0;
   let createdCaptions = 0;
-  for (const imageDirectory of listDirectories(IMAGES_DIRECTORY)) {
-    const albumId = path.basename(imageDirectory);
+  for (const album of readAlbumConfigs()) {
+    const imageDirectory = path.resolve(ROOT_DIRECTORY, album.path);
+    const albumId = album.id;
     const imageFiles = fs
       .readdirSync(imageDirectory, { withFileTypes: true })
       .filter((entry) => entry.isFile() && isImageFile(entry.name))

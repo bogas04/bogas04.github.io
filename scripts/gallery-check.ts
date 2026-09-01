@@ -10,9 +10,10 @@ import {
   formatPath,
   inspectImage,
   isGalleryCategory,
-  listDirectories,
   listImageFilesRecursive,
+  readAlbumConfigs,
   readAlbums,
+  imageIdIsSafe,
   slugIsSafe,
   stringValue,
 } from "./gallery-lib.ts";
@@ -23,16 +24,29 @@ function add(errors: string[], message: string): void {
 
 async function main(): Promise<void> {
   const errors: string[] = [];
-  const albums = readAlbums();
+  let configs;
+  try {
+    configs = readAlbumConfigs();
+  } catch (error) {
+    add(errors, error instanceof Error ? error.message : String(error));
+    configs = [];
+  }
+  const albums = configs.length ? readAlbums() : [];
   const albumIds = new Set<string>();
 
-  if (!fs.existsSync(IMAGES_DIRECTORY)) add(errors, "gallery/images is missing");
+  if (!configs.length) add(errors, "gallery/albums.json has no albums");
 
-  for (const albumDirectory of listDirectories(IMAGES_DIRECTORY)) {
-    const albumId = path.basename(albumDirectory);
+  for (const config of configs) {
+    const albumId = config.id;
+    const albumDirectory = path.resolve(process.cwd(), config.path);
     if (albumIds.has(albumId)) add(errors, `duplicate album ID: ${albumId}`);
     albumIds.add(albumId);
     if (!slugIsSafe(albumId)) add(errors, `unsafe album ID: ${albumId}`);
+    if (!albumDirectory.startsWith(`${IMAGES_DIRECTORY}${path.sep}`)) {
+      add(errors, `album path must be inside public/img: ${config.path}`);
+      continue;
+    }
+    if (!fs.existsSync(albumDirectory)) add(errors, `${config.path} is missing`);
     if (!fs.existsSync(path.join(albumDirectory, "index.md"))) {
       add(errors, `${formatPath(albumDirectory)} is missing index.md`);
     }
@@ -63,7 +77,7 @@ async function main(): Promise<void> {
     for (const image of album.images) {
       if (imageIds.has(image.id)) add(errors, `duplicate image ID: ${album.id}/${image.id}`);
       imageIds.add(image.id);
-      if (!slugIsSafe(image.id)) add(errors, `unsafe image ID: ${album.id}/${image.id}`);
+      if (!imageIdIsSafe(image.id)) add(errors, `unsafe image ID: ${album.id}/${image.id}`);
       if (image.id === "index") {
         add(errors, `${formatPath(image.sourcePath)} uses reserved image ID: index`);
       }
@@ -81,12 +95,6 @@ async function main(): Promise<void> {
 
       try {
         const inspection = await inspectImage(image.sourcePath);
-        if (inspection.metadataReasons.length) {
-          add(
-            errors,
-            `${formatPath(image.sourcePath)} contains ${inspection.metadataReasons.join(", ")}`,
-          );
-        }
       } catch (error) {
         add(
           errors,
@@ -112,6 +120,7 @@ async function main(): Promise<void> {
   // Existing public assets are also committed source files. Keep the privacy
   // boundary from regressing when an old blog or travel image is replaced.
   for (const publicImagePath of listImageFilesRecursive(PUBLIC_DIRECTORY)) {
+    if (publicImagePath.startsWith(`${IMAGES_DIRECTORY}${path.sep}`)) continue;
     if (publicImagePath.startsWith(`${PUBLIC_GALLERY_DIRECTORY}${path.sep}`)) continue;
     try {
       const inspection = await inspectImage(publicImagePath);

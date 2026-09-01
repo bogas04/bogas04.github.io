@@ -5,11 +5,11 @@ import sharp from "sharp";
 
 import {
   GALLERY_CATEGORIES,
-  IMAGES_DIRECTORY,
   createTemporaryDirectory,
+  findAlbum,
   formatPath,
+  imageIdIsSafe,
   inspectImage,
-  listImageFiles,
   slugIsSafe,
 } from "./gallery-lib.ts";
 
@@ -21,15 +21,6 @@ function usage(): never {
 function argumentValue(args: string[], name: string): string | undefined {
   const index = args.indexOf(name);
   return index === -1 ? undefined : args[index + 1];
-}
-
-function nextImageId(directory: string): string {
-  const ids = listImageFiles(directory)
-    .map((filePath) => path.basename(filePath, path.extname(filePath)))
-    .map((id) => Number(id))
-    .filter((id) => Number.isInteger(id));
-  const next = (ids.length ? Math.max(...ids) : 0) + 1;
-  return String(next).padStart(3, "0");
 }
 
 function createAlbumTemplate(
@@ -66,11 +57,16 @@ async function main(): Promise<void> {
   const requestedId = argumentValue(args, "--id");
   if (!inputPath || !albumId || !slugIsSafe(albumId)) usage();
   if (!(GALLERY_CATEGORIES as readonly string[]).includes(category)) usage();
-  if (requestedId && (!slugIsSafe(requestedId) || requestedId === "index")) usage();
+  if (requestedId && (!imageIdIsSafe(requestedId) || requestedId === "index")) usage();
   if (!fs.existsSync(inputPath)) throw new Error(`Input image does not exist: ${inputPath}`);
 
-  const imageDirectory = path.join(IMAGES_DIRECTORY, albumId);
-  const id = requestedId || nextImageId(imageDirectory);
+  const album = findAlbum(albumId);
+  if (!album) {
+    throw new Error(`Unknown album: ${albumId}. Add it to gallery/albums.json first.`);
+  }
+  const imageDirectory = album.directory;
+  const id = requestedId || path.basename(inputPath, path.extname(inputPath));
+  if (!imageIdIsSafe(id) || id === "index") usage();
   const destinationPath = path.join(imageDirectory, `${id}.jpg`);
   const sidecarPath = path.join(imageDirectory, `${id}.md`);
   if (fs.existsSync(destinationPath) || fs.existsSync(sidecarPath)) {

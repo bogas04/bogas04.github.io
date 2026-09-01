@@ -11,12 +11,16 @@ branch at `/` (Settings → Pages); `main` contains source code only.
 
 ## Image gallery
 
-Gallery masters live in `gallery/images` and are always JPEGs re-encoded by
-`sharp` without embedded metadata. Travel photos, blog images, and manually
-added photos all use the same album format: each folder contains `index.md`,
-image masters, and matching Markdown sidecars.
+Gallery masters can live anywhere below `public/img`. `gallery/albums.json`
+maps stable gallery album IDs to their source directories, so an image path or
+filename never needs to follow a gallery convention. Each mapped folder contains
+`index.md`, image masters, and matching Markdown sidecars.
 
-`public/gallery` contains generated deployment derivatives. Site-only artwork
+```json
+{ "albums": [{ "id": "bali", "path": "public/img/travel/bali" }] }
+```
+
+`public/gallery` contains generated responsive derivatives. Site-only artwork
 such as talk thumbnails, maps, logos, and error illustrations lives in
 `public/assets` and is not included in the gallery manifest.
 
@@ -24,10 +28,13 @@ such as talk thumbnails, maps, logos, and error illustrations lives in
 pnpm gallery:add ~/Pictures/photo.jpg --album my-trip --category travel
 pnpm gallery:prepare
 pnpm gallery:check
-git add gallery/
+git add public/img/
 git commit -m "feat(gallery): add photos"
 git push
 ```
+
+`gallery:add` keeps the input filename (with a `.jpg` extension after
+sanitising) unless an explicit `--id` is supplied.
 
 The build creates responsive assets under `public/gallery` and a manifest under
 `gallery/generated`; both are ignored and recreated for every deployment.

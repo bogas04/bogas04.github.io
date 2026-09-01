@@ -49,7 +49,7 @@ scripts/
   gallery-audit.ts
 ```
 
-Only `gallery/images/**` is committed. `public/gallery` and
+Only `public/img/**` is committed. `public/gallery` and
 `gallery/generated` are recreated during every build and must be included in
 `.gitignore`.
 
@@ -57,8 +57,8 @@ Only `gallery/images/**` is committed. `public/gallery` and
 
 Each album is a self-contained folder. `index.md` contains album-level
 metadata, and each image has a Markdown sidecar with the same basename. For
-example, `gallery/images/taiwan-2026/001.jpg` is described by
-`gallery/images/taiwan-2026/001.md`.
+example, `public/img/taiwan-2026/001.jpg` is described by
+`public/img/taiwan-2026/001.md`.
 
 ```md
 ---
@@ -102,7 +102,7 @@ pnpm gallery:add ~/Pictures/taiwan/001.jpg --album taiwan-2026
 ```
 
 It sanitises the selected local original before writing
-`gallery/images/taiwan-2026/001.jpg`, creates an adjacent caption template when
+`public/img/taiwan-2026/001.jpg`, creates an adjacent caption template when
 needed, and never writes the unsanitised original to the repository. If the
 album is new, it also creates a non-destructive `index.md` template beside the
 image.
@@ -113,7 +113,7 @@ orientation (baked into pixels), and colour profile as appropriate.
 
 ### `gallery:prepare`
 
-Scans `gallery/images` and creates `index.md` plus a sidecar Markdown template
+Scans `public/img` and creates `index.md` plus a sidecar Markdown template
 for every image that lacks one. It never overwrites an existing Markdown file.
 Run it whenever images are copied in manually, before `git add`.
 
@@ -208,7 +208,7 @@ only if build times become material.
 2. Implement `gallery:add` and verify it strips metadata before any image is
    committed.
 3. Move one small existing album into a self-contained folder under
-   `gallery/images` with fresh Markdown sidecars; use sanitised copies, not the
+   `public/img` with fresh Markdown sidecars; use sanitised copies, not the
    existing files directly.
 4. Build the gallery UI and deploy it behind `/image-gallery/`.
 5. Add the Cloudflare redirect for `img.bogas04.fyi`.

@@ -7,7 +7,8 @@ import type { Metadata } from "sharp";
 export const ROOT_DIRECTORY = process.cwd();
 export const PUBLIC_DIRECTORY = path.join(ROOT_DIRECTORY, "public");
 export const GALLERY_DIRECTORY = path.join(ROOT_DIRECTORY, "gallery");
-export const IMAGES_DIRECTORY = path.join(GALLERY_DIRECTORY, "images");
+export const ALBUMS_CONFIG_PATH = path.join(GALLERY_DIRECTORY, "albums.json");
+export const IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, "img");
 export const GENERATED_DIRECTORY = path.join(GALLERY_DIRECTORY, "generated");
 export const PUBLIC_GALLERY_DIRECTORY = path.join(
   ROOT_DIRECTORY,
@@ -17,7 +18,7 @@ export const PUBLIC_GALLERY_DIRECTORY = path.join(
 
 export const MAX_SOURCE_BYTES = 25 * 1024 * 1024;
 export const MAX_SOURCE_PIXELS = 100_000_000;
-export const SOURCE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+export const SOURCE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"]);
 export const GALLERY_CATEGORIES = ["travel", "blog", "random"] as const;
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
@@ -44,6 +45,11 @@ export interface GalleryAlbumRecord {
   metadataPath: string;
   data: FrontMatter;
   images: GalleryImageRecord[];
+}
+
+export interface GalleryAlbumConfig {
+  id: string;
+  path: string;
 }
 
 export interface ImageInspection {
@@ -152,6 +158,10 @@ export function booleanValue(
 
 export function slugIsSafe(value: string): boolean {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+}
+
+export function imageIdIsSafe(value: string): boolean {
+  return Boolean(value) && value !== "." && value !== ".." && !/[\\/]/.test(value);
 }
 
 export function isGalleryCategory(value: string): value is GalleryCategory {
@@ -319,8 +329,32 @@ export async function inspectImage(
   };
 }
 
+export function readAlbumConfigs(): GalleryAlbumConfig[] {
+  if (!fs.existsSync(ALBUMS_CONFIG_PATH)) return [];
+  const parsed = JSON.parse(fs.readFileSync(ALBUMS_CONFIG_PATH, "utf8")) as {
+    albums?: unknown;
+  };
+  if (!Array.isArray(parsed.albums)) {
+    throw new Error("gallery/albums.json must contain an albums array");
+  }
+  return parsed.albums.map((album, index) => {
+    if (
+      !album ||
+      typeof album !== "object" ||
+      typeof (album as GalleryAlbumConfig).id !== "string" ||
+      typeof (album as GalleryAlbumConfig).path !== "string"
+    ) {
+      throw new Error(`gallery/albums.json album ${index + 1} must contain string id and path values`);
+    }
+    return album as GalleryAlbumConfig;
+  });
+}
+
 export function findAlbum(albumId: string): GalleryAlbumRecord | null {
-  const directory = path.join(IMAGES_DIRECTORY, albumId);
+  const config = readAlbumConfigs().find((album) => album.id === albumId);
+  if (!config) return null;
+  const directory = path.resolve(ROOT_DIRECTORY, config.path);
+  if (!directory.startsWith(`${IMAGES_DIRECTORY}${path.sep}`)) return null;
   const metadataPath = path.join(directory, "index.md");
   if (!fs.existsSync(directory) || !fs.existsSync(metadataPath)) return null;
   const images = listImageFiles(directory).map((sourcePath) => {
@@ -348,8 +382,8 @@ export function findAlbum(albumId: string): GalleryAlbumRecord | null {
 }
 
 export function readAlbums(): GalleryAlbumRecord[] {
-  const albums = listDirectories(IMAGES_DIRECTORY)
-    .map((directory) => findAlbum(path.basename(directory)))
+  const albums = readAlbumConfigs()
+    .map((config) => findAlbum(config.id))
     .filter((album): album is GalleryAlbumRecord => Boolean(album));
   return albums.sort((a, b) => {
     if (a.id === "blog" && b.id !== "blog") return 1;

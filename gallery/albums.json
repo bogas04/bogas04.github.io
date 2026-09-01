@@ -1,0 +1,13 @@
+{
+  "albums": [
+    { "id": "bali", "path": "public/img/travel/bali" },
+    { "id": "blog", "path": "public/img/blog" },
+    { "id": "ireland", "path": "public/img/travel/ireland" },
+    { "id": "malaysia", "path": "public/img/travel/malaysia" },
+    { "id": "maldives-2023", "path": "public/img/travel/maldives" },
+    { "id": "south-korea", "path": "public/img/travel/sk" },
+    { "id": "taiwan", "path": "public/img/travel/taiwan" },
+    { "id": "thailand", "path": "public/img/travel/thailand" },
+    { "id": "uk", "path": "public/img/travel/uk" }
+  ]
+}
