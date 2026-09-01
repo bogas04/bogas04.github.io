@@ -7,7 +7,7 @@ keywords: [javascript]
 slug: ""
 ---
 
-![Evolution of ECMAScript](/gallery/blog/042/display.webp)
+![Evolution of ECMAScript](/gallery/blog/ecmascript/display.webp)
 [Source](https://engineering.carsguide.com.au/javascript-context-ecmascript-84d709ef9165)
 
 ## Basic JavaScript syntax

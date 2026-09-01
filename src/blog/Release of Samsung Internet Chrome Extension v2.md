@@ -11,7 +11,7 @@ slug: /@bogas04/release-of-samsung-internet-chrome-extension-v2-644e7b97096e
 
 > **Update Oct 2017:** Since the release of v2 (March 2017), we saw a **9.3x increase** in our monthly active users (~8k to 75k). We also observed **35% jump** in the rating. Thank you so much for using & liking our extension, stay tuned for more updates!
 
-![](/gallery/blog/013/display.webp)
+![](/gallery/blog/1__e16MS4BgBe8e__DtlF666JA/display.webp)
 
 Today we are very glad to release the much awaited [version 2](https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh) of our Chrome Extension. [Install](https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh) it today to sync bookmarks across your Chrome browser on PC and Samsung Internet.
 
@@ -21,20 +21,20 @@ The Samsung Internet extension, earlier known as Samsung Sync (v1.4), not only s
 
 First-sync performance was the number one complaint in our web store reviews, usually leaving users to never actually getting around to use our extension. We hit the heart of the issue with a dagger by rewriting several modules and chaining network requests, database queries and DOM updates in a much more optimized manner. With this release, you can now not only see the progress of sync, but also the fetched bookmarks as and when they arrive. We feel this will solve the top complaint and allow users to enjoy the extension.
 
-![](/gallery/blog/026/display.webp)
+![](/gallery/blog/1__qYPi94TVyTF1p1aX1BCW9g/display.webp)
 
 > Consistent UI with [Samsung Internet on Android.](https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser)
 
 We are proud of our UX team’s efforts in offering a very modern look and feel to the extension. The small 600 x 400 screen real estate makes it much harder to add features while keeping the interface user-friendly. After several iterations, I think we’ve pretty much nailed it. From a progress bar to show sync status to modals for bookmark management, the UI even though offering several functionalities doesn’t overwhelm the user.
 
-![Live loading of bookmarks, top requested feature.](/gallery/blog/015/display.webp)
+![Live loading of bookmarks, top requested feature.](/gallery/blog/1__hE8PGhNMYIhyt3WsuEF50Q/display.webp)
 Live loading of bookmarks, top requested feature.
 
 > Enhanced bookmark management.
 
 The previous version (1.4) was bit limiting in the sense users could only edit title or delete a bookmark. We felt that the extension can offer much more than that and with today’s release, not only basic create / update / delete / move is supported, but users can also import Chrome bookmarks into their Samsung account. We feel that this brings the control back to the user.
 
-![Improved Bookmark Management](/gallery/blog/012/display.webp)
+![Improved Bookmark Management](/gallery/blog/1__d6bWg__Yhi2DyDM0JSZdrjA/display.webp)
 Improved Bookmark Management
 
 > And much more…

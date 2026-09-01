@@ -7,7 +7,7 @@ keywords: [vegan, diet, lifestyle, nutrition, health]
 slug: ""
 ---
 
-![A picture of Indian dishes](/gallery/blog/043/display.webp)
+![A picture of Indian dishes](/gallery/blog/indian-food/display.webp)
 
 India is a very diverse country with a plethora of languages, cuisines, ingredients and diet preferences. It makes it a perfect foodie country, in my biased opinion. It also makes nutrition hard to discuss in broad strokes.
 

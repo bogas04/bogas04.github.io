@@ -7,7 +7,7 @@ keywords: [react-native, performance, telemetry, experimentation, udaan]
 slug: ""
 ---
 
-![React Native startup performance investigation](/gallery/blog/058/display.webp)
+![React Native startup performance investigation](/gallery/blog/udaan-react-native-startup-performance/display.webp)
 
 I also wrote about a much more persistent problem at udaan: [improving startup performance for a large React Native app](https://medium.com/engineering-udaan/reacting-to-change-tale-of-a-web-developer-improving-startup-performance-for-a-large-react-native-854f8a4850fd).
 

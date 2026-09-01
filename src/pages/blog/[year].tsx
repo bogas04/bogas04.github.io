@@ -21,7 +21,7 @@ import Link from "next/link";
 import { ShareLinks } from "../../components/ShareLinks/ShareLinks";
 import BlogArchive from "../../components/BlogArchive";
 
-const BLOG_PLACEHOLDER_IMAGE = "/gallery/uk/014/display.webp";
+const BLOG_PLACEHOLDER_IMAGE = "/gallery/uk/uk-14/display.webp";
 const BLOG_PLACEHOLDER_ALT = "DJ shrugging infront of Awkward Hill Cottage in UK";
 
 export async function getStaticPaths() {

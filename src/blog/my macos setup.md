@@ -7,7 +7,7 @@ keywords: [software, macos]
 slug: /@bogas04/my-macos-setup
 ---
 
-![Picture of a macbook](/gallery/blog/045/display.webp)
+![Picture of a macbook](/gallery/blog/macos/display.webp)
 
 ## Preferences
 
@@ -41,13 +41,13 @@ git config push.default current --global
 
 Spotlight history is of no good use really, and that key combination can be utilized for a better purpose that we'll talk about later.
 
-![Screenshot of spotlight keyboard settings](/gallery/blog/057/display.webp)
+![Screenshot of spotlight keyboard settings](/gallery/blog/spotlight-history/display.webp)
 
 - Use Caps lock as Escape (System Preferences -> Keyboard -> Modifier Keys)
 
 As a vim user, I'm used to keeping Caps Lock as Escape key.
 
-![Screenshot of capslock modifier](/gallery/blog/041/display.webp)
+![Screenshot of capslock modifier](/gallery/blog/caps-escape/display.webp)
 
 - Turn on key repeating
 

@@ -9,7 +9,7 @@ slug: /the-new-crysis-of-video-gaming
 
 NOTE: I am not an analyst, just a gamer who consumes media on gaming and has some spit balling to share.
 
-![abandonware need for speed underground on ROG Ally](/gallery/blog/046/display.webp)
+![abandonware need for speed underground on ROG Ally](/gallery/blog/need%20for%20speed%20underground%20on%20ROG%20Ally/display.webp)
 
 > _Me playing NFS Underground 2 on ROG Ally, a game that is delisted and abandoned by original publisher_
 

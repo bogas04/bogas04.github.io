@@ -7,7 +7,7 @@ keywords: [software, macos]
 slug: /@bogas04/my-macos-setup
 ---
 
-![Picture of a macbook](/gallery/blog/045/display.webp)
+![Picture of a macbook](/gallery/blog/macos/display.webp)
 
 ## Preferences
 

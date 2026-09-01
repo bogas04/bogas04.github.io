@@ -7,7 +7,7 @@ keywords: [react-native, react, performance, debugging, udaan]
 slug: ""
 ---
 
-![React Native re-rendering investigation](/gallery/blog/059/display.webp)
+![React Native re-rendering investigation](/gallery/blog/udaan-react-render-stutter/display.webp)
 
 I recently wrote about one of the more satisfying debugging efforts I have been part of at udaan: [how we solved a 2s+ stutter caused by re-rendering React components](https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a).
 

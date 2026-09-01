@@ -39,5 +39,12 @@ sanitising) unless an explicit `--id` is supplied.
 The build creates responsive assets under `public/gallery` and a manifest under
 `gallery/generated`; both are ignored and recreated for every deployment.
 
+### Local gallery authoring
+
+Run `pnpm start` and open `/upload` in Chrome or Edge to connect a local
+checkout. The page can create and organise albums, upload images without
+renaming them, and edit the accompanying gallery metadata. It is development
+only and never writes to the deployed site or GitHub.
+
 To configure the vanity host, add a Cloudflare Redirect Rule for
 `img.bogas04.fyi/*` to `https://bogas04.fyi/image-gallery/` with status `301`.

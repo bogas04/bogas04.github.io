@@ -5,6 +5,7 @@ import {
   IMAGES_DIRECTORY,
   PUBLIC_DIRECTORY,
   PUBLIC_GALLERY_DIRECTORY,
+  type GalleryAlbumConfig,
   allImageSidecars,
   booleanValue,
   formatPath,
@@ -24,7 +25,7 @@ function add(errors: string[], message: string): void {
 
 async function main(): Promise<void> {
   const errors: string[] = [];
-  let configs;
+  let configs: GalleryAlbumConfig[];
   try {
     configs = readAlbumConfigs();
   } catch (error) {
