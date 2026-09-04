@@ -97,6 +97,26 @@ const emptyImage = (): ImageForm => ({
 
 const imageId = (name: string) => name.replace(/\.[^.]+$/, "");
 
+async function optimiseImage(file: File): Promise<Blob> {
+  const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+  const canvas = document.createElement("canvas");
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  const context = canvas.getContext("2d");
+  if (!context) {
+    bitmap.close();
+    throw new Error("The browser could not optimise this image.");
+  }
+  context.drawImage(bitmap, 0, 0);
+  bitmap.close();
+
+  const image = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", 0.95),
+  );
+  if (!image) throw new Error("The browser could not optimise this image.");
+  return image;
+}
+
 const safeText = (value: string) => value.replace(/[\r\n]+/g, " ").trim();
 
 const frontmatterString = (value: string) => JSON.stringify(safeText(value));
@@ -409,13 +429,16 @@ export default function GalleryUploader() {
     if (!file || !selectedAlbum || !repository) return;
     if (!IMAGE_PATTERN.test(file.name)) return setMessage("Choose a JPG, PNG, GIF, WebP, or AVIF image.");
     setIsBusy(true);
+    setMessage("Optimising image and removing metadata…");
     try {
-      const existing = await selectedAlbum.directory.getFileHandle(file.name, { create: true });
-      if ((await existing.getFile()).size > 0 && !window.confirm(`Replace ${file.name}?`)) return;
+      const name = `${imageId(file.name)}.jpg`;
+      const existing = await selectedAlbum.directory.getFileHandle(name, { create: true });
+      if ((await existing.getFile()).size > 0 && !window.confirm(`Replace ${name}?`)) return;
+      const image = await optimiseImage(file);
       const writer = await existing.createWritable();
-      await writer.write(await file.arrayBuffer());
+      await writer.write(image);
       await writer.close();
-      const id = imageId(file.name);
+      const id = imageId(name);
       let nextImageForm: ImageForm;
       try {
         const parsed = parseFrontmatter(await readText(selectedAlbum.directory, `${id}.md`));
@@ -437,7 +460,7 @@ export default function GalleryUploader() {
       await reload(repository, selectedAlbum.id);
       setSelectedImageId(id);
       setImageForm(nextImageForm);
-      setMessage(`Added ${file.name}. Add its title, alt text, and caption before publishing.`);
+      setMessage(`Added optimised ${name}. Add its title, alt text, and caption before publishing.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Could not add that image.");
     } finally {
@@ -500,7 +523,7 @@ export default function GalleryUploader() {
           </div>
           <button className="mt-5 rounded bg-slate-800 px-5 py-2.5 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={!repository || isBusy} onClick={() => void saveAlbum()}>{selectedAlbumId ? "Save album" : "Create album"}</button>
 
-          {selectedAlbum && <div className="mt-9 border-t border-slate-200 pt-6 dark:border-white/15"><div className="mb-3 flex flex-wrap items-center justify-between gap-3"><p className="m-0 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">images</p><label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm dark:border-white/25"><input className="sr-only" type="file" accept="image/avif,image/gif,image/jpeg,image/png,image/webp" onChange={uploadImage} disabled={isBusy} />Upload image</label></div><p className="text-xs text-slate-500 dark:text-slate-300">The original filename and path are preserved. Generated gallery versions are created by the normal build.</p><div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{visibleImages.map((image) => <button className={`rounded border p-2 text-left text-xs ${image.id === selectedImageId ? "border-slate-800 dark:border-white" : "border-slate-300 dark:border-white/25"}`} type="button" key={image.id} onClick={() => selectImage(image)}><span className="block truncate font-semibold">{image.name}</span><span className="text-slate-500 dark:text-slate-300">{image.published ? "published" : "draft"}</span></button>)}</div></div>}
+          {selectedAlbum && <div className="mt-9 border-t border-slate-200 pt-6 dark:border-white/15"><div className="mb-3 flex flex-wrap items-center justify-between gap-3"><p className="m-0 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">images</p><label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm dark:border-white/25"><input className="sr-only" type="file" accept="image/avif,image/gif,image/jpeg,image/png,image/webp" onChange={uploadImage} disabled={isBusy} />Upload image</label></div><p className="text-xs text-slate-500 dark:text-slate-300">Images are saved as quality-95 JPEGs with orientation baked in and metadata removed. Generated gallery versions are created by the normal build.</p><div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{visibleImages.map((image) => <button className={`rounded border p-2 text-left text-xs ${image.id === selectedImageId ? "border-slate-800 dark:border-white" : "border-slate-300 dark:border-white/25"}`} type="button" key={image.id} onClick={() => selectImage(image)}><span className="block truncate font-semibold">{image.name}</span><span className="text-slate-500 dark:text-slate-300">{image.published ? "published" : "draft"}</span></button>)}</div></div>}
         </section>
 
         <section className="min-w-0 border-t border-slate-200 pt-6 dark:border-white/15 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" aria-label="Image editor">

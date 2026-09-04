@@ -11,6 +11,9 @@ branch at `/` (Settings → Pages); `main` contains source code only.
 
 ## Image gallery
 
+For the full guide to `/write`, `/upload`, image metadata, gallery publication,
+and the build pipeline, see [Content authoring](guides/content-authoring.md).
+
 Gallery masters can live anywhere below `public/img`. `gallery/albums.json`
 maps stable gallery album IDs to their source directories, so an image path or
 filename never needs to follow a gallery convention. Each mapped folder contains
@@ -26,7 +29,6 @@ such as talk thumbnails, maps, logos, and error illustrations lives in
 
 ```sh
 pnpm gallery:add ~/Pictures/photo.jpg --album my-trip --category travel
-pnpm gallery:prepare
 pnpm gallery:check
 git add public/img/
 git commit -m "feat(gallery): add photos"
@@ -42,9 +44,8 @@ The build creates responsive assets under `public/gallery` and a manifest under
 ### Local gallery authoring
 
 Run `pnpm start` and open `/upload` in Chrome or Edge to connect a local
-checkout. The page can create and organise albums, upload images without
-renaming them, and edit the accompanying gallery metadata. It is development
-only and never writes to the deployed site or GitHub.
+checkout. It is development-only and writes only to the selected local
+repository; commit and push the resulting changes yourself.
 
 To configure the vanity host, add a Cloudflare Redirect Rule for
 `img.bogas04.fyi/*` to `https://bogas04.fyi/image-gallery/` with status `301`.

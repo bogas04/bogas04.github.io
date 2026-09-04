@@ -13,7 +13,6 @@
     "generate:rss": "node --no-warnings ./scripts/generate-rss.ts",
     "generate:sitemap": "node --no-warnings ./scripts/generate-sitemap.ts",
     "gallery:add": "node --no-warnings scripts/gallery-add.ts",
-    "gallery:prepare": "node --no-warnings scripts/gallery-prepare.ts",
     "gallery:build": "node --no-warnings scripts/gallery-build.ts",
     "gallery:check": "node --no-warnings scripts/gallery-check.ts",
     "gallery:audit": "node --no-warnings scripts/gallery-audit.ts",
