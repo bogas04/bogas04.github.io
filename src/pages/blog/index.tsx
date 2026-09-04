@@ -175,7 +175,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                       ? { viewTransitionName: "blog-image" }
                       : undefined
                   }
-                  src={post.image || "/img/travel/uk/uk-14.jpg"}
+                  src={post.image || "/gallery/uk/uk-14/display.webp"}
                   alt={`Image for ${post.title}`}
                 />
               </Link>

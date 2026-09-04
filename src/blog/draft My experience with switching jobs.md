@@ -7,7 +7,7 @@ keywords: []
 slug: ""
 ---
 
-![unDraw illustration for job search](/img/blog/jobs.png)
+![unDraw illustration for job search](/gallery/blog/jobs/display.webp)
 
 > I recently switched my job and this post is all about it.
 

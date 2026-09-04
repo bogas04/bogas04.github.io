@@ -8,3 +8,44 @@ Feel free to use it for your own personal webpage, though don't forget to star t
 GitHub Actions builds the site after each push to `main` and publishes the generated
 files to the `gh-pages` branch. Configure GitHub Pages to deploy from the `gh-pages`
 branch at `/` (Settings → Pages); `main` contains source code only.
+
+## Image gallery
+
+For the full guide to `/write`, `/upload`, image metadata, gallery publication,
+and the build pipeline, see [Content authoring](guides/content-authoring.md).
+
+Gallery masters can live anywhere below `public/img`. `gallery/albums.json`
+maps stable gallery album IDs to their source directories, so an image path or
+filename never needs to follow a gallery convention. Each mapped folder contains
+`index.md`, image masters, and matching Markdown sidecars.
+
+```json
+{ "albums": [{ "id": "bali", "path": "public/img/travel/bali" }] }
+```
+
+`public/gallery` contains generated responsive derivatives. Site-only artwork
+such as talk thumbnails, maps, logos, and error illustrations lives in
+`public/assets` and is not included in the gallery manifest.
+
+```sh
+pnpm gallery:add ~/Pictures/photo.jpg --album my-trip --category travel
+pnpm gallery:check
+git add public/img/
+git commit -m "feat(gallery): add photos"
+git push
+```
+
+`gallery:add` keeps the input filename (with a `.jpg` extension after
+sanitising) unless an explicit `--id` is supplied.
+
+The build creates responsive assets under `public/gallery` and a manifest under
+`gallery/generated`; both are ignored and recreated for every deployment.
+
+### Local gallery authoring
+
+Run `pnpm start` and open `/upload` in Chrome or Edge to connect a local
+checkout. It is development-only and writes only to the selected local
+repository; commit and push the resulting changes yourself.
+
+To configure the vanity host, add a Cloudflare Redirect Rule for
+`img.bogas04.fyi/*` to `https://bogas04.fyi/image-gallery/` with status `301`.

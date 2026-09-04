@@ -1,5 +1,7 @@
 .next
 /docs
+/public/gallery
+/gallery/generated
 *.tsbuildinfo
 .DS_Store
 /node_modules/

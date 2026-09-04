@@ -4,8 +4,8 @@ import { flushSync } from "react-dom";
 
 import SeoTags from "../components/SeoTags";
 
-import TwitterIcon from "../components/icons/twitter";
 import BlogIcon from "../components/icons/blog";
+import GalleryIcon from "../components/icons/gallery";
 import LinkedInIcon from "../components/icons/linkedin";
 import GithubIcon from "../components/icons/github";
 import Section from "../layout/section";
@@ -71,22 +71,19 @@ function Hero() {
           <LinkedInIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           linkedin
         </a>
-        <a
-          href="https://twitter.com/bogas04"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
-        >
-          <TwitterIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
-          twitter
-        </a>
-
         <Link
           href="/blog"
           className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
         >
           <BlogIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
           blog
+        </Link>
+        <Link
+          href="/image-gallery/"
+          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
+        >
+          <GalleryIcon className="mb-2 h-16 w-16 sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
+          gallery
         </Link>
         <a
           href="https://github.com/bogas04"
@@ -419,7 +416,7 @@ function Travel() {
       >
         <div className="relative inline-block">
           <img
-            src="/img/map.png"
+            src="/assets/map.png"
             alt="Grayscale world map used as the background for interactive pins marking Divjot Singh's travel destinations"
             className="grayscale brightness-150 w-[80vw]"
           />
@@ -1163,7 +1160,7 @@ const socialLinks = [
 
 const talks = [
   {
-    image: "/img/upfront91-2024.png",
+    image: "/assets/talks/upfront91-2024.png",
     title: "Surviving the Crunch",
     link: "https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ",
     event: "Upfront91 2024, Make My Trip Office",
@@ -1172,7 +1169,7 @@ const talks = [
       "https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912",
   },
   {
-    image: "/img/designs-of-coder.png",
+    image: "/assets/talks/designs-of-coder.png",
     title: "Designs of a Coder (2021)",
     link: "https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing",
     event: "Pesto",
@@ -1180,7 +1177,7 @@ const talks = [
     video: "https://youtu.be/es-oXFtKshI",
   },
   {
-    image: "/img/blazing-fast-web.png",
+    image: "/assets/talks/blazing-fast-web.png",
     title: "Web Performance in 2019",
     link: "http://bit.ly/web-performance-2019",
     eventLink: "https://www.hellomeets.com/",
@@ -1196,14 +1193,14 @@ const talks = [
     video: "https://www.youtube.com/watch?v=2mX8hmefCRI",
   },
   {
-    image: "/img/react-2019.png",
+    image: "/assets/talks/react-2019.png",
     title: "React in 2019",
     link: "http://bit.ly/react-2019",
     eventLink: "https://www.meetup.com/reactjs-bangalore/events/255737841/",
     event: "ReactJS Bangalore #41",
   },
   {
-    image: "img/testing-with-jest.png",
+    image: "/assets/talks/testing-with-jest.png",
     title: "Testing with Jest",
     link: "http://bit.ly/jest-04-2018",
     eventLink: "https://www.meetup.com/ReactJS-Bangalore/events/247773928",
@@ -1225,18 +1222,18 @@ const travelDestinations = [
     name: "South Korea",
     description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
     images: [
-      "img/travel/sk/sk-1.jpg",
-      "img/travel/sk/sk-10.jpg",
-      "img/travel/sk/sk-11.jpg",
-      "img/travel/sk/sk-12.jpg",
-      "img/travel/sk/sk-2.jpg",
-      "img/travel/sk/sk-3.jpg",
-      "img/travel/sk/sk-4.jpg",
-      "img/travel/sk/sk-5.jpg",
-      "img/travel/sk/sk-6.jpg",
-      "img/travel/sk/sk-7.jpg",
-      "img/travel/sk/sk-8.jpg",
-      "img/travel/sk/sk-9.jpg",
+      "/gallery/south-korea/sk-1/display.webp",
+      "/gallery/south-korea/sk-10/display.webp",
+      "/gallery/south-korea/sk-11/display.webp",
+      "/gallery/south-korea/sk-12/display.webp",
+      "/gallery/south-korea/sk-2/display.webp",
+      "/gallery/south-korea/sk-3/display.webp",
+      "/gallery/south-korea/sk-4/display.webp",
+      "/gallery/south-korea/sk-5/display.webp",
+      "/gallery/south-korea/sk-6/display.webp",
+      "/gallery/south-korea/sk-7/display.webp",
+      "/gallery/south-korea/sk-8/display.webp",
+      "/gallery/south-korea/sk-9/display.webp",
     ],
     lat: 37.5665,
     lng: 126.978,
@@ -1245,10 +1242,10 @@ const travelDestinations = [
     name: "Maldives",
     description: "2023\n• Island Paradise",
     images: [
-      "img/travel/maldives/maldives-1.jpg",
-      "img/travel/maldives/maldives-2.jpg",
-      "img/travel/maldives/maldives-3.jpg",
-      "img/travel/maldives/maldives-4.jpg",
+      "/gallery/maldives-2023/maldives-1/display.webp",
+      "/gallery/maldives-2023/maldives-2/display.webp",
+      "/gallery/maldives-2023/maldives-3/display.webp",
+      "/gallery/maldives-2023/maldives-4/display.webp",
     ],
     lat: 4.1755,
     lng: 73.5093,
@@ -1257,14 +1254,14 @@ const travelDestinations = [
     name: "Thailand",
     description: "2024, 2025\n• Vegan food, road trips and beautiful sights",
     images: [
-      "img/travel/thailand/thailand-1.jpg",
-      "img/travel/thailand/thailand-2.jpg",
-      "img/travel/thailand/thailand-3.jpg",
-      "img/travel/thailand/thailand-4.jpg",
-      "img/travel/thailand/thailand-5.jpg",
-      "img/travel/thailand/thailand-6.jpg",
-      "img/travel/thailand/thailand-7.jpg",
-      "img/travel/thailand/thailand-8.jpg",
+      "/gallery/thailand/thailand-1/display.webp",
+      "/gallery/thailand/thailand-2/display.webp",
+      "/gallery/thailand/thailand-3/display.webp",
+      "/gallery/thailand/thailand-4/display.webp",
+      "/gallery/thailand/thailand-5/display.webp",
+      "/gallery/thailand/thailand-6/display.webp",
+      "/gallery/thailand/thailand-7/display.webp",
+      "/gallery/thailand/thailand-8/display.webp",
     ],
     lat: 13.7563,
     lng: 100.5018,
@@ -1273,11 +1270,11 @@ const travelDestinations = [
     name: "Malaysia",
     description: "2024\n• Beautiful temples, walkable cities!",
     images: [
-      "img/travel/malaysia/malaysia-1.jpg",
-      "img/travel/malaysia/malaysia-2.jpg",
-      "img/travel/malaysia/malaysia-3.jpg",
-      "img/travel/malaysia/malaysia-4.jpg",
-      "img/travel/malaysia/malaysia-5.jpg",
+      "/gallery/malaysia/malaysia-1/display.webp",
+      "/gallery/malaysia/malaysia-2/display.webp",
+      "/gallery/malaysia/malaysia-3/display.webp",
+      "/gallery/malaysia/malaysia-4/display.webp",
+      "/gallery/malaysia/malaysia-5/display.webp",
     ],
     lat: 3.139,
     lng: 101.6869,
@@ -1285,12 +1282,12 @@ const travelDestinations = [
   {
     name: "Bali, Indonesia",
     images: [
-      "img/travel/bali/bali-1.jpg",
-      "img/travel/bali/bali-2.jpg",
-      "img/travel/bali/bali-3.jpg",
-      "img/travel/bali/bali-4.jpg",
-      "img/travel/bali/bali-5.jpg",
-      "img/travel/bali/bali-6.jpg",
+      "/gallery/bali/bali-1/display.webp",
+      "/gallery/bali/bali-2/display.webp",
+      "/gallery/bali/bali-3/display.webp",
+      "/gallery/bali/bali-4/display.webp",
+      "/gallery/bali/bali-5/display.webp",
+      "/gallery/bali/bali-6/display.webp",
     ],
     description:
       "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
@@ -1300,17 +1297,17 @@ const travelDestinations = [
   {
     name: "Taiwan",
     images: [
-      "img/travel/taiwan/taiwan-1.jpg",
-      "img/travel/taiwan/taiwan-10.jpg",
-      "img/travel/taiwan/taiwan-11.jpg",
-      "img/travel/taiwan/taiwan-2.jpg",
-      "img/travel/taiwan/taiwan-3.jpg",
-      "img/travel/taiwan/taiwan-4.jpg",
-      "img/travel/taiwan/taiwan-5.jpg",
-      "img/travel/taiwan/taiwan-6.jpg",
-      "img/travel/taiwan/taiwan-7.jpg",
-      "img/travel/taiwan/taiwan-8.jpg",
-      "img/travel/taiwan/taiwan-9.jpg",
+      "/gallery/taiwan/taiwan-1/display.webp",
+      "/gallery/taiwan/taiwan-10/display.webp",
+      "/gallery/taiwan/taiwan-11/display.webp",
+      "/gallery/taiwan/taiwan-2/display.webp",
+      "/gallery/taiwan/taiwan-3/display.webp",
+      "/gallery/taiwan/taiwan-4/display.webp",
+      "/gallery/taiwan/taiwan-5/display.webp",
+      "/gallery/taiwan/taiwan-6/display.webp",
+      "/gallery/taiwan/taiwan-7/display.webp",
+      "/gallery/taiwan/taiwan-8/display.webp",
+      "/gallery/taiwan/taiwan-9/display.webp",
     ],
     description: "2024, 2025\n• Amazing Buddhist culture, vegan food",
     lat: 25.033,
@@ -1319,25 +1316,25 @@ const travelDestinations = [
   {
     name: "UK",
     images: [
-      "img/travel/uk/uk-1.jpg",
-      "img/travel/uk/uk-10.jpg",
-      "img/travel/uk/uk-11.jpg",
-      "img/travel/uk/uk-12.jpg",
-      "img/travel/uk/uk-13.jpg",
-      "img/travel/uk/uk-14.jpg",
-      "img/travel/uk/uk-15.jpg",
-      "img/travel/uk/uk-16.jpg",
-      "img/travel/uk/uk-17.jpg",
-      "img/travel/uk/uk-18.jpg",
-      "img/travel/uk/uk-19.jpg",
-      "img/travel/uk/uk-2.jpg",
-      "img/travel/uk/uk-3.jpg",
-      "img/travel/uk/uk-4.jpg",
-      "img/travel/uk/uk-5.jpg",
-      "img/travel/uk/uk-6.jpg",
-      "img/travel/uk/uk-7.jpg",
-      "img/travel/uk/uk-8.jpg",
-      "img/travel/uk/uk-9.jpg",
+      "/gallery/uk/uk-1/display.webp",
+      "/gallery/uk/uk-10/display.webp",
+      "/gallery/uk/uk-11/display.webp",
+      "/gallery/uk/uk-12/display.webp",
+      "/gallery/uk/uk-13/display.webp",
+      "/gallery/uk/uk-14/display.webp",
+      "/gallery/uk/uk-15/display.webp",
+      "/gallery/uk/uk-16/display.webp",
+      "/gallery/uk/uk-17/display.webp",
+      "/gallery/uk/uk-18/display.webp",
+      "/gallery/uk/uk-19/display.webp",
+      "/gallery/uk/uk-2/display.webp",
+      "/gallery/uk/uk-3/display.webp",
+      "/gallery/uk/uk-4/display.webp",
+      "/gallery/uk/uk-5/display.webp",
+      "/gallery/uk/uk-6/display.webp",
+      "/gallery/uk/uk-7/display.webp",
+      "/gallery/uk/uk-8/display.webp",
+      "/gallery/uk/uk-9/display.webp",
     ],
     description: "2025\n• History & Heritage and lots of pies!",
     lat: 51.5074,
@@ -1346,17 +1343,17 @@ const travelDestinations = [
   {
     name: "Ireland",
     images: [
-      "img/travel/ireland/ireland-1.jpg",
-      "img/travel/ireland/ireland-10.jpg",
-      "img/travel/ireland/ireland-11.jpg",
-      "img/travel/ireland/ireland-2.jpg",
-      "img/travel/ireland/ireland-3.jpg",
-      "img/travel/ireland/ireland-4.jpg",
-      "img/travel/ireland/ireland-5.jpg",
-      "img/travel/ireland/ireland-6.jpg",
-      "img/travel/ireland/ireland-7.jpg",
-      "img/travel/ireland/ireland-8.jpg",
-      "img/travel/ireland/ireland-9.jpg",
+      "/gallery/ireland/ireland-1/display.webp",
+      "/gallery/ireland/ireland-10/display.webp",
+      "/gallery/ireland/ireland-11/display.webp",
+      "/gallery/ireland/ireland-2/display.webp",
+      "/gallery/ireland/ireland-3/display.webp",
+      "/gallery/ireland/ireland-4/display.webp",
+      "/gallery/ireland/ireland-5/display.webp",
+      "/gallery/ireland/ireland-6/display.webp",
+      "/gallery/ireland/ireland-7/display.webp",
+      "/gallery/ireland/ireland-8/display.webp",
+      "/gallery/ireland/ireland-9/display.webp",
     ],
     description: "2025\n• Happy Pear, Galleries and vegan food!",
     lat: 53.3498,

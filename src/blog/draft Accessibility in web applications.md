@@ -7,7 +7,7 @@ keywords: [react, web platform, accessibility]
 slug: /@bogas04/living-in-suwon-korea-1b3afd88a2ab
 ---
 
-![Illustration from unDraw on accessibility showing a woman in wheelchair browsing web](/img/blog/accessibility.png)
+![Illustration from unDraw on accessibility showing a woman in wheelchair browsing web](/gallery/blog/accessibility/display.webp)
 
 Often we solely rely on a linter to help us avoid accessibility issues in our codebase, however it isn't always obvious how to deal with it. The solution to the linter telling you to add tabIndex/onKeyDown/role isn't to follow it (lol), but
 to evaluate whether we need a button here or an anchor, or we simply need to wrap the inner callback with our function.

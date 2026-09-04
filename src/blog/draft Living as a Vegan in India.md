@@ -41,7 +41,7 @@ Enough said.
 
 Even though India is vegetarian friendly, surprisingly it’s quite lactose heavy. Dishes are often cooked with ghee, curd or buttermilk. Almost all the sweets are made using khoya. This can become quite a big problem for a vegan in India. Luckily, some of the cuisines within Indian cuisine family are not only vegan, but also gluten-free!
 
-![Masala Dosa (Lentil and Rice pancake with potato stuffing) served with Sambar (Lentil soup with tomatoes and a mix of vegetables) and Chutney (Coconut and curry leave dip)](img/blog/0__pLB__t2lROZfPlJML.jpg)
+![Masala Dosa (Lentil and Rice pancake with potato stuffing) served with Sambar (Lentil soup with tomatoes and a mix of vegetables) and Chutney (Coconut and curry leave dip)](/gallery/blog/0__pLB__t2lROZfPlJML/display.webp)
 Masala Dosa (Lentil and Rice pancake with potato stuffing) served with Sambar (Lentil soup with tomatoes and a mix of vegetables) and Chutney (Coconut and curry leave dip)
 
 - ✅ Protein

@@ -32,8 +32,13 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('src/**/*.js', 'src/**/*.jsx', 'src/**/*.ts', 'src/**/*.tsx', 'next.config.js') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
+      - name: 🖼️ validate and generate gallery
+        run: |
+          pnpm gallery:check
+          pnpm gallery:build
+          pnpm gallery:audit
       - name: 🛠 build project
-        run: pnpm run build
+        run: pnpm run build:site
       - name: 🚀 publish generated site to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
