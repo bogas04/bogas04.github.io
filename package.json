@@ -11,7 +11,8 @@
     "build": "make build",
     "generate:rss": "node --no-warnings ./scripts/generate-rss.ts",
     "generate:sitemap": "node --no-warnings ./scripts/generate-sitemap.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "preview",
@@ -20,6 +21,7 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
