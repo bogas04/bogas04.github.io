@@ -101,6 +101,7 @@ function BlogPost({ post, tagCounts = {} }: IBlogPostProps) {
   return (
     <BlogLayout
       title={post.title}
+      description={post.description}
       readingTimeMinutes={post.readingTimeMinutes}
       transitionSlug={post.slug}
       breadcrumbs={[

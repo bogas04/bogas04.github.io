@@ -11,6 +11,7 @@ interface BlogLayoutProps {
   breadcrumbs?: BlogBreadcrumbItem[];
   readingTimeMinutes?: number;
   title?: string;
+  description?: string;
   transitionSlug?: string;
 }
 
@@ -21,6 +22,7 @@ const BlogLayout = ({
   breadcrumbs,
   readingTimeMinutes,
   title,
+  description,
   transitionSlug,
 }: BlogLayoutProps) => {
   const [fontStep, setFontStep] = useState(() => cachedFontStep);
@@ -60,6 +62,11 @@ const BlogLayout = ({
         {breadcrumbs && (
           <header>
             {title && <h1 className="blog-view-title pb-2 font-bold leading-[1.25]">{title}</h1>}
+            {description && (
+              <p className="blog-view-description mb-4 text-lg leading-relaxed text-slate-600 dark:text-slate-200">
+                {description}
+              </p>
+            )}
             <section
               className="blog-view-reading-controls mb-5 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300"
               aria-label="Reading controls"

@@ -566,7 +566,7 @@ function Education() {
         {educationData.institutions.map((institution) => (
           <div
             key={institution.name}
-            className="bg-transparent border-none flex flex-col relative"
+            className="mt-8 bg-transparent border-none flex flex-col relative"
           >
             <h3 className="text-2xl font-bold pb-4 uppercase">
               <a
