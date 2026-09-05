@@ -761,11 +761,13 @@ export default function BlogWriter() {
   }, [router.isReady, directories, draftFromUrl, posts, editingFileName]);
 
   return (
-    <main className="mx-auto min-h-screen max-w-384 bg-white px-6 py-10 text-slate-800 dark:bg-[#333] dark:text-white sm:px-10">
+    <main
+      className={`mx-auto min-h-screen bg-white px-6 py-10 text-slate-800 dark:bg-[#333] dark:text-white sm:px-10 ${isZenMode ? "max-w-none" : "max-w-384"}`}
+    >
       <Head>
         <title>write | divjot</title>
       </Head>
-      <header className="mb-8 flex flex-wrap items-end justify-between gap-5 border-b border-slate-200 pb-6 dark:border-white/15">
+      {!isZenMode && <header className="mb-8 flex flex-wrap items-end justify-between gap-5 border-b border-slate-200 pb-6 dark:border-white/15">
         <div>
           <h1 className="m-0 font-body text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
             write something.
@@ -790,17 +792,34 @@ export default function BlogWriter() {
           >
             {directories ? "Disconnect" : "Connect repository"}
           </button>
+          <button
+            className="rounded border border-slate-300 px-4 py-2 text-sm font-semibold dark:border-white/25"
+            type="button"
+            onClick={() => setIsZenMode(true)}
+          >
+            Zen mode
+          </button>
         </div>
-      </header>
+      </header>}
 
-      {message && (
+      {message && !isZenMode && (
         <p className="mb-6 rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-600 dark:bg-white/10 dark:text-slate-200">
           {message}
         </p>
       )}
 
-      <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)_minmax(0,1fr)]">
-        <aside
+      {isZenMode && (
+        <button
+          className="fixed right-5 top-5 z-20 rounded border border-slate-300 bg-white/95 px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-sm dark:border-white/25 dark:bg-[#333]/95"
+          type="button"
+          onClick={() => setIsZenMode(false)}
+        >
+          Exit zen
+        </button>
+      )}
+
+      <div className={`grid gap-8 ${isZenMode ? "" : "lg:grid-cols-[14rem_minmax(0,1fr)]"}`}>
+        {!isZenMode && <aside
           className="order-last border-t border-slate-200 pt-6 dark:border-white/15 lg:order-first lg:border-r lg:border-t-0 lg:pr-6 lg:pt-0"
           aria-label="Existing posts"
         >
@@ -841,7 +860,7 @@ export default function BlogWriter() {
               onChange={(event) => setPostSearch(event.target.value)}
             />
           )}
-          <ul className="m-0 max-h-[70vh] list-none space-y-1 overflow-y-auto p-0">
+          <ul className="m-0 list-none space-y-1 p-0">
             {visiblePosts.map((post) => (
               <li key={post.fileName}>
                 <button
@@ -868,9 +887,11 @@ export default function BlogWriter() {
               </li>
             )}
           </ul>
-        </aside>
-        <section className="flex min-h-0 flex-col" aria-label="Post editor">
-          <div className="grid gap-4 sm:grid-cols-2">
+        </aside>}
+        <div className="min-w-0">
+          {!isZenMode && <div className="grid gap-8 lg:grid-cols-2">
+            <section aria-label="Post details">
+              <div className="grid gap-4 sm:grid-cols-2">
             <label className="sm:col-span-2">
               <input
                 className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25"
@@ -909,9 +930,9 @@ export default function BlogWriter() {
                 (autosaves every 30s)
               </span>
             </label>
-          </div>
+              </div>
 
-          <div className="mt-5">
+              <div className="mt-5">
             <BlogTagPills
               tags={selectedTags}
               onRemove={(tag) =>
@@ -947,39 +968,69 @@ export default function BlogWriter() {
                 <BlogTagPills tags={availableTags} onSelect={addTag} />
               </div>
             )}
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm dark:border-white/25">
+                  <input
+                    className="sr-only"
+                    type="file"
+                    accept="image/*"
+                    onChange={uploadImage}
+                    disabled={isBusy}
+                  />
+                  Add optimised image
+                </label>
+                <span className="text-xs text-slate-500 dark:text-slate-300">
+                  WebP · max {MAX_IMAGE_DIMENSION}px · EXIF removed
+                </span>
+              </div>
+            </section>
+
+            <section aria-label="Preview details">
+              <p className="mb-4 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">
+                preview
+              </p>
+              <h2 className="mb-2 font-body text-3xl font-semibold tracking-[-0.03em]">
+                {title || "Untitled post"}
+              </h2>
+              {description && (
+                <p className="mb-5 text-slate-600 dark:text-slate-200">
+                  {description}
+                </p>
+              )}
+              <BlogTagPills tags={selectedTags} />
+            </section>
+          </div>}
+
+          <div className={`grid min-w-0 gap-8 lg:grid-cols-2 ${isZenMode ? "" : "mt-6"}`}>
+            <section className="flex min-w-0 flex-col" aria-label="Post editor">
+              {!isZenMode && (
+                <span className="mb-1.5 flex h-6 items-center justify-between text-sm font-semibold">
+                  Markdown
+                  <span className="font-normal text-slate-500 dark:text-slate-300">
+                    {readingTimeMinutes} {readingTimeMinutes === 1 ? "min" : "mins"} read
+                  </span>
+                </span>
+              )}
+              <textarea
+                ref={textarea}
+                className={`min-h-128 w-full flex-1 rounded border border-slate-300 bg-transparent p-3 text-sm leading-6 dark:border-white/25 ${isZenMode ? "min-h-[calc(100vh-10rem)]" : ""}`}
+                placeholder="Start writing…"
+                aria-label="Markdown"
+                value={body}
+                onChange={(event) => setBody(event.target.value)}
+              />
+            </section>
+            <section className="min-w-0" aria-label="Preview">
+              {!isZenMode && <div className="mb-1.5 h-6" aria-hidden="true" />}
+              <article
+                className="blog-content"
+                dangerouslySetInnerHTML={{ __html: preview }}
+              />
+            </section>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-            <label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm dark:border-white/25">
-              <input
-                className="sr-only"
-                type="file"
-                accept="image/*"
-                onChange={uploadImage}
-                disabled={isBusy}
-              />
-              Add optimised image
-            </label>
-            <span className="text-xs text-slate-500 dark:text-slate-300">
-              WebP · max {MAX_IMAGE_DIMENSION}px · EXIF removed
-            </span>
-          </div>
-          <label className="mt-3 flex min-h-128 flex-1 flex-col gap-1.5">
-            <span className="flex items-center justify-between text-sm font-semibold">
-              Markdown{" "}
-              <span className="font-normal text-slate-500 dark:text-slate-300">
-                {readingTimeMinutes} {readingTimeMinutes === 1 ? "min" : "mins"}{" "}
-                read
-              </span>
-            </span>
-            <textarea
-              ref={textarea}
-              className="min-h-128 w-full flex-1 rounded border border-slate-300 bg-transparent p-3 text-sm leading-6 dark:border-white/25"
-              placeholder="Start writing…"
-              value={body}
-              onChange={(event) => setBody(event.target.value)}
-            />
-          </label>
           <div className="sticky bottom-0 z-10 mt-5 flex items-center justify-between gap-4 border-t border-slate-200 bg-white/95 pt-4 backdrop-blur-sm dark:border-white/15 dark:bg-[#333]/95">
             <span className="text-xs text-slate-500 dark:text-slate-300">
               {lastSavedAt
@@ -1007,29 +1058,7 @@ export default function BlogWriter() {
               </button>
             </div>
           </div>
-        </section>
-
-        <section
-          className="min-w-0 border-t border-slate-200 pt-6 dark:border-white/15 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0"
-          aria-label="Preview"
-        >
-          <p className="mb-4 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">
-            preview
-          </p>
-          <h2 className="mb-2 font-body text-3xl font-semibold tracking-[-0.03em]">
-            {title || "Untitled post"}
-          </h2>
-          {description && (
-            <p className="mb-5 text-slate-600 dark:text-slate-200">
-              {description}
-            </p>
-          )}
-          <BlogTagPills tags={selectedTags} />
-          <article
-            className="blog-content"
-            dangerouslySetInnerHTML={{ __html: preview }}
-          />
-        </section>
+        </div>
       </div>
     </main>
   );
