@@ -28,7 +28,7 @@ But the act of being in a community (IndieWeb), hearing so many wonderful people
 
 The prompt wasn't about how I allow myself to take space, but about how an idea qualifies to be a post. I have lots of ideas, I even write about some, and at times post them on my website. _Which_ ideas qualify?
 
-This requires me to answer the question "what purpose does my website serve". Right now, in my unsure 30s, it is about self-discovery and self-expression. The more authentic it is, the more worthwhile it is to me, the more qualified it becomes. Sadly, this requires me to discover myself more, express myself more, be more sure about my uncertainty. And the sure-shot way of accessing that is an interesting prompt that really makes me think, a time constraint and a room full of amazing people willing to listen.
+This requires me to answer the question "what purpose does my website serve". Right now, in my unsure 30s, it is about self-discovery and self-expression. The more authentic it is, the more worthwhile it is to me, the more qualified it becomes. Sadly, this requires me to discover myself more, express myself more, be more sure about my un-surety. And the sure-shot way of accessing that is an interesting prompt that really makes me think, a time constraint and a room full of amazing people willing to listen.
 
 ![prompt in indie web](/img/blog/prompt-in-indie-web.webp)
 
