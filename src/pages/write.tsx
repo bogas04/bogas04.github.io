@@ -104,6 +104,14 @@ const safeFilePart = (value: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
+const imageFileStem = (value: string) =>
+  value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "image";
+
 const safeFrontmatterValue = (value: string) =>
   value
     .replace(/[\r\n]+/g, " ")
@@ -333,6 +341,21 @@ async function optimiseImage(file: File) {
   return blob;
 }
 
+async function nextImageFileName(
+  directory: FileSystemDirectoryHandle,
+  stem: string,
+) {
+  for (let suffix = 1; ; suffix += 1) {
+    const name = `${stem}${suffix === 1 ? "" : `-${suffix}`}.webp`;
+    try {
+      await directory.getFileHandle(name);
+    } catch (error) {
+      if ((error as DOMException).name === "NotFoundError") return name;
+      throw error;
+    }
+  }
+}
+
 export const getStaticProps: GetStaticProps = async () => {
   if (process.env.NODE_ENV !== "development") return { notFound: true };
   return { props: {} };
@@ -358,6 +381,7 @@ export default function BlogWriter() {
   const [isDraft, setIsDraft] = useState(true);
   const [message, setMessage] = useState("");
   const [isBusy, setIsBusy] = useState(false);
+  const [isZenMode, setIsZenMode] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
   const [currentTime, setCurrentTime] = useState(() => Date.now());
   const textarea = useRef<HTMLTextAreaElement>(null);
@@ -534,7 +558,10 @@ export default function BlogWriter() {
     setMessage("Optimising image and removing metadata…");
     try {
       const image = await optimiseImage(file);
-      const name = `${safeFilePart(file.name.replace(/\.[^.]+$/, "")) || "image"}-${Date.now()}.webp`;
+      const name = await nextImageFileName(
+        directories.images,
+        imageFileStem(file.name.replace(/\.[^.]+$/, "")),
+      );
       const imageFile = await directories.images.getFileHandle(name, {
         create: true,
       });

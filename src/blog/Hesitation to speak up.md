@@ -22,7 +22,7 @@ Say, I even polished it up, why do I still not publish it? How come I have a ver
 
 I think, ultimately, incoherent or not, I hesitate to take space, even if digitally. I procrastinate, I fear immense judgment or worse, indifference, and keep my thoughts to myself.
 
-But the act of being in a community (IndieWeb), hearing so many wonderful people typing away their beautiful thoughts, and even reading mine and [liking it](https://abhi.now/weeknotes/2026/34/) makes me feel secure. This is more about my outlook of myself in the world, and less about the quality of my writing. My procrastination is a symptom of my hesitation, not the other way round.
+But the act of being in a community (IndieWeb), hearing so many wonderful people typing away their beautiful thoughts, and even reading mine and [liking, nay, loving it](https://abhi.now/weeknotes/2026/34#posts-i-loved) makes me feel secure. This is more about my outlook of myself in the world, and less about the quality of my writing. My procrastination is a symptom of my hesitation, not the other way round.
 
 ## read the question again
 
