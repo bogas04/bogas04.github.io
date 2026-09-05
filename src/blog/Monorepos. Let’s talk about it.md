@@ -75,7 +75,7 @@ As you can see, while the projects are very different (check out [swiggy.com](ht
 
 ### The how.
 
-![Logo of Lerna](/img/blog/1__0WjBWfdkbcob39FMklwp7A.png)
+![Logo of Lerna](/img/blog/004.jpg)
 
 [https://lerna.js.org/](https://lerna.js.org/)
 

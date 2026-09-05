@@ -1,0 +1,7 @@
+name = "img-bogas04-gallery-redirect"
+main = "image-gallery-redirect.js"
+compatibility_date = "2026-08-15"
+
+routes = [
+  { pattern = "img.bogas04.fyi/*", zone_name = "bogas04.fyi" }
+]
