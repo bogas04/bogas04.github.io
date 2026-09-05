@@ -8,7 +8,7 @@ keywords: [indie-web, belonging]
 
 So this is my entry to a prompt "How does an idea qualify to be a post on your website?" I received at [an IndieWeb Meetup](https://indieweb.org/Bangalore).
 
-It is a peculiar thing for me, isn't it? If you've tried to read more of [my blog posts](/blog), you'll quickly realise how I don't even have set up a way to paginate my blog posts. Yet, as I write this post, I can see I already have 7 drafts that haven't yet "qualified" to be part of my website.
+It is a peculiar thing for me, isn't it? If you've tried to read more of [my blog posts](/blog), you'll quickly realise how I don't even have a setup to paginate my blog posts. Yet, as I write this post, I can see I already have 7 drafts that haven't yet "qualified" to be part of my website.
 
 Why? When I read some of those, I see great value, funny anecdotes, and something that I do cherish and feel cutely expresses my thoughts of the past. Yet I still feel something is still missing. Maybe they are too unstructured, maybe they are too blunt, maybe they are too personal, or maybe I want to say more, but I am not there yet.
 
