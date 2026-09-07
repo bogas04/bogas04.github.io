@@ -53,11 +53,52 @@ Mark both the album and an image as published before it appears in the gallery.
 `public/img` are static public assets after deployment. Do not put confidential
 or unsanitised material there.
 
+Before every commit, the pre-commit hook checks every staged image added or
+modified below `public/img`. It blocks images larger than 25 MiB or 100 million
+pixels; use `/upload` or `pnpm gallery:add` to re-encode oversized originals.
+
 ## How the gallery is built
 
 `gallery/albums.json` maps a stable gallery ID to an arbitrary folder below
 `public/img`; neither the folder name nor image filename needs to follow a
 convention.
+
+```mermaid
+flowchart TD
+  Upload["/upload"] --> UploadImage["Re-encode to JPEG, quality 95\nBake orientation and remove metadata"]
+  CLI["pnpm gallery:add"] --> CLIImage["Sharp re-encode to JPEG, quality 95\nBake orientation and remove metadata"]
+  Manual["Manually add an image"] --> Source
+  UploadImage --> Source["public/img/<album-folder>/<image>.<ext>"]
+  CLIImage --> Source
+
+  Source --- Sidecar["<image>.md\ntitle, alt, takenAt, published, caption"]
+  Source --- Album["index.md\ntitle, cover, category, startDate, published"]
+  Album --- Registry["gallery/albums.json\nalbum ID → folder"]
+
+  Source --> Check["pnpm gallery:check"]
+  Sidecar --> Check
+  Album --> Check
+  Registry --> Check
+  Check -->|"album and image are published"| Manifest["gallery/generated/manifest.json"]
+  Check -->|"missing sidecar, invalid image, or invalid metadata"| Block["Build and deploy blocked"]
+
+  Manifest --> All["/image-gallery\nAll published gallery images"]
+  Manifest --> AlbumPage["/image-gallery/<album>\nPublished images in one album"]
+  Manifest --> PhotoPage["/image-gallery/<album>/<file>\nOne image page"]
+  Source --> Asset["/img/<folder>/<file>\nActual public image file"]
+  Asset --> PhotoPage
+  Asset --> Blog["/blog and other pages\nDirect image references"]
+```
+
+An image appears in gallery pages only if all of these conditions hold:
+
+1. Its folder is registered as an album in `gallery/albums.json`.
+2. The album's `index.md` has `published: true`.
+3. The image has a matching `.md` sidecar with `published: true`.
+
+Files below `public/img` are always public at their `/img/**` URL after a
+deployment. A blog post can therefore use an image directly even when that
+image is not published in the image gallery.
 
 During each build:
 
@@ -70,8 +111,8 @@ During each build:
    pages from that manifest.
 
 The generated manifest is ignored by Git and recreated for every build.
-GitHub Actions runs the gallery validation, generation, audit, and site build
-on pushes to `main` before publishing the static site.
+GitHub Actions runs the gallery validation, generation, and site build on
+pushes to `main` before publishing the static site.
 
 ## Command-line alternative
 

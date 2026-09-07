@@ -1,1 +1,2 @@
 pnpm gallery:check
+pnpm gallery:check:staged

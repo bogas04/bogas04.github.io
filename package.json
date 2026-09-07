@@ -17,6 +17,7 @@
     "gallery:add": "node --no-warnings scripts/gallery-add.ts",
     "gallery:build": "node --no-warnings scripts/gallery-build.ts",
     "gallery:check": "node --no-warnings scripts/gallery-check.ts",
+    "gallery:check:staged": "node --no-warnings scripts/gallery-check-staged-images.ts",
     "prepare": "husky"
   },
   "dependencies": {
