@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const isDesktop = (projectName: string) => projectName === "desktop";
 const isMobile = (projectName: string) => projectName === "mobile";
-const buildGeneratedPaths = new Set(["/blog.xml", "/blog.atom"]);
+const staticHostingPaths = new Set(["/blog.xml", "/blog.atom", "/resume"]);
 
 test("homepage presents the essential profile content and navigation", async ({
   page,
@@ -85,6 +85,51 @@ test("blog listing, tag archive, post, and in-post image render", async ({ page 
   await expect(articleImage.locator("xpath=.."), "Blog images should link to their source file.").toHaveClass(/blog-image-link/);
 });
 
+test("image gallery routes use canonical img files and human-friendly photo labels", async ({ page }) => {
+  await page.goto("/image-gallery/ireland/");
+
+  await expect(page.getByRole("heading", { name: "ireland" })).toBeVisible();
+  const firstPhoto = page.locator('figure a[href^="/image-gallery/ireland/"]').first();
+  await expect(firstPhoto).toBeVisible();
+
+  await firstPhoto.click();
+  await expect(page.getByRole("heading", { name: /this image/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /ireland\s*\//i })).toHaveAttribute(
+    "href",
+    "/image-gallery/ireland/",
+  );
+  await expect(page.locator("main img").first()).toHaveAttribute("src", /\/img\/travel\/ireland\//);
+});
+
+test("desktop image-gallery date picker opens beside the selected date and navigates to another date", async ({
+  page,
+}, testInfo) => {
+  test.skip(!isDesktop(testInfo.project.name), "This assertion covers the desktop date picker.");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/image-gallery/");
+
+  const dateTrigger = page.locator('section[aria-labelledby^="date-"] h2 button').nth(1);
+  await dateTrigger.scrollIntoViewIfNeeded();
+  const triggerBox = await dateTrigger.boundingBox();
+  expect(triggerBox).not.toBeNull();
+
+  await dateTrigger.click();
+  const picker = page.getByRole("dialog", { name: "Choose a month or year" });
+  await expect(picker).toBeVisible();
+  const pickerBox = await picker.boundingBox();
+  expect(pickerBox).not.toBeNull();
+  expect(Math.abs(pickerBox!.y - triggerBox!.y)).toBeLessThan(160);
+
+  const destination = picker.locator("button").nth(1);
+  const destinationLabel = (await destination.textContent())?.trim();
+  expect(destinationLabel).toBeTruthy();
+  await destination.click();
+  await expect(picker).toBeHidden();
+
+  const destinationHeading = page.getByRole("heading", { name: destinationLabel!, exact: true });
+  await expect.poll(() => destinationHeading.evaluate((element) => element.getBoundingClientRect().top)).toBeLessThan(200);
+});
+
 function toLocalPath(value: string, pageUrl: string, baseURL: string): string | null {
   const url = new URL(value, pageUrl);
   if (url.origin !== baseURL) return null;
@@ -110,8 +155,10 @@ test("every reachable local page, link, and image responds without a 404", async
     const currentPath = pending.shift()!;
     if (checked.has(currentPath)) continue;
     checked.add(currentPath);
-    // These feeds are emitted into docs/ by `make build`, not served by Next dev.
-    if (buildGeneratedPaths.has(currentPath)) continue;
+    // These paths are produced or resolved by static hosting, not Next dev.
+    // GitHub Pages resolves public/resume.html at /resume, while Next dev only
+    // exposes it at /resume.html.
+    if (staticHostingPaths.has(currentPath)) continue;
 
     const response = await request.get(currentPath);
     if (response.status() >= 400) {

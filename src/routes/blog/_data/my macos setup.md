@@ -7,7 +7,7 @@ keywords: [software, macos]
 slug: /@bogas04/my-macos-setup
 ---
 
-![Picture of a macbook](img/blog/macos.jpg)
+![Picture of a macbook](/img/blog/macos.jpg)
 
 ## Preferences
 
@@ -37,3 +37,13 @@ defaults write -g ApplePressAndHoldEnabled -bool false
   - Configure it to use `cmd+option+arrow-key` for top/left/right/bottom and `cmd+option+space` for maximize
 - Install [Clippy](https://github.com/Clipy/Clipy/releases)
   - Configure it to use `cmd+option+v` for menu.
+
+## update 2026
+
+above list might be outdated or not compatible with modern macOS. If they fail try following;
+
+- [Monitor Control](https://github.com/MonitorControl/MonitorControl): to control secondary displays via keyboard.
+- [Rectangle](https://rectangleapp.com/): aero snap for mac
+- [Maccy](https://maccy.app/): clipboard manager for mac
+- [Karabiner Elements](https://karabiner-elements.pqrs.org/): for keyboard modifications beyond caps -> escape (like escape + hjkl for arrow)
+- [MacWhisper](https://www.macwhisper.com/): for better dictation. Setup with `cmd+'`
