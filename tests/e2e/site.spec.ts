@@ -88,6 +88,11 @@ test("blog listing, tag archive, post, and in-post image render", async ({ page 
 test("image gallery routes use canonical img files and human-friendly photo labels", async ({ page }) => {
   await page.goto("/image-gallery/ireland/");
 
+  await expect(page.locator('meta[name="viewport"]')).toHaveAttribute(
+    "content",
+    /maximum-scale=1.*user-scalable=no/,
+  );
+
   await expect(page.getByRole("heading", { name: "ireland" })).toBeVisible();
   const firstPhoto = page.locator('figure a[href^="/image-gallery/ireland/"]').first();
   await expect(firstPhoto).toBeVisible();
