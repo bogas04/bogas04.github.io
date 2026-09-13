@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { AppProps } from "next/app";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { useEffect } from "react";
 import { setPendingBlogPostTransition } from "../utils/blogViewTransition";
 
@@ -11,11 +11,6 @@ type NativeViewTransition = {
 };
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter();
-  const viewport = pathname.startsWith("/image-gallery")
-    ? "width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
-    : "width=device-width,initial-scale=1,viewport-fit=cover";
-
   useEffect(() => {
     // remove all sws
     if (window.navigator.serviceWorker) {
@@ -104,7 +99,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <Head>
         <meta
-          content={viewport}
+          content="width=device-width,initial-scale=1,viewport-fit=cover"
           name="viewport"
         />
         <meta name="format-detection" content="telephone=no" />
