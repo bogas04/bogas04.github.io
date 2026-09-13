@@ -1,5 +1,5 @@
 ---
-title: Maldives, 2023
+title: Maldives
 summary: Four quiet frames from a week of turquoise water, weathered boats, and island shade.
 cover: maldives-1
 category: travel
