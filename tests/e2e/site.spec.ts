@@ -92,6 +92,11 @@ test("image gallery routes use canonical img files and human-friendly photo labe
     "touch-action",
     "pan-x pan-y",
   );
+  expect(await page.evaluate(() => {
+    const event = new Event("gesturestart", { cancelable: true });
+    document.dispatchEvent(event);
+    return event.defaultPrevented;
+  })).toBe(true);
 
   await expect(page.getByRole("heading", { name: "ireland" })).toBeVisible();
   const firstPhoto = page.locator('figure a[href^="/image-gallery/ireland/"]').first();
