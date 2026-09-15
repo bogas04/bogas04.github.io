@@ -85,18 +85,20 @@ test("blog listing, tag archive, post, and in-post image render", async ({ page 
   await expect(articleImage.locator("xpath=.."), "Blog images should link to their source file.").toHaveClass(/blog-image-link/);
 });
 
-test("image gallery routes use canonical img files and human-friendly photo labels", async ({ page }) => {
+test("image gallery routes use canonical img files and human-friendly photo labels", async ({ page }, testInfo) => {
   await page.goto("/image-gallery/ireland/");
 
-  await expect(page.locator("[data-gallery-frame]")).toHaveCSS(
-    "touch-action",
-    "pan-x pan-y",
-  );
-  expect(await page.evaluate(() => {
-    const event = new Event("gesturestart", { cancelable: true });
-    document.dispatchEvent(event);
-    return event.defaultPrevented;
-  })).toBe(true);
+  if (isMobile(testInfo.project.name)) {
+    await expect(page.locator("[data-gallery-frame]")).toHaveCSS(
+      "touch-action",
+      "pan-x pan-y",
+    );
+    expect(await page.evaluate(() => {
+      const event = new Event("gesturestart", { cancelable: true });
+      document.dispatchEvent(event);
+      return event.defaultPrevented;
+    })).toBe(true);
+  }
 
   await expect(page.getByRole("heading", { name: "ireland" })).toBeVisible();
   const firstPhoto = page.locator('figure a[href^="/image-gallery/ireland/"]').first();
@@ -109,6 +111,26 @@ test("image gallery routes use canonical img files and human-friendly photo labe
     "/image-gallery/ireland/",
   );
   await expect(page.locator("main img").first()).toHaveAttribute("src", /\/img\/travel\/ireland\//);
+});
+
+test("mobile gallery album navigation keeps history and provides a back link", async ({ page }, testInfo) => {
+  test.skip(!isMobile(testInfo.project.name), "This assertion covers the mobile-only gallery.");
+
+  await page.goto("/image-gallery/ireland/");
+  await expect(page.getByRole("link", { name: "← ireland" })).toHaveAttribute("href", "/image-gallery/");
+
+  await page.goto("/image-gallery/?album=bali");
+  const galleryNavigation = page.getByRole("navigation", { name: "Gallery views and albums" });
+  await expect(galleryNavigation.getByRole("link", { name: "bali" })).toHaveAttribute("aria-current", "page");
+  const galleryTrack = page.locator('[aria-label="Gallery views and albums"] + div');
+  await expect.poll(() => galleryTrack.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+
+  await galleryTrack.locator(":scope > div").nth(2).locator('figure a[href^="/image-gallery/bali/"]').first().click();
+  await expect(page).toHaveURL(/\/image-gallery\/bali\/bali-\d+\/?$/);
+  await page.goBack();
+
+  await expect(page).toHaveURL("/image-gallery/?album=bali");
+  await expect(galleryNavigation.getByRole("link", { name: "bali" })).toHaveAttribute("aria-current", "page");
 });
 
 test("desktop image-gallery date picker opens beside the selected date and navigates to another date", async ({

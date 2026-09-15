@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import GalleryGrid from "./GalleryGrid";
@@ -418,51 +419,52 @@ function MobileGallerySidebar({
 }
 
 function MobileGallery({ manifest }: { manifest: GalleryManifest }) {
+  const router = useRouter();
   const [activePaneIndex, setActivePaneIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const paneCount = manifest.albums.length + 2;
 
   const pathForPane = (paneIndex: number) => {
     const album = manifest.albums[paneIndex - 2];
-    return album ? `/image-gallery/${album.id}/` : "/image-gallery/";
+    if (album) return `/image-gallery/?album=${encodeURIComponent(album.id)}`;
+    return paneIndex === 1 ? "/image-gallery/?view=albums" : "/image-gallery/";
   };
 
-  const updatePath = (paneIndex: number) => {
-    const nextPath = pathForPane(paneIndex);
-    if (window.location.pathname !== nextPath) {
-      window.history.pushState({ galleryPane: paneIndex }, "", nextPath);
-    }
+  const paneIndexForPath = () => {
+    const parameters = new URLSearchParams(router.asPath.split("?")[1] || "");
+    const albumIndex = manifest.albums.findIndex((album) => album.id === parameters.get("album"));
+    if (albumIndex !== -1) return albumIndex + 2;
+    return parameters.get("view") === "albums" ? 1 : 0;
   };
 
-  const selectPane = (paneIndex: number) => {
-    const nextPaneIndex = Math.max(0, Math.min(paneIndex, paneCount - 1));
-    setActivePaneIndex(nextPaneIndex);
-    updatePath(nextPaneIndex);
+  const scrollToPane = (paneIndex: number, behavior: ScrollBehavior) => {
     trackRef.current?.scrollTo({
-      left: nextPaneIndex * (trackRef.current.clientWidth || 0),
-      behavior: "smooth",
+      left: paneIndex * (trackRef.current.clientWidth || 0),
+      behavior,
     });
   };
 
-  useEffect(() => {
-    const handlePopState = () => {
-      const albumIndex = manifest.albums.findIndex((album) => window.location.pathname === `/image-gallery/${album.id}/`);
-      const nextPaneIndex = albumIndex === -1 ? 0 : albumIndex + 2;
-      setActivePaneIndex(nextPaneIndex);
-      trackRef.current?.scrollTo({ left: nextPaneIndex * (trackRef.current.clientWidth || 0), behavior: "smooth" });
-    };
+  const selectPane = (paneIndex: number, behavior: ScrollBehavior = "smooth") => {
+    const nextPaneIndex = Math.max(0, Math.min(paneIndex, paneCount - 1));
+    setActivePaneIndex(nextPaneIndex);
+    const nextPath = pathForPane(nextPaneIndex);
+    if (router.asPath !== nextPath) void router.push(nextPath, undefined, { scroll: false });
+    scrollToPane(nextPaneIndex, behavior);
+  };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [manifest.albums]);
+  useEffect(() => {
+    const nextPaneIndex = paneIndexForPath();
+    setActivePaneIndex(nextPaneIndex);
+    const frame = requestAnimationFrame(() => scrollToPane(nextPaneIndex, "auto"));
+    return () => cancelAnimationFrame(frame);
+  }, [router.asPath]);
 
   const handleTrackScroll = () => {
     const track = trackRef.current;
     if (!track || !track.clientWidth) return;
     const nextPaneIndex = Math.max(0, Math.min(paneCount - 1, Math.round(track.scrollLeft / track.clientWidth)));
     if (nextPaneIndex !== activePaneIndex) {
-      setActivePaneIndex(nextPaneIndex);
-      updatePath(nextPaneIndex);
+      selectPane(nextPaneIndex);
     }
   };
 

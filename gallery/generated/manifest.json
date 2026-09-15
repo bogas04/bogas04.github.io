@@ -2,7 +2,7 @@
   "albums": [
     {
       "id": "bali",
-      "title": "Bali, Indonesia",
+      "title": "Bali",
       "summary": "Nusa Penida, Sidemen, and plenty of vegan food.",
       "category": "travel",
       "cover": "bali-1",
@@ -231,7 +231,7 @@
     {
       "id": "bali-1",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 001",
       "alt": "Travel photograph from Bali, Indonesia.",
@@ -250,7 +250,7 @@
     {
       "id": "bali-2",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 002",
       "alt": "Travel photograph from Bali, Indonesia.",
@@ -269,7 +269,7 @@
     {
       "id": "bali-3",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 003",
       "alt": "Travel photograph from Bali, Indonesia.",
@@ -288,7 +288,7 @@
     {
       "id": "bali-4",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 004",
       "alt": "Travel photograph from Bali, Indonesia.",
@@ -307,7 +307,7 @@
     {
       "id": "bali-5",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 005",
       "alt": "Travel photograph from Bali, Indonesia.",
@@ -326,7 +326,7 @@
     {
       "id": "bali-6",
       "album": "bali",
-      "albumTitle": "Bali, Indonesia",
+      "albumTitle": "Bali",
       "category": "travel",
       "title": "Bali, Indonesia · 006",
       "alt": "Travel photograph from Bali, Indonesia.",

@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
 
 import SeoTags from "../../../components/SeoTags";
 import { AlbumSidebar } from "../../../components/gallery/GalleryCategoryFilter";
@@ -41,7 +42,11 @@ export default function AlbumPage({ albums, album, images }: AlbumPageProps) {
           </div>
           <section className="min-w-0">
             <div className="sticky top-0 z-20 -mx-4 mb-8 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0">
-              <h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl">{album.title}</h1>
+              <h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl">
+                <Link href="/image-gallery/" className="no-underline transition hover:text-[#1ba1e2] lg:pointer-events-none lg:text-white">
+                  <span className="lg:hidden">← </span>{album.title}
+                </Link>
+              </h1>
               {album.summary ? <p className="mt-6 mb-0 max-w-2xl text-lg font-light text-white/65">{album.summary}</p> : null}
             </div>
             <GalleryGrid images={images} />

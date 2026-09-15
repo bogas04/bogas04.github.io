@@ -3,6 +3,8 @@ import { ReactNode, useEffect } from "react";
 
 export default function GalleryFrame({ children, trail }: { children: ReactNode; trail?: string }) {
   useEffect(() => {
+    if (!window.matchMedia("(pointer: coarse)").matches) return undefined;
+
     const preventPinchZoom = (event: Event) => {
       if (event instanceof TouchEvent && event.touches.length < 2) return;
       event.preventDefault();

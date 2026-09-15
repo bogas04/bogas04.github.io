@@ -1,5 +1,5 @@
 ---
-title: "Bali, Indonesia"
+title: "Bali"
 summary: "Nusa Penida, Sidemen, and plenty of vegan food."
 cover: bali-1
 category: travel
