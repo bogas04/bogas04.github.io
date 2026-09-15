@@ -6,7 +6,11 @@ import { AlbumSidebar } from "../../../components/gallery/GalleryCategoryFilter"
 import GalleryFrame from "../../../components/gallery/GalleryFrame";
 import GalleryGrid from "../../../components/gallery/GalleryGrid";
 import type { GalleryAlbum, GalleryImage } from "../../../utils/gallery";
-import { getGalleryAlbum, getGalleryImages } from "../../../utils/gallery";
+import {
+  getGalleryAlbum,
+  getGalleryAlbumViewTransitionName,
+  getGalleryImages,
+} from "../../../utils/gallery";
 import { getGalleryManifest } from "../../../utils/gallery-server";
 
 interface AlbumPageProps {
@@ -43,8 +47,18 @@ export default function AlbumPage({ albums, album, images }: AlbumPageProps) {
           <section className="min-w-0">
             <div className="sticky top-0 z-20 -mx-4 mb-8 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0">
               <h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl">
+                <Link
+                  href="/image-gallery/"
+                  data-gallery-transition
+                  aria-label="Back to pictures"
+                  className="inline-flex pr-2 align-middle text-white/55 no-underline transition hover:text-[#1ba1e2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1ba1e2]"
+                >
+                  <span aria-hidden="true" className="font-sans text-2xl leading-none">←</span>
+                </Link>
                 <Link href="/image-gallery/" className="no-underline transition hover:text-[#1ba1e2] lg:pointer-events-none lg:text-white">
-                  <span className="lg:hidden">← </span>{album.title}
+                  <span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>
+                    {album.title}
+                  </span>
                 </Link>
               </h1>
               {album.summary ? <p className="mt-6 mb-0 max-w-2xl text-lg font-light text-white/65">{album.summary}</p> : null}

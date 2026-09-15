@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { ReactNode, useEffect } from "react";
 
-export default function GalleryFrame({ children, trail }: { children: ReactNode; trail?: string }) {
+export default function GalleryFrame({
+  children,
+  trail,
+}: {
+  children: ReactNode;
+  trail?: string;
+}) {
   useEffect(() => {
     if (!window.matchMedia("(pointer: coarse)").matches) return undefined;
 

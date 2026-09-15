@@ -94,6 +94,61 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     document.addEventListener("click", handleBlogNavigation, true);
     return () => document.removeEventListener("click", handleBlogNavigation, true);
   }, []);
+  useEffect(() => {
+    const handleGalleryNavigation = (event: MouseEvent) => {
+      const target = event.target as Element | null;
+      const link = target?.closest<HTMLAnchorElement>("a[data-gallery-transition]");
+      if (
+        !link ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        link.target
+      ) return;
+
+      const href = link.getAttribute("href");
+      if (!href?.startsWith("/image-gallery/")) return;
+      event.preventDefault();
+
+      const pushToGallery = async () => {
+        const navigated = await Router.push(href, undefined, { scroll: false });
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        root.style.scrollBehavior = previousScrollBehavior;
+        return navigated;
+      };
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        void pushToGallery();
+        return;
+      }
+
+      const viewTransitionDocument = document as Document & {
+        startViewTransition?: (
+          update: () => Promise<boolean>
+        ) => NativeViewTransition;
+      };
+      if (viewTransitionDocument.startViewTransition) {
+        document.documentElement.dataset.galleryViewTransition = "true";
+        const transition = viewTransitionDocument.startViewTransition(() =>
+          pushToGallery()
+        );
+        void transition.finished.then(
+          () => delete document.documentElement.dataset.galleryViewTransition,
+          () => delete document.documentElement.dataset.galleryViewTransition
+        );
+      } else {
+        void pushToGallery();
+      }
+    };
+    document.addEventListener("click", handleGalleryNavigation, true);
+    return () => document.removeEventListener("click", handleGalleryNavigation, true);
+  }, []);
   return (
     <>
       <Component {...pageProps} />

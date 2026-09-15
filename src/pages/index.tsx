@@ -1,6 +1,12 @@
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import React, {
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  ViewTransition,
+} from "react";
 
 import SeoTags from "../components/SeoTags";
 
@@ -1479,24 +1485,8 @@ function PopOver({
       return;
     }
 
-    const viewTransitionDocument = document as Document & {
-      startViewTransition?: (update: () => void) => { finished: Promise<void> };
-    };
-
-    if (viewTransitionDocument.startViewTransition) {
-      document.documentElement.dataset.travelPhotoDirection = direction;
-      const transition = viewTransitionDocument.startViewTransition(() => {
-        flushSync(() => setRotateBy(nextImageIndex));
-      });
-      transition.finished.finally(() => {
-        delete document.documentElement.dataset.travelPhotoDirection;
-        setPreparingDirection(null);
-      });
-      return;
-    }
-
-    setPreparingDirection(null);
-    setPendingDirection(direction);
+    document.documentElement.dataset.travelPhotoDirection = direction;
+    startTransition(() => setRotateBy(nextImageIndex));
   };
   const finishCardTransition = () => {
     if (!pendingDirection) {
@@ -1543,13 +1533,20 @@ function PopOver({
         </div>
       ) : null}
 
-      <div
-        className={`polaroid-card absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] flex-col bg-white p-4 shadow-xl ${
-          pendingDirection ? `polaroid-card--${pendingDirection}` : ""
-        }`}
-        style={{ viewTransitionName: "travel-photo" }}
-        onAnimationEnd={finishCardTransition}
+      <ViewTransition
+        name="travel-photo"
+        update="travel-photo"
+        onUpdate={() => () => {
+          delete document.documentElement.dataset.travelPhotoDirection;
+          setPreparingDirection(null);
+        }}
       >
+        <div
+          className={`polaroid-card absolute left-1/2 top-0 z-10 flex h-[94%] w-[88%] flex-col bg-white p-4 shadow-xl ${
+            pendingDirection ? `polaroid-card--${pendingDirection}` : ""
+          }`}
+          onAnimationEnd={finishCardTransition}
+        >
         <div className="relative h-[70%] w-full bg-slate-100">
           <img
             key={activeImage}
@@ -1628,7 +1625,8 @@ function PopOver({
             </button>
           </div>
         </div>
-      </div>
+        </div>
+      </ViewTransition>
     </div>
   );
 }

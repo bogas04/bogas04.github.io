@@ -49,3 +49,14 @@ export function getGalleryImages(
     ? manifest.images.filter((image) => image.album === albumId)
     : manifest.images;
 }
+
+export function getGalleryAlbumViewTransitionName(album: GalleryAlbum) {
+  return `gallery-album-${album.id}`;
+}
+
+export function getGalleryImageViewTransitionName(image: GalleryImage) {
+  return `gallery-image-${image.album}-${image.id}`.replace(
+    /[^a-zA-Z0-9_-]/g,
+    "-",
+  );
+}
