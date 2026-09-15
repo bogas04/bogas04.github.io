@@ -106,18 +106,86 @@ test("image gallery routes use canonical img files and human-friendly photo labe
 
   await firstPhoto.click();
   await expect(page.getByRole("heading", { name: /this image/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /ireland\s*\//i })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Back to Ireland" })).toHaveAttribute(
+    "href",
+    "/image-gallery/ireland/",
+  );
+  await expect(
+    page.getByRole("heading", { name: /this image/i }).getByRole("link", { name: "Ireland", exact: true }),
+  ).toHaveAttribute(
     "href",
     "/image-gallery/ireland/",
   );
   await expect(page.locator("main img").first()).toHaveAttribute("src", /\/img\/travel\/ireland\//);
 });
 
+test("image detail navigation fills each side of the photo and wraps within its album", async ({ page }) => {
+  await page.goto("/image-gallery/ireland/ireland-1/");
+
+  const navigation = page.getByRole("navigation", { name: "Image navigation" });
+  const previous = navigation.getByRole("link", { name: /Show previous image:/ });
+  const next = navigation.getByRole("link", { name: /Show next image:/ });
+  const navigationBox = await navigation.boundingBox();
+  const previousBox = await previous.boundingBox();
+  const nextBox = await next.boundingBox();
+
+  expect(navigationBox).not.toBeNull();
+  expect(previousBox).not.toBeNull();
+  expect(nextBox).not.toBeNull();
+  expect(previousBox!.height).toBeGreaterThanOrEqual(navigationBox!.height - 1);
+  expect(nextBox!.height).toBeGreaterThanOrEqual(navigationBox!.height - 1);
+  expect(previousBox!.width + nextBox!.width).toBeGreaterThanOrEqual(navigationBox!.width - 1);
+
+  await next.click({ position: { x: 4, y: 4 } });
+  await expect(page).toHaveURL(/\/image-gallery\/ireland\/ireland-2\/?$/);
+
+  const previousAfterNavigation = page
+    .getByRole("navigation", { name: "Image navigation" })
+    .getByRole("link", { name: /Show previous image:/ });
+  const previousAfterNavigationBox = await previousAfterNavigation.boundingBox();
+  expect(previousAfterNavigationBox).not.toBeNull();
+  await previousAfterNavigation.click({
+    position: { x: previousAfterNavigationBox!.width - 4, y: 4 },
+  });
+  await expect(page).toHaveURL(/\/image-gallery\/ireland\/ireland-1\/?$/);
+});
+
+test("gallery navigation works when View Transitions are unavailable", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(document, "startViewTransition", {
+      configurable: true,
+      value: undefined,
+    });
+  });
+  await page.goto("/image-gallery/ireland/");
+
+  await page.locator('figure a[href^="/image-gallery/ireland/"]').first().click();
+  await expect(page).toHaveURL(/\/image-gallery\/ireland\/ireland-\d+\/?$/);
+  await expect(page.getByRole("heading", { name: /this image/i })).toBeVisible();
+});
+
+test("gallery detail metadata and invalid routes remain correct", async ({ page }) => {
+  await page.goto("/image-gallery/ireland/ireland-1/");
+  await expect(page).toHaveTitle(/ireland/i);
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://bogas04.fyi/image-gallery/ireland/ireland-1/",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /https:\/\/bogas04\.fyi\/img\/travel\/ireland\//,
+  );
+
+  const response = await page.goto("/image-gallery/not-an-album/not-an-image/");
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("heading", { name: /page not found/i })).toBeVisible();
+});
+
 test("mobile gallery album navigation keeps history and provides a back link", async ({ page }, testInfo) => {
   test.skip(!isMobile(testInfo.project.name), "This assertion covers the mobile-only gallery.");
 
   await page.goto("/image-gallery/ireland/");
-  await expect(page.getByRole("link", { name: "← ireland" })).toHaveAttribute("href", "/image-gallery/");
+  await expect(page.getByRole("link", { name: "Back to pictures" })).toHaveAttribute("href", "/image-gallery/");
 
   await page.goto("/image-gallery/?album=bali");
   const galleryNavigation = page.getByRole("navigation", { name: "Gallery views and albums" });
