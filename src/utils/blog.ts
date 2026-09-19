@@ -8,7 +8,7 @@ import {
 import type { IBlogPostMeta } from "./index.ts";
 
 import path from "path";
-import { getBlogTagSlug } from "./blogTag";
+import { getBlogTagSlug } from "./blogTag.ts";
 
 export const NOW_TAG = "now";
 
