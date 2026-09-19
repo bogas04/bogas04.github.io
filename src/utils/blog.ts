@@ -8,6 +8,9 @@ import {
 import type { IBlogPostMeta } from "./index.ts";
 
 import path from "path";
+import { getBlogTagSlug } from "./blogTag";
+
+export const NOW_TAG = "now";
 
 export interface IBlogPost extends IBlogPostMeta {
   html: string;
@@ -69,9 +72,31 @@ function shouldIncludePost(post: IBlogPostSummary, includeDrafts: boolean) {
   );
 }
 
+function hasTag(post: IBlogPostSummary, tag: string) {
+  const tags = Array.isArray(post.keywords)
+    ? post.keywords
+    : post.keywords
+      ? [post.keywords]
+      : [];
+
+  return tags.some((keyword) => getBlogTagSlug(keyword) === tag);
+}
+
 export function getBlogPostSummaries(includeDrafts = false): IBlogPostSummary[] {
   return getBlogSources()
-    .filter((post) => shouldIncludePost(post, includeDrafts))
+    .filter(
+      (post) =>
+        shouldIncludePost(post, includeDrafts) && !hasTag(post, NOW_TAG)
+    )
+    .map(({ body: _body, ...post }) => post);
+}
+
+/** Posts in this stream intentionally only appear under /now. */
+export function getNowPostSummaries(includeDrafts = false): IBlogPostSummary[] {
+  return getBlogSources()
+    .filter(
+      (post) => shouldIncludePost(post, includeDrafts) && hasTag(post, NOW_TAG)
+    )
     .map(({ body: _body, ...post }) => post);
 }
 
