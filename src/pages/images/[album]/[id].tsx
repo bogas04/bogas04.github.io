@@ -83,7 +83,7 @@ export default function PhotoPage({
             <div className="sticky top-0 z-20 -mx-4 mb-8 shrink-0 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0">
               <h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl">
                 <Link
-                  href={`/image-gallery/${album.id}/`}
+                  href={`/images/${album.id}/`}
                   aria-label={`Back to ${album.title}`}
                   data-gallery-transition
                   className="inline-flex pr-2 align-middle text-white/55 no-underline transition hover:text-[#1ba1e2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1ba1e2]"
@@ -91,7 +91,7 @@ export default function PhotoPage({
                   <GalleryNavigationArrow direction="previous" />
                 </Link>
                 <Link
-                  href={`/image-gallery/${album.id}/`}
+                  href={`/images/${album.id}/`}
                   data-gallery-transition
                   className="lg:text-white/55 no-underline transition hover:text-[#1ba1e2]"
                 >

@@ -33,7 +33,7 @@ export default function GalleryFrame({
         <div className="flex items-center gap-3 text-xl font-light lowercase tracking-[-0.04em] sm:text-2xl">
           <Link href="/" className="text-white/55 no-underline transition hover:text-white">bogas04</Link>
           <span aria-hidden="true" className="text-white/30">/</span>
-          <Link href="/image-gallery/" className={`${trail ? "text-white/55" : "text-white"} no-underline transition hover:text-white`}>pictures</Link>
+          <Link href="/images/" className={`${trail ? "text-white/55" : "text-white"} no-underline transition hover:text-white`}>pictures</Link>
           {trail ? (
             <>
               <span aria-hidden="true" className="text-white/30">/</span>

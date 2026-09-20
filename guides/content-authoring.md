@@ -82,9 +82,9 @@ flowchart TD
   Check -->|"album and image are published"| Manifest["gallery/generated/manifest.json"]
   Check -->|"missing sidecar, invalid image, or invalid metadata"| Block["Build and deploy blocked"]
 
-  Manifest --> All["/image-gallery\nAll published gallery images"]
-  Manifest --> AlbumPage["/image-gallery/<album>\nPublished images in one album"]
-  Manifest --> PhotoPage["/image-gallery/<album>/<file>\nOne image page"]
+  Manifest --> All["/images\nAll published gallery images"]
+  Manifest --> AlbumPage["/images/<album>\nPublished images in one album"]
+  Manifest --> PhotoPage["/images/<album>/<file>\nOne image page"]
   Source --> Asset["/img/<folder>/<file>\nActual public image file"]
   Asset --> PhotoPage
   Asset --> Blog["/blog and other pages\nDirect image references"]
@@ -107,7 +107,7 @@ During each build:
 2. `pnpm gallery:build` reads published albums/images and creates
    `gallery/generated/manifest.json` for the gallery pages. All displayed
    images remain at their canonical `/img/**` paths.
-3. Next.js renders `/image-gallery`, each album page, and individual photo
+3. Next.js renders `/images`, each album page, and individual photo
    pages from that manifest.
 
 The generated manifest is ignored by Git and recreated for every build.

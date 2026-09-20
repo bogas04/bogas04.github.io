@@ -16,7 +16,7 @@ export default function GalleryIndex({ manifest }: { manifest: GalleryManifest }
       <SeoTags
         title="Pictures — divjot"
         description="Divjot's photo library."
-        pageUrl="https://bogas04.fyi/image-gallery/"
+        pageUrl="https://bogas04.fyi/images/"
       />
       <main>
         <GalleryCategoryFilter manifest={manifest} />

@@ -91,7 +91,7 @@ export function AlbumSidebar({
             all
           </button>
         ) : (
-          <Link href="/image-gallery/" aria-current={!selectedAlbumId ? "page" : undefined} className={itemClass(!selectedAlbumId)}>
+          <Link href="/images/" aria-current={!selectedAlbumId ? "page" : undefined} className={itemClass(!selectedAlbumId)}>
             all
           </Link>
         )}
@@ -100,14 +100,14 @@ export function AlbumSidebar({
             albums
           </button>
         ) : (
-          <Link href="/image-gallery/?view=albums" className={itemClass(false)}>
+          <Link href="/images/?view=albums" className={itemClass(false)}>
             albums
           </Link>
         )}
         {albums.map((album) => (
           <Link
             key={album.id}
-            href={`/image-gallery/${album.id}/`}
+            href={`/images/${album.id}/`}
             aria-current={album.id === selectedAlbumId ? "page" : undefined}
             className={itemClass(album.id === selectedAlbumId)}
           >
@@ -311,7 +311,7 @@ function AlbumGrid({
           return (
             <Link
               key={album.id}
-              href={`/image-gallery/${album.id}/`}
+              href={`/images/${album.id}/`}
               onClick={onAlbumSelect ? (event) => {
                 event.preventDefault();
                 onAlbumSelect(album);
@@ -402,7 +402,7 @@ function MobileGallerySidebar({
           ref={(element) => {
             itemRefs.current[String(albumIndex + 2)] = element;
           }}
-          href={`/image-gallery/${album.id}/`}
+          href={`/images/${album.id}/`}
           onClick={(event) => {
             event.preventDefault();
             onPaneChange(albumIndex + 2);
@@ -426,8 +426,8 @@ function MobileGallery({ manifest }: { manifest: GalleryManifest }) {
 
   const pathForPane = (paneIndex: number) => {
     const album = manifest.albums[paneIndex - 2];
-    if (album) return `/image-gallery/?album=${encodeURIComponent(album.id)}`;
-    return paneIndex === 1 ? "/image-gallery/?view=albums" : "/image-gallery/";
+    if (album) return `/images/?album=${encodeURIComponent(album.id)}`;
+    return paneIndex === 1 ? "/images/?view=albums" : "/images/";
   };
 
   const paneIndexForPath = () => {
@@ -510,7 +510,7 @@ export default function GalleryCategoryFilter({ manifest }: { manifest: GalleryM
 
   const selectDesktopView = (nextView: DesktopView) => {
     setDesktopView(nextView);
-    const nextPath = nextView === "albums" ? "/image-gallery/?view=albums" : "/image-gallery/";
+    const nextPath = nextView === "albums" ? "/images/?view=albums" : "/images/";
     if (`${window.location.pathname}${window.location.search}` !== nextPath) {
       window.history.pushState({ galleryView: nextView }, "", nextPath);
     }

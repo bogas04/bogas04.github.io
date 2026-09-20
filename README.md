@@ -48,4 +48,4 @@ checkout. It is development-only and writes only to the selected local
 repository; commit and push the resulting changes yourself.
 
 To configure the vanity host, add a Cloudflare Redirect Rule for
-`img.bogas04.fyi/*` to `https://bogas04.fyi/image-gallery/` with status `301`.
+`img.bogas04.fyi/*` to `https://bogas04.fyi/images/` with status `301`.

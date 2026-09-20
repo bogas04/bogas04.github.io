@@ -110,7 +110,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       ) return;
 
       const href = link.getAttribute("href");
-      if (!href?.startsWith("/image-gallery/")) return;
+      if (!href?.startsWith("/images/")) return;
       event.preventDefault();
 
       const pushToGallery = async () => {

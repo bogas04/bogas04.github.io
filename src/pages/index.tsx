@@ -14,6 +14,7 @@ import BlogIcon from "../components/icons/blog";
 import GalleryIcon from "../components/icons/gallery";
 import LinkedInIcon from "../components/icons/linkedin";
 import GithubIcon from "../components/icons/github";
+import NowIcon from "../components/icons/now";
 import Section from "../layout/section";
 
 function HomePage() {
@@ -50,6 +51,9 @@ function HomePage() {
 export default HomePage;
 
 function Hero() {
+  const navLinkClass =
+    "flex w-28 shrink-0 flex-col items-center gap-2 text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-32";
+
   return (
     <Section className="min-h-[91vh]" style={{ zIndex: 10 }}>
       <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
@@ -61,43 +65,51 @@ function Hero() {
         divjot
       </h1>
 
-      <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
-        Heylo! I&apos;m divjot (dj) or bogas04, software engineer by profession
-        with interest in veganism, single player gaming and psychology. I
-        sometimes write about unhinged emotional pieces and some cool tech work.
+      <p className="mx-auto mt-2 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
+        Heylo! I&apos;m divjot (dj) or bogas04, software engineer by profession,
+        with huge interest in veganism, single player video gaming, and newfound
+        interest in philosophy and psychology. I sometimes write unhinged
+        emotional pieces and share some cool tech work.
       </p>
 
-      <nav className="mt-6 grid w-full grid-cols-4 gap-2 p-8 max-lg:p-2">
+      <nav className="mt-8 mb-6 flex w-full flex-wrap justify-center gap-x-4 gap-y-8 px-2 py-4 sm:gap-x-8 sm:gap-y-10">
+        <Link
+          href="/images"
+          className={navLinkClass}
+        >
+          <GalleryIcon className="h-14 w-14 sm:h-16 sm:w-16" />
+          /images
+        </Link>
+        <Link
+          href="/now"
+          className={navLinkClass}
+        >
+          <NowIcon className="h-14 w-14 sm:h-16 sm:w-16" />
+          /now
+        </Link>
+        <Link
+          href="/blog"
+          className={navLinkClass}
+        >
+          <BlogIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
+          /blog
+        </Link>
         <a
           href="https://linkedin.com/in/bogas04"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
+          className={navLinkClass}
         >
-          <LinkedInIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
+          <LinkedInIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
           linkedin
         </a>
-        <Link
-          href="/image-gallery/"
-          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
-        >
-          <GalleryIcon className="mb-2 h-16 w-16 sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
-          gallery
-        </Link>
-        <Link
-          href="/blog"
-          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
-        >
-          <BlogIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
-          blog
-        </Link>
         <a
           href="https://github.com/bogas04"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex min-w-0 flex-col items-center text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase"
+          className={navLinkClass}
         >
-          <GithubIcon className="mb-2 h-16 w-16 invert sm:h-[73px] sm:w-[73px] lg:h-[98px] lg:w-[98px] max-sm:mb-0" />
+          <GithubIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
           github
         </a>
       </nav>
@@ -1547,84 +1559,84 @@ function PopOver({
           }`}
           onAnimationEnd={finishCardTransition}
         >
-        <div className="relative h-[70%] w-full bg-slate-100">
-          <img
-            key={activeImage}
-            src={activeImage}
-            alt={`${destination.name}, photo ${activeImageIndex + 1}`}
-            className="h-full w-full object-contain"
-          />
-          <button
-            type="button"
-            className="absolute inset-y-0 left-0 w-1/2 cursor-w-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
-            onClick={(e) => {
-              e.stopPropagation();
-              void showPhoto("previous");
-            }}
-            disabled={Boolean(pendingDirection || preparingDirection)}
-            aria-label={`Show previous photo of ${destination.name}`}
-          />
-          <button
-            type="button"
-            className="absolute inset-y-0 right-0 w-1/2 cursor-e-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
-            onClick={(e) => {
-              e.stopPropagation();
-              void showPhoto("next");
-            }}
-            disabled={Boolean(pendingDirection || preparingDirection)}
-            aria-label={`Show next photo of ${destination.name}`}
-          />
-        </div>
-
-        <div className="flex min-h-0 flex-1 flex-col pt-5">
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <h3 className="m-0 text-xl font-semibold leading-tight">
-                {destination.name} ({activeImageIndex + 1}/
-                {destination.images.length})
-              </h3>
-              <p className="m-0 mt-2 break-words text-lg leading-snug text-gray-700">
-                {destination.description}
-              </p>
-            </div>
+          <div className="relative h-[70%] w-full bg-slate-100">
+            <img
+              key={activeImage}
+              src={activeImage}
+              alt={`${destination.name}, photo ${activeImageIndex + 1}`}
+              className="h-full w-full object-contain"
+            />
             <button
               type="button"
-              className="shrink-0 rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-base font-medium hover:bg-gray-200"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(activeImage, "_blank", "noopener,noreferrer");
-              }}
-            >
-              Zoom
-            </button>
-          </div>
-          <div className="mt-auto flex items-center gap-2 pt-3">
-            <button
-              type="button"
-              aria-label="Show previous photo"
-              title="Previous photo"
-              className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+              className="absolute inset-y-0 left-0 w-1/2 cursor-w-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
               onClick={(e) => {
                 e.stopPropagation();
                 void showPhoto("previous");
               }}
-            >
-              <span aria-hidden="true">👈</span>
-            </button>
+              disabled={Boolean(pendingDirection || preparingDirection)}
+              aria-label={`Show previous photo of ${destination.name}`}
+            />
             <button
               type="button"
-              aria-label="Show next photo"
-              title="Next photo"
-              className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+              className="absolute inset-y-0 right-0 w-1/2 cursor-e-resize appearance-none border-0 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-black"
               onClick={(e) => {
                 e.stopPropagation();
                 void showPhoto("next");
               }}
-            >
-              <span aria-hidden="true">👉</span>
-            </button>
+              disabled={Boolean(pendingDirection || preparingDirection)}
+              aria-label={`Show next photo of ${destination.name}`}
+            />
           </div>
-        </div>
+
+          <div className="flex min-h-0 flex-1 flex-col pt-5">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <h3 className="m-0 text-xl font-semibold leading-tight">
+                  {destination.name} ({activeImageIndex + 1}/
+                  {destination.images.length})
+                </h3>
+                <p className="m-0 mt-2 break-words text-lg leading-snug text-gray-700">
+                  {destination.description}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="shrink-0 rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-base font-medium hover:bg-gray-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(activeImage, "_blank", "noopener,noreferrer");
+                }}
+              >
+                Zoom
+              </button>
+            </div>
+            <div className="mt-auto flex items-center gap-2 pt-3">
+              <button
+                type="button"
+                aria-label="Show previous photo"
+                title="Previous photo"
+                className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  void showPhoto("previous");
+                }}
+              >
+                <span aria-hidden="true">👈</span>
+              </button>
+              <button
+                type="button"
+                aria-label="Show next photo"
+                title="Next photo"
+                className="rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-2xl leading-none hover:bg-gray-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  void showPhoto("next");
+                }}
+              >
+                <span aria-hidden="true">👉</span>
+              </button>
+            </div>
+          </div>
         </div>
       </ViewTransition>
     </div>

@@ -91,7 +91,7 @@ async function main(): Promise<void> {
         width: dimensions.width,
         height: dimensions.height,
         aspectRatio: dimensions.height ? dimensions.width / dimensions.height : 1,
-        photoUrl: `/image-gallery/${encodeURIComponent(album.id)}/${encodeURIComponent(image.id)}/`,
+        photoUrl: `/images/${encodeURIComponent(album.id)}/${encodeURIComponent(image.id)}/`,
         thumbUrl: sourceUrl,
         displayUrl: sourceUrl,
         fallbackUrl: sourceUrl,
