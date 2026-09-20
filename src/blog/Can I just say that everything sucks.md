@@ -8,6 +8,8 @@ keywords: [life, career]
 
 I was talking to my peers, and every single one of them currently feels anxious, uncertain and insecure about the future. Some are impacted by a [layoff](https://www.trueup.io/layoffs), some are anticipating one, some settled for a pay cut, while others are figuring out ways to make money to fund their life or parenthood. My nephew himself is concerned about which career to pick, as white-collar jobs seem to be dead ends or easily replaceable. I mean, what sort of world have we created that education is being undervalued? Is this made up? Is my internet wrong? Is it just my threatened privilege feeling concerned about its general expectation of "life will get better" not adding up anymore?
 
+I really don't know how to make my point without qualifying that, of course, education is a privilege in a third world country, having a white collar job at all, let alone from pre covid era is a privilege, not having job insecurity for even few years is a privilege. What I really want to say is that, even that privilege is seemingly eroding away.
+
 ## suppose
 
 Say you are indeed laid off today, not because you underperformed, but because a clanker has been trained by learning (read stealing) from millions of people like you who involuntarily built the knowledge base for it. What do you do now? Do keep in mind that you would now be competing for a job with many other senior and junior candidates, thus driving the value of your cognitive abilities further down.
