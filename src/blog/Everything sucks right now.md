@@ -6,4 +6,4 @@ categories: []
 keywords: [now]
 ---
 
-I recently poured my ongoing angst at the world in this [blog post](/blog/2026/09/can-i-just-say-that-everything-sucks), maybe you relate? maybe you vehemently disagree? It covers content from two of my drafts in one, so that's two less problems in my life.
+I recently poured my ongoing angst about the world in this [blog post](/blog/2026/09/can-i-just-say-that-everything-sucks), Maybe you relate? Maybe you vehemently disagree? It covers content from two of my drafts in one, so that's two less problems in my life.
