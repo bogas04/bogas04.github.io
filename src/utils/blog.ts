@@ -65,11 +65,7 @@ function getBlogSources(): BlogSource[] {
 }
 
 function shouldIncludePost(post: IBlogPostSummary, includeDrafts: boolean) {
-  return !(
-    process.env.NODE_ENV === "production" &&
-    post.isDraft &&
-    !includeDrafts
-  );
+  return includeDrafts || !post.isDraft;
 }
 
 function hasTag(post: IBlogPostSummary, tag: string) {

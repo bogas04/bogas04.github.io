@@ -7,8 +7,9 @@ import {
 import { getBlogDateParts } from "../../../../utils/blogDate";
 
 export async function getStaticPaths() {
+  const includeDrafts = process.env.NODE_ENV === "development";
   return {
-    paths: getBlogPostSummaries().flatMap((post) => {
+    paths: getBlogPostSummaries(includeDrafts).flatMap((post) => {
       const dateParts = getBlogDateParts(post.date);
       return dateParts
         ? [{ params: { ...dateParts, slug: post.slug } }]
@@ -22,7 +23,9 @@ export async function getStaticProps(context: {
   params: { year: string; month: string; slug: string };
 }) {
   const { year, month, slug } = context.params;
-  const postSummary = getBlogPostSummaries(true).find((candidate) => {
+  const postSummary = getBlogPostSummaries(
+    process.env.NODE_ENV === "development"
+  ).find((candidate) => {
     const dateParts = getBlogDateParts(candidate.date);
     return (
       candidate.slug === slug &&

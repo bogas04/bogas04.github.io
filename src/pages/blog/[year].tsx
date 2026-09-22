@@ -25,13 +25,14 @@ const BLOG_PLACEHOLDER_IMAGE = "/img/travel/uk/uk-14.jpg";
 const BLOG_PLACEHOLDER_ALT = "DJ shrugging infront of Awkward Hill Cottage in UK";
 
 export async function getStaticPaths() {
-  const posts = getBlogPostSummaries(true);
-  const publishedPosts = getBlogPostSummaries();
+  const visiblePosts = getBlogPostSummaries(
+    process.env.NODE_ENV === "development"
+  );
   const years = Array.from(
-    new Set(publishedPosts.map((post) => new Date(post.date).getFullYear()))
+    new Set(visiblePosts.map((post) => new Date(post.date).getFullYear()))
   );
   const paths = [
-    ...posts.map((post) => ({ params: { year: post.legacySlug } })),
+    ...visiblePosts.map((post) => ({ params: { year: post.legacySlug } })),
     ...years.map((year) => ({ params: { year: String(year) } })),
   ];
 
@@ -42,7 +43,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: { params: { year: string } }) {
-  const legacyPost = getBlogPostSummaries(true).find((p) => {
+  const legacyPost = getBlogPostSummaries(
+    process.env.NODE_ENV === "development"
+  ).find((p) => {
     return p.legacySlug === context.params.year;
   });
   if (legacyPost) {
@@ -50,7 +53,9 @@ export async function getStaticProps(context: { params: { year: string } }) {
   }
 
   const year = context.params.year;
-  const posts = getBlogPostSummaries().filter(
+  const posts = getBlogPostSummaries(
+    process.env.NODE_ENV === "development"
+  ).filter(
     (candidate) => String(new Date(candidate.date).getFullYear()) === year
   );
 

@@ -12,7 +12,7 @@ branch at `/` (Settings → Pages); `main` contains source code only.
 ## Image gallery
 
 For the full guide to `/write`, `/upload`, image metadata, gallery publication,
-and the build pipeline, see [Content authoring](guides/content-authoring.md).
+and the build pipeline, see [Content authoring](docs/content-authoring.md).
 
 Gallery masters can live anywhere below `public/img`. `gallery/albums.json`
 maps stable gallery album IDs to their source directories, so an image path or

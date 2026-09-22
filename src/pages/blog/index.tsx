@@ -12,7 +12,7 @@ import Link from "next/link";
 import { flushSync } from "react-dom";
 
 export async function getStaticProps() {
-  const posts = getBlogPostSummaries();
+  const posts = getBlogPostSummaries(process.env.NODE_ENV === "development");
 
   return {
     props: { posts },
@@ -37,8 +37,7 @@ const getBlogPreviewTags = (keywords: IBlogPostSummary["keywords"]) =>
 
 export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) {
   const router = useRouter();
-  const showDrafts = router.query["be-more-vulnerable"] === "1";
-  const [opensDraftsInSite, setOpensDraftsInSite] = useState(false);
+  const isLocalDevelopment = process.env.NODE_ENV === "development";
   const [drafts, setDrafts] = useState<IBlogPostSummary[]>([]);
   const [selectedDraft, setSelectedDraft] = useState<IBlogPostSummary | null>(
     null
@@ -46,19 +45,17 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
   const [transitioningPostSlug, setTransitioningPostSlug] = useState<string | null>(
     consumePendingBlogPostTransition
   );
+  const showDrafts =
+    isLocalDevelopment || router.query["be-more-vulnerable"] === "1";
 
   useEffect(() => {
-    if (!showDrafts) return;
+    if (!showDrafts || isLocalDevelopment) return;
 
     fetch("/_be-more-vulnerable.json")
       .then((response) => response.json())
       .then(setDrafts)
       .catch(() => setDrafts([]));
-  }, [showDrafts]);
-
-  useEffect(() => {
-    setOpensDraftsInSite(window.location.hostname === "localhost");
-  }, []);
+  }, [isLocalDevelopment, showDrafts]);
 
   const visiblePosts = showDrafts
     ? [...posts, ...drafts].sort(
@@ -100,7 +97,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
           const tags = getBlogPreviewTags(post.keywords);
           const articleHref = getBlogPostPath(post);
           const handlePostClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-            if (post.isDraft && !opensDraftsInSite) {
+            if (post.isDraft && !isLocalDevelopment) {
               event.preventDefault();
               setSelectedDraft(post);
               return;
@@ -117,7 +114,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
               <div className="flex flex-col content-between">
                 <Link
                   href={articleHref}
-                  data-blog-transition={!post.isDraft || opensDraftsInSite || undefined}
+                  data-blog-transition={!post.isDraft || isLocalDevelopment || undefined}
                   className="no-underline"
                   onClick={handlePostClick}
                 >
@@ -156,7 +153,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                   </div>
                 )}
 
-                <Link href={articleHref} data-blog-transition={!post.isDraft || opensDraftsInSite || undefined} className="no-underline" onClick={handlePostClick}>
+                <Link href={articleHref} data-blog-transition={!post.isDraft || isLocalDevelopment || undefined} className="no-underline" onClick={handlePostClick}>
                   <p className="mb-3 leading-relaxed text-slate-600 dark:text-slate-200">{post.description}</p>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-200">
                     <time dateTime={post.date}>
@@ -172,7 +169,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
                   </div>
                 </Link>
               </div>
-              <Link href={articleHref} data-blog-transition={!post.isDraft || opensDraftsInSite || undefined} className="h-52 w-full overflow-hidden rounded-lg min-[801px]:h-auto min-[801px]:min-w-[30%] min-[801px]:max-w-[30%]" onClick={handlePostClick}>
+              <Link href={articleHref} data-blog-transition={!post.isDraft || isLocalDevelopment || undefined} className="h-52 w-full overflow-hidden rounded-lg min-[801px]:h-auto min-[801px]:min-w-[30%] min-[801px]:max-w-[30%]" onClick={handlePostClick}>
                 <img
                   className="h-full w-full object-cover"
                   style={
