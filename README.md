@@ -1,51 +1,31 @@
 # bogas04.fyi
-My homepage built with [Next.js](https://nextjs.org/) and loouveee
 
-Feel free to use it for your own personal webpage, though don't forget to star the repo!
+The source for [bogas04.fyi](https://bogas04.fyi), a personal website for
+writing, photography, and an evolving digital identity outside corporate
+platforms.
 
-## Deployment
+## How it is made
 
-GitHub Actions builds the site after each push to `main` and publishes the generated
-files to the `gh-pages` branch. Configure GitHub Pages to deploy from the `gh-pages`
-branch at `/` (Settings → Pages); `main` contains source code only.
+The site uses the Next.js Pages Router with static export and Tailwind. It has
+no application server. Blog posts are Markdown files in `src/blog`; gallery
+albums are registered in `gallery/albums.json` and use image masters plus
+Markdown metadata under `public/img`.
 
-## Image gallery
+Gallery pages are built from a generated manifest. Blog pages produce RSS, Atom,
+and a sitemap during the site build. Public images are served from their
+canonical `/img/**` paths.
 
-For the full guide to `/write`, `/upload`, image metadata, gallery publication,
-and the build pipeline, see [Content authoring](docs/content-authoring.md).
+## Publishing
 
-Gallery masters can live anywhere below `public/img`. `gallery/albums.json`
-maps stable gallery album IDs to their source directories, so an image path or
-filename never needs to follow a gallery convention. Each mapped folder contains
-`index.md`, image masters, and matching Markdown sidecars.
+GitHub Actions builds every push to `main`, validates and generates the gallery,
+creates the static site, then publishes it to `gh-pages`. GitHub Pages serves
+the generated branch and Cloudflare provides the public domain.
 
-```json
-{ "albums": [{ "id": "bali", "path": "public/img/travel/bali" }] }
-```
+## Project documentation
 
-Gallery and blog pages serve these originals directly from `public/img`.
-Site-only artwork such as talk thumbnails, maps, logos, and error illustrations lives in
-`public/assets` and is not included in the gallery manifest.
+The implementation and its decisions are documented in [`docs/`](docs/):
 
-```sh
-pnpm gallery:add ~/Pictures/photo.jpg --album my-trip --category travel
-pnpm gallery:check
-git add public/img/
-git commit -m "feat(gallery): add photos"
-git push
-```
-
-`gallery:add` keeps the input filename (with a `.jpg` extension after
-sanitising) unless an explicit `--id` is supplied.
-
-The build creates a gallery manifest under `gallery/generated`; it is ignored
-and recreated for every deployment.
-
-### Local gallery authoring
-
-Run `pnpm start` and open `/upload` in Chrome or Edge to connect a local
-checkout. It is development-only and writes only to the selected local
-repository; commit and push the resulting changes yourself.
-
-To configure the vanity host, add a Cloudflare Redirect Rule for
-`img.bogas04.fyi/*` to `https://bogas04.fyi/images/` with status `301`.
+- [Content authoring](docs/content-authoring.md)
+- [Design direction](docs/design-direction.md)
+- [Technical principles](docs/technical-principles.md)
+- [Build and deployment](docs/build-and-deployment.md)

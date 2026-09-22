@@ -1,16 +1,24 @@
 import Head from "next/head";
 import type { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import {
   ChangeEvent,
   useEffect,
   useMemo,
   useState,
 } from "react";
+import {
+  discardRecovery,
+  loadRecovery,
+  saveRecovery,
+  type RecoverySnapshot,
+} from "../utils/authoringRecovery";
 
 declare global {
   interface Window {
     showDirectoryPicker?: (options?: {
       mode?: "read" | "readwrite";
+      id?: string;
     }) => Promise<FileSystemDirectoryHandle>;
   }
   interface FileSystemHandle {
@@ -29,6 +37,7 @@ declare global {
 const HANDLE_DATABASE = "divjot-gallery-uploader";
 const HANDLE_STORE = "handles";
 const REPOSITORY_HANDLE_KEY = "repository";
+const UPLOADER_RECOVERY_KEY = "divjot-gallery-uploader-recovery";
 const IMAGE_PATTERN = /\.(avif|gif|jpe?g|png|webp)$/i;
 const ALBUM_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -70,6 +79,15 @@ type GalleryAlbum = AlbumConfig & {
   form: AlbumForm;
   directory: FileSystemDirectoryHandle;
   images: GalleryImage[];
+};
+
+type UploaderRecovery = {
+  selectedAlbumId: string | null;
+  selectedImageId: string | null;
+  albumForm: AlbumForm;
+  imageForm: ImageForm;
+  savedAlbumForm: AlbumForm;
+  savedImageForm: ImageForm;
 };
 
 const emptyAlbum = (): AlbumForm => ({
@@ -286,6 +304,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function GalleryUploader() {
+  const router = useRouter();
   const [repository, setRepository] = useState<FileSystemDirectoryHandle | null>(null);
   const [albums, setAlbums] = useState<GalleryAlbum[]>([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState<string | null>(null);
@@ -296,9 +315,24 @@ export default function GalleryUploader() {
   const [isBusy, setIsBusy] = useState(false);
   const [hasSavedRepository, setHasSavedRepository] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [savedAlbumForm, setSavedAlbumForm] = useState<AlbumForm>(emptyAlbum);
+  const [savedImageForm, setSavedImageForm] = useState<ImageForm>(emptyImage);
+  const [recovery, setRecovery] = useState<RecoverySnapshot<UploaderRecovery> | null>(null);
+  const [recoveryReady, setRecoveryReady] = useState(false);
 
   const selectedAlbum = albums.find((album) => album.id === selectedAlbumId) || null;
   const selectedImage = selectedAlbum?.images.find((image) => image.id === selectedImageId) || null;
+  const isDirty =
+    JSON.stringify(albumForm) !== JSON.stringify(savedAlbumForm) ||
+    JSON.stringify(imageForm) !== JSON.stringify(savedImageForm);
+  const recoveryValue = (): UploaderRecovery => ({
+    selectedAlbumId,
+    selectedImageId,
+    albumForm,
+    imageForm,
+    savedAlbumForm,
+    savedImageForm,
+  });
 
   const reload = async (nextRepository: FileSystemDirectoryHandle, preferredAlbumId?: string | null) => {
     const gallery = await nextRepository.getDirectoryHandle("gallery");
@@ -313,8 +347,12 @@ export default function GalleryUploader() {
     setSelectedAlbumId(nextSelectedId);
     setSelectedImageId(null);
     const nextAlbum = nextAlbums.find((album) => album.id === nextSelectedId);
-    setAlbumForm(nextAlbum?.form || emptyAlbum());
-    setImageForm(emptyImage());
+    const nextAlbumForm = nextAlbum?.form || emptyAlbum();
+    const nextImageForm = emptyImage();
+    setAlbumForm(nextAlbumForm);
+    setImageForm(nextImageForm);
+    setSavedAlbumForm(nextAlbumForm);
+    setSavedImageForm(nextImageForm);
   };
 
   useEffect(() => {
@@ -335,6 +373,30 @@ export default function GalleryUploader() {
     };
     void restoreRepository();
   }, []);
+
+  useEffect(() => {
+    setRecovery(loadRecovery<UploaderRecovery>(UPLOADER_RECOVERY_KEY));
+    setRecoveryReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!recoveryReady || !isDirty) return;
+    const timer = window.setTimeout(
+      () => saveRecovery(UPLOADER_RECOVERY_KEY, recoveryValue()),
+      300,
+    );
+    return () => window.clearTimeout(timer);
+  }, [recoveryReady, albumForm, imageForm, savedAlbumForm, savedImageForm]);
+
+  useEffect(() => {
+    if (!isDirty) return;
+    const warnBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnBeforeUnload);
+    return () => window.removeEventListener("beforeunload", warnBeforeUnload);
+  }, [isDirty]);
 
   useEffect(() => {
     if (!selectedImage || !selectedAlbum) {
@@ -360,7 +422,7 @@ export default function GalleryUploader() {
     setIsBusy(true);
     try {
       if (!window.showDirectoryPicker) throw new Error("This uploader needs Chrome, Edge, or another browser with the File System Access API.");
-      const nextRepository = await window.showDirectoryPicker({ mode: "readwrite" });
+      const nextRepository = await window.showDirectoryPicker({ mode: "readwrite", id: "bogas04-repository" });
       await saveRepositoryHandle(nextRepository);
       setHasSavedRepository(true);
       await reload(nextRepository);
@@ -388,15 +450,45 @@ export default function GalleryUploader() {
   };
 
   const selectAlbum = (album: GalleryAlbum) => {
+    if (isDirty) {
+      saveRecovery(UPLOADER_RECOVERY_KEY, recoveryValue());
+      if (!window.confirm("You have unsaved changes. They are kept in this browser for recovery. Continue?")) return;
+    }
     setSelectedAlbumId(album.id);
     setSelectedImageId(null);
     setAlbumForm(album.form);
-    setImageForm(emptyImage());
+    const nextImageForm = emptyImage();
+    setImageForm(nextImageForm);
+    setSavedAlbumForm(album.form);
+    setSavedImageForm(nextImageForm);
   };
 
   const selectImage = (image: GalleryImage) => {
+    if (isDirty) {
+      saveRecovery(UPLOADER_RECOVERY_KEY, recoveryValue());
+      if (!window.confirm("You have unsaved changes. They are kept in this browser for recovery. Continue?")) return;
+    }
     setSelectedImageId(image.id);
     setImageForm(image);
+    setSavedImageForm(image);
+  };
+
+  const restoreRecovery = () => {
+    if (!recovery) return;
+    const value = recovery.value;
+    setSelectedAlbumId(value.selectedAlbumId);
+    setSelectedImageId(value.selectedImageId);
+    setAlbumForm(value.albumForm);
+    setImageForm(value.imageForm);
+    setSavedAlbumForm(value.savedAlbumForm);
+    setSavedImageForm(value.savedImageForm);
+    setRecovery(null);
+    setMessage("Restored unsaved gallery details from this browser. Save when you are ready to write them to the repository.");
+  };
+
+  const discardStoredRecovery = () => {
+    discardRecovery(UPLOADER_RECOVERY_KEY);
+    setRecovery(null);
   };
 
   const saveAlbum = async () => {
@@ -415,6 +507,9 @@ export default function GalleryUploader() {
       else config.albums[existingIndex] = entry;
       await writeText(gallery, "albums.json", `${JSON.stringify(config, null, 2)}\n`);
       await reload(repository, albumForm.id);
+      setSavedAlbumForm({ ...albumForm, path: albumPath });
+      discardRecovery(UPLOADER_RECOVERY_KEY);
+      setRecovery(null);
       setMessage(`Saved ${albumForm.id} in ${albumPath}.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Could not save the album.");
@@ -475,6 +570,10 @@ export default function GalleryUploader() {
       await writeText(selectedAlbum.directory, `${selectedImage.id}.md`, imageFile({ ...imageForm, id: selectedImage.id }));
       await reload(repository, selectedAlbum.id);
       setSelectedImageId(selectedImage.id);
+      setImageForm(imageForm);
+      setSavedImageForm(imageForm);
+      discardRecovery(UPLOADER_RECOVERY_KEY);
+      setRecovery(null);
       setMessage(`Saved metadata for ${selectedImage.name}.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Could not save the image details.");
@@ -495,11 +594,15 @@ export default function GalleryUploader() {
         </div>
         <div className="flex gap-2">
           {!repository && hasSavedRepository && <button className="rounded border border-slate-300 px-4 py-2 text-sm font-semibold disabled:opacity-50 dark:border-white/25" type="button" onClick={() => void reconnect()} disabled={isBusy}>Reconnect saved</button>}
-          <button className="rounded bg-slate-800 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" onClick={repository ? () => { setRepository(null); setAlbums([]); } : () => void connect()} disabled={isBusy}>{repository ? "Disconnect" : "Connect repository"}</button>
+          <button className="rounded bg-slate-800 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" onClick={repository ? () => { setRepository(null); setAlbums([]); } : () => void connect()} disabled={isBusy} autoFocus={!repository && router.query.connect === "1"}>{repository ? "Disconnect" : "Connect repository"}</button>
         </div>
       </header>
 
       {message && <p className="mb-6 rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-600 dark:bg-white/10 dark:text-slate-200">{message}</p>}
+
+      {recovery && <section className="mb-6 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950 dark:border-amber-300/40 dark:bg-amber-300/10 dark:text-amber-100" aria-label="Recovered gallery work"><p className="m-0">Unsaved gallery details from {new Date(recovery.savedAt).toLocaleString()} are available in this browser.</p><div className="mt-3 flex flex-wrap gap-2"><button className="rounded bg-amber-900 px-3 py-1.5 font-semibold text-white dark:bg-amber-100 dark:text-amber-950" type="button" onClick={restoreRecovery}>Restore them</button><button className="rounded border border-current px-3 py-1.5 font-semibold" type="button" onClick={discardStoredRecovery}>Discard recovery</button></div></section>}
+
+      {isDirty && <p className="mb-6 text-sm text-slate-500 dark:text-slate-300">Unsaved details are recoverable in this browser and will not be written to the repository until you save.</p>}
 
       <div className="grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)_minmax(0,1fr)]">
         <aside className="order-last border-t border-slate-200 pt-6 dark:border-white/15 lg:order-first lg:border-r lg:border-t-0 lg:pr-6 lg:pt-0">

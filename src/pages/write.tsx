@@ -13,11 +13,18 @@ import remark from "remark";
 // @ts-ignore `remark-html` predates its bundled TypeScript declarations.
 import html from "remark-html";
 import { getBlogTagColors } from "../utils/blogTag";
+import {
+  discardRecovery,
+  loadRecovery,
+  saveRecovery,
+  type RecoverySnapshot,
+} from "../utils/authoringRecovery";
 
 declare global {
   interface Window {
     showDirectoryPicker?: (options?: {
       mode?: "read" | "readwrite";
+      id?: string;
     }) => Promise<FileSystemDirectoryHandle>;
   }
   interface FileSystemHandle {
@@ -37,6 +44,7 @@ const MAX_IMAGE_DIMENSION = 2400;
 const HANDLE_DATABASE = "divjot-blog-writer";
 const HANDLE_STORE = "handles";
 const REPOSITORY_HANDLE_KEY = "repository";
+const WRITER_RECOVERY_KEY = "divjot-blog-writer-recovery";
 
 type WriterDirectories = {
   repository: FileSystemDirectoryHandle;
@@ -60,6 +68,17 @@ type ParsedPost = {
 };
 
 type PostSort = "alphabetical" | "status";
+
+type WriterRecovery = {
+  editingFileName: string | null;
+  title: string;
+  description: string;
+  date: string;
+  selectedTags: string[];
+  body: string;
+  isDraft: boolean;
+  savedFingerprint: string;
+};
 
 const postSortLabels: Record<PostSort, string> = {
   alphabetical: "A–Z",
@@ -384,10 +403,20 @@ export default function BlogWriter() {
   const [isZenMode, setIsZenMode] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
   const [currentTime, setCurrentTime] = useState(() => Date.now());
+  const [savedFingerprint, setSavedFingerprint] = useState(() =>
+    postFingerprint({
+      fileName: null,
+      title: "",
+      description: "",
+      date: today(),
+      tags: [],
+      body: "",
+      isDraft: true,
+    }),
+  );
+  const [recovery, setRecovery] = useState<RecoverySnapshot<WriterRecovery> | null>(null);
+  const [recoveryReady, setRecoveryReady] = useState(false);
   const textarea = useRef<HTMLTextAreaElement>(null);
-  const lastSavedDraft = useRef<string | null>(null);
-  const isSaving = useRef(false);
-  const autosave = useRef<() => void>(() => undefined);
 
   const preview = useMemo(
     () => renderPreview(body || "_Start writing to see a preview._"),
@@ -410,12 +439,44 @@ export default function BlogWriter() {
   const readingTimeMinutes = getReadingTimeMinutes(body);
   const draftFromUrl =
     typeof router.query.draft === "string" ? router.query.draft : null;
+  const currentFingerprint = postFingerprint({
+    fileName: editingFileName,
+    title,
+    description,
+    date,
+    tags: selectedTags,
+    body,
+    isDraft,
+  });
+  const isDirty = currentFingerprint !== savedFingerprint;
+  const recoveryValue = (): WriterRecovery => ({
+    editingFileName,
+    title,
+    description,
+    date,
+    selectedTags,
+    body,
+    isDraft,
+    savedFingerprint,
+  });
 
   const setDraftInUrl = (fileName: string | null) => {
     void router.replace(
       { pathname: "/write", query: fileName ? { draft: fileName } : {} },
       undefined,
       { shallow: true, scroll: false },
+    );
+  };
+
+  const preserveRecovery = () => {
+    if (isDirty) saveRecovery(WRITER_RECOVERY_KEY, recoveryValue());
+  };
+
+  const confirmLeavingDraft = () => {
+    if (!isDirty) return true;
+    preserveRecovery();
+    return window.confirm(
+      "You have unsaved changes. They are kept in this browser for recovery. Continue without saving to the repository?",
     );
   };
 
@@ -457,6 +518,27 @@ export default function BlogWriter() {
     void restoreRepository();
   }, []);
 
+  useEffect(() => {
+    setRecovery(loadRecovery<WriterRecovery>(WRITER_RECOVERY_KEY));
+    setRecoveryReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!recoveryReady || !isDirty) return;
+    const timer = window.setTimeout(() => preserveRecovery(), 300);
+    return () => window.clearTimeout(timer);
+  }, [recoveryReady, currentFingerprint]);
+
+  useEffect(() => {
+    if (!isDirty) return;
+    const warnBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnBeforeUnload);
+    return () => window.removeEventListener("beforeunload", warnBeforeUnload);
+  }, [isDirty]);
+
   const connect = async () => {
     setIsBusy(true);
     setMessage("");
@@ -468,6 +550,7 @@ export default function BlogWriter() {
       }
       const repository = await window.showDirectoryPicker({
         mode: "readwrite",
+        id: "bogas04-repository",
       });
       await saveRepositoryHandle(repository);
       setHasSavedRepository(true);
@@ -512,6 +595,7 @@ export default function BlogWriter() {
   };
 
   const disconnect = () => {
+    if (!confirmLeavingDraft()) return;
     setDirectories(null);
     setPosts([]);
     setEditingFileName(null);
@@ -599,9 +683,9 @@ export default function BlogWriter() {
       setBody(parsed.body);
       setIsDraft(post.isDraft);
       setLastSavedAt(new Date(content.lastModified));
-      lastSavedDraft.current = post.isDraft
-        ? postFingerprint({ fileName: post.fileName, ...parsed, isDraft: true })
-        : null;
+      setSavedFingerprint(
+        postFingerprint({ fileName: post.fileName, ...parsed, isDraft: post.isDraft }),
+      );
     } catch (error) {
       setMessage(
         error instanceof Error ? error.message : "Could not open that post.",
@@ -612,11 +696,13 @@ export default function BlogWriter() {
   };
 
   const openPost = (post: ExistingPost) => {
+    if (!confirmLeavingDraft()) return;
     setDraftInUrl(post.isDraft ? post.fileName : null);
     void editPost(post);
   };
 
   const newPost = () => {
+    if (!confirmLeavingDraft()) return;
     setDraftInUrl(null);
     setEditingFileName(null);
     setTitle("");
@@ -625,7 +711,17 @@ export default function BlogWriter() {
     setSelectedTags([]);
     setBody("");
     setIsDraft(true);
-    lastSavedDraft.current = null;
+    setSavedFingerprint(
+      postFingerprint({
+        fileName: null,
+        title: "",
+        description: "",
+        date: today(),
+        tags: [],
+        body: "",
+        isDraft: true,
+      }),
+    );
     setLastSavedAt(null);
     setMessage("New draft. Save it to create a Markdown file.");
   };
@@ -656,18 +752,18 @@ export default function BlogWriter() {
     }
   };
 
-  const save = async (isAutosave = false) => {
+  const save = async () => {
     if (!directories) {
-      if (!isAutosave) setMessage("Connect the repository before saving.");
+      setMessage("Connect the repository before saving.");
       return;
     }
     if (!title.trim() || !description.trim()) {
-      if (!isAutosave) setMessage("Title and description are required.");
+      setMessage("Title and description are required.");
       return;
     }
     const name = safeFilePart(`${isDraft ? "draft " : ""}${title}.md`);
     if (!name || name === ".md") {
-      if (!isAutosave) setMessage("Please use a valid title.");
+      setMessage("Please use a valid title.");
       return;
     }
     const snapshot = postFingerprint({
@@ -679,14 +775,7 @@ export default function BlogWriter() {
       body,
       isDraft,
     });
-    if (
-      isAutosave &&
-      (!isDraft || snapshot === lastSavedDraft.current || isSaving.current)
-    )
-      return;
-
-    isSaving.current = true;
-    if (!isAutosave) setIsBusy(true);
+    setIsBusy(true);
     try {
       if (name !== editingFileName) {
         try {
@@ -707,44 +796,44 @@ export default function BlogWriter() {
       }
       setEditingFileName(name);
       setDraftInUrl(isDraft ? name : null);
-      lastSavedDraft.current = isDraft ? snapshot : null;
+      setSavedFingerprint(snapshot);
+      discardRecovery(WRITER_RECOVERY_KEY);
+      setRecovery(null);
       setLastSavedAt(new Date());
       const existingContent = await getExistingPosts(directories.blog);
       setPosts(existingContent.posts);
       setTags(existingContent.tags);
       setMessage(
-        isAutosave
-          ? `Autosaved src/blog/${name}.`
-          : `Saved src/blog/${name}. Review it in git, then commit and push when ready.`,
+        `Saved src/blog/${name}. Review it in git, then commit and push when ready.`,
       );
     } catch (error) {
       setMessage(
         error instanceof Error ? error.message : "Could not save the post.",
       );
     } finally {
-      isSaving.current = false;
-      if (!isAutosave) setIsBusy(false);
+      setIsBusy(false);
     }
   };
 
-  autosave.current = () => {
-    void save(true);
+  const restoreRecovery = () => {
+    if (!recovery) return;
+    const value = recovery.value;
+    setEditingFileName(value.editingFileName);
+    setTitle(value.title);
+    setDescription(value.description);
+    setDate(value.date);
+    setSelectedTags(value.selectedTags);
+    setBody(value.body);
+    setIsDraft(value.isDraft);
+    setSavedFingerprint(value.savedFingerprint);
+    setRecovery(null);
+    setMessage("Restored unsaved work from this browser. Save when you are ready to write it to the repository.");
   };
 
-  useEffect(() => {
-    if (!directories || !isDraft) return;
-    const timer = window.setTimeout(() => autosave.current(), 30_000);
-    return () => window.clearTimeout(timer);
-  }, [
-    directories,
-    isDraft,
-    editingFileName,
-    title,
-    description,
-    date,
-    selectedTags,
-    body,
-  ]);
+  const discardStoredRecovery = () => {
+    discardRecovery(WRITER_RECOVERY_KEY);
+    setRecovery(null);
+  };
 
   useEffect(() => {
     if (
@@ -789,6 +878,7 @@ export default function BlogWriter() {
             type="button"
             onClick={directories ? disconnect : connect}
             disabled={isBusy}
+            autoFocus={!directories && router.query.connect === "1"}
           >
             {directories ? "Disconnect" : "Connect repository"}
           </button>
@@ -806,6 +896,16 @@ export default function BlogWriter() {
         <p className="mb-6 rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-600 dark:bg-white/10 dark:text-slate-200">
           {message}
         </p>
+      )}
+
+      {recovery && !isZenMode && (
+        <section className="mb-6 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950 dark:border-amber-300/40 dark:bg-amber-300/10 dark:text-amber-100" aria-label="Recovered work">
+          <p className="m-0">Unsaved work from {new Date(recovery.savedAt).toLocaleString()} is available in this browser.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button className="rounded bg-amber-900 px-3 py-1.5 font-semibold text-white dark:bg-amber-100 dark:text-amber-950" type="button" onClick={restoreRecovery}>Restore it</button>
+            <button className="rounded border border-current px-3 py-1.5 font-semibold" type="button" onClick={discardStoredRecovery}>Discard recovery</button>
+          </div>
+        </section>
       )}
 
       {isZenMode && (
@@ -927,7 +1027,7 @@ export default function BlogWriter() {
               />{" "}
               Save as draft{" "}
               <span className="text-xs text-slate-500 dark:text-slate-300">
-                (autosaves every 30s)
+                (recovery is saved in this browser)
               </span>
             </label>
               </div>
@@ -1033,7 +1133,9 @@ export default function BlogWriter() {
 
           <div className="sticky bottom-0 z-10 mt-5 flex items-center justify-between gap-4 border-t border-slate-200 bg-white/95 pt-4 backdrop-blur-sm dark:border-white/15 dark:bg-[#333]/95">
             <span className="text-xs text-slate-500 dark:text-slate-300">
-              {lastSavedAt
+              {isDirty
+                ? "unsaved changes are recoverable in this browser"
+                : lastSavedAt
                 ? formatLastSaved(lastSavedAt, currentTime)
                 : "not saved yet"}
             </span>

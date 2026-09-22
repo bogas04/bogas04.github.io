@@ -5,17 +5,14 @@ repository after the author grants a directory handle. They are development only
 and intentionally return 404 in production. See
 [Content authoring](content-authoring.md) for current behaviour.
 
-Unsaved work protection is a required future feature, especially for `/write`.
-The author has lost a blog post after closing a tab with unsaved work.
+Both editors protect unsaved form changes. They show an unsaved state, warn
+before a tab closes, and store a local recovery snapshot in browser storage.
+After a crash or accidental tab closure, the editor offers to restore or discard
+that snapshot.
 
-When implementing it, cover:
+Recovery snapshots never write Markdown or gallery metadata to the repository.
+The author must choose Save to write the restored work. `/upload` applies this
+to album and image details; image uploads remain an explicit file action.
 
-- an obvious dirty and saved state;
-- a warning before closing or navigating away from unsaved edits;
-- local browser recovery after a crash or accidental tab closure;
-- a recovery path that does not overwrite the Markdown file without the
-  author's intent; and
-- equivalent consideration for gallery metadata and uploads in `/upload`.
-
-Document the chosen storage model, recovery UX, and cleanup policy in a focused
-document alongside the implementation.
+The recovery data belongs to the browser profile and device that created it. It
+is not a backup, sync service, or private store for confidential content.

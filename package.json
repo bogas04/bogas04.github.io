@@ -8,6 +8,8 @@
   },
   "scripts": {
     "start": "pnpm gallery:build && next dev",
+    "write": "node scripts/open-authoring.mjs write",
+    "upload": "node scripts/open-authoring.mjs upload",
     "build": "pnpm run gallery:check && pnpm run gallery:build && pnpm run build:site",
     "build:site": "make build",
     "generate:rss": "node --no-warnings ./scripts/generate-rss.ts",

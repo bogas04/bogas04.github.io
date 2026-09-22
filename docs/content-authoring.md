@@ -5,11 +5,18 @@ This repository has two local-only authoring pages:
 - `/write` creates and edits blog posts.
 - `/upload` creates and manages image-gallery albums and photos.
 
-Start the development server with `pnpm start`, then open either page in Chrome
-or Edge. Both pages use the browser's File System Access API, so the first step
-is to select this repository's root directory and grant read/write access. The
-saved directory handle stays only in that browser's local IndexedDB storage;
-neither page uploads files to a server or commits/pushes Git changes.
+Use `pnpm write` or `pnpm upload` to start the development server and open the
+right authoring page. `pnpm start` remains available when you want the whole
+site without opening an editor.
+
+Both pages use the browser's File System Access API, so the first connection
+still requires selecting this repository's root directory and granting
+read/write access. A command line tool cannot grant that browser permission or
+pass a directory handle to the page. The Connect repository button is focused
+when opened through either authoring command, and Chrome or Edge remembers the
+last directory used for this site. The saved directory handle stays only in that
+browser's local IndexedDB storage; neither page uploads files to a server or
+commits/pushes Git changes.
 
 They deliberately return 404 in production, so they are not deployed to the
 public site.
@@ -20,6 +27,9 @@ public site.
 editor, live preview, tags, draft status, and a list of existing posts.
 
 - Saving creates or updates a post Markdown file with its front matter.
+- Unsaved edits are kept locally in the browser and can be restored after a
+  crash or accidental tab closure. They are not written to the repository until
+  Save is selected.
 - Saving a draft keeps it private to the repository; commit and push only when
   it is ready to publish.
 - Deleting a post removes its Markdown file after confirmation.
@@ -44,6 +54,8 @@ public/img/travel/example-trip/
 
 The page can create an album, choose its category and cover, edit album
 metadata, upload photos, and edit each photo's accessible text and caption.
+Unsaved album and image metadata is recoverable locally in the browser; it does
+not write to the repository until Save is selected.
 Images are reencoded locally as quality-95 JPEG files, with orientation baked
 into pixels and embedded metadata removed. Their filename base is retained;
 for example, `sunset.png` becomes `sunset.jpg`.
