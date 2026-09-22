@@ -114,11 +114,11 @@ function main(): void {
 
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());
   const recentPosts = posts.slice(0, 20);
-  const rssOutputPath = path.join(process.cwd(), "docs", "blog.xml");
-  const atomOutputPath = path.join(process.cwd(), "docs", "blog.atom");
+  const rssOutputPath = path.join(process.cwd(), "out", "blog.xml");
+  const atomOutputPath = path.join(process.cwd(), "out", "blog.atom");
   const draftPreviewOutputPath = path.join(
     process.cwd(),
-    "docs",
+    "out",
     "_be-more-vulnerable.json"
   );
   fs.writeFileSync(rssOutputPath, buildRss(recentPosts), "utf8");

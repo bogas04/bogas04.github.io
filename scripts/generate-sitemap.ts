@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 const WEBSITE_URL = "https://bogas04.fyi";
-const DOCS_DIRECTORY = path.join(process.cwd(), "docs");
+const OUTPUT_DIRECTORY = path.join(process.cwd(), "out");
 
 function findHtmlFiles(directory: string): string[] {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -13,7 +13,7 @@ function findHtmlFiles(directory: string): string[] {
 }
 
 function toPageUrl(filePath: string): string | null {
-  const relativePath = path.relative(DOCS_DIRECTORY, filePath);
+  const relativePath = path.relative(OUTPUT_DIRECTORY, filePath);
   if (relativePath === "404.html" || relativePath.startsWith("_next")) return null;
 
   const pathname = relativePath
@@ -29,7 +29,7 @@ function escapeXml(value: string): string {
 }
 
 function main(): void {
-  const urls = findHtmlFiles(DOCS_DIRECTORY)
+  const urls = findHtmlFiles(OUTPUT_DIRECTORY)
     .map(toPageUrl)
     .filter((url): url is string => Boolean(url))
     .sort();
@@ -41,7 +41,7 @@ function main(): void {
     "",
   ].join("\n");
 
-  const outputPath = path.join(DOCS_DIRECTORY, "sitemap.xml");
+  const outputPath = path.join(OUTPUT_DIRECTORY, "sitemap.xml");
   fs.writeFileSync(outputPath, sitemap, "utf8");
   console.log(`Wrote ${urls.length} URLs to ${outputPath}`);
 }

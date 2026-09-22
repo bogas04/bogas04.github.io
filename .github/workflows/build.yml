@@ -43,7 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir deploy
-          cp -a docs/. deploy/
+          cp -a out/. deploy/
           cd deploy
           git init
           git checkout -b gh-pages

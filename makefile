@@ -10,4 +10,4 @@ build:
 		pnpm run generate:sitemap & sitemap_pid=$$!; \
 		wait $$rss_pid && wait $$sitemap_pid; \
 	) && \
-	touch docs/.nojekyll
+	touch out/.nojekyll
