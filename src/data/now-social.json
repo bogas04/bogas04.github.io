@@ -34,6 +34,11 @@
       "name": "Kashyap Suhas",
       "url": "https://www.kashyapsuhas.com/",
       "feedUrl": "https://www.kashyapsuhas.com/blog/feed.xml"
+    },
+    {
+      "name": "Akhil Unnikrishnan",
+      "url": "https://akhilunnikrishnan.com/",
+      "feedUrl": "https://akhilunnikrishnan.com/feed/blog/"
     }
   ],
   "communities": [
