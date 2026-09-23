@@ -232,7 +232,7 @@ export default function NowPost({ post, previousPost, nowPostCount = 0, photoCou
         <div className="mx-auto flex min-h-8 max-w-252 items-stretch px-2">
           <Link href="/" className="flex items-center border-r border-[#6b91bb] bg-white px-2 font-[Arial,Helvetica,sans-serif] text-[21px] font-normal tracking-[-1.5px] text-[#e51d84] no-underline">orkut<span className="ml-1 text-[7px] tracking-normal text-[#a5a5a5]">INSPIRED</span></Link>
           <nav className="flex min-w-0 overflow-x-auto" aria-label="Site navigation">
-            <Link href="/now" onClick={openNowHome} className="border-r border-[#6b91bb] px-2.5 py-2 text-[11px] font-bold text-white no-underline hover:bg-[#628bbc]">Scrapbook</Link>
+            <a href="/now" onClick={openNowHome} className="border-r border-[#6b91bb] px-2.5 py-2 text-[11px] font-bold text-white no-underline hover:bg-[#628bbc]">Scrapbook</a>
             <a href={FRIENDS_HASH} onClick={(event) => { event.preventDefault(); selectCenterView("friends"); }} className="border-r border-[#6b91bb] px-2.5 py-2 text-[11px] font-bold text-white no-underline hover:bg-[#628bbc]">Friends</a>
             <a href={COMMUNITIES_HASH} onClick={(event) => { event.preventDefault(); selectCenterView("communities"); }} className="border-r border-[#6b91bb] px-2.5 py-2 text-[11px] font-bold text-white no-underline hover:bg-[#628bbc]">Communities</a>
           </nav>
@@ -248,7 +248,7 @@ export default function NowPost({ post, previousPost, nowPostCount = 0, photoCou
             <p className="mb-3 mt-2 text-[11px] leading-[13px] text-[#666]">This is a now page. Read more about the idea <a href="https://nownownow.com/" className="text-[#075a9f]">here</a>. I designed mine like the Orkut I remember from childhood; I wanted to keep a piece of that internet around, even though it shut down.</p>
             <nav className="text-[12px]" aria-label="Profile navigation">
               <Link href="/" className="flex items-center gap-1 border border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="blue">profile</TinyIcon>profile</Link>
-              <Link href="/now" onClick={openNowHome} className="flex items-center gap-1 border-x border-b border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="pink">scrapbook</TinyIcon>scrapbook</Link>
+              <a href="/now" onClick={openNowHome} className="flex items-center gap-1 border-x border-b border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="pink">scrapbook</TinyIcon>scrapbook</a>
               <Link href="/images" className="flex items-center gap-1 border-x border-b border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="green">albums</TinyIcon>albums</Link>
               <a href="https://www.youtube.com/@DivjotSingh" className="flex items-center gap-1 border-x border-b border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="pink">videos</TinyIcon>videos</a>
               <Link href="/blog" className="flex items-center gap-1 border-x border-b border-[#c5d7e9] bg-[#edf5fc] px-1 py-1 text-[#075a9f] no-underline"><TinyIcon tone="teal">words</TinyIcon>posts</Link>

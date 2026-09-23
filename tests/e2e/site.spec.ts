@@ -22,6 +22,22 @@ test("homepage presents the essential profile content and navigation", async ({
   );
 });
 
+test("now navigation returns from friends to scrapbook updates without scrolling", async ({ page }) => {
+  await page.goto("/now#friends");
+  await expect(page.getByRole("heading", { name: /my friends \(\d+\)/ }).first()).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+
+  await page.getByRole("link", { name: "Scrapbook", exact: true }).click();
+
+  await expect(page).toHaveURL(/\/now\/?$/);
+  await expect(page.getByRole("tab", { name: "my updates", exact: true })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await expect(page.getByText("Updates from: me", { exact: true })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
 test("mobile travel galleries are horizontally scrollable carousels", async ({
   page,
 }, testInfo) => {
