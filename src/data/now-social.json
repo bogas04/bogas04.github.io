@@ -39,6 +39,16 @@
       "name": "Akhil Unnikrishnan",
       "url": "https://akhilunnikrishnan.com/",
       "feedUrl": "https://akhilunnikrishnan.com/feed/blog/"
+    },
+    {
+      "name": "Signal Shore",
+      "url": "https://signalshore.net/",
+      "feedUrl": "https://signalshore.net/feed.xml"
+    },
+    {
+      "name": "ascelpius",
+      "url": "https://ascelpius.mataroa.blog/",
+      "feedUrl": "https://ascelpius.mataroa.blog/rss/"
     }
   ],
   "communities": [
