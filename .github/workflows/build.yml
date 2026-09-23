@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -36,6 +39,8 @@ jobs:
         run: |
           pnpm gallery:check
           pnpm gallery:build
+      - name: 🫂 refresh friend updates
+        run: pnpm refresh:friends
       - name: 🛠 build project
         run: pnpm run build:site
       - name: 🚀 publish generated site to gh-pages

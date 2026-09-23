@@ -13,6 +13,7 @@
     "build": "pnpm run gallery:check && pnpm run gallery:build && pnpm run build:site",
     "build:site": "make build",
     "generate:rss": "node --no-warnings ./scripts/generate-rss.ts",
+    "refresh:friends": "node --no-warnings ./scripts/refresh-friend-updates.ts",
     "generate:sitemap": "node --no-warnings ./scripts/generate-sitemap.ts",
     "test": "playwright test",
     "test:e2e": "playwright test",

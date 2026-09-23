@@ -1,0 +1,48 @@
+{
+  "friends": [
+    {
+      "name": "Jatan",
+      "url": "https://jatan.space/",
+      "feedUrl": "https://jatan.space/rss/"
+    },
+    {
+      "name": "Yash Garg",
+      "url": "https://yashgarg.dev/",
+      "feedUrl": "https://yashgarg.dev/posts/feed.atom"
+    },
+    {
+      "name": "Azan",
+      "url": "https://azan-n.com/",
+      "feedUrl": "https://blog.azan-n.com/rss.xml"
+    },
+    {
+      "name": "Tanvi Bhakta",
+      "url": "https://tanvibhakta.in/",
+      "feedUrl": "https://tanvibhakta.in/blog/feed.xml"
+    },
+    {
+      "name": "Aakrit",
+      "url": "https://aakritwrites.com/",
+      "feedUrl": "https://aakritwrites.com/rss.xml"
+    },
+    {
+      "name": "Abhi",
+      "url": "https://abhi.now/",
+      "feedUrl": "https://abhi.now/blog/feed.xml"
+    }
+  ],
+  "communities": [
+    {
+      "name": "blr indieweb",
+      "url": "https://blr.indiewebclub.org/",
+      "initials": "BIWC",
+      "color": "#f6c4d7"
+    },
+    {
+      "name": "bengaluru vegans",
+      "url": "https://bengaluruvegans.wordpress.com/",
+      "initials": "BV",
+      "color": "#d8edc8"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import NowPost from "../../components/NowPost";
-import { getBlogPost, getNowPostSummaries } from "../../utils/blog";
+import { getBlogPost, getBlogPostSummaries, getNowPostSummaries } from "../../utils/blog";
+import { getGalleryManifest } from "../../utils/gallery-server";
 
 export async function getStaticPaths() {
   return {
@@ -25,7 +26,15 @@ export async function getStaticProps(context: { params: { slug: string } }) {
 
   if (!post) return { notFound: true };
 
-  return { props: { post, previousPost } };
+  return {
+    props: {
+      post,
+      previousPost,
+      nowPostCount: posts.length,
+      photoCount: getGalleryManifest().images.length,
+      blogPostCount: getBlogPostSummaries().length,
+    },
+  };
 }
 
 export default NowPost;
