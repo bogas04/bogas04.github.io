@@ -49,6 +49,11 @@
       "name": "ascelpius",
       "url": "https://ascelpius.mataroa.blog/",
       "feedUrl": "https://ascelpius.mataroa.blog/rss/"
+    },
+    {
+      "name": "Ankur Sethi",
+      "url": "https://ankursethi.com/",
+      "feedUrl": "https://ankursethi.com/feeds/index.xml"
     }
   ],
   "communities": [
