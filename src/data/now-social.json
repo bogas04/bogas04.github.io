@@ -29,6 +29,11 @@
       "name": "Abhi",
       "url": "https://abhi.now/",
       "feedUrl": "https://abhi.now/blog/feed.xml"
+    },
+    {
+      "name": "Kashyap Suhas",
+      "url": "https://www.kashyapsuhas.com/",
+      "feedUrl": "https://www.kashyapsuhas.com/blog/feed.xml"
     }
   ],
   "communities": [

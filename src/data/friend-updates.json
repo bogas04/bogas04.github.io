@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T07:29:35.706Z",
+  "updatedAt": "2026-09-23T07:39:01.647Z",
   "items": [
     {
       "author": "Jatan",
@@ -14,10 +14,16 @@
       "publishedAt": "2026-09-18T00:00:00.000Z"
     },
     {
-      "author": "Aakrit Writes",
+      "author": "Aakrit",
       "title": "The surprising amount of product thinking behind 'Delivering in 10 minutes'",
       "url": "https://aakritwrites.com/quick-commerce-eta-widget/",
       "publishedAt": "2026-09-14T10:00:00.000Z"
+    },
+    {
+      "author": "Kashyap Suhas",
+      "title": "Internationalization (i18n) and Localization (l10n)",
+      "url": "https://www.kashyapsuhas.com/blog/i18n-l10n",
+      "publishedAt": "2026-09-07T00:52:25.000Z"
     },
     {
       "author": "Yash Garg",
