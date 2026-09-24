@@ -92,7 +92,16 @@ export function toMarkdown(content: string) {
 export function linkBlogImages(html: string) {
   return html.replace(
     /<img\b([^>]*?)\bsrc=("[^"]*"|'[^']*')([^>]*)>/gi,
-    (image, beforeSrc, quotedSource, afterSrc) => {
+    (image, beforeSrc, quotedSource, afterSrc, offset, sourceHtml) => {
+      const precedingAnchors: string[] = sourceHtml
+        .slice(0, offset)
+        .match(/<\/?a\b[^>]*>/gi) ?? [];
+      const isAlreadyLinked = precedingAnchors.reduce(
+        (depth, tag) => depth + (tag.startsWith("</") ? -1 : 1),
+        0
+      ) > 0;
+      if (isAlreadyLinked) return image;
+
       const source = quotedSource.slice(1, -1);
       return `<a class="blog-image-link" href="${source}" target="_blank" rel="noopener noreferrer">${image}</a>`;
     }
