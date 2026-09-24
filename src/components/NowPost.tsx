@@ -40,7 +40,7 @@ const COMMUNITIES_HASH = "#communities";
 
 interface NowPostProps {
   post?: IBlogPost;
-  previousPost?: IBlogPost;
+  nowPosts?: IBlogPost[];
   nowPostCount?: number;
   photoCount?: number;
   blogPostCount?: number;
@@ -162,13 +162,14 @@ function StreamAvatar({ author }: { author: string }) {
   return <span className="grid h-7 w-7 place-items-center bg-[#d8e7f6] text-[9px] font-bold text-[#39516b]">{initials(author)}</span>;
 }
 
-export default function NowPost({ post, previousPost, nowPostCount = 0, photoCount = 0, blogPostCount = 0 }: NowPostProps) {
+export default function NowPost({ post, nowPosts = [], nowPostCount = 0, photoCount = 0, blogPostCount = 0 }: NowPostProps) {
   const [activeUpdates, setActiveUpdates] = useState<"mine" | "friends">("mine");
   const [centerView, setCenterView] = useState<"updates" | "friends" | "communities">("updates");
   const [showAllFriends, setShowAllFriends] = useState(false);
   const [showAllCommunities, setShowAllCommunities] = useState(false);
   const postUrl = post ? `${WEBSITE_URL}/now/${post.slug}` : `${WEBSITE_URL}/now`;
   const updatedAt = formatNowPageUpdate(post?.date);
+  const myUpdates = nowPosts.length > 0 ? nowPosts : post ? [post] : [];
 
   useEffect(() => {
     const syncUpdatesTab = () => {
@@ -271,8 +272,7 @@ export default function NowPost({ post, previousPost, nowPostCount = 0, photoCou
           </div>
 
           {activeUpdates === "mine" ? <>
-            <Panel className="overflow-hidden p-0"><div className="border-b border-[#d8e2ec] bg-[#f8fbff] px-3 py-1.5 text-[11px]"><b>Updates from:</b> me</div>{post ? <article className="flex gap-2 px-3 py-2"><img src="/profile.png" alt="" className="h-6 w-6 object-cover" /><div className="min-w-0"><div className="mb-0.5 text-[11px] font-bold text-[#075a9f]">divjot</div><h2 className="mb-1 font-[Arial,Helvetica,sans-serif] text-[14px] font-normal leading-[1.2] text-black">{post.title}</h2><div className="blog-content text-[12px] leading-[1.45] text-[#333] [&_a]:text-[#075a9f] [&_img]:border [&_img]:border-[#c8d8e8]" dangerouslySetInnerHTML={{ __html: post.html }} /><time className="mt-1.5 block text-[9px] text-[#777]" dateTime={post.date}>{updatedAt}</time></div></article> : <p className="m-0 p-3 text-[12px] text-[#555]">No scrapbook entry yet.</p>}</Panel>
-            {previousPost && <nav aria-label="Now post navigation" className="px-1 text-[12px]"><Link href={`/now/${previousPost.slug}`} className="text-[#075a9f]">← older scrapbook entry</Link></nav>}
+            <Panel className="overflow-hidden p-0"><div className="border-b border-[#d8e2ec] bg-[#f8fbff] px-3 py-1.5 text-[11px]"><b>Updates from:</b> me</div>{myUpdates.length > 0 ? <ol className="m-0 list-none p-0" aria-label="My scrapbook entries">{myUpdates.map((update) => <li key={update.fileName} className="border-b border-[#e5ebf1] last:border-0"><article className="flex gap-2 px-3 py-2"><img src="/profile.png" alt="" className="h-6 w-6 object-cover" /><div className="min-w-0"><div className="mb-0.5 text-[11px] font-bold text-[#075a9f]">divjot</div><h2 className="mb-1 font-[Arial,Helvetica,sans-serif] text-[14px] font-normal leading-[1.2] text-black">{update.title}</h2><div className="blog-content text-[12px] leading-[1.45] text-[#333] [&_a]:text-[#075a9f] [&_img]:border [&_img]:border-[#c8d8e8]" dangerouslySetInnerHTML={{ __html: update.html }} /><time className="mt-1.5 block text-[9px] text-[#777]" dateTime={update.date}>{formatNowPageUpdate(update.date)}</time></div></article></li>)}</ol> : <p className="m-0 p-3 text-[12px] text-[#555]">No scrapbook entry yet.</p>}</Panel>
           </> : <Panel className="overflow-hidden p-0">
             <div className="border-b border-[#d8e2ec] bg-[#f8fbff] px-3 py-1.5 text-[11px]"><b>Updates from:</b> <span className="ml-1 inline-block border border-[#c7d3df] bg-white px-1 py-px text-[10px]">my friends</span></div>
             {updates.length > 0 ? <ol className="m-0 list-none p-0">{updates.map((update) => <li key={update.url} className="flex gap-2 border-b border-[#e5ebf1] px-3 py-1.5 last:border-0"><StreamAvatar author={update.author} /><div className="min-w-0"><div className="text-[11px] font-bold text-[#075a9f]">{update.author}</div><a href={update.url} className="block text-[11px] leading-[1.3] text-[#075a9f] underline decoration-[#7ca8cd] underline-offset-1 hover:text-[#003f75]">{update.title}</a><time className="mt-0.5 block text-[9px] text-[#777]" dateTime={update.publishedAt || undefined}>{formatFriendUpdate(update.publishedAt)}</time></div></li>)}</ol> : <p className="m-0 p-3 text-[12px] text-[#555]">No recent friend updates yet. The next GitHub Actions refresh will look for their feeds.</p>}

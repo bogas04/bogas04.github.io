@@ -20,6 +20,13 @@ website URL, initials, and pastel `color`:
 The page's add and invite controls link to the GitHub edit screen for this JSON
 file, so visitors can suggest entries through a normal repository change.
 
+## Scrapbook updates
+
+`/now` shows every published blog post tagged `now` in one newest-first
+scrapbook feed that expands to fit its content. Do not replace the feed with an
+older/newer pager or a nested scroll area. Individual `/now/<slug>` routes
+remain available as canonical links to each update.
+
 Friends and communities appear as three-column previews, capped at nine tiles.
 Their `view all` controls open the matching centre view (`#friends` or
 `#communities`), where lists larger than nine can be expanded. The top

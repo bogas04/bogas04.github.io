@@ -71,6 +71,10 @@ image in the selected album without changing its image metadata. Afterward, the
 control reports that the album is already optimized instead of reprocessing the
 files.
 
+Pressing Ctrl+C stops both the local HTTP listener and Next.js's development
+runtime. A subsequent `pnpm start` can reuse the same port without manual
+cleanup.
+
 Mark both the album and an image as published before it appears in the gallery.
 `published: false` prevents it from appearing in gallery pages, but files under
 `public/img` are static public assets after deployment. Do not put confidential

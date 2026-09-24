@@ -96,6 +96,12 @@ export function getNowPostSummaries(includeDrafts = false): IBlogPostSummary[] {
     .map(({ body: _body, ...post }) => post);
 }
 
+export function getNowPosts(includeDrafts = false): IBlogPost[] {
+  return getNowPostSummaries(includeDrafts)
+    .map((post) => getBlogPost(post.fileName))
+    .filter((post): post is IBlogPost => Boolean(post));
+}
+
 export function getBlogPost(fileName: string): IBlogPost | undefined {
   const source = getBlogSources().find((post) => post.fileName === fileName);
   if (!source) return undefined;

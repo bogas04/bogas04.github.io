@@ -83,6 +83,32 @@ server.listen(port, hostname, () => {
   console.log(`Local image optimizer: ${MAX_CONCURRENT_TRANSFORMS} concurrent Sharp transforms.`);
 });
 
+let shuttingDown = false;
+
+async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`Received ${signal}; stopping local authoring server...`);
+
+  const forceExit = setTimeout(() => process.exit(1), 5_000);
+  forceExit.unref();
+
+  try {
+    const closed = new Promise((resolve, reject) => {
+      server.close((error) => (error ? reject(error) : resolve()));
+    });
+    server.closeAllConnections?.();
+    await closed;
+    await app.close();
+    process.exit(0);
+  } catch (error) {
+    console.error("Could not stop the local authoring server cleanly:", error);
+    process.exit(1);
+  } finally {
+    clearTimeout(forceExit);
+  }
+}
+
 for (const signal of ["SIGINT", "SIGTERM"]) {
-  process.on(signal, () => server.close(() => process.exit(0)));
+  process.once(signal, () => void shutdown(signal));
 }

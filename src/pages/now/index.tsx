@@ -1,15 +1,15 @@
 import NowPost from "../../components/NowPost";
-import { getBlogPost, getBlogPostSummaries, getNowPostSummaries } from "../../utils/blog";
+import { getBlogPostSummaries, getNowPosts } from "../../utils/blog";
 import { getGalleryManifest } from "../../utils/gallery-server";
 
 export async function getStaticProps() {
-  const nowPosts = getNowPostSummaries();
-  const [latestPost, previousPost] = nowPosts;
+  const nowPosts = getNowPosts();
+  const [latestPost] = nowPosts;
 
   return {
     props: {
-      post: latestPost ? getBlogPost(latestPost.fileName) : null,
-      previousPost: previousPost ? getBlogPost(previousPost.fileName) : null,
+      post: latestPost || null,
+      nowPosts,
       nowPostCount: nowPosts.length,
       photoCount: getGalleryManifest().images.length,
       blogPostCount: getBlogPostSummaries().length,

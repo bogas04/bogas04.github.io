@@ -20,16 +20,11 @@ export async function getStaticProps(context: { params: { slug: string } }) {
   if (currentIndex === -1) return { notFound: true };
 
   const post = getBlogPost(posts[currentIndex].fileName);
-  const previousPost = posts[currentIndex + 1]
-    ? getBlogPost(posts[currentIndex + 1].fileName)
-    : null;
-
   if (!post) return { notFound: true };
 
   return {
     props: {
       post,
-      previousPost,
       nowPostCount: posts.length,
       photoCount: getGalleryManifest().images.length,
       blogPostCount: getBlogPostSummaries().length,
