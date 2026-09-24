@@ -165,6 +165,22 @@
       ]
     },
     {
+      "id": "screenshots/a-plague-tale-innocence",
+      "title": "A Plague Tale Innocence",
+      "summary": "A tragic story with robust stealth mechanisms.",
+      "category": "screenshots",
+      "cover": "A Plague Tale_ Innocence-2021_06_04-08_48_42",
+      "startDate": "2021-06-04",
+      "endDate": "2021-07-07",
+      "images": [
+        "A Plague Tale_ Innocence-2021_06_04-08_48_42",
+        "A Plague Tale_ Innocence-2021_06_04-09_05_02",
+        "A Plague Tale_ Innocence-2021_07_07-18_53_51",
+        "A Plague Tale_ Innocence-2021_07_07-18_57_09",
+        "A Plague Tale_ Innocence-2021_07_07-19_01_48"
+      ]
+    },
+    {
       "id": "blog",
       "title": "Blog",
       "summary": "assorted images from the blog posts as found on /blog",
@@ -224,6 +240,16 @@
         "spotlight-history",
         "udaan-react-native-startup-performance",
         "udaan-react-render-stutter"
+      ]
+    }
+  ],
+  "folders": [
+    {
+      "id": "screenshots",
+      "title": "screenshots",
+      "folders": [],
+      "albums": [
+        "screenshots/a-plague-tale-innocence"
       ]
     }
   ],
@@ -1671,6 +1697,101 @@
       "thumbUrl": "/img/travel/uk/uk-19.jpg",
       "displayUrl": "/img/travel/uk/uk-19.jpg",
       "fallbackUrl": "/img/travel/uk/uk-19.jpg"
+    },
+    {
+      "id": "A Plague Tale_ Innocence-2021_06_04-08_48_42",
+      "album": "screenshots/a-plague-tale-innocence",
+      "albumTitle": "A Plague Tale Innocence",
+      "category": "screenshots",
+      "title": "Hugo eating an apple",
+      "alt": "Hugo eating an apple",
+      "caption": "Hugo eating an apple",
+      "takenAt": "2021-06-04",
+      "location": "Xbox Series X",
+      "featured": false,
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "photoUrl": "/images/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-08_48_42/",
+      "thumbUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-08_48_42.jpg",
+      "displayUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-08_48_42.jpg",
+      "fallbackUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-08_48_42.jpg"
+    },
+    {
+      "id": "A Plague Tale_ Innocence-2021_06_04-09_05_02",
+      "album": "screenshots/a-plague-tale-innocence",
+      "albumTitle": "A Plague Tale Innocence",
+      "category": "screenshots",
+      "title": "It was cute to see Hugo rush to get warmth",
+      "alt": "It was cute to see Hugo rush to get warmth",
+      "caption": "It was cute to see Hugo rush to get warmth",
+      "takenAt": "2021-06-04",
+      "location": "Xbox Series X",
+      "featured": false,
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "photoUrl": "/images/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-09_05_02/",
+      "thumbUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-09_05_02.jpg",
+      "displayUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-09_05_02.jpg",
+      "fallbackUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_06_04-09_05_02.jpg"
+    },
+    {
+      "id": "A Plague Tale_ Innocence-2021_07_07-18_53_51",
+      "album": "screenshots/a-plague-tale-innocence",
+      "albumTitle": "A Plague Tale Innocence",
+      "category": "screenshots",
+      "title": "Let's go!",
+      "alt": "Let's go!",
+      "caption": "Let's go!",
+      "takenAt": "2021-07-07",
+      "location": "Xbox Series X",
+      "featured": false,
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "photoUrl": "/images/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_53_51/",
+      "thumbUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_53_51.jpg",
+      "displayUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_53_51.jpg",
+      "fallbackUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_53_51.jpg"
+    },
+    {
+      "id": "A Plague Tale_ Innocence-2021_07_07-18_57_09",
+      "album": "screenshots/a-plague-tale-innocence",
+      "albumTitle": "A Plague Tale Innocence",
+      "category": "screenshots",
+      "title": "Not bad at all",
+      "alt": "Not bad at all",
+      "caption": "Not bad at all",
+      "takenAt": "2021-07-07",
+      "location": "Xbox Series X",
+      "featured": false,
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "photoUrl": "/images/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_57_09/",
+      "thumbUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_57_09.jpg",
+      "displayUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_57_09.jpg",
+      "fallbackUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_57_09.jpg"
+    },
+    {
+      "id": "A Plague Tale_ Innocence-2021_07_07-19_01_48",
+      "album": "screenshots/a-plague-tale-innocence",
+      "albumTitle": "A Plague Tale Innocence",
+      "category": "screenshots",
+      "title": "Amicia and Hugo looking down while crossing a water body",
+      "alt": "Amicia and Hugo looking down while crossing a water body",
+      "caption": "I would quite like to see a monster actually...",
+      "takenAt": "2021-07-07",
+      "location": "Xbox Series X",
+      "featured": false,
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "photoUrl": "/images/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-19_01_48/",
+      "thumbUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-19_01_48.jpg",
+      "displayUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-19_01_48.jpg",
+      "fallbackUrl": "/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-19_01_48.jpg"
     },
     {
       "id": "1____g5l9BybNJiUO22dNPEeYg",

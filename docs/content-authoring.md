@@ -53,12 +53,23 @@ public/img/travel/example-trip/
 ```
 
 The page can create an album, choose its category and cover, edit album
-metadata, upload photos, and edit each photo's accessible text and caption.
+metadata, upload one or more photos at once, and edit each photo's accessible
+text and caption. Gallery categories are Travel, Blog, Random, and
+Screenshots. Image dates use the browser's date picker; use **Auto-fill from
+image dates** to set an album's start and end dates from its dated images.
 Unsaved album and image metadata is recoverable locally in the browser; it does
 not write to the repository until Save is selected.
-Images are reencoded locally as quality-95 JPEG files, with orientation baked
-into pixels and embedded metadata removed. Their filename base is retained;
-for example, `sunset.png` becomes `sunset.jpg`.
+`pnpm start` runs a local-only Sharp service alongside Next.js, so `/upload`
+works whether it is opened through `pnpm upload` or visited from an ordinary
+local development session. Both it and `pnpm gallery:add` use the same image
+optimizer: it reduces images to 1440px on their longest edge, reencodes them as
+quality-95 JPEGs, bakes orientation into pixels, and removes embedded metadata.
+Their filename base is retained; for example, `sunset.png` becomes
+`sunset.jpg`. The uploader sends up to four images to this local service at
+once. **Optimize all images** applies the same process to every unprocessed
+image in the selected album without changing its image metadata. Afterward, the
+control reports that the album is already optimized instead of reprocessing the
+files.
 
 Mark both the album and an image as published before it appears in the gallery.
 `published: false` prevents it from appearing in gallery pages, but files under
@@ -73,12 +84,17 @@ pixels; use `/upload` or `pnpm gallery:add` to re-encode oversized originals.
 
 `gallery/albums.json` maps a stable gallery ID to an arbitrary folder below
 `public/img`; neither the folder name nor image filename needs to follow a
-convention.
+convention. Album IDs may use slash-separated, lowercase path segments to make
+nested gallery folders. For example, an album with ID `screenshots/celeste`
+and path `public/img/screenshots/celeste` is browsed at
+`/images/screenshots/celeste/`; `/images/screenshots/` becomes its containing
+folder. A registered album cannot also be a containing folder, so put images
+in the leaf game folders rather than the `screenshots` folder itself.
 
 ```mermaid
 flowchart TD
-  Upload["/upload"] --> UploadImage["Re-encode to JPEG, quality 95\nBake orientation and remove metadata"]
-  CLI["pnpm gallery:add"] --> CLIImage["Sharp re-encode to JPEG, quality 95\nBake orientation and remove metadata"]
+  Upload["/upload + local Sharp service"] --> UploadImage["Shared image optimizer\nResize to 1440px maximum\nRe-encode to JPEG, quality 95\nBake orientation and remove metadata"]
+  CLI["pnpm gallery:add"] --> CLIImage["Shared image optimizer"]
   Manual["Manually add an image"] --> Source
   UploadImage --> Source["public/img/<album-folder>/<image>.<ext>"]
   CLIImage --> Source

@@ -11,9 +11,10 @@ import {
 import BlogArchive from "../../../components/BlogArchive";
 
 export async function getStaticPaths() {
+  const includeDrafts = process.env.NODE_ENV === "development";
   const tags = Array.from(
     new Set(
-      getBlogPostSummaries()
+      getBlogPostSummaries(includeDrafts)
         .flatMap((post) => (post.keywords || []) as string[])
         .map(getBlogTagSlug),
     ),
@@ -28,11 +29,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: { params: { tag: string } }) {
+  const includeDrafts = process.env.NODE_ENV === "development";
   const tag = context.params.tag;
   const redirectTo = BLOG_TAG_ALIASES[tag];
   if (redirectTo) return { props: { tag, redirectTo } };
 
-  const posts = getBlogPostSummaries().filter((post) =>
+  const posts = getBlogPostSummaries(includeDrafts).filter((post) =>
     ((post.keywords || []) as string[]).some(
       (keyword) => getBlogTagSlug(keyword) === tag,
     ),

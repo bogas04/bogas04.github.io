@@ -3,9 +3,10 @@ import { getBlogDateParts } from "../../../utils/blogDate";
 import BlogArchive from "../../../components/BlogArchive";
 
 export async function getStaticPaths() {
+  const includeDrafts = process.env.NODE_ENV === "development";
   const paths = Array.from(
     new Set(
-      getBlogPostSummaries().map((post) => {
+      getBlogPostSummaries(includeDrafts).map((post) => {
         const dateParts = getBlogDateParts(post.date);
         return dateParts && `${dateParts.year}/${dateParts.month}`;
       })
@@ -21,8 +22,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: {
   params: { year: string; month: string };
 }) {
+  const includeDrafts = process.env.NODE_ENV === "development";
   const { year, month } = context.params;
-  const posts = getBlogPostSummaries().filter((post) => {
+  const posts = getBlogPostSummaries(includeDrafts).filter((post) => {
     const dateParts = getBlogDateParts(post.date);
     return dateParts?.year === year && dateParts.month === month;
   });

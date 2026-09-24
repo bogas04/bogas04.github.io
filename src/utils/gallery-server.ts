@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { GalleryManifest } from "./gallery";
 
-const EMPTY_MANIFEST: GalleryManifest = { albums: [], images: [] };
+const EMPTY_MANIFEST: GalleryManifest = { albums: [], folders: [], images: [] };
 
 export function getGalleryManifest(): GalleryManifest {
   const manifestPath = path.join(
@@ -19,4 +19,3 @@ export function getGalleryManifest(): GalleryManifest {
     throw new Error(`Unable to read ${manifestPath}: ${String(error)}`);
   }
 }
-

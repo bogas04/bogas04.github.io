@@ -42,9 +42,21 @@ interface ManifestAlbum {
   images: string[];
 }
 
+interface ManifestFolder {
+  id: string;
+  title: string;
+  folders: string[];
+  albums: string[];
+}
+
 interface GalleryManifest {
   albums: ManifestAlbum[];
+  folders: ManifestFolder[];
   images: ManifestImage[];
+}
+
+function folderTitle(id: string): string {
+  return id.split("/").at(-1)!.replace(/-/g, " ");
 }
 
 function dateOrEmpty(value: unknown): string {
@@ -53,7 +65,7 @@ function dateOrEmpty(value: unknown): string {
 
 async function main(): Promise<void> {
   const albums = readAlbums();
-  const manifest: GalleryManifest = { albums: [], images: [] };
+  const manifest: GalleryManifest = { albums: [], folders: [], images: [] };
 
   fs.rmSync(GENERATED_DIRECTORY, { recursive: true, force: true });
   fs.mkdirSync(GENERATED_DIRECTORY, { recursive: true });
@@ -91,7 +103,7 @@ async function main(): Promise<void> {
         width: dimensions.width,
         height: dimensions.height,
         aspectRatio: dimensions.height ? dimensions.width / dimensions.height : 1,
-        photoUrl: `/images/${encodeURIComponent(album.id)}/${encodeURIComponent(image.id)}/`,
+        photoUrl: `/images/${album.id.split("/").map(encodeURIComponent).join("/")}/${encodeURIComponent(image.id)}/`,
         thumbUrl: sourceUrl,
         displayUrl: sourceUrl,
         fallbackUrl: sourceUrl,
@@ -101,6 +113,31 @@ async function main(): Promise<void> {
     }
     manifest.albums.push(manifestAlbum);
   }
+
+  const folders = new Map<string, ManifestFolder>();
+  const ensureFolder = (id: string) => {
+    const existing = folders.get(id);
+    if (existing) return existing;
+    const folder: ManifestFolder = { id, title: folderTitle(id), folders: [], albums: [] };
+    folders.set(id, folder);
+    return folder;
+  };
+  for (const album of manifest.albums) {
+    const parts = album.id.split("/");
+    if (parts.length === 1) continue;
+    for (let index = 1; index < parts.length; index += 1) {
+      const folderId = parts.slice(0, index).join("/");
+      const folder = ensureFolder(folderId);
+      const childId = parts.slice(0, index + 1).join("/");
+      if (index === parts.length - 1) folder.albums.push(album.id);
+      else if (!folder.folders.includes(childId)) folder.folders.push(childId);
+    }
+  }
+  manifest.folders = [...folders.values()].map((folder) => ({
+    ...folder,
+    folders: folder.folders.sort(),
+    albums: folder.albums.sort(),
+  })).sort((a, b) => a.id.localeCompare(b.id));
 
   fs.writeFileSync(
     path.join(GENERATED_DIRECTORY, "manifest.json"),

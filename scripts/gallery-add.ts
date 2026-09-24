@@ -1,8 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import sharp from "sharp";
-
 import {
   GALLERY_CATEGORIES,
   createTemporaryDirectory,
@@ -10,11 +8,12 @@ import {
   formatPath,
   imageIdIsSafe,
   inspectImage,
-  slugIsSafe,
+  albumIdIsSafe,
 } from "./gallery-lib.ts";
+import { OPTIMIZATION_VERSION, optimizeImage } from "./image-optimizer.ts";
 
 function usage(): never {
-  console.error("Usage: pnpm gallery:add <image> --album <album-id> [--category travel|blog|random] [--id <image-id>]");
+  console.error("Usage: pnpm gallery:add <image> --album <album-id> [--category travel|blog|random|screenshots] [--id <image-id>]");
   process.exit(1);
 }
 
@@ -55,7 +54,7 @@ async function main(): Promise<void> {
   const albumId = argumentValue(args, "--album");
   const category = argumentValue(args, "--category") || "random";
   const requestedId = argumentValue(args, "--id");
-  if (!inputPath || !albumId || !slugIsSafe(albumId)) usage();
+  if (!inputPath || !albumId || !albumIdIsSafe(albumId)) usage();
   if (!(GALLERY_CATEGORIES as readonly string[]).includes(category)) usage();
   if (requestedId && (!imageIdIsSafe(requestedId) || requestedId === "index")) usage();
   if (!fs.existsSync(inputPath)) throw new Error(`Input image does not exist: ${inputPath}`);
@@ -79,10 +78,8 @@ async function main(): Promise<void> {
   const temporaryDirectory = createTemporaryDirectory("gallery-add-");
   const temporaryPath = path.join(temporaryDirectory, `${id}.jpg`);
   try {
-    await sharp(inputPath, { failOn: "error" })
-      .rotate()
-      .jpeg({ quality: 95, mozjpeg: true })
-      .toFile(temporaryPath);
+    const output = await optimizeImage(inputPath);
+    fs.writeFileSync(temporaryPath, output.data);
 
     const inspection = await inspectImage(temporaryPath);
     if (inspection.metadataReasons.length) {
@@ -100,6 +97,8 @@ takenAt:
 location:
 published: false
 featured: false
+optimized: true
+optimizationVersion: "${OPTIMIZATION_VERSION}"
 ---
 
 Write a caption for this photo.

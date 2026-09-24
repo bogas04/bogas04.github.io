@@ -14,7 +14,7 @@ export const GENERATED_DIRECTORY = path.join(GALLERY_DIRECTORY, "generated");
 export const MAX_SOURCE_BYTES = 25 * 1024 * 1024;
 export const MAX_SOURCE_PIXELS = 100_000_000;
 export const SOURCE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"]);
-export const GALLERY_CATEGORIES = ["travel", "blog", "random"] as const;
+export const GALLERY_CATEGORIES = ["travel", "blog", "random", "screenshots"] as const;
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
 export type FrontMatterValue = boolean | number | string | null;
@@ -153,6 +153,12 @@ export function booleanValue(
 
 export function slugIsSafe(value: string): boolean {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+}
+
+// Album IDs double as their public route below /images. Permit nested folders,
+// but keep every individual path segment as constrained as the old flat IDs.
+export function albumIdIsSafe(value: string): boolean {
+  return value.split("/").every(slugIsSafe);
 }
 
 export function imageIdIsSafe(value: string): boolean {

@@ -3,10 +3,17 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import GalleryGrid from "./GalleryGrid";
-import type { GalleryAlbum, GalleryImage, GalleryManifest } from "../../utils/gallery";
+import {
+  getGalleryAlbumUrl,
+  type GalleryAlbum,
+  type GalleryFolder,
+  type GalleryImage,
+  type GalleryManifest,
+} from "../../utils/gallery";
 
 interface AlbumSidebarProps {
   albums: GalleryAlbum[];
+  folders?: GalleryFolder[];
 }
 
 type DesktopView = "all" | "albums";
@@ -71,6 +78,7 @@ function groupImagesByDate(images: GalleryImage[], albums: GalleryAlbum[]): Gall
 
 export function AlbumSidebar({
   albums,
+  folders = [],
   selectedAlbumId,
   desktopView,
   onAllSelect,
@@ -104,10 +112,15 @@ export function AlbumSidebar({
             albums
           </Link>
         )}
-        {albums.map((album) => (
+        {folders.filter((folder) => !folder.id.includes("/")).map((folder) => (
+          <Link key={folder.id} href={`/images/${folder.id}/`} className={itemClass(false)}>
+            {folder.title}
+          </Link>
+        ))}
+        {albums.filter((album) => !album.id.includes("/")).map((album) => (
           <Link
             key={album.id}
-            href={`/images/${album.id}/`}
+            href={getGalleryAlbumUrl(album.id)}
             aria-current={album.id === selectedAlbumId ? "page" : undefined}
             className={itemClass(album.id === selectedAlbumId)}
           >
@@ -303,7 +316,20 @@ function AlbumGrid({
   return (
     <section aria-label="Albums">
       <div className="grid grid-cols-2 gap-x-3 gap-y-8">
-        {manifest.albums.map((album) => {
+        {manifest.folders.filter((folder) => !folder.id.includes("/")).map((folder) => {
+          const firstAlbumId = [
+            ...folder.albums,
+            ...manifest.albums.filter((album) => album.id.startsWith(`${folder.id}/`)).map((album) => album.id),
+          ][0];
+          const cover = manifest.images.find((image) => image.album === firstAlbumId);
+          return (
+            <Link key={folder.id} href={`/images/${folder.id}/`} className="group block min-w-0 text-white no-underline">
+              {cover ? <img src={cover.thumbUrl} alt="" width={cover.width} height={cover.height} className="block aspect-[4/3] h-auto w-full object-cover transition duration-300 group-hover:opacity-75" loading="lazy" decoding="async" /> : <div className="aspect-[4/3] bg-white/10" />}
+              <h2 className="mt-3 text-lg font-light lowercase leading-tight tracking-[-0.03em]">{folder.title}</h2>
+            </Link>
+          );
+        })}
+        {manifest.albums.filter((album) => !album.id.includes("/")).map((album) => {
           const cover = manifest.images.find((image) => image.album === album.id && image.id === album.cover)
             || manifest.images.find((image) => image.album === album.id);
           if (!cover) return null;
@@ -311,7 +337,7 @@ function AlbumGrid({
           return (
             <Link
               key={album.id}
-              href={`/images/${album.id}/`}
+              href={getGalleryAlbumUrl(album.id)}
               onClick={onAlbumSelect ? (event) => {
                 event.preventDefault();
                 onAlbumSelect(album);
@@ -522,6 +548,7 @@ export default function GalleryCategoryFilter({ manifest }: { manifest: GalleryM
         <div className="grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10">
           <AlbumSidebar
             albums={manifest.albums}
+            folders={manifest.folders}
             desktopView={desktopView}
             onAllSelect={() => selectDesktopView("all")}
             onAlbumsSelect={() => selectDesktopView("albums")}

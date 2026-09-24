@@ -14,7 +14,7 @@ import {
   readAlbumConfigs,
   readAlbums,
   imageIdIsSafe,
-  slugIsSafe,
+  albumIdIsSafe,
   stringValue,
 } from "./gallery-lib.ts";
 
@@ -41,7 +41,7 @@ async function main(): Promise<void> {
     const albumDirectory = path.resolve(process.cwd(), config.path);
     if (albumIds.has(albumId)) add(errors, `duplicate album ID: ${albumId}`);
     albumIds.add(albumId);
-    if (!slugIsSafe(albumId)) add(errors, `unsafe album ID: ${albumId}`);
+    if (!albumIdIsSafe(albumId)) add(errors, `unsafe album ID: ${albumId}`);
     if (!albumDirectory.startsWith(`${IMAGES_DIRECTORY}${path.sep}`)) {
       add(errors, `album path must be inside public/img: ${config.path}`);
       continue;
@@ -49,6 +49,12 @@ async function main(): Promise<void> {
     if (!fs.existsSync(albumDirectory)) add(errors, `${config.path} is missing`);
     if (!fs.existsSync(path.join(albumDirectory, "index.md"))) {
       add(errors, `${formatPath(albumDirectory)} is missing index.md`);
+    }
+  }
+
+  for (const albumId of albumIds) {
+    if ([...albumIds].some((otherId) => otherId.startsWith(`${albumId}/`))) {
+      add(errors, `album ID cannot also be a folder: ${albumId}`);
     }
   }
 
@@ -60,7 +66,7 @@ async function main(): Promise<void> {
     if (!albumTitle) add(errors, `${formatPath(album.metadataPath)} is missing title`);
     if (!albumSummary) add(errors, `${formatPath(album.metadataPath)} is missing summary`);
     if (!isGalleryCategory(albumCategory)) {
-      add(errors, `${formatPath(album.metadataPath)} must declare category: travel, blog, or random`);
+      add(errors, `${formatPath(album.metadataPath)} must declare category: travel, blog, random, or screenshots`);
     }
     if (!albumCover) add(errors, `${formatPath(album.metadataPath)} is missing cover`);
     if (!stringValue(album.data.startDate)) {
