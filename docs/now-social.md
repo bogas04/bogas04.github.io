@@ -27,6 +27,16 @@ scrapbook feed that expands to fit its content. Do not replace the feed with an
 older/newer pager or a nested scroll area. Individual `/now/<slug>` routes
 remain available as canonical links to each update.
 
+## Local composer
+
+When `/now` runs through `pnpm start`, its scrapbook has a local-only composer.
+It uses the browser's File System Access API to write a published Markdown post
+to `src/blog` with the `now` tag; it is not included in the static export.
+Pasting an HTTP or HTTPS link into the update field, or using **add preview**,
+asks the local authoring server for its Open Graph metadata and inserts ordinary
+Markdown for the resulting preview. The server rejects local and
+private-network URLs.
+
 Friends and communities appear as three-column previews, capped at nine tiles.
 Their `view all` controls open the matching centre view (`#friends` or
 `#communities`), where lists larger than nine can be expanded. The top

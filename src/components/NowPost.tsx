@@ -6,6 +6,7 @@ import social from "../data/now-social.json";
 import { WEBSITE_URL } from "../constants";
 import type { IBlogPost } from "../utils/blog";
 import SeoTags from "./SeoTags";
+import NowComposer from "./NowComposer";
 
 const SOCIAL_EDITOR_URL =
   "https://github.com/bogas04/bogas04.github.io/edit/main/src/data/now-social.json";
@@ -37,6 +38,7 @@ const MY_UPDATES_HASH = "#my-updates";
 const FRIEND_UPDATES_HASH = "#updates-from-my-friends";
 const FRIENDS_HASH = "#friends";
 const COMMUNITIES_HASH = "#communities";
+const isLocalAuthoring = process.env.NODE_ENV === "development";
 
 interface NowPostProps {
   post?: IBlogPost;
@@ -272,6 +274,7 @@ export default function NowPost({ post, nowPosts = [], nowPostCount = 0, photoCo
           </div>
 
           {activeUpdates === "mine" ? <>
+            {isLocalAuthoring && <NowComposer />}
             <Panel className="overflow-hidden p-0"><div className="border-b border-[#d8e2ec] bg-[#f8fbff] px-3 py-1.5 text-[11px]"><b>Updates from:</b> me</div>{myUpdates.length > 0 ? <ol className="m-0 list-none p-0" aria-label="My scrapbook entries">{myUpdates.map((update) => <li key={update.fileName} className="border-b border-[#e5ebf1] last:border-0"><article className="flex gap-2 px-3 py-2"><img src="/profile.png" alt="" className="h-6 w-6 object-cover" /><div className="min-w-0"><div className="mb-0.5 text-[11px] font-bold text-[#075a9f]">divjot</div><h2 className="mb-1 font-[Arial,Helvetica,sans-serif] text-[14px] font-normal leading-[1.2] text-black">{update.title}</h2><div className="blog-content text-[12px] leading-[1.45] text-[#333] [&_a]:text-[#075a9f] [&_img]:border [&_img]:border-[#c8d8e8]" dangerouslySetInnerHTML={{ __html: update.html }} /><time className="mt-1.5 block text-[9px] text-[#777]" dateTime={update.date}>{formatNowPageUpdate(update.date)}</time></div></article></li>)}</ol> : <p className="m-0 p-3 text-[12px] text-[#555]">No scrapbook entry yet.</p>}</Panel>
           </> : <Panel className="overflow-hidden p-0">
             <div className="border-b border-[#d8e2ec] bg-[#f8fbff] px-3 py-1.5 text-[11px]"><b>Updates from:</b> <span className="ml-1 inline-block border border-[#c7d3df] bg-white px-1 py-px text-[10px]">my friends</span></div>
