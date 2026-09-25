@@ -25,35 +25,12 @@ interface GalleryDateGroup {
   images: GalleryImage[];
 }
 
-const MONTH_NAMES = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
-];
-
-function dateGroupFor(rawDate: string, groupByYear = false): Omit<GalleryDateGroup, "images"> {
+function dateGroupFor(rawDate: string): Omit<GalleryDateGroup, "images"> {
   const match = rawDate.trim().match(/^(\d{4})(?:-(\d{1,2})(?:-\d{1,2})?)?/);
   if (!match) return { key: "undated", label: "undated", sortValue: "0000" };
 
-  const [, year, month] = match;
-  if (!month || groupByYear) return { key: year, label: year, sortValue: `${year}-00` };
-
-  const monthNumber = Number(month);
-  const monthLabel = MONTH_NAMES[monthNumber - 1] || month;
-  return {
-    key: `${year}-${month.padStart(2, "0")}`,
-    label: `${monthLabel}, ${year}`,
-    sortValue: `${year}-${month.padStart(2, "0")}`,
-  };
+  const [, year] = match;
+  return { key: year, label: year, sortValue: `${year}-00` };
 }
 
 function groupImagesByDate(images: GalleryImage[], albums: GalleryAlbum[]): GalleryDateGroup[] {
@@ -61,10 +38,7 @@ function groupImagesByDate(images: GalleryImage[], albums: GalleryAlbum[]): Gall
   const groups = new Map<string, GalleryDateGroup>();
 
   for (const image of images) {
-    const group = dateGroupFor(
-      image.takenAt || albumDates.get(image.album) || "",
-      image.category === "blog",
-    );
+    const group = dateGroupFor(image.takenAt || albumDates.get(image.album) || "");
     const existing = groups.get(group.key);
     if (existing) {
       existing.images.push(image);
@@ -166,7 +140,7 @@ function DateNavigator({
         </button>
       ) : null}
       {open ? (
-        <div className="fixed inset-0 z-50 bg-[#1a1a1a] text-white lg:absolute lg:[inset:auto] lg:top-0 lg:left-0 lg:h-auto lg:max-h-[70vh] lg:w-full lg:max-w-[28rem] lg:overflow-y-auto lg:shadow-2xl" role="dialog" aria-modal="true" aria-label="Choose a month or year">
+        <div className="fixed inset-0 z-50 bg-[#1a1a1a] text-white lg:absolute lg:[inset:auto] lg:top-0 lg:left-0 lg:h-auto lg:max-h-[70vh] lg:w-full lg:max-w-[28rem] lg:overflow-y-auto lg:shadow-2xl" role="dialog" aria-modal="true" aria-label="Choose a year">
           <div className="flex h-full flex-col px-6 py-6 sm:px-10 sm:py-8 lg:h-auto">
             <div className="flex items-center justify-between gap-6">
               <p className="m-0 text-sm lowercase text-white/45">dates</p>

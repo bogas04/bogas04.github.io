@@ -142,6 +142,9 @@ During each build:
 3. Next.js renders `/images`, each album page, and individual photo
    pages from that manifest.
 
+The `/images` timeline groups all published images by calendar year. Individual
+image and album metadata retains their more specific dates.
+
 The generated manifest is ignored by Git and recreated for every build.
 GitHub Actions runs the gallery validation, generation, and site build on
 pushes to `main` before publishing the static site.

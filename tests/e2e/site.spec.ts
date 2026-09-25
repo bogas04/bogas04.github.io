@@ -37,6 +37,17 @@ test("now navigation returns from friends to scrapbook updates without scrolling
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 });
 
+test("all pictures uses year-only date sections", async ({ page }) => {
+  await page.goto("/images");
+
+  const dateLabels = await page
+    .locator('section[aria-labelledby^="date-"] h2')
+    .allTextContents();
+
+  expect(dateLabels.length).toBeGreaterThan(0);
+  expect(dateLabels.every((label) => /^(?:\d{4}|undated)$/.test(label.trim()))).toBe(true);
+});
+
 test("mobile travel galleries are horizontally scrollable carousels", async ({
   page,
 }, testInfo) => {
