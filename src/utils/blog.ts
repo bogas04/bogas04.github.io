@@ -47,7 +47,14 @@ function getBlogSources(): BlogSource[] {
       fileName,
     ])
     .map(([content, fileName]) => {
-      const [, head, body] = content.split("---");
+      const frontMatter = content.match(
+        /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)([\s\S]*)$/
+      );
+      if (!frontMatter) {
+        throw new Error(`Invalid frontmatter in blog post: ${fileName}`);
+      }
+
+      const [, head, body] = frontMatter;
       const meta = parseHead(head);
 
       return {
