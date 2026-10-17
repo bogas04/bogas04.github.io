@@ -225,6 +225,7 @@
         "caps-escape",
         "ecmascript",
         "macos",
+        "me-in-a-mirror",
         "need for speed underground on ROG Ally",
         "prahlad-1",
         "prahlad-2",
@@ -2476,6 +2477,25 @@
       "thumbUrl": "/img/blog/macos.jpg",
       "displayUrl": "/img/blog/macos.jpg",
       "fallbackUrl": "/img/blog/macos.jpg"
+    },
+    {
+      "id": "me-in-a-mirror",
+      "album": "blog",
+      "albumTitle": "Blog",
+      "category": "blog",
+      "title": "Me in a mirror",
+      "alt": "Me reflected in a mirror",
+      "caption": "",
+      "takenAt": "",
+      "location": "",
+      "featured": false,
+      "width": 1765,
+      "height": 2400,
+      "aspectRatio": 0.7354166666666667,
+      "photoUrl": "/images/blog/me-in-a-mirror/",
+      "thumbUrl": "/img/blog/me-in-a-mirror.webp",
+      "displayUrl": "/img/blog/me-in-a-mirror.webp",
+      "fallbackUrl": "/img/blog/me-in-a-mirror.webp"
     },
     {
       "id": "need for speed underground on ROG Ally",

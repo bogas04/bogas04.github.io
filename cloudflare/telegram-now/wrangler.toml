@@ -1,0 +1,12 @@
+name = "bogas-now-telegram"
+main = "worker.mjs"
+compatibility_date = "2026-10-16"
+
+[[r2_buckets]]
+binding = "PENDING_MEDIA"
+bucket_name = "bogas-now-pending-media"
+
+[vars]
+GITHUB_OWNER = "bogas04"
+GITHUB_REPO = "bogas04.github.io"
+GITHUB_WORKFLOW = "build.yml"
