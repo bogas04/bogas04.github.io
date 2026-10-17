@@ -27,6 +27,8 @@ product decision.
 - Before changing a public content surface, read
   [Content lifecycle](docs/content-lifecycle.md). Drafts must stay out of the
   normal public experience, feeds, and discovery surfaces.
+- Blog comment behavior and its GitHub issue mapping are documented in
+  [Blog comments](docs/blog-comments.md).
 - Before changing `/write` or `/upload`, read
   [Content authoring](docs/content-authoring.md) and
   [Local authoring roadmap](docs/local-authoring-roadmap.md).
