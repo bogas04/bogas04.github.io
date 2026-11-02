@@ -385,7 +385,7 @@ function Travel() {
         className="absolute transform -translate-x-1/2 -translate-y-1/2 z-[0]"
         style={{
           left: `${position.x}%`,
-          top: `${position.y}%`,
+          top: `calc(${position.y}% + ${destination.markerOffsetY ?? 0}px)`,
         }}
       >
         <button
@@ -1237,102 +1237,57 @@ const talks = [
 ];
 const travelDestinations = [
   {
-    name: "South Korea",
-    description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
+    name: "Sri Lanka",
+    albumId: "sri-lanka",
+    markerOffsetY: 20,
+    description: "September 2026\n• A trip through Sri Lanka",
     images: [
-      "/img/travel/sk/sk-1.jpg",
-      "/img/travel/sk/sk-10.jpg",
-      "/img/travel/sk/sk-11.jpg",
-      "/img/travel/sk/sk-12.jpg",
-      "/img/travel/sk/sk-2.jpg",
-      "/img/travel/sk/sk-3.jpg",
-      "/img/travel/sk/sk-4.jpg",
-      "/img/travel/sk/sk-5.jpg",
-      "/img/travel/sk/sk-6.jpg",
-      "/img/travel/sk/sk-7.jpg",
-      "/img/travel/sk/sk-8.jpg",
-      "/img/travel/sk/sk-9.jpg",
+      "/img/travel/sri-lanka/sri-lanka-01.jpg",
+      "/img/travel/sri-lanka/sri-lanka-02.jpg",
+      "/img/travel/sri-lanka/sri-lanka-03.jpg",
+      "/img/travel/sri-lanka/sri-lanka-04.jpg",
+      "/img/travel/sri-lanka/sri-lanka-05.jpg",
+      "/img/travel/sri-lanka/sri-lanka-06.jpg",
+      "/img/travel/sri-lanka/sri-lanka-07.jpg",
+      "/img/travel/sri-lanka/sri-lanka-08.jpg",
+      "/img/travel/sri-lanka/sri-lanka-09.jpg",
+      "/img/travel/sri-lanka/sri-lanka-10.jpg",
+      "/img/travel/sri-lanka/sri-lanka-11.jpg",
+      "/img/travel/sri-lanka/sri-lanka-12.jpg",
+      "/img/travel/sri-lanka/sri-lanka-13.jpg",
+      "/img/travel/sri-lanka/sri-lanka-14.jpg",
+      "/img/travel/sri-lanka/sri-lanka-15.jpg",
+      "/img/travel/sri-lanka/sri-lanka-16.jpg",
+      "/img/travel/sri-lanka/sri-lanka-17.jpg",
+      "/img/travel/sri-lanka/sri-lanka-18.jpg",
+      "/img/travel/sri-lanka/sri-lanka-19.jpg",
     ],
-    lat: 37.5665,
-    lng: 126.978,
+    lat: 7.8731,
+    lng: 80.7718,
   },
-  {
-    name: "Maldives",
-    description: "2023\n• Island Paradise",
+{
+    name: "Ireland",
+    albumId: "ireland",
     images: [
-      "/img/travel/maldives/maldives-1.jpg",
-      "/img/travel/maldives/maldives-2.jpg",
-      "/img/travel/maldives/maldives-3.jpg",
-      "/img/travel/maldives/maldives-4.jpg",
+      "/img/travel/ireland/ireland-1.jpg",
+      "/img/travel/ireland/ireland-10.jpg",
+      "/img/travel/ireland/ireland-11.jpg",
+      "/img/travel/ireland/ireland-2.jpg",
+      "/img/travel/ireland/ireland-3.jpg",
+      "/img/travel/ireland/ireland-4.jpg",
+      "/img/travel/ireland/ireland-5.jpg",
+      "/img/travel/ireland/ireland-6.jpg",
+      "/img/travel/ireland/ireland-7.jpg",
+      "/img/travel/ireland/ireland-8.jpg",
+      "/img/travel/ireland/ireland-9.jpg",
     ],
-    lat: 4.1755,
-    lng: 73.5093,
+    description: "2025\n• Happy Pear, Galleries and vegan food!",
+    lat: 53.3498,
+    lng: -6.2603,
   },
-  {
-    name: "Thailand",
-    description: "2024, 2025\n• Vegan food, road trips and beautiful sights",
-    images: [
-      "/img/travel/thailand/thailand-1.jpg",
-      "/img/travel/thailand/thailand-2.jpg",
-      "/img/travel/thailand/thailand-3.jpg",
-      "/img/travel/thailand/thailand-4.jpg",
-      "/img/travel/thailand/thailand-5.jpg",
-      "/img/travel/thailand/thailand-6.jpg",
-      "/img/travel/thailand/thailand-7.jpg",
-      "/img/travel/thailand/thailand-8.jpg",
-    ],
-    lat: 13.7563,
-    lng: 100.5018,
-  },
-  {
-    name: "Malaysia",
-    description: "2024\n• Beautiful temples, walkable cities!",
-    images: [
-      "/img/travel/malaysia/malaysia-1.jpg",
-      "/img/travel/malaysia/malaysia-2.jpg",
-      "/img/travel/malaysia/malaysia-3.jpg",
-      "/img/travel/malaysia/malaysia-4.jpg",
-      "/img/travel/malaysia/malaysia-5.jpg",
-    ],
-    lat: 3.139,
-    lng: 101.6869,
-  },
-  {
-    name: "Bali, Indonesia",
-    images: [
-      "/img/travel/bali/bali-1.jpg",
-      "/img/travel/bali/bali-2.jpg",
-      "/img/travel/bali/bali-3.jpg",
-      "/img/travel/bali/bali-4.jpg",
-      "/img/travel/bali/bali-5.jpg",
-      "/img/travel/bali/bali-6.jpg",
-    ],
-    description:
-      "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
-    lat: -8.65,
-    lng: 115.2167,
-  },
-  {
-    name: "Taiwan",
-    images: [
-      "/img/travel/taiwan/taiwan-1.jpg",
-      "/img/travel/taiwan/taiwan-10.jpg",
-      "/img/travel/taiwan/taiwan-11.jpg",
-      "/img/travel/taiwan/taiwan-2.jpg",
-      "/img/travel/taiwan/taiwan-3.jpg",
-      "/img/travel/taiwan/taiwan-4.jpg",
-      "/img/travel/taiwan/taiwan-5.jpg",
-      "/img/travel/taiwan/taiwan-6.jpg",
-      "/img/travel/taiwan/taiwan-7.jpg",
-      "/img/travel/taiwan/taiwan-8.jpg",
-      "/img/travel/taiwan/taiwan-9.jpg",
-    ],
-    description: "2024, 2025\n• Amazing Buddhist culture, vegan food",
-    lat: 25.033,
-    lng: 121.5654,
-  },
-  {
+{
     name: "UK",
+    albumId: "uk",
     images: [
       "/img/travel/uk/uk-1.jpg",
       "/img/travel/uk/uk-10.jpg",
@@ -1358,26 +1313,108 @@ const travelDestinations = [
     lat: 51.5074,
     lng: -0.1278,
   },
-  {
-    name: "Ireland",
+{
+    name: "Taiwan",
+    albumId: "taiwan",
     images: [
-      "/img/travel/ireland/ireland-1.jpg",
-      "/img/travel/ireland/ireland-10.jpg",
-      "/img/travel/ireland/ireland-11.jpg",
-      "/img/travel/ireland/ireland-2.jpg",
-      "/img/travel/ireland/ireland-3.jpg",
-      "/img/travel/ireland/ireland-4.jpg",
-      "/img/travel/ireland/ireland-5.jpg",
-      "/img/travel/ireland/ireland-6.jpg",
-      "/img/travel/ireland/ireland-7.jpg",
-      "/img/travel/ireland/ireland-8.jpg",
-      "/img/travel/ireland/ireland-9.jpg",
+      "/img/travel/taiwan/taiwan-1.jpg",
+      "/img/travel/taiwan/taiwan-10.jpg",
+      "/img/travel/taiwan/taiwan-11.jpg",
+      "/img/travel/taiwan/taiwan-2.jpg",
+      "/img/travel/taiwan/taiwan-3.jpg",
+      "/img/travel/taiwan/taiwan-4.jpg",
+      "/img/travel/taiwan/taiwan-5.jpg",
+      "/img/travel/taiwan/taiwan-6.jpg",
+      "/img/travel/taiwan/taiwan-7.jpg",
+      "/img/travel/taiwan/taiwan-8.jpg",
+      "/img/travel/taiwan/taiwan-9.jpg",
     ],
-    description: "2025\n• Happy Pear, Galleries and vegan food!",
-    lat: 53.3498,
-    lng: -6.2603,
+    description: "2024, 2025\n• Amazing Buddhist culture, vegan food",
+    lat: 25.033,
+    lng: 121.5654,
   },
-].reverse();
+{
+    name: "Thailand",
+    albumId: "thailand",
+    description: "2024, 2025\n• Vegan food, road trips and beautiful sights",
+    images: [
+      "/img/travel/thailand/thailand-1.jpg",
+      "/img/travel/thailand/thailand-2.jpg",
+      "/img/travel/thailand/thailand-3.jpg",
+      "/img/travel/thailand/thailand-4.jpg",
+      "/img/travel/thailand/thailand-5.jpg",
+      "/img/travel/thailand/thailand-6.jpg",
+      "/img/travel/thailand/thailand-7.jpg",
+      "/img/travel/thailand/thailand-8.jpg",
+    ],
+    lat: 13.7563,
+    lng: 100.5018,
+  },
+{
+    name: "Malaysia",
+    albumId: "malaysia",
+    description: "2024\n• Beautiful temples, walkable cities!",
+    images: [
+      "/img/travel/malaysia/malaysia-1.jpg",
+      "/img/travel/malaysia/malaysia-2.jpg",
+      "/img/travel/malaysia/malaysia-3.jpg",
+      "/img/travel/malaysia/malaysia-4.jpg",
+      "/img/travel/malaysia/malaysia-5.jpg",
+    ],
+    lat: 3.139,
+    lng: 101.6869,
+  },
+{
+    name: "Bali, Indonesia",
+    albumId: "bali",
+    images: [
+      "/img/travel/bali/bali-1.jpg",
+      "/img/travel/bali/bali-2.jpg",
+      "/img/travel/bali/bali-3.jpg",
+      "/img/travel/bali/bali-4.jpg",
+      "/img/travel/bali/bali-5.jpg",
+      "/img/travel/bali/bali-6.jpg",
+    ],
+    description:
+      "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
+    lat: -8.65,
+    lng: 115.2167,
+  },
+{
+    name: "Maldives",
+    albumId: "maldives-2023",
+    description: "2023\n• Island Paradise",
+    images: [
+      "/img/travel/maldives/maldives-1.jpg",
+      "/img/travel/maldives/maldives-2.jpg",
+      "/img/travel/maldives/maldives-3.jpg",
+      "/img/travel/maldives/maldives-4.jpg",
+    ],
+    lat: 4.1755,
+    lng: 73.5093,
+  },
+{
+    name: "South Korea",
+    albumId: "south-korea",
+    description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
+    images: [
+      "/img/travel/sk/sk-1.jpg",
+      "/img/travel/sk/sk-10.jpg",
+      "/img/travel/sk/sk-11.jpg",
+      "/img/travel/sk/sk-12.jpg",
+      "/img/travel/sk/sk-2.jpg",
+      "/img/travel/sk/sk-3.jpg",
+      "/img/travel/sk/sk-4.jpg",
+      "/img/travel/sk/sk-5.jpg",
+      "/img/travel/sk/sk-6.jpg",
+      "/img/travel/sk/sk-7.jpg",
+      "/img/travel/sk/sk-8.jpg",
+      "/img/travel/sk/sk-9.jpg",
+    ],
+    lat: 37.5665,
+    lng: 126.978,
+  },
+];
 
 function ImageGallery({
   destination,
@@ -1599,16 +1636,15 @@ function PopOver({
                   {destination.description}
                 </p>
               </div>
-              <button
-                type="button"
-                className="shrink-0 rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-base font-medium hover:bg-gray-200"
+              <Link
+                href={`/images/${destination.albumId}/`}
+                className="shrink-0 rounded-md border border-gray-300 bg-gray-100 px-3 py-1 text-base font-medium no-underline hover:bg-gray-200"
                 onClick={(e) => {
                   e.stopPropagation();
-                  window.open(activeImage, "_blank", "noopener,noreferrer");
                 }}
               >
-                Zoom
-              </button>
+                View all
+              </Link>
             </div>
             <div className="mt-auto flex items-center gap-2 pt-3">
               <button

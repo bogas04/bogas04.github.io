@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
 
 import SeoTags from "../../components/SeoTags";
 import { AlbumSidebar } from "../../components/gallery/GalleryCategoryFilter";
@@ -97,7 +99,53 @@ function FolderPage({ manifest, folder }: { manifest: GalleryManifest; folder: G
 }
 
 function PhotoPage({ manifest, album, image, previousImage, nextImage }: Required<Pick<GalleryPageProps, "manifest" | "album" | "image">> & Pick<GalleryPageProps, "previousImage" | "nextImage">) {
-  return <GalleryFrame trail={album.title}><SeoTags title={`${image.title} — ${album.title}`} description={image.caption || image.alt} imageUrl={`https://bogas04.fyi${image.displayUrl}`} pageUrl={`https://bogas04.fyi${image.photoUrl}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0 lg:flex lg:min-h-0 lg:flex-col"><div className="sticky top-0 z-20 -mx-4 mb-8 shrink-0 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><Link href={getGalleryAlbumUrl(album.id)} aria-label={`Back to ${album.title}`} data-gallery-transition className="inline-flex pr-2 align-middle text-white/55 no-underline transition hover:text-[#1ba1e2]"><Arrow direction="previous" /></Link><Link href={getGalleryAlbumUrl(album.id)} data-gallery-transition className="lg:text-white/55 no-underline transition hover:text-[#1ba1e2]"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link><span> /</span><span className="ml-2" style={{ viewTransitionName: "gallery-photo-title" }}>this image</span></h1><p className="mt-8 mb-0 text-lg font-light text-white/65 sm:text-xl">{image.alt}</p></div><section className="relative bg-transparent lg:min-h-0 lg:flex-1"><a href={image.fallbackUrl} target="_blank" rel="noopener noreferrer" className="block h-full lg:flex lg:items-center lg:justify-center"><img src={image.fallbackUrl} alt={image.alt} width={image.width} height={image.height} className="mx-auto block h-auto max-h-[calc(100svh-10rem)] w-auto max-w-full bg-gray-800 object-contain lg:max-h-full" style={{ viewTransitionName: getGalleryImageViewTransitionName(image) }} decoding="async" /></a>{previousImage && nextImage ? <nav aria-label="Image navigation" className="pointer-events-none absolute inset-0 flex"><Link href={previousImage.photoUrl} className="group pointer-events-auto flex h-full w-1/2 items-center justify-start p-3 no-underline sm:p-5" aria-label={`Show previous image: ${previousImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="previous" /></span></Link><Link href={nextImage.photoUrl} className="group pointer-events-auto flex h-full w-1/2 items-center justify-end p-3 no-underline sm:p-5" aria-label={`Show next image: ${nextImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="next" /></span></Link></nav> : null}</section></section></GalleryLayout></main></GalleryFrame>;
+  const router = useRouter();
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    imageRef.current?.scrollIntoView({
+      block: "start",
+      inline: "nearest",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, [image.id]);
+
+  useEffect(() => {
+    if (!previousImage || !nextImage) return undefined;
+
+    const handleArrowKeys = (event: KeyboardEvent) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName))
+      ) {
+        return;
+      }
+
+      const targetImage =
+        event.key === "ArrowLeft"
+          ? previousImage
+          : event.key === "ArrowRight"
+            ? nextImage
+            : undefined;
+      if (!targetImage) return;
+
+      event.preventDefault();
+      void router.push(targetImage.photoUrl, undefined, { scroll: false });
+    };
+
+    window.addEventListener("keydown", handleArrowKeys);
+    return () => window.removeEventListener("keydown", handleArrowKeys);
+  }, [nextImage, previousImage, router]);
+
+  return <GalleryFrame trail={album.title}><SeoTags title={`${image.title} — ${album.title}`} description={image.caption || image.alt} imageUrl={`https://bogas04.fyi${image.displayUrl}`} pageUrl={`https://bogas04.fyi${image.photoUrl}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0 lg:flex lg:min-h-0 lg:flex-col"><div className="sticky top-0 z-20 -mx-4 mb-8 shrink-0 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><Link href={getGalleryAlbumUrl(album.id)} aria-label={`Back to ${album.title}`} data-gallery-transition className="inline-flex pr-2 align-middle text-white/55 no-underline transition hover:text-[#1ba1e2]"><Arrow direction="previous" /></Link><Link href={getGalleryAlbumUrl(album.id)} data-gallery-transition className="lg:text-white/55 no-underline transition hover:text-[#1ba1e2]"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link><span> /</span><span className="ml-2" style={{ viewTransitionName: "gallery-photo-title" }}>this image</span></h1><p className="mt-8 mb-0 text-lg font-light text-white/65 sm:text-xl">{image.alt}</p></div><section className="relative bg-transparent lg:min-h-0 lg:flex-1"><a href={image.fallbackUrl} target="_blank" rel="noopener noreferrer" className="block h-full lg:flex lg:items-center lg:justify-center"><img ref={imageRef} src={image.fallbackUrl} alt={image.alt} width={image.width} height={image.height} className="mx-auto block h-auto max-h-[calc(100svh-10rem)] w-auto max-w-full scroll-mt-36 bg-gray-800 object-contain" style={{ viewTransitionName: getGalleryImageViewTransitionName(image) }} decoding="async" /></a>{previousImage && nextImage ? <nav aria-label="Image navigation" className="pointer-events-none absolute inset-0 flex"><Link href={previousImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-start p-3 no-underline sm:p-5" aria-label={`Show previous image: ${previousImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="previous" /></span></Link><Link href={nextImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-end p-3 no-underline sm:p-5" aria-label={`Show next image: ${nextImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="next" /></span></Link></nav> : null}</section></section></GalleryLayout></main></GalleryFrame>;
 }
 
 export default function GalleryPathPage(props: GalleryPageProps) {

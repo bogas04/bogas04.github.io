@@ -65,8 +65,10 @@ local development session. Both it and `pnpm gallery:add` use the same image
 optimizer: it reduces images to 1440px on their longest edge, reencodes them as
 quality-95 JPEGs, bakes orientation into pixels, and removes embedded metadata.
 Their filename base is retained; for example, `sunset.png` becomes
-`sunset.jpg`. The uploader sends up to four images to this local service at
-once. **Optimize all images** applies the same process to every unprocessed
+`sunset.jpg`. `pnpm gallery:add` also accepts HEIC/HEIF sources; the shared
+optimizer decodes their primary photo before resizing and sanitizing it. The
+uploader sends up to four images to this local service at once. **Optimize all
+images** applies the same process to every unprocessed
 image in the selected album without changing its image metadata. Afterward, the
 control reports that the album is already optimized instead of reprocessing the
 files.

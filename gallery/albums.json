@@ -37,6 +37,10 @@
       "path": "public/img/travel/uk"
     },
     {
+      "id": "sri-lanka",
+      "path": "public/img/travel/sri-lanka"
+    },
+    {
       "id": "screenshots/a-plague-tale-innocence",
       "path": "public/img/screenshots/a-plague-tale-innocence"
     }
