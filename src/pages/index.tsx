@@ -462,6 +462,7 @@ function Travel() {
           >
             <ImageGallery
               destination={destination.name}
+              albumId={destination.albumId}
               images={destination.images}
               priority={index === 0}
             />
@@ -1418,10 +1419,12 @@ const travelDestinations = [
 
 function ImageGallery({
   destination,
+  albumId,
   images,
   priority = false,
 }: {
   destination: string;
+  albumId: string;
   images: string[];
   priority?: boolean;
 }) {
@@ -1429,12 +1432,13 @@ function ImageGallery({
   return (
     <div className="image-gallery flex overflow-x-auto [scroll-snap-type:x_mandatory] gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {images.map((image, index) => (
-        <button
-          type="button"
+        <Link
+          href={`/images/${encodeURIComponent(albumId)}/${encodeURIComponent(
+            image.split("/").pop()!.replace(/\.[^.]+$/, ""),
+          )}`}
           key={image}
-          className="h-[min(45vw,20rem)] shrink-0 cursor-zoom-in rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          onClick={() => window.open(image, "_blank", "noopener,noreferrer")}
-          aria-label={`Open photo ${index + 1} from ${destination} in a new tab`}
+          className="h-[min(45vw,20rem)] shrink-0 cursor-pointer rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          aria-label={`View photo ${index + 1} from ${destination}`}
         >
           <img
             src={image}
@@ -1443,7 +1447,7 @@ function ImageGallery({
             loading={priority && index === 0 ? "eager" : "lazy"}
             decoding="async"
           />
-        </button>
+        </Link>
       ))}
     </div>
   );
