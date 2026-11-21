@@ -56,14 +56,19 @@ export const getStaticProps: GetStaticProps<GalleryPageProps> = ({ params }) => 
     const images = getGalleryImages(manifest, imageAlbum.id);
     const index = images.findIndex((candidate) => candidate.id === image.id);
     const hasMultipleImages = images.length > 1;
+    const photoNavigationProps = hasMultipleImages
+      ? {
+          previousImage: images[(index - 1 + images.length) % images.length],
+          nextImage: images[(index + 1) % images.length],
+        }
+      : {};
     return {
       props: {
         kind: "photo",
         manifest,
         album: imageAlbum,
         image,
-        previousImage: hasMultipleImages ? images[(index - 1 + images.length) % images.length] : undefined,
-        nextImage: hasMultipleImages ? images[(index + 1) % images.length] : undefined,
+        ...photoNavigationProps,
       },
     };
   }
