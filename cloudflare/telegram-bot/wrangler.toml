@@ -1,0 +1,24 @@
+name = "bogas04-telegram-bot"
+main = "src/index.js"
+compatibility_date = "2026-11-21"
+
+[vars]
+GITHUB_OWNER = "bogas04"
+GITHUB_REPO = "bogas04.github.io"
+GITHUB_BRANCH = "main"
+GITHUB_APP_ID = "5863523"
+GITHUB_INSTALLATION_ID = "184384828"
+
+[[kv_namespaces]]
+binding = "BOT_STATE"
+id = "75b0df19fedf494bbf1164eb37143b1a"
+
+[images]
+binding = "IMAGES"
+
+[[routes]]
+pattern = "bot.bogas04.fyi"
+custom_domain = true
+
+[observability]
+enabled = true
