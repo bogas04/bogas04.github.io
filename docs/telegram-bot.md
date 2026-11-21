@@ -110,9 +110,12 @@ instead of weakening the image privacy checks.
 5. Keep the `IMAGES` binding enabled. The existing `bot.bogas04.fyi` custom
    domain should be attached to this Worker. The Telegram endpoint is
    `https://bot.bogas04.fyi/telegram/webhook`.
-6. Register a Telegram webhook at that URL using Telegram's
-   `secret_token` option. Set it to receive only message updates needed by
-   `/now`.
+6. Register the webhook by sending an authenticated `POST` request to
+   `https://bot.bogas04.fyi/telegram/admin/register`, with
+   `Authorization: Bearer <TELEGRAM_WEBHOOK_SECRET>`. This endpoint can only
+   register the fixed `/telegram/webhook` URL and only accepts the webhook
+   secret as its credential. It calls Telegram's `setWebhook` with that same
+   secret and subscribes only to message updates.
 
 ### Verification before using it for real posts
 

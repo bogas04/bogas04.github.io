@@ -205,6 +205,21 @@ async function telegramCall(env, method, payload) {
   return result.result;
 }
 
+async function registerTelegramWebhook(env) {
+  await telegramCall(env, "setWebhook", {
+    url: "https://bot.bogas04.fyi/telegram/webhook",
+    secret_token: env.TELEGRAM_WEBHOOK_SECRET,
+    allowed_updates: ["message"],
+  });
+  const info = await telegramCall(env, "getWebhookInfo", {});
+  return json({
+    ok: true,
+    url: info.url,
+    pendingUpdates: info.pending_update_count || 0,
+    lastError: info.last_error_message || null,
+  });
+}
+
 function commandText(message) {
   const raw = message.text || message.caption || "";
   const match = raw.match(/^\/now(?:@bogas04_bot)?(?:\s+|$)/i);
@@ -384,6 +399,18 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/") return new Response("bogas04 telegram bot is ready");
+    if (url.pathname === "/telegram/admin/register") {
+      if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+      if (!env.TELEGRAM_WEBHOOK_SECRET || request.headers.get("authorization") !== `Bearer ${env.TELEGRAM_WEBHOOK_SECRET}`) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      try {
+        return await registerTelegramWebhook(env);
+      } catch (error) {
+        console.error("Telegram webhook registration failed", error instanceof Error ? error.message : "unknown error");
+        return json({ ok: false, error: error instanceof Error ? error.message : "Registration failed" }, 502);
+      }
+    }
     if (url.pathname !== WEBHOOK_PATH) return new Response("Not found", { status: 404 });
     if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
     if (request.headers.get("x-telegram-bot-api-secret-token") !== env.TELEGRAM_WEBHOOK_SECRET) {
