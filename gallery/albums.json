@@ -21,8 +21,20 @@
       "path": "public/img/travel/maldives"
     },
     {
+      "id": "now",
+      "path": "public/img/now"
+    },
+    {
+      "id": "screenshots/a-plague-tale-innocence",
+      "path": "public/img/screenshots/a-plague-tale-innocence"
+    },
+    {
       "id": "south-korea",
       "path": "public/img/travel/sk"
+    },
+    {
+      "id": "sri-lanka",
+      "path": "public/img/travel/sri-lanka"
     },
     {
       "id": "taiwan",
@@ -35,14 +47,6 @@
     {
       "id": "uk",
       "path": "public/img/travel/uk"
-    },
-    {
-      "id": "sri-lanka",
-      "path": "public/img/travel/sri-lanka"
-    },
-    {
-      "id": "screenshots/a-plague-tale-innocence",
-      "path": "public/img/screenshots/a-plague-tale-innocence"
     }
   ]
 }
