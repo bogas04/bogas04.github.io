@@ -147,13 +147,19 @@ function quoteYaml(value) {
   return JSON.stringify(value);
 }
 
+function markdownImageAlt(value) {
+  return value.replace(/\\/g, "\\\\").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
+}
+
 function dateStamp(date) {
   return date.toISOString().slice(0, 10);
 }
 
 function blogMarkdown(title, body, createdAt, image) {
   const description = body.replace(/\s+/g, " ").slice(0, 180);
-  const content = image ? `${body.trim()}\n\n![${image.alt}](/img/now/${image.id}.jpg)` : body.trim();
+  const content = image
+    ? `${body.trim()}\n\n[![${markdownImageAlt(image.alt)}](/img/now/${image.id}.jpg)](/images/now/${image.id}/)`
+    : body.trim();
   return `---\ntitle: ${quoteYaml(title)}\ndescription: ${quoteYaml(description)}\ndate: ${quoteYaml(createdAt.toISOString())}\ncategories: []\nkeywords: [now]\n---\n\n${content}\n`;
 }
 

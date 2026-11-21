@@ -25,7 +25,8 @@ visitors. The static site and its GitHub Actions deployment remain unchanged.
 Each successful command creates a published Markdown post in `src/blog` with
 the `now` keyword and a UTC timestamp. For a photo, it also creates a
 sanitized JPEG and a published image sidecar under `public/img/now`. The post
-can reference that image. The `now` album is registered in
+shows the photo and links it to its canonical `/images/now/<id>/` gallery page.
+The `now` album is registered in
 `gallery/albums.json`, categorized as `random`, and published. One commit
 contains all files for an update so the gallery and post stay in sync.
 
