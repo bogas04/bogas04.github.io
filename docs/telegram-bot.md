@@ -57,6 +57,26 @@ unsanitized images to the bot.
 - A push to `main` invokes the existing workflow, which runs gallery
   validation and builds and deploys the static site.
 
+```mermaid
+flowchart TD
+  Author["Author in private Telegram chat"] -->|"/now text, optionally with photo"| Telegram["Telegram Bot API"]
+  Telegram -->|"HTTPS webhook"| Worker["Cloudflare Worker\n/telegram/webhook"]
+  Worker -->|"verify webhook secret and allowed IDs"| Gate{"Authorized update?"}
+  Gate -->|No| Reject["Ignore update"]
+  Gate -->|Yes, text only| Post["Create /now Markdown"]
+  Gate -->|Yes, photo attached| Alt["Ask for alt text"]
+  Alt -->|"alt text reply"| Images["Cloudflare Images\nresize, orient, strip metadata"]
+  Images --> Gallery["Create JPEG, sidecar, and now album metadata"]
+  Post --> Commit["GitHub App writes one commit to main"]
+  Gallery --> Commit
+  Commit --> Deploy["GitHub Actions validates and deploys static site"]
+  Deploy --> Site["/now post and optional /images/now photo"]
+  Commit --> Reply["Bot confirms the commit"]
+
+  Setup["One-time setup call"] -->|"authenticated POST"| Register["Worker /telegram/admin/register"]
+  Register -->|"setWebhook"| Telegram
+```
+
 The Cloudflare Images binding must be exercised with real test inputs before
 launch. In particular, confirm orientation is baked into the pixels and the
 result passes the same metadata checks used by the gallery. If it does not,
