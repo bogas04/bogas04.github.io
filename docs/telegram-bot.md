@@ -3,10 +3,11 @@
 ## Purpose
 
 Use one private Telegram bot command, `/now`, to publish a short update to the
-site's existing `/now` scrapbook. A post may be text only or include one photo.
-When a photo is attached, the bot also adds it to a dedicated `now` album on
-`/images`. The Telegram command and the website route are separate interfaces
-to the same published content; there is no `/insta` command.
+site's existing `/now` scrapbook. The current bot accepts text or one photo;
+multi-photo albums and video support are planned. Media is also added to a
+dedicated `now` album on `/images`. The Telegram command and the website route
+are separate interfaces to the same published content; there is no `/insta`
+command.
 
 This is an authoring and publishing path, not a server feature for site
 visitors. The static site and its GitHub Actions deployment remain unchanged.
@@ -14,19 +15,26 @@ visitors. The static site and its GitHub Actions deployment remain unchanged.
 ## Proposed flow
 
 1. Send `/now <post text>` in a private chat with the bot. A photo can be sent
-   with the same command and text in its caption. Links and line breaks in the
+   with the same command and text in its caption. The planned video flow will
+   accept a video with a caption in the same way. Links and line breaks in the
    post text are retained as Markdown content.
 2. If a photo is attached, the bot asks for image alt text before publishing.
    This keeps the gallery's accessibility requirement explicit rather than
-   guessing a description from the post text.
-3. The bot acknowledges the update only after it has created the Git commit.
+   guessing a description from the post text. A future multi-photo post will
+   ask for a description for each image.
+3. For videos, the planned flow asks for a short description and uses a poster
+   thumbnail for the gallery card. The video itself is playable on its
+   canonical `/images/now/<id>/` page.
+4. The bot acknowledges the update only after it has created the Git commit.
    The existing push-to-`main` workflow validates and deploys the site.
 
 Each successful command creates a published Markdown post in `src/blog` with
 the `now` keyword and a UTC timestamp. For a photo, it also creates a
 sanitized JPEG and a published image sidecar under `public/img/now`. The post
 shows the photo and links it to its canonical `/images/now/<id>/` gallery page.
-The `now` album is registered in
+For a video, the planned pipeline stores an MP4 and its poster image under
+`public` in the repository, and adds published gallery metadata. The `/now`
+post links to the playable gallery page. The `now` album is registered in
 `gallery/albums.json`, categorized as `random`, and published. One commit
 contains all files for an update so the gallery and post stay in sync.
 
@@ -78,6 +86,103 @@ flowchart TD
   Register -->|"setWebhook"| Telegram
 ```
 
+### Planned video pipeline
+
+Video support is a follow-up to the working photo flow. Keep the repository as
+the source of truth: commit the MP4, poster image, sidecar metadata, gallery
+manifest inputs, and `/now` post together. Do not add R2, Stream, or another
+video storage service.
+
+- Target short screen recordings, memes, and Live Photo-like clips. Accept
+  portrait, landscape, and square aspect ratios without cropping or padding.
+- Recommend MP4 with H.264 video and AAC audio, up to 1080p. Preserve the
+  submitted encoding in the first version; the Worker does not transcode video.
+- Enforce a 20 MB download limit because Telegram's Bot API currently limits
+  bot downloads to 20 MB. Tell the author to compress or trim larger videos.
+  See [Telegram `getFile`](https://core.telegram.org/bots/api#getfile).
+- Store video files below `public` (for example,
+  `public/video/now/<id>.mp4`) so the existing static deploy publishes them.
+  Keep individual files well below GitHub's 50 MiB warning threshold; the
+  Telegram download limit is already stricter. See [GitHub large-file
+  guidance](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github).
+- Extend the gallery manifest and detail page to distinguish image and video
+  items while retaining existing photo URLs and behavior. A video item uses a
+  playable HTML video with controls and a poster thumbnail; its sidecar carries
+  title, description, date, and publication state.
+- Use a Telegram-provided video thumbnail when available, then sanitize it
+  through the existing image path. If no usable thumbnail is available, ask the
+  author to attach a cover photo or defer gallery publication for that clip.
+- Ensure video metadata does not expose unwanted location or device details.
+  The initial pipeline does not re-encode video, so it must inspect metadata
+  before publishing and reject files that need privacy cleanup. Add a local or
+  CI validation path for the MP4 container, codec, dimensions, duration,
+  metadata, and size before enabling video uploads.
+- Update `/now` Markdown generation to link each clip to its gallery page, and
+  keep all files for one post in one Git commit. Preserve the current webhook
+  allowlist, duplicate-update handling, and repository-path restrictions.
+
+```mermaid
+flowchart TD
+  Author["Private Telegram chat"] -->|"/now text + short video"| Telegram["Telegram Bot API"]
+  Telegram -->|"webhook update"| Worker["Cloudflare Worker"]
+  Worker -->|"download ≤20 MB"| Validate["Validate MP4 and privacy metadata"]
+  Validate -->|"valid video"| Asset["Commit MP4 under public/video/now"]
+  Validate -->|"thumbnail available"| Poster["Sanitize poster with image pipeline"]
+  Validate -->|"no usable thumbnail"| Ask["Ask author for a cover photo"]
+  Asset --> Gallery["Create video sidecar and gallery entry"]
+  Poster --> Gallery
+  Ask --> Gallery
+  Gallery --> Post["Create linked /now Markdown post"]
+  Post --> Commit["One GitHub commit"]
+  Commit --> Deploy["GitHub Actions static build and deploy"]
+  Deploy --> Site["/now post and playable /images/now/<id>/ page"]
+```
+
+Implementation should first add mixed-media support to the gallery generator,
+validator, and detail page; then add Worker download and commit handling; finally
+verify the static build, mobile playback, poster accessibility, and privacy
+checks with representative short clips. The proposed `public/video/now` path is
+not a current public URL until this feature is implemented.
+
+### Planned multi-photo gallery posts
+
+The current bot accepts one photo per `/now` post. Extend it to accept a
+Telegram photo album as one post, preserving the current single-photo flow.
+
+- Send `/now <caption>` with a Telegram album of 2–10 photos. Telegram delivers
+  album items as separate messages linked by a shared `media_group_id`; buffer
+  them briefly in the existing KV namespace and process the group once all
+  items have arrived. See the [Telegram Bot API `Message` fields and media
+  groups](https://core.telegram.org/bots/api#message).
+- Use the caption on the album item that contains `/now` as the post text, and
+  preserve the order Telegram supplied. Reject mixed media groups in the first
+  version; photo albums and video albums should each have their own handling.
+- Ask for short alt text for each photo, in order, before publishing. Do not
+  substitute the post caption for image descriptions. If the prompt expires or
+  any image fails validation, discard the pending group and do not partially
+  publish it.
+- Run every photo through the existing image sanitation path. Apply both a
+  per-file limit and an aggregate limit so a large album cannot overwhelm
+  Worker memory or produce an unexpectedly large commit.
+- Create one `/now` Markdown post, one sanitized JPEG and sidecar per photo,
+  and one gallery update in a single Git commit. The post displays an ordered
+  strip of photos; each item links to its existing canonical
+  `/images/now/<id>/` page and participates in the album's previous/next
+  navigation.
+- Use a stable group key derived from the Telegram `media_group_id` for KV
+  buffering and duplicate protection. Keep webhook update IDs deduplicated too,
+  so Telegram retries or out-of-order delivery cannot create duplicate posts,
+  omit an item, or reorder the album.
+- Add a timeout and cleanup policy for abandoned pending groups, and test
+  delivery where webhook events arrive with delay or in a different order.
+  Acknowledge publication only after every photo and the post are committed
+  together.
+
+Implement multi-photo handling after the current single-photo flow is stable.
+The existing gallery already displays multiple images in the `now` album; this
+plan groups a Telegram album into one `/now` post and adds per-photo accessible
+descriptions. It does not introduce a new public route.
+
 The Cloudflare Images binding must be exercised with real test inputs before
 launch. In particular, confirm orientation is baked into the pixels and the
 result passes the same metadata checks used by the gallery. If it does not,
@@ -90,7 +195,9 @@ instead of weakening the image privacy checks.
   `/now` composer. It does not create drafts.
 - A photo update is committed only after alt text is supplied and both the
   blog Markdown and image files can be written together.
-- The first version accepts one still photo per update. Unsupported media,
+- The current bot accepts one still photo per update. Multi-photo album and
+  video acceptance are planned and remain disabled until their grouping,
+  gallery, and metadata validation support is implemented. Unsupported media,
   oversized files, missing alt text, and malformed updates get a Telegram
   explanation and do not create a commit.
 - Telegram update IDs are recorded in a Cloudflare KV namespace before
