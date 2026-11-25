@@ -12,6 +12,30 @@ type NativeViewTransition = {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
+    // Track only entries created within this running site, so a direct link
+    // does not send the gallery's back control to an unrelated external page.
+    const history = window.history;
+    const push = history.pushState;
+    const replace = history.replaceState;
+    const key = "__siteHistoryPosition";
+    const currentPosition = () => typeof history.state?.[key] === "number" ? history.state[key] as number : 0;
+    if (typeof history.state?.[key] !== "number") {
+      replace.call(history, { ...history.state, [key]: 0 }, "");
+    }
+    history.pushState = function (state, unused, url) {
+      const nextState = state && typeof state === "object" ? { ...state, [key]: currentPosition() + 1 } : state;
+      return push.call(this, nextState, unused, url);
+    };
+    history.replaceState = function (state, unused, url) {
+      const nextState = state && typeof state === "object" ? { ...state, [key]: currentPosition() } : state;
+      return replace.call(this, nextState, unused, url);
+    };
+    return () => {
+      history.pushState = push;
+      history.replaceState = replace;
+    };
+  }, []);
+  useEffect(() => {
     // remove all sws
     if (window.navigator.serviceWorker) {
       navigator.serviceWorker

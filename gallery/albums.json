@@ -29,6 +29,54 @@
       "path": "public/img/screenshots/a-plague-tale-innocence"
     },
     {
+      "id": "screenshots/cyberpunk-2077",
+      "path": "public/img/screenshots/cyberpunk-2077"
+    },
+    {
+      "id": "screenshots/days-gone",
+      "path": "public/img/screenshots/days-gone"
+    },
+    {
+      "id": "screenshots/deliver-us-mars",
+      "path": "public/img/screenshots/deliver-us-mars"
+    },
+    {
+      "id": "screenshots/far-cry-6",
+      "path": "public/img/screenshots/far-cry-6"
+    },
+    {
+      "id": "screenshots/final-fantasy-vii-remake",
+      "path": "public/img/screenshots/final-fantasy-vii-remake"
+    },
+    {
+      "id": "screenshots/god-of-war-ragnarok",
+      "path": "public/img/screenshots/god-of-war-ragnarok"
+    },
+    {
+      "id": "screenshots/horizon-forbidden-west",
+      "path": "public/img/screenshots/horizon-forbidden-west"
+    },
+    {
+      "id": "screenshots/horizon-zero-dawn",
+      "path": "public/img/screenshots/horizon-zero-dawn"
+    },
+    {
+      "id": "screenshots/mafia-the-old-country",
+      "path": "public/img/screenshots/mafia-the-old-country"
+    },
+    {
+      "id": "screenshots/resident-evil-village",
+      "path": "public/img/screenshots/resident-evil-village"
+    },
+    {
+      "id": "screenshots/stray",
+      "path": "public/img/screenshots/stray"
+    },
+    {
+      "id": "screenshots/thank-goodness-youre-here",
+      "path": "public/img/screenshots/thank-goodness-youre-here"
+    },
+    {
       "id": "south-korea",
       "path": "public/img/travel/sk"
     },

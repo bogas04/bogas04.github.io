@@ -5,6 +5,16 @@ import SeoTags from "../../components/SeoTags";
 
 const boardUrl = "https://trello.com/b/Ctw7Er15/games";
 const splashStorageKey = "plays-splash-date";
+const gameCollage = [
+  "/img/screenshots/mafia-the-old-country/01.jpg",
+  "/img/screenshots/horizon-forbidden-west/06.jpg",
+  "/img/screenshots/god-of-war-ragnarok/11.jpg",
+];
+const captureCollage = [
+  "/img/screenshots/stray/01.jpg",
+  "/img/screenshots/deliver-us-mars/03.jpg",
+  "/img/screenshots/far-cry-6/01.jpg",
+];
 
 function useGamepadNavigation() {
   useEffect(() => {
@@ -127,14 +137,18 @@ export default function Plays() {
               <section aria-label="Games and screenshots" className="grid grid-cols-2 gap-3 sm:flex sm:h-[calc(2*var(--tile-size)+0.75rem)] sm:w-max sm:items-end [--tile-size:clamp(100px,15vw,160px)]">
                 <a data-gamepad {...tileInteraction(0)} href={boardUrl} target="_blank" rel="noopener noreferrer" className={`relative flex shrink-0 items-end overflow-hidden bg-[#176c38] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(0)}`}>
                   <span aria-hidden="true" className="absolute inset-0 grid grid-cols-3 gap-0.5">
-                    {["2021_06_04-09_05_02", "2021_07_07-18_57_09", "2021_07_07-19_01_48"].map((image) => (
-                      <img key={image} src={`/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-${image}.jpg`} alt="" className="h-full w-full object-cover" />
+                    {gameCollage.map((image) => (
+                      <img key={image} src={image} alt="" className="h-full w-full object-cover" />
                     ))}
                   </span>
                   <span className="relative w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent px-4 pb-4 pt-12"><strong className="text-xl font-bold sm:text-2xl">My games</strong></span>
                 </a>
                 <Link data-gamepad {...tileInteraction(1)} href="/images/screenshots/" className={`relative flex shrink-0 items-end overflow-hidden bg-[#34483b] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(1)}`}>
-                  <img src="/img/screenshots/a-plague-tale-innocence/A%20Plague%20Tale_%20Innocence-2021_07_07-18_53_51.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+                  <span aria-hidden="true" className="absolute inset-0 grid grid-cols-3 gap-0.5">
+                    {captureCollage.map((image) => (
+                      <img key={image} src={image} alt="" className="h-full w-full object-cover" />
+                    ))}
+                  </span>
                   <span className="relative w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent px-4 pb-4 pt-12"><strong className="block text-lg">My captures</strong><span className="text-sm">Screenshots</span></span>
                 </Link>
                 <Link data-gamepad {...tileInteraction(2)} href="/blog/tags/video-game-industry/" className={`flex shrink-0 flex-col justify-end overflow-hidden bg-[#48536d] p-3 text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(2)}`}>

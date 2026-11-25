@@ -78,6 +78,9 @@ runtime. A subsequent `pnpm start` can reuse the same port without manual
 cleanup.
 
 Mark both the album and an image as published before it appears in the gallery.
+Screenshot albums may leave both start and end dates empty when capture dates
+are unknown. Their undated images appear in the gallery's undated section;
+do not substitute an import date for an unknown capture date.
 `published: false` prevents it from appearing in gallery pages, but files under
 `public/img` are static public assets after deployment. Do not put confidential
 or unsanitised material there.
@@ -87,6 +90,11 @@ modified below `public/img`. It blocks images larger than 25 MiB or 100 million
 pixels; use `/upload` or `pnpm gallery:add` to re-encode oversized originals.
 
 ## How the gallery is built
+
+Gallery back arrows use the visitor's known in-site browsing history, preserving
+the view they came from. For a direct entry, they replace the current page with
+the parent album or folder, then the pictures index, so repeated back actions
+continue up the hierarchy. The pictures header links home.
 
 `gallery/albums.json` maps a stable gallery ID to an arbitrary folder below
 `public/img`; neither the folder name nor image filename needs to follow a

@@ -69,10 +69,12 @@ async function main(): Promise<void> {
       add(errors, `${formatPath(album.metadataPath)} must declare category: travel, blog, random, or screenshots`);
     }
     if (!albumCover) add(errors, `${formatPath(album.metadataPath)} is missing cover`);
-    if (!stringValue(album.data.startDate)) {
+    const undatedScreenshots = albumCategory === "screenshots" &&
+      !stringValue(album.data.startDate) && !stringValue(album.data.endDate);
+    if (!undatedScreenshots && !stringValue(album.data.startDate)) {
       add(errors, `${formatPath(album.metadataPath)} is missing startDate`);
     }
-    if (!stringValue(album.data.endDate)) {
+    if (!undatedScreenshots && !stringValue(album.data.endDate)) {
       add(errors, `${formatPath(album.metadataPath)} is missing endDate`);
     }
     if (typeof album.data.published !== "boolean") {

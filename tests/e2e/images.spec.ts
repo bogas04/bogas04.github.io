@@ -18,7 +18,7 @@ test("image gallery routes use canonical img files and human-friendly photo labe
   await expect(firstPhoto).toBeVisible();
   await firstPhoto.click();
   await expect(page.getByRole("heading", { name: /this image/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Back to Ireland" })).toHaveAttribute("href", "/images/ireland/");
+  await expect(page.getByRole("link", { name: "Go back" })).toHaveAttribute("href", "/images/ireland/");
   await expect(page.getByRole("heading", { name: /this image/i }).getByRole("link", { name: "Ireland", exact: true })).toHaveAttribute("href", "/images/ireland/");
   await expect(page.locator("main img").first()).toHaveAttribute("src", /\/img\/travel\/ireland\//);
 });
@@ -73,7 +73,7 @@ test("gallery detail metadata and invalid routes remain correct", async ({ page 
 test("mobile gallery album navigation keeps history and provides a back link", async ({ page }, testInfo) => {
   test.skip(!isMobile(testInfo.project.name), "This assertion covers the mobile-only gallery.");
   await page.goto("/images/ireland/");
-  await expect(page.getByRole("link", { name: "Back to pictures" })).toHaveAttribute("href", "/images/");
+  await expect(page.getByRole("link", { name: "Go back" })).toHaveAttribute("href", "/images/");
   await page.goto("/images/?album=bali");
   const galleryNavigation = page.getByRole("navigation", { name: "Gallery views and albums" });
   await expect(galleryNavigation.getByRole("link", { name: "bali" })).toHaveAttribute("aria-current", "page");
@@ -81,7 +81,7 @@ test("mobile gallery album navigation keeps history and provides a back link", a
   await expect.poll(() => galleryTrack.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
   await galleryTrack.locator(":scope > div").nth(2).locator('figure a[href^="/images/bali/"]').first().click();
   await expect(page).toHaveURL(/\/images\/bali\/bali-\d+\/?$/);
-  await page.goBack();
+  await page.getByRole("link", { name: "Go back" }).click();
   await expect(page).toHaveURL("/images/?album=bali");
   await expect(galleryNavigation.getByRole("link", { name: "bali" })).toHaveAttribute("aria-current", "page");
 });
@@ -107,4 +107,24 @@ test("desktop image-gallery date picker opens beside the selected date and navig
   await expect(picker).toBeHidden();
   const destinationHeading = page.getByRole("heading", { name: destinationLabel!, exact: true });
   await expect.poll(() => destinationHeading.evaluate((element) => element.getBoundingClientRect().top)).toBeLessThan(200);
+});
+
+
+test("gallery back follows browsing history and falls back through the directory", async ({ page }) => {
+  await page.goto("/images/screenshots/");
+  await page.getByRole("link", { name: /cyberpunk 2077/i }).first().click();
+  await expect(page).toHaveURL(/\/images\/screenshots\/cyberpunk-2077\/?$/);
+  await page.getByRole("link", { name: "Go back" }).click();
+  await expect(page).toHaveURL(/\/images\/screenshots\/?$/);
+
+  // A direct entry has no known in-site predecessor. Each fallback replaces
+  // the current entry, so the next back action continues up the hierarchy.
+  const direct = await page.context().newPage();
+  await direct.goto("/images/screenshots/cyberpunk-2077/01/");
+  await direct.getByRole("link", { name: "Go back" }).click();
+  await expect(direct).toHaveURL(/\/images\/screenshots\/cyberpunk-2077\/?$/);
+  await direct.getByRole("link", { name: "Go back" }).click();
+  await expect(direct).toHaveURL(/\/images\/screenshots\/?$/);
+  await direct.getByRole("link", { name: "Go back" }).click();
+  await expect(direct).toHaveURL(/\/images\/?$/);
 });
