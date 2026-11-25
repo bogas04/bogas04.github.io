@@ -77,9 +77,10 @@
       "category": "random",
       "cover": "20261121-000005-journaling",
       "startDate": "2026-11-21",
-      "endDate": "2026-11-21",
+      "endDate": "2026-11-22",
       "images": [
-        "20261121-000005-journaling"
+        "20261121-000005-journaling",
+        "20261122-000009-meh-but-interesting"
       ]
     },
     {
@@ -809,6 +810,25 @@
       "thumbUrl": "/img/now/20261121-000005-journaling.jpg",
       "displayUrl": "/img/now/20261121-000005-journaling.jpg",
       "fallbackUrl": "/img/now/20261121-000005-journaling.jpg"
+    },
+    {
+      "id": "20261122-000009-meh-but-interesting",
+      "album": "now",
+      "albumTitle": "now",
+      "category": "random",
+      "title": "meh, but interesting",
+      "alt": "An underside picture of metro train elevated corridor with some festive lights and flags, taken after a sunset",
+      "caption": "meh, but interesting",
+      "takenAt": "2026-11-22",
+      "location": "",
+      "featured": false,
+      "width": 960,
+      "height": 1280,
+      "aspectRatio": 0.75,
+      "photoUrl": "/images/now/20261122-000009-meh-but-interesting/",
+      "thumbUrl": "/img/now/20261122-000009-meh-but-interesting.jpg",
+      "displayUrl": "/img/now/20261122-000009-meh-but-interesting.jpg",
+      "fallbackUrl": "/img/now/20261122-000009-meh-but-interesting.jpg"
     },
     {
       "id": "A Plague Tale_ Innocence-2021_06_04-08_48_42",

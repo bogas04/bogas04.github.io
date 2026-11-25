@@ -36,7 +36,8 @@ product decision.
   [Local authoring roadmap](docs/local-authoring-roadmap.md).
 - A new route has no assumed visual style. Ask the author which remembered web
   style it should evoke before designing it. Read
-  [Design direction](docs/design-direction.md).
+  [Design direction](docs/design-direction.md). For homepage changes, also read
+  [Home page design](docs/home-design.md).
 - Before changing markup, styles, or browser interactions, read
   [Technical principles](docs/technical-principles.md).
 - Treat documentation as code. Create or update the narrow document covering a

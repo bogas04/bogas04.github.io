@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, {
   startTransition,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   ViewTransition,
@@ -10,11 +12,7 @@ import React, {
 
 import SeoTags from "../components/SeoTags";
 
-import BlogIcon from "../components/icons/blog";
-import GalleryIcon from "../components/icons/gallery";
-import LinkedInIcon from "../components/icons/linkedin";
 import GithubIcon from "../components/icons/github";
-import NowIcon from "../components/icons/now";
 import Section from "../layout/section";
 
 function HomePage() {
@@ -51,8 +49,13 @@ function HomePage() {
 export default HomePage;
 
 function Hero() {
-  const navLinkClass =
-    "flex w-28 shrink-0 flex-col items-center gap-2 text-center text-[clamp(0.875rem,3vw,1.25rem)] text-white lowercase transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-32";
+  const links = [
+    { label: "now", subtitle: "what life looks like lately", href: "/now", icon: "now" },
+    { label: "blog", subtitle: "thoughts & stories", href: "/blog", icon: "blog" },
+    { label: "images", subtitle: "places, people & moments", href: "/images", icon: "images" },
+    { label: "linkedin", subtitle: "the professional me", href: "https://linkedin.com/in/bogas04", icon: "linkedin" },
+    { label: "github", subtitle: "things I've built", href: "https://github.com/bogas04", icon: "github" },
+  ] as const;
 
   return (
     <Section className="min-h-[91vh]" style={{ zIndex: 10 }}>
@@ -66,72 +69,231 @@ function Hero() {
       </h1>
 
       <p className="mx-auto mt-2 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
-        Heylo! I&apos;m divjot (dj) or bogas04, software engineer by profession,
-        with huge interest in veganism, single player video gaming, and newfound
+        Heylo! I&apos;m divjot (dj) or bogas04, a software engineer by profession,
+        with a huge interest in veganism, single-player video gaming, and a newfound
         interest in philosophy and psychology. I sometimes write unhinged
         emotional pieces and share some cool tech work.
       </p>
 
-      <nav className="mt-8 mb-6 flex w-full flex-wrap justify-center gap-x-4 gap-y-8 px-2 py-4 sm:gap-x-8 sm:gap-y-10">
-        <Link
-          href="/images"
-          className={navLinkClass}
-        >
-          <GalleryIcon className="h-14 w-14 sm:h-16 sm:w-16" />
-          /images
-        </Link>
-        <Link
-          href="/now"
-          className={navLinkClass}
-        >
-          <NowIcon className="h-14 w-14 sm:h-16 sm:w-16" />
-          /now
-        </Link>
-        <Link
-          href="/blog"
-          className={navLinkClass}
-        >
-          <BlogIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
-          /blog
-        </Link>
-        <a
-          href="https://linkedin.com/in/bogas04"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={navLinkClass}
-        >
-          <LinkedInIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
-          linkedin
-        </a>
-        <a
-          href="https://github.com/bogas04"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={navLinkClass}
-        >
-          <GithubIcon className="h-14 w-14 fill-current sm:h-16 sm:w-16" />
-          github
-        </a>
+      <nav aria-label="Find me online" className="mx-auto mt-10 mb-6 grid w-full max-w-4xl grid-cols-2 gap-3 sm:gap-4">
+        {(() => {
+          const renderLink = ({ label, subtitle, href, icon }: (typeof links)[number]) => {
+          const external = href.startsWith("https://");
+          const glyph = (
+            <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-20 sm:w-20">
+              {icon === "images" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><rect x="3" y="3" width="18" height="18" rx="1" /><circle cx="16.5" cy="8" r="1.5" fill="currentColor" stroke="none" /><path d="m4 18 5-5 4 4 2-2 5 5" /></svg>}
+              {icon === "now" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><circle cx="12" cy="12" r="9" /><path d="M12 6v6l4 3" strokeLinecap="square" /></svg>}
+              {icon === "blog" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><path d="m4 20 4.5-1 11-11-3.5-3.5-11 11L4 20ZM14.5 6 18 9.5" strokeLinejoin="round" /></svg>}
+              {icon === "linkedin" && <span className="font-sans text-4xl font-black leading-none tracking-tight sm:text-7xl">in</span>}
+              {icon === "github" && <GithubIcon className="h-full w-full fill-current" />}
+            </span>
+          );
+          const words = <span className="flex min-w-0 flex-col"><span className="text-xl font-bold lowercase leading-none sm:text-3xl">{label}</span><span className="mt-2 text-sm leading-snug opacity-80">{subtitle}</span></span>;
+          const common = "group min-w-0 no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none";
+          const className = `${common} flex min-h-36 justify-between gap-3 overflow-hidden bg-[#30145e] p-4 text-white transition-colors sm:min-h-44 sm:flex-row sm:items-end sm:p-5 sm:hover:bg-[#49217d] ${icon === "images" ? "col-span-2 flex-row items-end" : "flex-col-reverse items-start"}`;
+          const content = <>{words}<span className="opacity-80 transition-transform group-hover:rotate-[-8deg] motion-reduce:transform-none">{glyph}</span></>;
+          return external ? (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
+          ) : (
+            <Link key={href} href={href} className={className}>{content}</Link>
+          );
+          };
+          const socialLinks = links.filter((link) => link.icon === "linkedin" || link.icon === "github");
+          return <>
+            {links.filter((link) => link.icon !== "linkedin" && link.icon !== "github").map((link) => renderLink(link))}
+            <span className="contents">
+              {socialLinks.map((link) => renderLink(link))}
+            </span>
+          </>;
+        })()}
       </nav>
     </Section>
   );
 }
+// Each boundary keeps its own angle, without skewing the section or its contents.
+const sectionEdge = "!pt-[clamp(12px,2.5vw,36px)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-[clamp(12px,2.5vw,36px)] before:content-['']";
+
 function Work() {
+  const router = useRouter();
+  const chronologicalJobs = chronologicalWorkExperience;
+  const readingIdRef = useRef<string | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const rulerRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+  const nextSectionTopRef = useRef<number | null>(null);
+  const [readingId, setReadingId] = useState<string | null>(null);
+  const reading = readingId !== null;
+  const [activeIndex, setActiveIndex] = useState(chronologicalJobs.length - 1);
+  const [chosenYear, setChosenYear] = useState<number | null>(null);
+  const updateActive = () => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const center = carousel.scrollLeft + carousel.clientWidth / 2;
+    const cards = Array.from(carousel.querySelectorAll<HTMLElement>("[data-work-card]"));
+    const closest = cards.reduce((best, card, index) =>
+      Math.abs(card.offsetLeft + card.offsetWidth / 2 - center) <
+      Math.abs(cards[best].offsetLeft + cards[best].offsetWidth / 2 - center) ? index : best, 0);
+    setActiveIndex(closest);
+  };
+  const moveTo = (index: number) => {
+    const carousel = carouselRef.current;
+    const card = carousel?.querySelectorAll<HTMLElement>("[data-work-card]")[index];
+    if (!carousel || !card) return;
+    carousel.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - carousel.clientWidth / 2,
+      behavior: "instant" });
+  };
+  const updateWorkUrl = (id: string | null, replace = false) => {
+    const url = new URL(window.location.href);
+    if (id) {
+      url.searchParams.set("work", id);
+      url.hash = "work";
+    } else {
+      url.searchParams.delete("work");
+    }
+    const href = `${url.pathname}${url.search}${url.hash}`;
+    void (replace ? router.replace(href, undefined, { shallow: true, scroll: false }) : router.push(href, undefined, { shallow: true, scroll: false }));
+  };
+  const changeReading = (next: boolean) => {
+    if (!next) {
+      document.getElementById("work")?.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+    const id = next ? workId(chronologicalJobs[activeIndex]) : null;
+    readingIdRef.current = id;
+    setReadingId(id);
+    updateWorkUrl(id);
+  };
+  useEffect(() => {
+    if (!router.isReady) return;
+    const syncWorkFromUrl = () => {
+      const id = new URL(window.location.href).searchParams.get("work");
+      const index = chronologicalJobs.findIndex((jobs) => workId(jobs) === id);
+      const nextId = index < 0 ? null : id;
+      if (nextId === readingIdRef.current) return;
+      readingIdRef.current = nextId;
+      if (index >= 0) {
+        document.getElementById("work")?.scrollIntoView({ block: "start", behavior: "instant" });
+        setActiveIndex(index);
+        setReadingId(nextId);
+      } else {
+        setReadingId(null);
+      }
+    };
+    syncWorkFromUrl();
+    window.addEventListener("popstate", syncWorkFromUrl);
+    router.events.on("routeChangeComplete", syncWorkFromUrl);
+    router.events.on("hashChangeComplete", syncWorkFromUrl);
+    return () => {
+      window.removeEventListener("popstate", syncWorkFromUrl);
+      router.events.off("routeChangeComplete", syncWorkFromUrl);
+      router.events.off("hashChangeComplete", syncWorkFromUrl);
+    };
+  }, [router.isReady, router.events]);
+  useLayoutEffect(() => {
+    if (!reading) {
+      moveTo(activeIndex);
+      if (nextSectionTopRef.current !== null) {
+        const nextSection = document.getElementById("travel");
+        if (nextSection) {
+          window.scrollBy({ top: nextSection.getBoundingClientRect().top - nextSectionTopRef.current, behavior: "instant" });
+        }
+        nextSectionTopRef.current = null;
+      }
+    }
+  }, [reading]);
+  useEffect(() => {
+    if (!reading) return;
+    const startY = window.scrollY;
+    const onScroll = () => {
+      const end = endRef.current;
+      if (end && window.scrollY > startY + 40 && end.getBoundingClientRect().bottom <= 0) {
+        nextSectionTopRef.current = document.getElementById("travel")?.getBoundingClientRect().top ?? null;
+        readingIdRef.current = null;
+        setReadingId(null);
+        updateWorkUrl(null, true);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [reading]);
+  const bounds = workYearBounds;
+  const firstYear = workFirstYear;
+  const lastYear = workLastYear;
+  const isWildcard = activeIndex === chronologicalJobs.length;
+  const selectedYear = isWildcard ? null : chosenYear !== null && chosenYear >= bounds[activeIndex].start && chosenYear <= bounds[activeIndex].end
+    ? chosenYear : bounds[activeIndex].end;
+  useEffect(() => {
+    const ruler = rulerRef.current;
+    const selected = ruler?.querySelector<HTMLElement>("[aria-pressed=true]");
+    if (ruler && selected) ruler.scrollTo({ left: selected.offsetLeft + selected.offsetWidth / 2 - ruler.clientWidth / 2, behavior: "instant" });
+  }, [selectedYear, reading]);
+  const selectYear = (year: number) => {
+    setChosenYear(year);
+    const matching = bounds.findLastIndex((period) => year >= period.start && year <= period.end);
+    const closest = matching >= 0 ? matching : bounds.reduce((best, period, index) =>
+      Math.abs(period.end - year) < Math.abs(bounds[best].end - year) ? index : best, 0);
+    moveTo(closest);
+  };
   return (
     <Section
-      className="[&_h2]:!mx-[-5vw] [&_h2]:!px-[calc(5vw+10px)]"
+      className={`${sectionEdge} before:bg-[#673ab7] before:[clip-path:polygon(0_0,100%_0,100%_65%,0_0)] [&_h2]:!mx-[-5vw] [&_h2]:!px-[calc(5vw+10px)]`}
       color="grey"
       style={{ zIndex: 12 }}
       id="work"
     >
       <h2>such work</h2>
 
-      <div className="w-full px-4 pt-3">
-        {groupedWorkExperience.map((jobs) => (
-          <WorkExperience key={jobs[0].id} jobs={jobs} />
-        ))}
-
-        <div className="mt-12 pb-4 text-2xl font-bold uppercase">
+      <div className="relative -mx-[5vw] pt-3">
+        {reading ? (
+          <>
+            <div className="sticky top-[calc(clamp(2.7rem,6vw,4.2rem)+4vw+1rem)] z-20 flex h-0 justify-end pr-[calc(5vw+10px)]">
+              <button type="button" onClick={() => {
+                const close = () => changeReading(false);
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) close();
+                else startTransition(close);
+              }} aria-label="Close highlights" className="flex h-11 w-11 items-center justify-center border-2 border-current bg-white text-3xl font-bold leading-none text-[#261a38] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current motion-reduce:transition-none">×</button>
+            </div>
+            <WorkExperience jobs={chronologicalJobs[activeIndex]} offset={0} onSelect={() => {}} reading onReadingChange={changeReading} />
+            <div ref={endRef} className="h-1" aria-hidden="true" />
+          </>
+        ) : <>
+        <div ref={carouselRef} onScroll={updateActive} role="region" aria-roledescription="carousel" aria-label="Work experience" tabIndex={0}
+          className="relative flex items-stretch overflow-x-auto overscroll-x-contain snap-x snap-mandatory px-[max(1rem,calc((100%-min(34vw,14rem))/2))] py-8 [perspective:1000px] [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white">
+          {chronologicalJobs.map((jobs, index) => (
+            <div key={jobs[0].id} data-work-card style={{ zIndex: 100 - Math.abs(index - activeIndex) }} className="relative flex w-[min(34vw,14rem)] shrink-0 snap-center">
+              <WorkExperience jobs={jobs} offset={index - activeIndex} onSelect={() => moveTo(index)} reading={false} onReadingChange={changeReading} />
+            </div>
+          ))}
+          <div data-work-card style={{ zIndex: 100 - Math.abs(chronologicalJobs.length - activeIndex) }} className="relative flex w-[min(34vw,14rem)] shrink-0 snap-center">
+            <a href="https://linkedin.com/in/bogas04" target="_blank" rel="noopener noreferrer"
+              onClick={(event) => { if (!isWildcard) { event.preventDefault(); moveTo(chronologicalJobs.length); } }}
+              style={{ transform: isWildcard ? "none" : "perspective(1000px) rotateY(-55deg) scale(0.88)" }}
+              className={`relative ml-[calc((min(34vw,14rem)-min(70vw,30rem))/2)] flex w-[min(70vw,30rem)] shrink-0 flex-col justify-between bg-[#ffdf5d] p-5 text-[#261a38] no-underline shadow-[0_12px_35px_rgba(0,0,0,0.6)] transition-[transform,filter] duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:p-8 motion-reduce:transition-none ${isWildcard ? "md:hover:grayscale" : "grayscale brightness-75"}`}>
+              <span aria-hidden="true" className="font-body text-[clamp(7rem,20vw,12rem)] font-extrabold leading-none">?</span>
+              <span><span className="block font-body text-2xl font-extrabold">What’s next?</span><span className="mt-2 block font-display text-lg sm:text-xl">Find me on LinkedIn ↗</span></span>
+            </a>
+          </div>
+        </div>
+        <div className="mx-auto mt-4 max-w-5xl px-[5vw]">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-2 border-b border-white/20 pb-3">
+            <p className="m-0 font-display text-xl leading-tight sm:text-2xl">{isWildcard ? "What’s next?" : chronologicalJobs[activeIndex][0].company} {selectedYear !== null && <span className="font-utility text-sm text-white/70">/ {selectedYear}</span>}</p>
+            <p className="m-0 font-utility text-xs uppercase tracking-wide text-white/70">Scroll sideways to explore</p>
+          </div>
+          <div ref={rulerRef} className="overflow-x-auto pb-3 [scrollbar-width:thin]" aria-label="Work timeline">
+            <div className="relative flex min-w-[42rem] border-t-2 border-white/70 pt-0">
+              {Array.from({ length: lastYear - firstYear + 1 }, (_, index) => firstYear + index).map((year) => (
+                <button key={year} type="button" onClick={() => selectYear(year)} aria-label={`Show work from ${year}`} aria-pressed={year === selectedYear}
+                  className={`group relative flex min-h-14 flex-1 flex-col items-center pt-4 text-xs tabular-nums focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white ${year === selectedYear ? "font-bold text-white" : "text-white/65 hover:text-white"}`}>
+                  <span aria-hidden="true" className={`absolute top-0 left-1/2 h-3 w-px -translate-x-1/2 ${year === selectedYear ? "h-4 w-1 bg-white" : "bg-white/70"}`} />
+                  <span aria-hidden="true" className="absolute top-0 left-1/4 h-1.5 w-px bg-white/40" />
+                  <span aria-hidden="true" className="absolute top-0 left-3/4 h-1.5 w-px bg-white/40" />
+                  {year}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        </>}
+        <div className="mt-12 px-[5vw] pb-4 text-2xl font-bold uppercase">
           And much more, meet up for a &#9749; coffee if my work interests you
         </div>
       </div>
@@ -148,15 +310,12 @@ const workCardThemes: Record<string, string> = {
   "samsung-trainee": "bg-[#1428a0]",
   refiral: "bg-teal-600",
 };
-const workCardInteractionThemes: Record<
-  string,
-  { hover: string; intersection: string }
-> = {
-  fizzy: { hover: "md:hover:bg-black", intersection: "bg-black" },
-};
 const defaultWorkCardTheme = "bg-[#673ab7]";
 const roleProgressions: Record<string, string[]> = {
   udaan: ["SDE3", "SDE4", "UI Architect"],
+};
+const workGroupSummaries: Record<string, string> = {
+  samsung: "Revamped Samsung Internet’s Chrome extension, built Gaana for Tizen, and helped train Bixby for browser commands.",
 };
 
 const formatEmploymentLength = (duration: string) => {
@@ -183,14 +342,20 @@ const formatEmploymentLength = (duration: string) => {
   );
 };
 
-function WorkExperience({ jobs }: { jobs: (typeof workExperience)[number][] }) {
+const workHighlightClasses = "[&_mark]:[box-decoration-break:clone] [&_mark]:bg-transparent [&_mark]:[background-image:linear-gradient(177deg,transparent_0%,transparent_7%,#ffdf5d_8%,#ffdf5d_92%,transparent_93%)] [&_mark]:px-1 [&_mark]:font-bold [&_mark]:text-[#261a38]";
+
+function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { jobs: (typeof workExperience)[number][]; offset: number; onSelect: () => void; reading: boolean; onReadingChange: (reading: boolean) => void }) {
   const job = jobs[0];
   const isGrouped = jobs.length > 1;
   const rolesInChronologicalOrder = isGrouped ? [...jobs].reverse() : jobs;
   const roleProgression = isGrouped
     ? rolesInChronologicalOrder.map((role) => role.position)
     : (roleProgressions[job.id] ?? [job.position]);
-  const toggleDetails = () => setIsExpanded((expanded) => !expanded);
+  const toggleDetails = () => {
+    const update = () => onReadingChange(!reading);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) update();
+    else startTransition(update);
+  };
   const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
     const hasTextSelection = window.getSelection()?.type === "Range";
     if (
@@ -201,65 +366,56 @@ function WorkExperience({ jobs }: { jobs: (typeof workExperience)[number][] }) {
       return;
     toggleDetails();
   };
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobileFocused, setIsMobileFocused] = useState(false);
-  const cardRef = useRef<HTMLElement>(null);
+  const isExpanded = reading;
+  const achievements = jobs.flatMap((role) => role.achievements ?? []);
+  const management = job.id === "udaan" ? job.descriptions.filter((description) => description.title === "Management") : [];
+  const hasLongAchievements = achievements.some((achievement) => achievement.length > 180);
   const contentId = `work-experience-${job.id}`;
   const theme = workCardThemes[job.id] ?? defaultWorkCardTheme;
-  const interactionTheme = workCardInteractionThemes[job.id];
   const combinedDuration = isGrouped
     ? `${jobs[jobs.length - 1].duration.split(" - ")[0]} - ${job.duration.split(" - ")[1]}`
     : job.duration;
 
-  useEffect(() => {
-    const card = cardRef.current;
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
-    let observer: IntersectionObserver | undefined;
-
-    const updateObserver = () => {
-      observer?.disconnect();
-      setIsMobileFocused(false);
-      if (!mediaQuery.matches || !card) return;
-
-      observer = new IntersectionObserver(
-        ([entry]) => setIsMobileFocused(entry.isIntersecting),
-        { rootMargin: "-40% 0px", threshold: 0 },
-      );
-      observer.observe(card);
-    };
-
-    updateObserver();
-    mediaQuery.addEventListener("change", updateObserver);
-    return () => {
-      observer?.disconnect();
-      mediaQuery.removeEventListener("change", updateObserver);
-    };
-  }, []);
-
   return (
+    <ViewTransition name={`work-tile-${job.id}`}>
     <article
-      ref={cardRef}
-      onClick={handleCardClick}
-      className={`mb-10 flex cursor-pointer flex-col p-7 max-md:mb-0 max-md:-mx-[calc(5vw+1rem)] ${job.isCurrent || isMobileFocused ? "grayscale-0" : "grayscale md:hover:grayscale-0"} ${theme} ${interactionTheme?.hover ?? ""} ${isMobileFocused ? (interactionTheme?.intersection ?? "") : ""}`}
+      onClickCapture={(event) => {
+        if (offset !== 0) {
+          event.preventDefault();
+          event.stopPropagation();
+          onSelect();
+        }
+      }}
+      onClick={reading ? undefined : handleCardClick}
+      style={{
+        transform: offset === 0 ? "none" : `perspective(1000px) rotateY(${offset < 0 ? 55 : -55}deg) scale(0.88)`,
+      }}
+      className={`relative p-5 ${reading ? "w-full cursor-auto" : "flex flex-col cursor-pointer"} ${reading ? "" : "ml-[calc((min(34vw,14rem)-min(70vw,30rem))/2)] w-[min(70vw,30rem)] shrink-0"} shadow-[0_12px_35px_rgba(0,0,0,0.6)] transition-[transform,opacity,filter] duration-300 sm:p-8 motion-reduce:transition-none ${reading ? "!px-[calc(5vw+10px)] py-8 sm:py-12 lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-12" : ""} ${offset === 0 ? "" : "grayscale brightness-75"} ${theme} ${reading ? "" : "md:hover:grayscale"}`}
     >
-      <div>
-        <h3 className="m-0">
+      <div className={reading ? `mx-auto w-full max-w-5xl ${hasLongAchievements ? "" : management.length ? "lg:[@media(min-height:1100px)]:sticky lg:[@media(min-height:1100px)]:top-[calc(clamp(2.7rem,6vw,4.2rem)+4vw+1rem)]" : "lg:sticky lg:top-[calc(clamp(2.7rem,6vw,4.2rem)+4vw+1rem)]"}` : "flex flex-1 flex-col"}>
+        <h3 className={reading ? "m-0 pr-14" : "m-0"}>
           <button
             type="button"
             aria-expanded={isExpanded}
             aria-controls={contentId}
             onClick={toggleDetails}
-            className="cursor-pointer font-body text-left text-[clamp(1.45rem,3vw,2.1rem)] font-extrabold leading-tight tracking-[-0.03em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+            className={`cursor-pointer font-body text-left font-extrabold leading-tight tracking-[-0.03em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current ${reading ? "text-[clamp(2.25rem,5vw,4rem)]" : "text-[clamp(1.2rem,3vw,2.1rem)]"}`}
           >
-            {job.company}
-            <span className="mt-3 block font-body text-lg font-medium normal-case">
-              {roleProgression.join(" → ")}
-            </span>
+            <ViewTransition name={`work-company-${job.id}`}>
+              <span className="block">{job.company}</span>
+            </ViewTransition>
+            <ViewTransition name={`work-role-${job.id}`}>
+              <span className={`mt-3 block font-body font-medium normal-case ${reading ? "text-lg sm:text-2xl" : "text-base sm:text-lg"}`}>
+                {roleProgression.join(" → ")}
+              </span>
+            </ViewTransition>
           </button>
         </h3>
+        <ViewTransition name={`work-meta-${job.id}`}>
         <div className="mt-6 flex flex-wrap gap-3 font-body text-sm font-semibold">
           <span className="bg-black/15 px-3 py-1.5">
-            {combinedDuration} ({formatEmploymentLength(combinedDuration)})
+            {combinedDuration}{" "}
+            <span className="block sm:inline">({formatEmploymentLength(combinedDuration)})</span>
           </span>
           <a
             href={job.companyUrl}
@@ -271,29 +427,52 @@ function WorkExperience({ jobs }: { jobs: (typeof workExperience)[number][] }) {
             Website ↗
           </a>
         </div>
-        <div className="mt-6 flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-5">
+        </ViewTransition>
+        <div className={reading ? "mt-8 flex flex-col items-start gap-5 border-t border-current/30 pt-6" : "mt-6 flex flex-1 flex-col items-start gap-3"}>
           <button
             type="button"
             aria-expanded={isExpanded}
             aria-controls={contentId}
             onClick={toggleDetails}
-            className="flex min-h-11 shrink-0 items-center px-0 py-2 font-body text-base font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+            className={`flex min-h-11 shrink-0 items-center gap-3 border-2 border-[#261a38] bg-[#ffdf5d] px-4 py-2 font-body text-base font-extrabold text-[#261a38] shadow-[4px_4px_0_#261a38] transition-[transform,box-shadow] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#261a38] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current motion-reduce:transition-none ${reading ? "" : "order-2 mt-auto"}`}
           >
-            {isExpanded ? "Hide details ↑" : "Read highlights ↓"}
+            {isExpanded ? "Hide highlights ↑" : "Read highlights ↓"}
           </button>
-          <p className="m-0 flex-1 font-body text-xl leading-relaxed normal-case">
+          <ViewTransition name={`work-summary-${job.id}`}>
+          <p className={`m-0 flex-1 font-display leading-relaxed normal-case ${reading ? "max-w-3xl text-lg font-medium sm:text-2xl" : "order-1 text-base sm:text-xl"}`}>
             {isGrouped
-              ? rolesInChronologicalOrder.map((role) => role.summary).join(" ")
+              ? (workGroupSummaries[job.id] ?? rolesInChronologicalOrder.map((role) => role.summary).join(" "))
               : job.summary}
           </p>
+          </ViewTransition>
         </div>
+        {reading && management.map((section) => (
+          <section key={section.title} className={`mt-8 border-t border-current/30 pt-6 ${workHighlightClasses}`}>
+            <h4 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">{section.title}</h4>
+            <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed sm:text-lg marker:opacity-70">
+              {section.items.map((item, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+          </section>
+        ))}
+        {reading && achievements.length > 0 && (
+          <section className={`mt-8 border-t border-current/30 pt-6 ${workHighlightClasses}`}>
+            <h4 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">Major Achievements</h4>
+            <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed sm:text-lg marker:opacity-70">
+              {achievements.map((achievement, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
       {isExpanded && (
-        <div id={contentId} className="mt-10">
+        <div id={contentId} className="mx-auto mt-12 w-full max-w-5xl border-t-2 border-current/30 pt-8 lg:mt-0 lg:border-t-0 lg:border-l-2 lg:pl-10 lg:pt-14">
           {jobs.map((role, index) => (
-            <section key={role.id} className={index ? "mt-10" : ""}>
+            <section key={role.id} className={index ? "mt-12 border-t-2 border-current/30 pt-10" : ""}>
               {isGrouped && (
-                <h4 className="mb-4 font-body text-xl font-semibold">
+                <h4 className="mb-6 font-body text-2xl font-bold sm:text-3xl">
                   {role.position}
                 </h4>
               )}
@@ -303,23 +482,22 @@ function WorkExperience({ jobs }: { jobs: (typeof workExperience)[number][] }) {
         </div>
       )}
     </article>
+    </ViewTransition>
   );
 }
 
 function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
   return (
-    <dl className="grid gap-x-8 gap-y-2 font-body md:grid-cols-[minmax(9rem,auto)_1fr] [&>dt]:self-start [&>dt]:py-1 [&>dt]:text-sm [&>dt]:font-semibold [&>dt]:uppercase [&>dt]:tracking-wide [&>dt]:opacity-75 [&>dd]:mb-6 [&>dd]:min-w-0 [&>dd]:py-1">
-      <dt>Duration:</dt>
-      <dd>{job.duration}</dd>
+    <dl className={`grid gap-x-8 gap-y-3 font-body text-base leading-relaxed sm:text-lg ${workHighlightClasses} [&>dt]:self-start [&>dt]:py-1 [&>dd]:mb-6 [&>dd]:min-w-0 [&>dd]:py-1`}>
       {job.team && (
         <>
-          <dt>Team:</dt>
+          <dt className="text-xs font-bold uppercase tracking-wider opacity-75">Team</dt>
           <dd dangerouslySetInnerHTML={{ __html: job.team }} />
         </>
       )}
-      {job.descriptions.map((desc, index) => (
+      {job.descriptions.filter((desc) => job.id !== "udaan" || desc.title !== "Management").map((desc, index) => (
         <React.Fragment key={index}>
-          <dt>{desc.title}:</dt>
+          <dt className="border-t border-current/30 pt-6 font-display text-2xl font-semibold leading-tight first:border-t-0 first:pt-0 sm:text-3xl">{desc.title}</dt>
           <dd>
             {desc.title === "Description" &&
             desc.items.length === 1 &&
@@ -327,8 +505,7 @@ function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
               <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
             ) : (
               <>
-                {desc.title !== "Description" && <p>{desc.title}:</p>}
-                <ul className="list-disc pl-6">
+                <ul className="list-disc space-y-3 pl-6 marker:opacity-70">
                   {desc.items.map((item, itemIndex) => (
                     <li
                       key={itemIndex}
@@ -341,21 +518,6 @@ function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
           </dd>
         </React.Fragment>
       ))}
-      {job.achievements && (
-        <>
-          <dt>Major Achievements:</dt>
-          <dd>
-            <ul className="list-disc pl-6">
-              {job.achievements.map((achievement, index) => (
-                <li
-                  key={index}
-                  dangerouslySetInnerHTML={{ __html: achievement }}
-                />
-              ))}
-            </ul>
-          </dd>
-        </>
-      )}
     </dl>
   );
 }
@@ -404,7 +566,7 @@ function Travel() {
 
   return (
     <Section
-      className="select-none"
+      className={`${sectionEdge} before:bg-[#343a40] before:[clip-path:polygon(0_0,100%_0,0_100%)] select-none`}
       color="yellow"
       style={{ zIndex: 11 }}
       id="travel"
@@ -454,10 +616,10 @@ function Travel() {
         </div>
       </div>
 
-      <div className="hidden max-sm:flex flex-col gap-3 mx-auto">
+      <div className="hidden max-sm:flex flex-col gap-5 mx-auto mr-2 mb-2">
         {travelDestinations.map((destination, index) => (
           <div
-            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20"
+            className="relative isolate text-left text-black p-3 before:absolute before:inset-0 before:-z-10 before:rotate-[-1deg] before:bg-[#fff2bd] before:content-['']"
             key={destination.name}
           >
             <ImageGallery
@@ -476,10 +638,10 @@ function Travel() {
         ))}
       </div>
 
-      <div className="grid max-sm:hidden travel-map grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-8 max-w-[1200px] mx-auto">
+      <div className="grid max-sm:hidden travel-map grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 p-8 max-w-[1200px] mx-auto">
         {travelDestinations.map((destination) => (
           <button
-            className="cursor-pointer text-left bg-transparent text-black rounded-xl border-2 border-white/50 p-3 hover:bg-white/40 active:bg-white/20 flex flex-col align-top"
+            className="relative isolate cursor-pointer text-left text-black p-4 before:absolute before:inset-0 before:-z-10 before:rotate-[-2deg] before:bg-[#fff2bd] before:transition-transform before:content-[''] hover:before:rotate-0 motion-reduce:before:transition-none flex flex-col align-top"
             onClick={() => {
               setShownCard(destination);
             }}
@@ -497,263 +659,90 @@ function Travel() {
 }
 
 function Education() {
+  const linkStyle = "underline decoration-2 underline-offset-4 hover:text-yellow-200 focus-visible:outline-2 focus-visible:outline-offset-4";
+  const highlightedLinkStyle = "[box-decoration-break:clone] bg-[linear-gradient(177deg,transparent_0%,transparent_7%,#ffdf5d_8%,#ffdf5d_92%,transparent_93%)] px-1 font-bold text-[#261a38] underline decoration-2 underline-offset-2 hover:text-[#261a38] focus-visible:outline-2 focus-visible:outline-offset-4";
   return (
-    <Section color="pink" style={{ zIndex: 11 }} id="education">
+    <Section className={`${sectionEdge} before:bg-[#ffc107] before:[clip-path:polygon(0_0,100%_0,100%_100%,0_25%)]`} color="pink" style={{ zIndex: 11 }} id="education">
       <h2>much education</h2>
-
-      <div className="container-fluid [&_a]:text-yellow-200 [&_a:hover]:text-white [&_a:visited]:text-yellow-100">
-        <div className="bg-transparent border-none flex flex-col relative">
-          <h3 className="text-2xl font-bold pb-4 uppercase">
-            <a
-              href={educationData.professionalInfo.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {educationData.professionalInfo.title}
-            </a>
-          </h3>
-
-          <dl className="dl-horizontal">
-            <dt>Resume:</dt>
-            <dd>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={educationData.professionalInfo.resume.link}
-              >
-                {educationData.professionalInfo.resume.text}
-              </a>
-            </dd>
-            <dt>Programming Languages:</dt>
-            <dd>
-              {educationData.professionalInfo.programmingLanguages.join(", ")},
-            </dd>
-            <dt>Stacks/Technologies:</dt>
-            <dd>
-              {educationData.professionalInfo.stacksTechnologies.map(
-                (tech, index) => (
-                  <span key={tech.name}>
-                    <a
-                      href={tech.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {tech.name}
-                    </a>
-                    {index <
-                    educationData.professionalInfo.stacksTechnologies.length - 1
-                      ? ", "
-                      : ""}
-                  </span>
-                ),
-              )}
-            </dd>
-            <dt>Databases</dt>
-            <dd>
-              {educationData.professionalInfo.databases.map((db, index) => (
-                <span key={db.name}>
-                  <a href={db.link} target="_blank" rel="noopener noreferrer">
-                    {db.name}
-                  </a>
-                  {index < educationData.professionalInfo.databases.length - 1
-                    ? " , "
-                    : ""}
-                </span>
-              ))}
-            </dd>
-            <dt>Tools</dt>
-            <dd>
-              {educationData.professionalInfo.tools.map((tool, index) => (
-                <span key={tool.name}>
-                  <a href={tool.link} target="_blank" rel="noopener noreferrer">
-                    {tool.name}
-                  </a>
-                  {index < educationData.professionalInfo.tools.length - 1
-                    ? " , "
-                    : ""}
-                </span>
-              ))}
-            </dd>
-            <dt>Other Languages 🤷‍♂️ :</dt>
-            <dd>{educationData.professionalInfo.otherLanguages.join(", ")}</dd>
-          </dl>
-        </div>
-
-        {educationData.institutions.map((institution) => (
-          <div
-            key={institution.name}
-            className="mt-8 bg-transparent border-none flex flex-col relative"
-          >
-            <h3 className="text-2xl font-bold pb-4 uppercase">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={institution.link}
-              >
-                {institution.name}
-              </a>
-            </h3>
-            <dl className="dl-horizontal">
-              <dt>Batch:</dt>
-              <dd>{institution.batch}</dd>
-
-              {institution.type === "school" && institution.board && (
-                <>
-                  <dt>Board:</dt>
-                  <dd>{institution.board}</dd>
-                </>
-              )}
-
-              <dt>
-                {institution.type === "school"
-                  ? "Performance in 12th"
-                  : "Performance"}
-                :
-              </dt>
-              <dd>
-                {institution.type === "school" ? (
-                  institution.performance.grade12
-                ) : (
-                  <>
-                    {institution.performance.percentage}
-                    <small>{institution.performance.rank}</small>
-                  </>
-                )}
-              </dd>
-
-              {institution.type === "school" &&
-                institution.performance.grade10 && (
-                  <>
-                    <dt>
-                      Performance in 10<sup>th</sup>:
-                    </dt>
-                    <dd>{institution.performance.grade10}</dd>
-                  </>
-                )}
-
-              {institution.major && (
-                <>
-                  <dt>Majored In:</dt>
-                  <dd>{institution.major}</dd>
-                </>
-              )}
-
-              <dt>Major Achievements:</dt>
-              <dd>
-                <ul className="list-disc pl-6">
-                  {institution.achievements.map((achievement, index) => (
-                    <li key={index}>
-                      {typeof achievement === "string" ? (
-                        achievement
-                      ) : achievement.projects ? (
-                        <>
-                          {achievement.text}{" "}
-                          {achievement.projects.map((project, projectIndex) => (
-                            <span key={project.name}>
-                              <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={project.link}
-                              >
-                                {project.name}
-                              </a>
-                              {projectIndex < achievement.projects.length - 1
-                                ? " | "
-                                : ", and more..."}
-                            </span>
-                          ))}
-                        </>
-                      ) : (
-                        <>
-                          Wrote a report on{" "}
-                          <a href={achievement.link}>
-                            {achievement.text.replace("Wrote a report on ", "")}
-                          </a>
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-
-              {institution.societies && (
-                <>
-                  <dt>Societies:</dt>
-                  <dd>
-                    <ul className="list-disc pl-6">
-                      {institution.societies.map((society) => (
-                        <li key={society.name}>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={society.link}
-                          >
-                            {society.name}
-                          </a>
-                          - {society.role}
-                        </li>
-                      ))}
-                    </ul>
-                  </dd>
-                </>
-              )}
-            </dl>
+      <div className="pb-14 pt-8 md:pb-20 md:pt-12 [&_a]:transition-colors">
+        <article className="grid gap-10 border-t-2 border-white pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-12">
+          <div>
+            <h3 className="m-0 font-display text-[clamp(3.5rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em]">NSIT<span aria-hidden="true">.</span></h3>
+            <p className="mt-4 max-w-md text-lg font-bold leading-snug">Netaji Subhas Institute of Technology<br />Computer Engineering · 2012–2016</p>
+            <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed">
+              <p><strong>79.48%</strong>, fifth in a department of around 190 students. Consistently in the top ten, with a merit scholarship for all four years.</p>
+              <p>Mentored a class of 30 in web development and design at IEEE NSIT, and worked on database watermarking research under Assistant Professor Vidhi Khanduja.</p>
+              <p>Projects included <a className={highlightedLinkStyle} href="https://github.com/bogas04/mvp-generator">MVP Generator</a>, <a className={highlightedLinkStyle} href="https://github.com/bogas04/collnet">CollNet</a>, <a className={highlightedLinkStyle} href="https://github.com/bogas04/cloudkeeper">CloudKeeper</a>, and the <a className={highlightedLinkStyle} href="https://github.com/bogas04/Attendance-System">Student Attendance System</a>. I also wrote a <a className={highlightedLinkStyle} href="/Rapes.pdf">report on rapes</a>.</p>
+              <p>Web developer at <a className={highlightedLinkStyle} href="//ieeensit.org">IEEE NSIT</a>, core member at <a className={highlightedLinkStyle} href="//junoonnsit.com">Junoon</a>, the photography club, and tech head at <a className={highlightedLinkStyle} href="//collegespace.in">CollegeSpace</a>.</p>
+            </div>
+            <a className={`${highlightedLinkStyle} mt-7 inline-block text-base`} href="https://nsut.ac.in/en/home" target="_blank" rel="noopener noreferrer">College website ↗</a>
           </div>
-        ))}
+          <blockquote className="relative isolate m-0 border-l-4 border-[#ffdf5d] px-6 pb-6 pt-12 font-display text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.5] before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:rotate-[1deg] before:bg-[#901044] before:content-[''] sm:px-10 sm:pb-10">
+            <span aria-hidden="true" className="absolute -top-8 left-4 select-none text-[8rem] leading-none text-[#ffdf5d] sm:left-8">“</span>
+            <div className="space-y-5">
+              <p>I spent my awkward teenage years at NSIT feeling a little lost and figuring out my place in the world. I kept finding myself thinking, “this is not me”, and asking who I really was. I’m still figuring that out.</p>
+              <p>One thing I did figure out was the complicated maths behind our grades, with different credits for each subject. A friend and I built <a className={linkStyle} href="https://www.youtube.com/watch?v=ZU_RGEo2tsM" target="_blank" rel="noopener noreferrer">NSITUlator</a> to make it easier. It was the first time I felt like an engineer: we saw a problem, made a naive solution, improved it with feedback, and tied it to CollegeSpace so people could use it. Internships, project ideas, and a calling as a web developer followed.</p>
+              <p>I made some friends along the way, though most of us are now scattered around the world.</p>
+            </div>
+          </blockquote>
+        </article>
+        <article className="mt-14 grid gap-10 border-t-2 border-white pt-8 lg:mt-24 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-12">
+          <div>
+            <h3 className="m-0 font-display text-[clamp(2.8rem,6vw,5rem)] font-medium leading-[1.05] tracking-[-0.05em]">St. Mary’s<br />School<span aria-hidden="true">.</span></h3>
+            <p className="mt-4 text-lg font-bold">2002–2012 · CBSE</p>
+            <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed">
+              <p><strong>95.2%</strong> in Class 12, topping the science stream. Scored <strong>9.8 CGPA</strong> (approximately 93.1%) in Class 10.</p>
+              <p>Received a merit scholarship for three years, from Class 10 through Class 12.</p>
+            </div>
+            <a className={`${highlightedLinkStyle} mt-7 inline-block text-base`} href="http://www.stmarysschooldwarka.com/" target="_blank" rel="noopener noreferrer">School website ↗</a>
+          </div>
+          <blockquote className="relative isolate m-0 border-l-4 border-[#ffdf5d] px-6 pb-6 pt-12 font-display text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.5] before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:rotate-[1deg] before:bg-[#901044] before:content-[''] sm:px-10 sm:pb-10">
+            <span aria-hidden="true" className="absolute -top-8 left-4 select-none text-[8rem] leading-none text-[#ffdf5d] sm:left-8">“</span>
+            <div className="space-y-5">
+              <p>St. Mary’s had a huge impact on my formative years. A lot of my values, and my emphasis on critical thinking, can be traced back to school.</p>
+              <p>Although it was a Christian school, I loved how open it was to different religions. I never felt like an outsider. Teachers helped me build intuition instead of simply learning by rote. I especially miss Shalini ma’am, whose progressive view of the world inspired me to think more critically and be more tolerant, even when the society around me was more orthodox.</p>
+              <p>I was delighted to find out I had topped the science stream in the board exams, and even more delighted to see my name in the newspaper!</p>
+            </div>
+          </blockquote>
+        </article>
+        <p className="mt-12 border-t border-white/50 pt-6 text-base"><a className={`${linkStyle} font-bold`} href="/resume" target="_blank" rel="noopener noreferrer">Download my résumé ↗</a></p>
       </div>
     </Section>
   );
 }
 function Talks() {
+  const posterColors = ["bg-[#f3e3c4]", "bg-[#d4e2cf]", "bg-[#efd3c9]", "bg-[#ded8e8]"];
   return (
-    <Section color="green" style={{ zIndex: 13 }} id="talks">
+    <Section className={`${sectionEdge} before:bg-[#c2185b] before:[clip-path:polygon(0_0,100%_0,0_75%)]`} color="green" style={{ zIndex: 13 }} id="talks">
       <h2>so talkative</h2>
-      <div className="px-4">
-        <div className="grid gap-12 grid-cols-[repeat(auto-fill,minmax(500px,1fr))] w-full max-lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
-          {talks.map((talk) => {
-            const img = (
-              <img
-                loading="lazy"
-                className="object-cover rounded-xl aspect-[4/3]"
-                alt={`Thumbnail for ${talk.title}`}
-                src={talk.image}
-              />
-            );
-            return (
-              <div key={talk.title}>
-                {talk.video ? (
-                  <a
-                    href={talk.video}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {img}
-                  </a>
-                ) : (
-                  img
-                )}
-                <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-tight">
-                  <a
-                    className="block w-fit rounded bg-[#14532d] px-3 py-2 text-white no-underline hover:bg-[#166534]"
-                    href={talk.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {talk.title}
-                  </a>
-                  <a
-                    className="mt-2 block w-fit rounded bg-[#134e4a] px-2 py-1 text-[0.65em] font-medium text-teal-50 no-underline hover:bg-[#115e59]"
-                    href={talk.eventLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {talk.event}
-                  </a>
-                </h3>
+      <div className="grid gap-7 pb-14 pt-6 md:grid-cols-2 md:pb-20 md:pt-10">
+        {talks.map((talk, index) => (
+          <article key={talk.title} className={`relative isolate flex min-w-0 flex-col before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:bg-[#163f26] before:content-[''] ${index % 2 === 0 ? "before:rotate-[1deg]" : "before:rotate-[-1deg]"} ${index === 0 ? "md:col-span-2 sm:flex-row" : "sm:flex-row md:flex-col xl:flex-row"}`}>
+            <div className={`relative min-w-0 overflow-hidden ${index === 0 ? "sm:w-1/2" : "sm:w-2/5 md:w-full xl:w-2/5"}`}>
+              {talk.video ? (
+                <a href={talk.video} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${talk.title}`} className="group block h-full focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white">
+                  <img loading="lazy" className="aspect-[16/10] h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none" alt="" src={talk.image} />
+                  <span aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"><span className="flex h-16 w-16 items-center justify-center bg-[#f3e3c4] pl-1 text-3xl text-[#193527]">▶</span></span>
+                </a>
+              ) : (
+                <img loading="lazy" className="aspect-[16/10] h-full w-full object-cover" alt={`Thumbnail for ${talk.title}`} src={talk.image} />
+              )}
+            </div>
+            <div className={`flex min-w-0 flex-1 flex-col items-start justify-between gap-5 p-5 text-[#193527] sm:p-7 ${posterColors[index % posterColors.length]}`}>
+              <h3 className={`m-0 font-body font-extrabold leading-[1.1] tracking-[-0.03em] ${index === 0 ? "text-[clamp(2rem,4vw,3.5rem)]" : "text-[clamp(1.5rem,2.5vw,2.5rem)]"}`}>
+                {talk.title}
+              </h3>
+              <div className="w-full">
+                <p className="mb-4 text-base font-medium leading-snug">{talk.event}</p>
+                <div className="flex flex-wrap gap-2">
+                  <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.link} target="_blank" rel="noopener noreferrer" aria-label={`${talk.title}: ${talk.title === "Swiggy ♥️ Web" ? "website" : "slides"}`}>{talk.title === "Swiggy ♥️ Web" ? "Website" : "Slides"} ↗</a>
+                  {talk.video && <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.video} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${talk.title}`}>Video ↗</a>}
+                  {talk.eventLink !== talk.video && <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.eventLink} target="_blank" rel="noopener noreferrer" aria-label={`${talk.title}: event details`}>Event ↗</a>}
+                </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          </article>
+        ))}
       </div>
     </Section>
   );
@@ -761,7 +750,7 @@ function Talks() {
 
 function Social() {
   return (
-    <Section color="blue" style={{ zIndex: 13 }} id="social">
+    <Section className={`${sectionEdge} before:bg-[#2e7d32] before:[clip-path:polygon(0_0,100%_0,100%_80%,0_10%)]`} color="blue" style={{ zIndex: 13 }} id="social">
       <h2>somewhat social</h2>
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -800,45 +789,54 @@ const workExperience = [
     company: "udaan, Bengaluru",
     companyUrl: "https://udaan.com",
     position: "Software Architect",
-    duration: "April 2020 - Present",
+    duration: "April 2020 - November 2026",
     summary:
-      "Leading the core UI platform team and improving web and app experiences.",
+      "Led the core UI platform team and improved web and app experiences.",
     team: undefined,
-    isCurrent: true,
+    isCurrent: false,
     descriptions: [
       {
         title: "Management",
         items: [
-          "Lead a core UI platform team of four very talented developers",
-          "Planned and delivered quarterly roadmaps with data-driven tasks and output",
+          "Led a <mark>core UI platform team of four very talented developers</mark>",
+          "Planned and delivered <mark>quarterly roadmaps</mark> with data-driven tasks and output",
           "Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...).",
-          'Consecutively won two "Lead without authority" knolskape leadering programmes',
         ],
       },
       {
         title: "Individual Contributions",
         items: [
+          "Built a release bundle size tracker with historical graphs and size targets; reduced app size from <mark>20MB to 6MB</mark>.",
+          "<mark>Halved team operating costs</mark> through event optimization and resource sizing.",
+          "Modernized and migrated a React Native app with <mark>over 200 screens from version 0.70 to 0.85</mark>.",
+          "Authored a <mark>modular documentation and skills system</mark> for LLM-assisted UI development using internal libraries and design systems.",
+          "Remediated <mark>annual VAPT findings</mark> across web and mobile apps.",
+          "Evaluated esbuild, Vite, and Rspack; selected Rspack and made development server startup and <mark>builds 10x faster</mark>.",
+          "Built a <mark>screen explorer</mark> connecting registered screens to daily active user metrics and usage trends to identify unused screens.",
           'Published <a href="https://vitadrop.in" rel="noopener noreferrer">vitadrop.in</a> and <a href="https://annabhumi.com" rel="noopener noreferrer">annabhumi.com</a> AI assisted brand websites.',
-          'Developed <a href="https://wondermart.com" rel="noopener noreferrer">wondermart</a> app from scratch in 1 month for b2c vertical.',
-          'Fixed a <a href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a" rel="noopener noreferrer">2400ms</a> re-rendering linked stutter caused on add to cart action.',
-          "Reduced react-native codepush bundle size by 20% by optimizing image assets",
-          "Improved app startup time by 75% (P90), thus improving conversions to 2nd page by 35%.",
+          'Developed <a href="https://wondermart.com" rel="noopener noreferrer">wondermart</a> app from scratch in <mark>1 month for b2c vertical</mark>.',
+          'Fixed a <a href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a" rel="noopener noreferrer"><mark>2400ms</mark></a> re-rendering linked stutter caused on add to cart action.',
+          "Reduced react-native codepush <mark>bundle size by 20%</mark> by optimizing image assets",
+          "Improved app <mark>startup time by 75% (P90)</mark>, thus improving <mark>conversions to 2nd page by 35%</mark>.",
           "Updated internal react-native+react-native-web framework to use functional components with specialized hooks.",
-          "Built Year In Review screens for 2020 & 2021.",
-          "Deployed a webview fallback for react-native screens for quicker resolution during outages.",
-          "Drove improvements for developer experience initiatives by adding CI checks, pre-commit hooks and dev compiler optimizations.",
-          "Refactored tightly coupled internal library into individual npm packages in a mono-repo.",
-          "Used extensive A/B testing to drive higher (3.6 to 4.4) app store ratings using a strategically placed prompt.",
-          "Revamped udaan's homepage with 60fps animations and better SEO.",
+          "Built <mark>Year In Review screens for 2020 & 2021</mark>.",
+          "Deployed a <mark>webview fallback</mark> for react-native screens for quicker resolution during outages.",
+          "Drove improvements for developer experience initiatives by adding <mark>CI checks, pre-commit hooks and dev compiler optimizations</mark>.",
+          "Refactored tightly coupled internal library into <mark>individual npm packages in a mono-repo</mark>.",
+          "Used extensive A/B testing to drive higher (<mark>3.6 to 4.4</mark>) app store ratings using a strategically placed prompt.",
+          "Revamped udaan's homepage with <mark>60fps animations</mark> and better SEO.",
           "Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.",
           "Worked supporting lazy loading of react-native+react-native-web screens.",
           "Worked on an internal framework for creating SSR based React apps (using webpack+node)",
-          "Worked on adding systematic changes to allow Animated Skeleton Screens for faster perceived performance on React Native and Web App.",
-          "Revamped Order Details Experience for React Native and Web.",
+          "Worked on adding systematic changes to allow <mark>Animated Skeleton Screens</mark> for faster perceived performance on React Native and Web App.",
+          "Revamped <mark>Order Details Experience</mark> for React Native and Web.",
         ],
       },
     ],
-    achievements: undefined,
+    achievements: [
+      "<mark>Unwavering Dedication Award</mark>",
+      "<mark>Leading Without Authority Award</mark> (winner twice)",
+    ],
   },
   {
     id: "swiggy-sde3",
@@ -853,12 +851,12 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          "Lead the release of Timeline shareability on Swiggy Go.",
-          "Lead the release of Swiggy Stores PWA.",
-          "Lead the release of Swiggy Single Page Checkout for Food.",
+          "Lead the release of <mark>Timeline shareability on Swiggy Go</mark>.",
+          "Lead the release of <mark>Swiggy Stores PWA</mark>.",
+          "Lead the release of <mark>Swiggy Single Page Checkout</mark> for Food.",
           "Developed new PL driven UI for Swiggy Stores.",
-          "Developed new Swiggy Genie.",
-          'Developed a system for incorporating Origin Trials for our PWAs, starting with <a href="https://web.dev/sms-receiver-api-announcement/" target="_blank" rel="noopener noreferrer">SMS Receiver API</a> & <a href="https://web.dev/contact-picker/" target="_blank" rel="noopener noreferrer">Contacts API</a>.',
+          "Developed new <mark>Swiggy Genie</mark>.",
+          'Developed a system for incorporating <mark>Origin Trials</mark> for our PWAs, starting with <a href="https://web.dev/sms-receiver-api-announcement/" target="_blank" rel="noopener noreferrer">SMS Receiver API</a> & <a href="https://web.dev/contact-picker/" target="_blank" rel="noopener noreferrer">Contacts API</a>.',
           "Deprecated legacy systems and ported the same to modern services.",
           "Regularly worked with and maintained HAProxy configuration.",
         ],
@@ -879,18 +877,20 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          "Designed and developed multi-tenant payments module",
-          "Designed and developed website generator (Gauntlet). 10+ dashboards.",
+          "Designed and developed <mark>multi-tenant payments module</mark>",
+          "Designed and developed <mark>website generator (Gauntlet)</mark>. <mark>10+ dashboards</mark>.",
           "Designed and developed static site serving system for legal pages.",
-          "Designed Hotstar-Pop integration and scaled codepath for 120k RPM.",
+          "Designed Hotstar-Pop integration and scaled codepath for <mark>120k RPM</mark>.",
           "Moved codebase to a monorepo for improved developer experience.",
-          "Developed automatic UA based asset serving system for smaller bundle sizes. (20%)",
-          "Developed Restaurant Hygiene Pages for PWA and as webview for apps.",
-          "Developed Everyday Offers Feature for mobile PWA.",
+          "Developed automatic UA based asset serving system for smaller <mark>bundle sizes. (20%)</mark>",
+          "Reduced <mark>bundle size by 50%</mark> for ES2015-compliant browsers with user-agent aware asset delivery.",
+          "Shipped enhancements across <mark>search, menu, and cart experiences</mark>.",
+          "Developed <mark>Restaurant Hygiene Pages</mark> for PWA and as webview for apps.",
+          "Developed <mark>Everyday Offers Feature</mark> for mobile PWA.",
         ],
       },
     ],
-    achievements: ["Awards: MVP (Oct 2018)"],
+    achievements: ["Awards: <mark>MVP (Oct 2018)</mark>"],
   },
   {
     id: "housing",
@@ -906,11 +906,11 @@ const workExperience = [
         title: "Description",
         items: [
           "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements:",
-          "Migrated to React 16 from version 15. 50% win for <code>renderToString</code> completion time.",
-          "Migrated to NodeJS version 8 from version 6 gave another 50% win for above.",
-          "Reduced asset size by roughly 20% using Brotli compression.",
+          "Migrated to React 16 from version 15. <mark>50% win for <code>renderToString</code> completion time</mark>.",
+          "Migrated to NodeJS version 8 from version 6 gave <mark>another 50% win</mark> for above.",
+          "Reduced asset size by <mark>roughly 20% using Brotli compression</mark>.",
           "Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.",
-          "Improved scroll performance of listing page by using <code>will-change</code> CSS rule, along with disabling <code>pointer-events</code> on scroll.",
+          "Improved <mark>scroll performance of listing page</mark> by using <code>will-change</code> CSS rule, along with disabling <code>pointer-events</code> on scroll.",
         ],
       },
     ],
@@ -924,7 +924,7 @@ const workExperience = [
     position: "Software Developer",
     duration: "June 2016 - October 2017",
     summary:
-      "Shipped Samsung Internet extension, Gaana, and Bixby web experiences.",
+      "Revamped Samsung Internet’s Chrome extension, built a Gaana music app for Tizen phones, and helped train Bixby for browser commands.",
     team: '<a href="https://twitter.com/SamsungInternet" target="_blank" rel="noopener noreferrer">@SamsungInternet</a> team',
     isCurrent: false,
     descriptions: [
@@ -932,20 +932,23 @@ const workExperience = [
         title: "Description",
         items: [
           '<strong><a href="https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh" target="_blank" rel="noopener noreferrer">Samsung Internet PC Extension</a></strong> Starting June 2016: Revamped the extension codebase by switching to modern JavaScript paradigms, UI overhaul and performance optimizations. Improved localization of strings and helped in <a href="https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e" target="_blank" rel="noopener noreferrer">rebranding</a> for version 2.0.',
-          "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from 2.7 to 3.7 post launch).",
-          "Currently working on adding new features and improving sync performance.",
-          "Userbase increased from 8,000 to 60,000 monthly active users (~8x) within 4 months of 2.0 release.",
+          "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from <mark>2.7 to 3.7</mark> post launch).",
+          "Improved bookmark sync and added <mark>dynamic loading for collections with 20,000 bookmarks</mark>, with caching and indexing to support browsing, searching, and favoriting.",
+          "Added loading bars and other perceived loading indicators to make bookmark sync and browsing feel more responsive.",
+          "Userbase increased from <mark>8,000 to 60,000 monthly active users (~8x)</mark> within 4 months of 2.0 release.",
           '<strong><a href="https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/" target="_blank" rel="noopener noreferrer">Gaana Web App</a></strong> Starting March 2017: Designed and developed the web application in ReactJS + Redux + <a href="https://github.com/styled-components/styled-components" target="_blank" rel="noopener noreferrer">Styled-Components</a> (later replaced with <a href="https://github.com/tkstrong4/emotion" target="_blank" rel="noopener noreferrer">Emotion</a> for perf wins).',
+          "Built the <mark>Gaana music experience as a web app for Tizen phones</mark>, as part of bringing third-party apps to the platform.",
           "Challenges like performance on low end devices, inter-op between Tizen APIs and Web Platform were tackled along with the team.",
-          "Successfully launched first phase of app within MyGalaxy on Tizen in Late May.",
-          '<strong><a href="https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser" target="_blank" rel="noopener noreferrer">Samsung Internet</a> - <a href="http://www.samsung.com/global/galaxy/apps/bixby/" target="_blank" rel="noopener noreferrer">Bixby</a></strong> April 2017 – July 2017: Wrote JSGF gram files for Samsung Internet domain. [<a href="https://www.youtube.com/watch?v=k2IM_wHrSQ8" target="_blank" rel="noopener noreferrer">video</a>]',
-          "Helped in bringing accuracy to 95%+ for Bixby US launch.",
+          "Successfully launched <mark>first phase of app within MyGalaxy on Tizen</mark> in Late May.",
+          '<strong><a href="https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser" target="_blank" rel="noopener noreferrer">Samsung Internet</a> - <a href="http://www.samsung.com/global/galaxy/apps/bixby/" target="_blank" rel="noopener noreferrer">Bixby</a></strong> April 2017 to July 2017: Wrote JSGF gram files for Samsung Internet domain. [<a href="https://www.youtube.com/watch?v=k2IM_wHrSQ8" target="_blank" rel="noopener noreferrer">video</a>]',
+          "Helped train Bixby for Samsung Internet by writing <mark>voice commands and browser intents</mark>, so it could understand requests such as opening a particular website from their context.",
+          "Helped in bringing <mark>accuracy to 95%+</mark> for Bixby US launch.",
         ],
       },
     ],
     achievements: [
-      "<strong>Employee of the Month (December 2016)</strong> Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ.",
-      '<strong>Samsung Citizen Award (March 2017)</strong> <em>"Though a fresher and new to product development, [he] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, [he] has displayed enormous passion with a clear goal of making it much better."</em>',
+      "<strong><mark>Employee of the Month (December 2016)</mark></strong> Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ.",
+      '<strong><mark>Samsung Citizen Award (March 2017)</mark></strong> <em>"Though a fresher and new to product development, [he] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, [he] has displayed enormous passion with a clear goal of making it much better."</em>',
     ],
   },
   {
@@ -961,7 +964,7 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          'Developed an <a href="http://chefsbasket.herokuapp.com" target="_blank" rel="noopener noreferrer">SPA</a> using ReactJS, NodeJS and Postgresql',
+          'Developed an <a href="http://chefsbasket.herokuapp.com" target="_blank" rel="noopener noreferrer">SPA</a> using <mark>ReactJS, NodeJS and Postgresql</mark>',
         ],
       },
     ],
@@ -981,8 +984,8 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          "Developed tile based map server using NodeJS, mapnik and TileMill",
-          "Set up Mongodb cluster (3 systems), developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road analysis done by Hadoop.",
+          "Developed <mark>tile based map server</mark> using NodeJS, mapnik and TileMill",
+          "Set up <mark>Mongodb cluster (3 systems)</mark>, developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road analysis done by Hadoop.",
         ],
       },
     ],
@@ -1002,10 +1005,10 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          "Co-founding member. Managed JavaScript head of the tool.",
-          "Health Report tool for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses.",
-          "Performance improvements by deploying faster routes to server calls. (300-400ms win)",
-          "Expanding support to several e-commerce platforms.",
+          "<mark>Co-founding member</mark>. Managed JavaScript head of the tool.",
+          "<mark>Health Report tool</mark> for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses.",
+          "Performance improvements by deploying faster routes to server calls. (<mark>300-400ms win</mark>)",
+          "Expanding support to <mark>several e-commerce platforms</mark>.",
           "Extending help in creating the internal API. Made its use to make several customizable popouts, providing more options than industry.",
           "Integration with social networks to enable the tool. Studied Facebook documentation to leverage best out of its Graph API.",
           "Helped in strategy and planning of the tool in its initial phase.",
@@ -1027,7 +1030,7 @@ const workExperience = [
       {
         title: "Description",
         items: [
-          "Buzzometer - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie.",
+          "<mark>Buzzometer</mark> - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie.",
         ],
       },
     ],
@@ -1039,6 +1042,9 @@ const companyGroupKey = (id: string) => {
   if (id === "samsung" || id.startsWith("samsung-")) return "samsung";
   return null;
 };
+
+const workId = (jobs: (typeof workExperience)[number][]) =>
+  companyGroupKey(jobs[0].id) ?? jobs[0].id;
 
 const groupedWorkExperience = workExperience.reduce<
   Array<(typeof workExperience)[number][]>
@@ -1058,120 +1064,18 @@ const groupedWorkExperience = workExperience.reduce<
   return groups;
 }, []);
 
-const educationData = {
-  professionalInfo: {
-    title: "Professionally Me",
-    link: "https://linkedin.com/in/bogas04",
-    resume: {
-      text: "Download resume",
-      link: "/resume",
-    },
-    programmingLanguages: [
-      "C",
-      "TypeScript",
-      "JavaScript (ES2015+)",
-      "PHP",
-      "Java",
-    ],
-    stacksTechnologies: [
-      { name: "(P)", link: "https://preactjs.com/" },
-      { name: "ReactJS", link: "https://facebook.github.io/react/" },
-      { name: "Redux", link: "https://redux.js.org/" },
-      { name: "AngularJS", link: "https://angularjs.org/" },
-      { name: "BootStrap", link: "https://getbootstrap.com/" },
-      { name: "jQuery", link: "https://jquery.org/" },
-      { name: "NodeJS", link: "httpss://nodejs.org/" },
-      { name: "ExpressJS", link: "https://expressjs.com/" },
-      { name: "Slim MicroFramework", link: "https://www.slimframework.com/" },
-    ],
-    databases: [
-      { name: "PostgreSQL", link: "https://www.postgresql.org/" },
-      { name: "MySQL", link: "https://www.mysql.com/" },
-      { name: "MongoDB", link: "https://www.mongodb.com/" },
-    ],
-    tools: [
-      { name: "npm", link: "https://www.npmjs.com/" },
-      { name: "git", link: "https://git-scm.com/" },
-      { name: "webpack", link: "http://webpack.js.org/" },
-      { name: "rollup", link: "https://rollupjs.org/" },
-      { name: "babel", link: "http://babeljs.io/" },
-      { name: "Jest", link: "https://jestjs.io/" },
-      { name: "Styleguidist", link: "https://react-styleguidist.js.org/" },
-      { name: "heroku", link: "https://www.heroku.com/" },
-      { name: "grunt", link: "https://gruntjs.com/" },
-      { name: "lerna", link: "https://lerna.js.org/" },
-      { name: "gulp", link: "https://gulpjs.com/" },
-      { name: "bower", link: "https://bower.io/" },
-      { name: "Visual Studio Code", link: "https://code.visualstudio.com/" },
-      { name: "Vim", link: "https://vim.sourceforge.io/" },
-      { name: "IntelliJ IDEA", link: "https://www.jetbrains.com/idea/" },
-      { name: "Eclipse", link: "https://www.eclipse.org/" },
-    ],
-    otherLanguages: ["HTML", "CSS", "XML", "YAML", "Stylus"],
-  },
-  institutions: [
-    {
-      name: "Netaji Subhas Institute of Technology",
-      link: "//nsit.ac.in/",
-      type: "college",
-      batch: "2012 - 2016",
-      performance: {
-        percentage: "79.48%",
-        rank: "5th position in entire department (~190 students)",
-      },
-      major: "Computer Engineering",
-      achievements: [
-        "Granted merit scholarship for all four years.",
-        "Consistently stood in top 10 performing students of the department.",
-        "Mentored class of 30 in an IEEE NSIT SIG for Web Development and Design",
-        {
-          text: "Wrote a report on Rapes",
-          link: "/Rapes.pdf",
-        },
-        {
-          text: "Successfully completed projects like :",
-          projects: [
-            {
-              name: "MVP Generator",
-              link: "//github.com/bogas04/mvp-generator",
-            },
-            { name: "CollNet", link: "//github.com/bogas04/collnet" },
-            { name: "CloudKeeper", link: "//github.com/bogas04/cloudkeeper" },
-            {
-              name: "Student Attendance System",
-              link: "//github.com/bogas04/Attendance-System",
-            },
-          ],
-        },
-        "Worked on a research project under Vidhi Khanduja (Assistant Professor) on a database watermarking scheme.",
-      ],
-      societies: [
-        { name: "IEEE NSIT", link: "//ieeensit.org", role: "Web Developer" },
-        {
-          name: "Junoon - The Official Photography Club",
-          link: "//junoonnsit.com",
-          role: "Core Member",
-        },
-        { name: "CollegeSpace", link: "//collegespace.in", role: "Tech Head" },
-      ],
-    },
-    {
-      name: "St. Mary's School",
-      link: "http://www.stmarysschooldwarka.com/",
-      type: "school",
-      batch: "2002- 2012",
-      board: "CBSE",
-      performance: {
-        grade12: "95.2%",
-        grade10: "9.8 CGPA ~ 93.1%",
-      },
-      achievements: [
-        "Granted merit scholarship for 3 years: 10th- 12th grades",
-        "Topped Science department in 12th Grade",
-      ],
-    },
-  ],
-};
+const chronologicalWorkExperience = [...groupedWorkExperience].reverse();
+const workYearBounds = chronologicalWorkExperience.map((jobs) => {
+  const start = jobs[jobs.length - 1].duration.split(" - ")[0];
+  const end = jobs[0].duration.split(" - ")[1];
+  return {
+    start: Number(start.slice(-4)),
+    end: end === "Present" ? new Date().getFullYear() : Number(end.slice(-4)),
+  };
+});
+const workFirstYear = Math.min(...workYearBounds.map((period) => period.start));
+const workLastYear = Math.max(...workYearBounds.map((period) => period.end));
+
 const socialLinks = [
   { title: "What I'm playing", url: "https://trello.com/b/Ctw7Er15/games" },
   { title: "YouTube", url: "//youtube.com/divjotbogas" },
@@ -1430,20 +1334,20 @@ function ImageGallery({
 }) {
   // image carousel using css, overflow, scroll snap, mobile friendly
   return (
-    <div className="image-gallery flex overflow-x-auto [scroll-snap-type:x_mandatory] gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+    <div className="image-gallery flex overflow-x-auto gap-2 pb-2 mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {images.map((image, index) => (
         <Link
           href={`/images/${encodeURIComponent(albumId)}/${encodeURIComponent(
             image.split("/").pop()!.replace(/\.[^.]+$/, ""),
           )}`}
           key={image}
-          className="h-[min(45vw,20rem)] shrink-0 cursor-pointer rounded-lg [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          className="h-[min(45vw,20rem)] shrink-0 cursor-pointer [scroll-snap-align:start] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           aria-label={`View photo ${index + 1} from ${destination}`}
         >
           <img
             src={image}
             alt={`${destination}, photo ${index + 1}`}
-            className="block h-full w-auto rounded-lg border border-white/20"
+            className="block h-full w-auto border border-white/20"
             loading={priority && index === 0 ? "eager" : "lazy"}
             decoding="async"
           />

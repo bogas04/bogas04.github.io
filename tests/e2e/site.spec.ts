@@ -15,7 +15,7 @@ test("homepage presents the essential profile content and navigation", async ({
   await expect(page.getByRole("heading", { name: "divjot", level: 1 })).toBeVisible();
   await expect(page.getByText("such work", { exact: true })).toBeVisible();
   await expect(page.getByText("many travels", { exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "/blog", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /blog thoughts & stories/i })).toHaveAttribute(
     "href",
     "/blog/",
   );
@@ -89,4 +89,35 @@ test("desktop travel thumbnails open a photo card whose controls change photos",
   await expect(page.getByRole("img", { name: "Thailand, photo 2" })).toBeVisible();
   await previous.click();
   await expect(page.getByRole("img", { name: "Thailand, photo 1" })).toBeVisible();
+});
+
+test("work timeline opens the selected role without closing when reading", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Show work from 2020" }).click();
+  await expect(page.getByRole("button", { name: "Show work from 2020" })).toHaveAttribute("aria-pressed", "true");
+  const carousel = page.getByRole("region", { name: "Work experience" });
+  const udaan = carousel.locator("article").filter({ hasText: "udaan, Bengaluru" });
+  await udaan.getByRole("button", { name: /Read highlights/ }).click();
+  const details = page.locator("#work-experience-udaan");
+  await expect(details).toBeVisible();
+  await page.locator("#work article").getByText("Management", { exact: true }).click();
+  await expect(details).toBeVisible();
+  await page.getByRole("button", { name: "Close highlights" }).click();
+  await expect(carousel).toBeVisible();
+  await expect(page.getByRole("button", { name: "Show work from 2020" })).toHaveAttribute("aria-pressed", "true");
+});
+
+test("work highlights have shareable URLs and follow browser history", async ({ page }) => {
+  await page.goto("/?source=test&work=swiggy#work");
+  await expect(page.locator("#work-experience-swiggy-sde3")).toBeVisible();
+  await page.reload();
+  await expect(page.locator("#work-experience-swiggy-sde3")).toBeVisible();
+  await page.getByRole("button", { name: "Close highlights" }).click();
+  await expect(page.getByRole("region", { name: "Work experience" })).toBeVisible();
+  await expect(page).toHaveURL(/source=test/);
+  await expect(page).not.toHaveURL(/work=/);
+  await page.goBack();
+  await expect(page.locator("#work-experience-swiggy-sde3")).toBeVisible();
+  await page.goForward();
+  await expect(page.getByRole("region", { name: "Work experience" })).toBeVisible();
 });

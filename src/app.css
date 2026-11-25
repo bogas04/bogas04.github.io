@@ -41,7 +41,7 @@
 @keyframes receive-photo { 0%, 35% { opacity: 0; transform: translateX(-50%) scale(0.98); } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
 
 @supports (view-transition-name: travel-photo) {
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  html[data-travel-photo-direction]::view-transition-old(root), html[data-travel-photo-direction]::view-transition-new(root) { animation: none; }
   ::view-transition-group(travel-photo) { animation: travel-photo-group 180ms cubic-bezier(0.4, 0, 0.2, 1); }
   html[data-travel-photo-direction="next"]::view-transition-old(travel-photo) { animation: travel-photo-exit-right 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }
   html[data-travel-photo-direction="next"]::view-transition-new(travel-photo) { animation: travel-photo-enter-left 180ms cubic-bezier(0.4, 0, 0.2, 1) both; }

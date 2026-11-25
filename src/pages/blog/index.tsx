@@ -83,7 +83,7 @@ export function BlogListing({ posts, heading, breadcrumbs }: IBlogListingProps) 
 
       {!heading && (
         <p className="mb-10 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-200">
-          If you&apos;re interested in sporadic writing about react, react native
+          If you&apos;re interested in sporadic writing about React, React Native,
           and emotions, then you&apos;ve come to the right place. There&apos;s{" "}
           <a href="/blog.xml">/blog.xml</a> and <a href="/blog.atom">/blog.atom</a>{" "}
           support as well!

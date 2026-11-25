@@ -15,3 +15,9 @@ author before introducing redirects or changing the static hosting strategy.
 
 After route or content changes, verify the affected links, generated RSS and
 Atom feeds, sitemap, and linked images.
+
+Home page work highlights can be linked with `/?work=<company>#work`. The
+supported identifiers are `udaan`, `swiggy`, `samsung`, `housing`, `fizzy`,
+`refiral`, and `frrole`. Keep these identifiers stable even if role data or
+presentation changes. Unknown identifiers leave the carousel closed. Other
+query parameters are preserved when highlights open or close.
