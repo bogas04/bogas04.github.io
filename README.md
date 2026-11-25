@@ -27,5 +27,6 @@ The implementation and its decisions are documented in [`docs/`](docs/):
 
 - [Content authoring](docs/content-authoring.md)
 - [Design direction](docs/design-direction.md)
+- [Plays page design](docs/plays-design.md)
 - [Technical principles](docs/technical-principles.md)
 - [Build and deployment](docs/build-and-deployment.md)

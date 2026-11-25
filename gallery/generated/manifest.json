@@ -77,10 +77,11 @@
       "category": "random",
       "cover": "20261121-000005-journaling",
       "startDate": "2026-11-21",
-      "endDate": "2026-11-22",
+      "endDate": "2026-11-23",
       "images": [
         "20261121-000005-journaling",
-        "20261122-000009-meh-but-interesting"
+        "20261122-000009-meh-but-interesting",
+        "20261123-000016-missing-galle"
       ]
     },
     {
@@ -829,6 +830,25 @@
       "thumbUrl": "/img/now/20261122-000009-meh-but-interesting.jpg",
       "displayUrl": "/img/now/20261122-000009-meh-but-interesting.jpg",
       "fallbackUrl": "/img/now/20261122-000009-meh-but-interesting.jpg"
+    },
+    {
+      "id": "20261123-000016-missing-galle",
+      "album": "now",
+      "albumTitle": "now",
+      "category": "random",
+      "title": "Missing Galle",
+      "alt": "Beautiful yellow painted wall with two arched long black windows, creating a striking contrast.",
+      "caption": "Missing Galle",
+      "takenAt": "2026-11-23",
+      "location": "",
+      "featured": false,
+      "width": 1280,
+      "height": 960,
+      "aspectRatio": 1.3333333333333333,
+      "photoUrl": "/images/now/20261123-000016-missing-galle/",
+      "thumbUrl": "/img/now/20261123-000016-missing-galle.jpg",
+      "displayUrl": "/img/now/20261123-000016-missing-galle.jpg",
+      "fallbackUrl": "/img/now/20261123-000016-missing-galle.jpg"
     },
     {
       "id": "A Plague Tale_ Innocence-2021_06_04-08_48_42",

@@ -37,8 +37,8 @@ component system.
 
 Keep the personal introduction conversational. The navigation is a Metro poster
 layout with icons, labels and short subtitles. On the two-column layout, Now
-and Blog share a row, Images spans both columns, and LinkedIn and GitHub stay
-paired. The layout should also work when the number of links changes. Keep the
+and Blog share a row, Images and Plays share the next row, and LinkedIn and
+GitHub stay paired. The layout should also work when the number of links changes. Keep the
 navigation tiles in a consistent colour family rather than assigning each a
 new colour.
 

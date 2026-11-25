@@ -8,6 +8,7 @@ Current directions:
 
 - Home page: bold colour and personal presence. See [Home page design](home-design.md).
 - Blog: easy reading takes priority.
+- `/plays`: a modern Xbox-inspired games dashboard. See [Plays design](plays-design.md).
 - Image gallery: Metro or Windows Phone inspired presentation.
 - `/now`: an early Orkut scrapbook. Use a blue utility header, pink Orkut-like
   wordmark treatment, compact Arial typography, thin blue borders, black and

@@ -53,6 +53,7 @@ function Hero() {
     { label: "now", subtitle: "what life looks like lately", href: "/now", icon: "now" },
     { label: "blog", subtitle: "thoughts & stories", href: "/blog", icon: "blog" },
     { label: "images", subtitle: "places, people & moments", href: "/images", icon: "images" },
+    { label: "plays", subtitle: "games & adventures", href: "/plays", icon: "plays" },
     { label: "linkedin", subtitle: "the professional me", href: "https://linkedin.com/in/bogas04", icon: "linkedin" },
     { label: "github", subtitle: "things I've built", href: "https://github.com/bogas04", icon: "github" },
   ] as const;
@@ -82,6 +83,7 @@ function Hero() {
           const glyph = (
             <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-20 sm:w-20">
               {icon === "images" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><rect x="3" y="3" width="18" height="18" rx="1" /><circle cx="16.5" cy="8" r="1.5" fill="currentColor" stroke="none" /><path d="m4 18 5-5 4 4 2-2 5 5" /></svg>}
+              {icon === "plays" && <svg viewBox="0 0 48 40" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full"><path d="M13 9h22c4.5 0 7.2 2.7 8.4 7.3l2.5 9.5c1.1 4.3-3.1 6.8-6.2 4.3l-5.8-4.6H14.1l-5.8 4.6c-3.1 2.5-7.3 0-6.2-4.3l2.5-9.5C5.8 11.7 8.5 9 13 9Z" /><path d="M13 14v7M9.5 17.5h7" /><g fill="currentColor" stroke="none"><circle cx="34" cy="13.5" r="1.35" /><circle cx="30" cy="17.5" r="1.35" /><circle cx="38" cy="17.5" r="1.35" /><circle cx="34" cy="21.5" r="1.35" /></g></svg>}
               {icon === "now" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><circle cx="12" cy="12" r="9" /><path d="M12 6v6l4 3" strokeLinecap="square" /></svg>}
               {icon === "blog" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><path d="m4 20 4.5-1 11-11-3.5-3.5-11 11L4 20ZM14.5 6 18 9.5" strokeLinejoin="round" /></svg>}
               {icon === "linkedin" && <span className="font-sans text-4xl font-black leading-none tracking-tight sm:text-7xl">in</span>}
@@ -90,7 +92,7 @@ function Hero() {
           );
           const words = <span className="flex min-w-0 flex-col"><span className="text-xl font-bold lowercase leading-none sm:text-3xl">{label}</span><span className="mt-2 text-sm leading-snug opacity-80">{subtitle}</span></span>;
           const common = "group min-w-0 no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none";
-          const className = `${common} flex min-h-36 justify-between gap-3 overflow-hidden bg-[#30145e] p-4 text-white transition-colors sm:min-h-44 sm:flex-row sm:items-end sm:p-5 sm:hover:bg-[#49217d] ${icon === "images" ? "col-span-2 flex-row items-end" : "flex-col-reverse items-start"}`;
+          const className = `${common} flex min-h-36 justify-between gap-3 overflow-hidden bg-[#30145e] p-4 text-white transition-colors sm:min-h-44 sm:flex-row sm:items-end sm:p-5 sm:hover:bg-[#49217d] flex-col-reverse items-start`;
           const content = <>{words}<span className="opacity-80 transition-transform group-hover:rotate-[-8deg] motion-reduce:transform-none">{glyph}</span></>;
           return external ? (
             <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
@@ -757,14 +759,11 @@ function Social() {
           {socialLinks.map((link) => (
             <div className="px-4 text-center" key={link.url}>
               <p className="h-96 flex justify-center items-center text-2xl font-bold pb-4 uppercase">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-50"
-                  href={link.url}
-                >
-                  {link.title}
-                </a>
+                {link.url.startsWith("/") && !link.url.startsWith("//") ? (
+                  <Link className="text-blue-50" href={link.url}>{link.title}</Link>
+                ) : (
+                  <a target="_blank" rel="noopener noreferrer" className="text-blue-50" href={link.url}>{link.title}</a>
+                )}
               </p>
             </div>
           ))}
@@ -1077,7 +1076,7 @@ const workFirstYear = Math.min(...workYearBounds.map((period) => period.start));
 const workLastYear = Math.max(...workYearBounds.map((period) => period.end));
 
 const socialLinks = [
-  { title: "What I'm playing", url: "https://trello.com/b/Ctw7Er15/games" },
+  { title: "What I'm playing", url: "/plays" },
   { title: "YouTube", url: "//youtube.com/divjotbogas" },
 ];
 
