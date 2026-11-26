@@ -1,0 +1,591 @@
+{
+  "workExperience": [
+    {
+      "id": "udaan",
+      "company": "udaan, Bengaluru",
+      "companyUrl": "https://udaan.com",
+      "position": "Software Architect",
+      "duration": "April 2020 - November 2026",
+      "summary": "Led the core UI platform team and improved web and app experiences.",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Management",
+          "items": [
+            "Led a ==core UI platform team of four very talented developers==",
+            "Planned and delivered ==quarterly roadmaps== with data-driven tasks and output",
+            "Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...)."
+          ]
+        },
+        {
+          "title": "Individual Contributions",
+          "items": [
+            "Built a release bundle size tracker with historical graphs and size targets; reduced app size from ==20MB to 6MB==.",
+            "==Halved team operating costs== through event optimization and resource sizing.",
+            "Modernized and migrated a React Native app with ==over 200 screens from version 0.70 to 0.85==.",
+            "Authored a ==modular documentation and skills system== for LLM-assisted UI development using internal libraries and design systems.",
+            "Remediated ==annual VAPT findings== across web and mobile apps.",
+            "Evaluated esbuild, Vite, and Rspack; selected Rspack and made development server startup and ==builds 10x faster==.",
+            "Built a ==screen explorer== connecting registered screens to daily active user metrics and usage trends to identify unused screens.",
+            "Published [vitadrop.in](https://vitadrop.in \"rel=noopener noreferrer\") and [annabhumi.com](https://annabhumi.com \"rel=noopener noreferrer\") AI assisted brand websites.",
+            "Developed [wondermart](https://wondermart.com \"rel=noopener noreferrer\") app from scratch in ==1 month for b2c vertical==.",
+            "Fixed a [==2400ms==](https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a \"rel=noopener noreferrer\") re-rendering linked stutter caused on add to cart action.",
+            "Reduced react-native codepush ==bundle size by 20%== by optimizing image assets",
+            "Improved app ==startup time by 75% (P90)==, thus improving ==conversions to 2nd page by 35%==.",
+            "Updated internal react-native+react-native-web framework to use functional components with specialized hooks.",
+            "Built ==Year In Review screens for 2020 & 2021==.",
+            "Deployed a ==webview fallback== for react-native screens for quicker resolution during outages.",
+            "Drove improvements for developer experience initiatives by adding ==CI checks, pre-commit hooks and dev compiler optimizations==.",
+            "Refactored tightly coupled internal library into ==individual npm packages in a mono-repo==.",
+            "Used extensive A/B testing to drive higher (==3.6 to 4.4==) app store ratings using a strategically placed prompt.",
+            "Revamped udaan's homepage with ==60fps animations== and better SEO.",
+            "Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.",
+            "Worked supporting lazy loading of react-native+react-native-web screens.",
+            "Worked on an internal framework for creating SSR based React apps (using webpack+node)",
+            "Worked on adding systematic changes to allow ==Animated Skeleton Screens== for faster perceived performance on React Native and Web App.",
+            "Revamped ==Order Details Experience== for React Native and Web."
+          ]
+        }
+      ],
+      "achievements": [
+        "==Unwavering Dedication Award==",
+        "==Leading Without Authority Award== (winner twice)"
+      ],
+      "roleProgression": [
+        "SDE3",
+        "SDE4",
+        "UI Architect"
+      ]
+    },
+    {
+      "id": "swiggy-sde3",
+      "company": "Swiggy, Bengaluru",
+      "companyUrl": "https://swiggy.com",
+      "position": "Software Development Engineer III",
+      "duration": "November 2019 - April 2020",
+      "summary": "Led launches across Swiggy Go, Stores, checkout, and Genie.",
+      "team": "[@SwiggyTech](https://www.twitter.com/SwiggyTech \"target=_blank;rel=noopener noreferrer\") - New Initiatives Team (Web)",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "Lead the release of ==Timeline shareability on Swiggy Go==.",
+            "Lead the release of ==Swiggy Stores PWA==.",
+            "Lead the release of ==Swiggy Single Page Checkout== for Food.",
+            "Developed new PL driven UI for Swiggy Stores.",
+            "Developed new ==Swiggy Genie==.",
+            "Developed a system for incorporating ==Origin Trials== for our PWAs, starting with [SMS Receiver API](https://web.dev/sms-receiver-api-announcement/ \"target=_blank;rel=noopener noreferrer\") & [Contacts API](https://web.dev/contact-picker/ \"target=_blank;rel=noopener noreferrer\").",
+            "Deprecated legacy systems and ported the same to modern services.",
+            "Regularly worked with and maintained HAProxy configuration."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swiggy-sde2",
+      "company": "Swiggy, Bengaluru",
+      "companyUrl": "https://swiggy.com",
+      "position": "Software Development Engineer II",
+      "duration": "January 2018 - November 2019",
+      "summary": "Built payments, platform tooling, and high-scale PWA features.",
+      "team": "[@SwiggyTech](https://www.twitter.com/SwiggyTech \"target=_blank;rel=noopener noreferrer\") - Web Team",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "Designed and developed ==multi-tenant payments module==",
+            "Designed and developed ==website generator (Gauntlet)==. ==10+ dashboards==.",
+            "Designed and developed static site serving system for legal pages.",
+            "Designed Hotstar-Pop integration and scaled codepath for ==120k RPM==.",
+            "Moved codebase to a monorepo for improved developer experience.",
+            "Developed automatic UA based asset serving system for smaller ==bundle sizes. (20%)==",
+            "Reduced ==bundle size by 50%== for ES2015-compliant browsers with user-agent aware asset delivery.",
+            "Shipped enhancements across ==search, menu, and cart experiences==.",
+            "Developed ==Restaurant Hygiene Pages== for PWA and as webview for apps.",
+            "Developed ==Everyday Offers Feature== for mobile PWA."
+          ]
+        }
+      ],
+      "achievements": [
+        "Awards: ==MVP (Oct 2018)=="
+      ]
+    },
+    {
+      "id": "housing",
+      "company": "Housing.com, Mumbai",
+      "companyUrl": "https://housing.com",
+      "position": "Senior Software Development Engineer",
+      "duration": "October 2017 - January 2018",
+      "summary": "Improved Housing's PWA performance, rendering, and page weight.",
+      "team": "[@HousingEngg](https://twitter.com/HousingEngg \"target=_blank;rel=noopener noreferrer\") - Frontend team",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements:",
+            "Migrated to React 16 from version 15. ==50% win for `renderToString` completion time==.",
+            "Migrated to NodeJS version 8 from version 6 gave ==another 50% win== for above.",
+            "Reduced asset size by ==roughly 20% using Brotli compression==.",
+            "Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.",
+            "Improved ==scroll performance of listing page== by using `will-change` CSS rule, along with disabling `pointer-events` on scroll."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "samsung",
+      "company": "Samsung R&D Institute, Bengaluru",
+      "companyUrl": "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
+      "position": "Software Developer",
+      "duration": "June 2016 - October 2017",
+      "summary": "Revamped Samsung Internet’s Chrome extension, built a Gaana music app for Tizen phones, and helped train Bixby for browser commands.",
+      "team": "[@SamsungInternet](https://twitter.com/SamsungInternet \"target=_blank;rel=noopener noreferrer\") team",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "**[Samsung Internet PC Extension](https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh \"target=_blank;rel=noopener noreferrer\")** Starting June 2016: Revamped the extension codebase by switching to modern JavaScript paradigms, UI overhaul and performance optimizations. Improved localization of strings and helped in [rebranding](https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e \"target=_blank;rel=noopener noreferrer\") for version 2.0.",
+            "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from ==2.7 to 3.7== post launch).",
+            "Improved bookmark sync and added ==dynamic loading for collections with 20,000 bookmarks==, with caching and indexing to support browsing, searching, and favoriting.",
+            "Added loading bars and other perceived loading indicators to make bookmark sync and browsing feel more responsive.",
+            "Userbase increased from ==8,000 to 60,000 monthly active users (~8x)== within 4 months of 2.0 release.",
+            "**[Gaana Web App](https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/ \"target=_blank;rel=noopener noreferrer\")** Starting March 2017: Designed and developed the web application in ReactJS + Redux + [Styled-Components](https://github.com/styled-components/styled-components \"target=_blank;rel=noopener noreferrer\") (later replaced with [Emotion](https://github.com/tkstrong4/emotion \"target=_blank;rel=noopener noreferrer\") for perf wins).",
+            "Built the ==Gaana music experience as a web app for Tizen phones==, as part of bringing third-party apps to the platform.",
+            "Challenges like performance on low end devices, inter-op between Tizen APIs and Web Platform were tackled along with the team.",
+            "Successfully launched ==first phase of app within MyGalaxy on Tizen== in Late May.",
+            "**[Samsung Internet](https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser \"target=_blank;rel=noopener noreferrer\") - [Bixby](http://www.samsung.com/global/galaxy/apps/bixby/ \"target=_blank;rel=noopener noreferrer\")** April 2017 to July 2017: Wrote JSGF gram files for Samsung Internet domain. \\[[video](https://www.youtube.com/watch?v=k2IM_wHrSQ8 \"target=_blank;rel=noopener noreferrer\")\\]",
+            "Helped train Bixby for Samsung Internet by writing ==voice commands and browser intents==, so it could understand requests such as opening a particular website from their context.",
+            "Helped in bringing ==accuracy to 95%+== for Bixby US launch."
+          ]
+        }
+      ],
+      "achievements": [
+        "**==Employee of the Month (December 2016)==** Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ.",
+        "**==Samsung Citizen Award (March 2017)==** *\"Though a fresher and new to product development, \\[he\\] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, \\[he\\] has displayed enormous passion with a clear goal of making it much better.\"*"
+      ],
+      "groupSummary": "Revamped Samsung Internet’s Chrome extension, built Gaana for Tizen, and helped train Bixby for browser commands."
+    },
+    {
+      "id": "fizzy",
+      "company": "Fizzy Food Lab's, Mumbai",
+      "companyUrl": "http://chefsbasket.com",
+      "position": "Fullstack JavaScript Developer",
+      "duration": "December 2015 - January 2016",
+      "summary": "Built a React, Node.js, and PostgreSQL single-page application.",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "Developed an [SPA](http://chefsbasket.herokuapp.com \"target=_blank;rel=noopener noreferrer\") using ==ReactJS, NodeJS and Postgresql=="
+          ]
+        }
+      ]
+    },
+    {
+      "id": "samsung-trainee",
+      "company": "Samsung Research Institute, Bengaluru",
+      "companyUrl": "//www.samsung.com/in/sri-b/siso.html",
+      "position": "Student Trainee",
+      "duration": "June 2015 - August 2015",
+      "summary": "Built map-data infrastructure and analysis tooling during a student internship.",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "Developed ==tile based map server== using NodeJS, mapnik and TileMill",
+            "Set up ==Mongodb cluster (3 systems)==, developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road analysis done by Hadoop."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refiral",
+      "company": "Refiral, New Delhi",
+      "companyUrl": "//refiral.com",
+      "position": "Product Developer",
+      "duration": "October 2013 - October 2014",
+      "summary": "Co-founded and built product, analytics, and platform integrations.",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "==Co-founding member==. Managed JavaScript head of the tool.",
+            "==Health Report tool== for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses.",
+            "Performance improvements by deploying faster routes to server calls. (==300-400ms win==)",
+            "Expanding support to ==several e-commerce platforms==.",
+            "Extending help in creating the internal API. Made its use to make several customizable popouts, providing more options than industry.",
+            "Integration with social networks to enable the tool. Studied Facebook documentation to leverage best out of its Graph API.",
+            "Helped in strategy and planning of the tool in its initial phase."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frrole",
+      "company": "Frrole, Remote",
+      "companyUrl": "//frrole.com",
+      "position": "Frontend Development Intern",
+      "duration": "November 2013 - January 2014",
+      "summary": "Built a responsive movie-buzz analytics web application.",
+      "isCurrent": false,
+      "descriptions": [
+        {
+          "title": "Description",
+          "items": [
+            "==Buzzometer== - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie."
+          ]
+        }
+      ]
+    }
+  ],
+  "travelDestinations": [
+    {
+      "name": "Sri Lanka",
+      "albumId": "sri-lanka",
+      "markerOffsetY": 20,
+      "description": "September 2026\n• A trip through Sri Lanka",
+      "images": [
+        "/img/travel/sri-lanka/sri-lanka-01.jpg",
+        "/img/travel/sri-lanka/sri-lanka-02.jpg",
+        "/img/travel/sri-lanka/sri-lanka-03.jpg",
+        "/img/travel/sri-lanka/sri-lanka-04.jpg",
+        "/img/travel/sri-lanka/sri-lanka-05.jpg",
+        "/img/travel/sri-lanka/sri-lanka-06.jpg",
+        "/img/travel/sri-lanka/sri-lanka-07.jpg",
+        "/img/travel/sri-lanka/sri-lanka-08.jpg",
+        "/img/travel/sri-lanka/sri-lanka-09.jpg",
+        "/img/travel/sri-lanka/sri-lanka-10.jpg",
+        "/img/travel/sri-lanka/sri-lanka-11.jpg",
+        "/img/travel/sri-lanka/sri-lanka-12.jpg",
+        "/img/travel/sri-lanka/sri-lanka-13.jpg",
+        "/img/travel/sri-lanka/sri-lanka-14.jpg",
+        "/img/travel/sri-lanka/sri-lanka-15.jpg",
+        "/img/travel/sri-lanka/sri-lanka-16.jpg",
+        "/img/travel/sri-lanka/sri-lanka-17.jpg",
+        "/img/travel/sri-lanka/sri-lanka-18.jpg",
+        "/img/travel/sri-lanka/sri-lanka-19.jpg"
+      ],
+      "lat": 7.8731,
+      "lng": 80.7718
+    },
+    {
+      "name": "Ireland",
+      "albumId": "ireland",
+      "images": [
+        "/img/travel/ireland/ireland-1.jpg",
+        "/img/travel/ireland/ireland-10.jpg",
+        "/img/travel/ireland/ireland-11.jpg",
+        "/img/travel/ireland/ireland-2.jpg",
+        "/img/travel/ireland/ireland-3.jpg",
+        "/img/travel/ireland/ireland-4.jpg",
+        "/img/travel/ireland/ireland-5.jpg",
+        "/img/travel/ireland/ireland-6.jpg",
+        "/img/travel/ireland/ireland-7.jpg",
+        "/img/travel/ireland/ireland-8.jpg",
+        "/img/travel/ireland/ireland-9.jpg"
+      ],
+      "description": "2025\n• Happy Pear, Galleries and vegan food!",
+      "lat": 53.3498,
+      "lng": -6.2603
+    },
+    {
+      "name": "UK",
+      "albumId": "uk",
+      "images": [
+        "/img/travel/uk/uk-1.jpg",
+        "/img/travel/uk/uk-10.jpg",
+        "/img/travel/uk/uk-11.jpg",
+        "/img/travel/uk/uk-12.jpg",
+        "/img/travel/uk/uk-13.jpg",
+        "/img/travel/uk/uk-14.jpg",
+        "/img/travel/uk/uk-15.jpg",
+        "/img/travel/uk/uk-16.jpg",
+        "/img/travel/uk/uk-17.jpg",
+        "/img/travel/uk/uk-18.jpg",
+        "/img/travel/uk/uk-19.jpg",
+        "/img/travel/uk/uk-2.jpg",
+        "/img/travel/uk/uk-3.jpg",
+        "/img/travel/uk/uk-4.jpg",
+        "/img/travel/uk/uk-5.jpg",
+        "/img/travel/uk/uk-6.jpg",
+        "/img/travel/uk/uk-7.jpg",
+        "/img/travel/uk/uk-8.jpg",
+        "/img/travel/uk/uk-9.jpg"
+      ],
+      "description": "2025\n• History & Heritage and lots of pies!",
+      "lat": 51.5074,
+      "lng": -0.1278
+    },
+    {
+      "name": "Taiwan",
+      "albumId": "taiwan",
+      "images": [
+        "/img/travel/taiwan/taiwan-1.jpg",
+        "/img/travel/taiwan/taiwan-10.jpg",
+        "/img/travel/taiwan/taiwan-11.jpg",
+        "/img/travel/taiwan/taiwan-2.jpg",
+        "/img/travel/taiwan/taiwan-3.jpg",
+        "/img/travel/taiwan/taiwan-4.jpg",
+        "/img/travel/taiwan/taiwan-5.jpg",
+        "/img/travel/taiwan/taiwan-6.jpg",
+        "/img/travel/taiwan/taiwan-7.jpg",
+        "/img/travel/taiwan/taiwan-8.jpg",
+        "/img/travel/taiwan/taiwan-9.jpg"
+      ],
+      "description": "2024, 2025\n• Amazing Buddhist culture, vegan food",
+      "lat": 25.033,
+      "lng": 121.5654
+    },
+    {
+      "name": "Thailand",
+      "albumId": "thailand",
+      "description": "2024, 2025\n• Vegan food, road trips and beautiful sights",
+      "images": [
+        "/img/travel/thailand/thailand-1.jpg",
+        "/img/travel/thailand/thailand-2.jpg",
+        "/img/travel/thailand/thailand-3.jpg",
+        "/img/travel/thailand/thailand-4.jpg",
+        "/img/travel/thailand/thailand-5.jpg",
+        "/img/travel/thailand/thailand-6.jpg",
+        "/img/travel/thailand/thailand-7.jpg",
+        "/img/travel/thailand/thailand-8.jpg"
+      ],
+      "lat": 13.7563,
+      "lng": 100.5018
+    },
+    {
+      "name": "Malaysia",
+      "albumId": "malaysia",
+      "description": "2024\n• Beautiful temples, walkable cities!",
+      "images": [
+        "/img/travel/malaysia/malaysia-1.jpg",
+        "/img/travel/malaysia/malaysia-2.jpg",
+        "/img/travel/malaysia/malaysia-3.jpg",
+        "/img/travel/malaysia/malaysia-4.jpg",
+        "/img/travel/malaysia/malaysia-5.jpg"
+      ],
+      "lat": 3.139,
+      "lng": 101.6869
+    },
+    {
+      "name": "Bali, Indonesia",
+      "albumId": "bali",
+      "images": [
+        "/img/travel/bali/bali-1.jpg",
+        "/img/travel/bali/bali-2.jpg",
+        "/img/travel/bali/bali-3.jpg",
+        "/img/travel/bali/bali-4.jpg",
+        "/img/travel/bali/bali-5.jpg",
+        "/img/travel/bali/bali-6.jpg"
+      ],
+      "description": "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
+      "lat": -8.65,
+      "lng": 115.2167
+    },
+    {
+      "name": "Maldives",
+      "albumId": "maldives-2023",
+      "description": "2023\n• Island Paradise",
+      "images": [
+        "/img/travel/maldives/maldives-1.jpg",
+        "/img/travel/maldives/maldives-2.jpg",
+        "/img/travel/maldives/maldives-3.jpg",
+        "/img/travel/maldives/maldives-4.jpg"
+      ],
+      "lat": 4.1755,
+      "lng": 73.5093
+    },
+    {
+      "name": "South Korea",
+      "albumId": "south-korea",
+      "description": "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
+      "images": [
+        "/img/travel/sk/sk-1.jpg",
+        "/img/travel/sk/sk-10.jpg",
+        "/img/travel/sk/sk-11.jpg",
+        "/img/travel/sk/sk-12.jpg",
+        "/img/travel/sk/sk-2.jpg",
+        "/img/travel/sk/sk-3.jpg",
+        "/img/travel/sk/sk-4.jpg",
+        "/img/travel/sk/sk-5.jpg",
+        "/img/travel/sk/sk-6.jpg",
+        "/img/travel/sk/sk-7.jpg",
+        "/img/travel/sk/sk-8.jpg",
+        "/img/travel/sk/sk-9.jpg"
+      ],
+      "lat": 37.5665,
+      "lng": 126.978
+    }
+  ],
+  "talks": [
+    {
+      "image": "/assets/talks/upfront91-2024.png",
+      "title": "Surviving the Crunch",
+      "link": "https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ",
+      "event": "Upfront91 2024, Make My Trip Office",
+      "eventLink": "https://upfront91.makemytrip.com/",
+      "video": "https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912",
+      "linkLabel": "Slides"
+    },
+    {
+      "image": "/assets/talks/designs-of-coder.png",
+      "title": "Designs of a Coder (2021)",
+      "link": "https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing",
+      "event": "Pesto",
+      "eventLink": "https://pesto.tech/",
+      "video": "https://youtu.be/es-oXFtKshI",
+      "linkLabel": "Slides"
+    },
+    {
+      "image": "/assets/talks/blazing-fast-web.png",
+      "title": "Web Performance in 2019",
+      "link": "http://bit.ly/web-performance-2019",
+      "eventLink": "https://www.hellomeets.com/",
+      "event": "Hello Meets, Swiggy Office",
+      "linkLabel": "Slides"
+    },
+    {
+      "image": "https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg",
+      "title": "Swiggy ♥️ Web",
+      "link": "https://www.swiggy.com",
+      "event": "Keynote, Google for Mobile India 2019",
+      "eventLink": "https://www.youtube.com/watch?v=2mX8hmefCRI",
+      "video": "https://www.youtube.com/watch?v=2mX8hmefCRI",
+      "linkLabel": "Website"
+    },
+    {
+      "image": "/assets/talks/react-2019.png",
+      "title": "React in 2019",
+      "link": "http://bit.ly/react-2019",
+      "eventLink": "https://www.meetup.com/reactjs-bangalore/events/255737841/",
+      "event": "ReactJS Bangalore #41",
+      "linkLabel": "Slides"
+    },
+    {
+      "image": "/assets/talks/testing-with-jest.png",
+      "title": "Testing with Jest",
+      "link": "http://bit.ly/jest-04-2018",
+      "eventLink": "https://www.meetup.com/ReactJS-Bangalore/events/247773928",
+      "event": "ReactJS Bangalore #32",
+      "linkLabel": "Slides"
+    },
+    {
+      "image": "https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg",
+      "video": "https://www.youtube.com/watch?v=lN8b_fXRC_A",
+      "title": "Delivering Fast Web-apps Fast",
+      "link": "http://bit.ly/gddx-dec2017",
+      "eventLink": "https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA",
+      "event": "Google Developers' Day, Extended (Mumbai)",
+      "linkLabel": "Slides"
+    }
+  ],
+  "socialLinks": [
+    {
+      "title": "What I'm playing",
+      "url": "/plays"
+    },
+    {
+      "title": "YouTube",
+      "url": "//youtube.com/divjotbogas"
+    }
+  ],
+  "settings": [
+    {
+      "name": "divjot",
+      "profileImage": "/profile.png",
+      "intro": "Heylo! I'm divjot (dj) or bogas04, a software engineer by profession, with a huge interest in veganism, single-player video gaming, and a newfound interest in philosophy and psychology. I sometimes write unhinged emotional pieces and share some cool tech work.",
+      "seoDescription": "Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India.",
+      "workHeading": "such work",
+      "travelHeading": "many travels",
+      "educationHeading": "much education",
+      "talksHeading": "so talkative",
+      "socialHeading": "somewhat social",
+      "travelIntro": "We think travel is how we gain new perspectives, but, as one of my favourite [YouTubers](https://www.youtube.com/@fiascodagama1 \"target=_blank;rel=noopener noreferrer\") puts it, it's also when we loosen our grip on identity and leave much of our baggage at home.",
+      "resumeUrl": "/resume",
+      "resumeLabel": "Download my résumé ↗",
+      "wildcardTitle": "What’s next?",
+      "wildcardText": "Find me on LinkedIn ↗",
+      "wildcardUrl": "https://linkedin.com/in/bogas04",
+      "carouselHint": "Scroll sideways to explore"
+    }
+  ],
+  "heroLinks": [
+    {
+      "label": "now",
+      "subtitle": "what life looks like lately",
+      "href": "/now",
+      "icon": "now"
+    },
+    {
+      "label": "blog",
+      "subtitle": "thoughts & stories",
+      "href": "/blog",
+      "icon": "blog"
+    },
+    {
+      "label": "images",
+      "subtitle": "places, people & moments",
+      "href": "/images",
+      "icon": "images"
+    },
+    {
+      "label": "plays",
+      "subtitle": "games & adventures",
+      "href": "/plays",
+      "icon": "plays"
+    },
+    {
+      "label": "linkedin",
+      "subtitle": "the professional me",
+      "href": "https://linkedin.com/in/bogas04",
+      "icon": "linkedin"
+    },
+    {
+      "label": "github",
+      "subtitle": "things I've built",
+      "href": "https://github.com/bogas04",
+      "icon": "github"
+    }
+  ],
+  "education": [
+    {
+      "name": "NSIT",
+      "subtitle": "Netaji Subhas Institute of Technology\nComputer Engineering · 2012–2016",
+      "facts": [
+        "**79.48%**, fifth in a department of around 190 students. Consistently in the top ten, with a merit scholarship for all four years.",
+        "Mentored a class of 30 in web development and design at IEEE NSIT, and worked on database watermarking research under Assistant Professor Vidhi Khanduja.",
+        "Projects included [MVP Generator](https://github.com/bogas04/mvp-generator), [CollNet](https://github.com/bogas04/collnet), [CloudKeeper](https://github.com/bogas04/cloudkeeper), and the [Student Attendance System](https://github.com/bogas04/Attendance-System). I also wrote a [report on rapes](/Rapes.pdf).",
+        "Web developer at [IEEE NSIT](//ieeensit.org), core member at [Junoon](//junoonnsit.com), the photography club, and tech head at [CollegeSpace](//collegespace.in)."
+      ],
+      "website": "https://nsut.ac.in/en/home",
+      "websiteLabel": "College website ↗",
+      "story": [
+        "I spent my awkward teenage years at NSIT feeling a little lost and figuring out my place in the world. I kept finding myself thinking, “this is not me”, and asking who I really was. I’m still figuring that out.",
+        "One thing I did figure out was the complicated maths behind our grades, with different credits for each subject. A friend and I built [NSITUlator](https://www.youtube.com/watch?v=ZU_RGEo2tsM \"target=_blank;rel=noopener noreferrer\") to make it easier. It was the first time I felt like an engineer: we saw a problem, made a naive solution, improved it with feedback, and tied it to CollegeSpace so people could use it. Internships, project ideas, and a calling as a web developer followed.",
+        "I made some friends along the way, though most of us are now scattered around the world."
+      ]
+    },
+    {
+      "name": "St. Mary’s\nSchool",
+      "subtitle": "2002–2012 · CBSE",
+      "facts": [
+        "**95.2%** in Class 12, topping the science stream. Scored **9.8 CGPA** (approximately 93.1%) in Class 10.",
+        "Received a merit scholarship for three years, from Class 10 through Class 12."
+      ],
+      "website": "http://www.stmarysschooldwarka.com/",
+      "websiteLabel": "School website ↗",
+      "story": [
+        "St. Mary’s had a huge impact on my formative years. A lot of my values, and my emphasis on critical thinking, can be traced back to school.",
+        "Although it was a Christian school, I loved how open it was to different religions. I never felt like an outsider. Teachers helped me build intuition instead of simply learning by rote. I especially miss Shalini ma’am, whose progressive view of the world inspired me to think more critically and be more tolerant, even when the society around me was more orthodox.",
+        "I was delighted to find out I had topped the science stream in the board exams, and even more delighted to see my name in the newspaper!"
+      ]
+    }
+  ]
+}

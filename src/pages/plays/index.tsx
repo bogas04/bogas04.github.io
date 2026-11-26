@@ -69,7 +69,7 @@ export default function Plays() {
   const [activeTile, setActiveTile] = useState(0);
   const tileSize = (index: number) => `${activeTile === index
     ? "h-[calc(2*var(--tile-size)+0.75rem)] w-[calc(2*var(--tile-size)+0.75rem)]"
-    : "h-[var(--tile-size)] w-[var(--tile-size)]"} max-sm:!h-auto max-sm:!w-full max-sm:aspect-square max-sm:transition-none`;
+    : "h-[var(--tile-size)] w-[var(--tile-size)]"} max-sm:!h-auto max-sm:!w-full ${index === 0 ? "max-sm:col-span-3 max-sm:aspect-[1.9/1]" : "max-sm:aspect-square"} max-sm:transition-none`;
   const tileInteraction = (index: number) => ({
     onFocus: () => setActiveTile(index),
     onMouseEnter: () => setActiveTile(index),
@@ -134,8 +134,8 @@ export default function Plays() {
             <h1 className="mb-2 font-[Arial,Helvetica,sans-serif] text-3xl font-bold tracking-tight sm:text-4xl">My games</h1>
             <p className="mb-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">I love getting lost in single-player games. Here’s a little corner for the games I play and the worlds I’ve visited.</p>
             <div className="pb-5 pt-2 sm:-mx-2 sm:overflow-x-auto sm:px-2 sm:[scrollbar-width:thin]">
-              <section aria-label="Games and screenshots" className="grid grid-cols-2 gap-3 sm:flex sm:h-[calc(2*var(--tile-size)+0.75rem)] sm:w-max sm:items-end [--tile-size:clamp(100px,15vw,160px)]">
-                <a data-gamepad {...tileInteraction(0)} href={boardUrl} target="_blank" rel="noopener noreferrer" className={`relative flex shrink-0 items-end overflow-hidden bg-[#176c38] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(0)}`}>
+              <section aria-label="Games and screenshots" className="grid grid-cols-3 gap-3 sm:flex sm:h-[calc(2*var(--tile-size)+0.75rem)] sm:w-max sm:items-end [--tile-size:clamp(100px,15vw,160px)]">
+                <a data-gamepad {...tileInteraction(0)} href={boardUrl} target="_blank" rel="noopener noreferrer" className={`relative flex shrink-0 items-end overflow-hidden bg-[#176c38] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none max-sm:rounded-xl ${tileSize(0)}`}>
                   <span aria-hidden="true" className="absolute inset-0 grid grid-cols-3 gap-0.5">
                     {gameCollage.map((image) => (
                       <img key={image} src={image} alt="" className="h-full w-full object-cover" />
@@ -143,18 +143,18 @@ export default function Plays() {
                   </span>
                   <span className="relative w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent px-4 pb-4 pt-12"><strong className="text-xl font-bold sm:text-2xl">My games</strong></span>
                 </a>
-                <Link data-gamepad {...tileInteraction(1)} href="/images/screenshots/" className={`relative flex shrink-0 items-end overflow-hidden bg-[#34483b] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(1)}`}>
+                <Link data-gamepad {...tileInteraction(1)} href="/images/screenshots/" className={`relative flex shrink-0 items-end overflow-hidden bg-[#34483b] text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none max-sm:rounded-lg ${tileSize(1)}`}>
                   <span aria-hidden="true" className="absolute inset-0 grid grid-cols-3 gap-0.5">
                     {captureCollage.map((image) => (
                       <img key={image} src={image} alt="" className="h-full w-full object-cover" />
                     ))}
                   </span>
-                  <span className="relative w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent px-4 pb-4 pt-12"><strong className="block text-lg">My captures</strong><span className="text-sm">Screenshots</span></span>
+                  <span className="relative w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-3 pt-8 sm:px-4 sm:pb-4 sm:pt-12"><strong className="block text-sm leading-tight sm:text-lg">My captures</strong><span className="hidden text-sm sm:inline">Screenshots</span></span>
                 </Link>
-                <Link data-gamepad {...tileInteraction(2)} href="/blog/tags/video-game-industry/" className={`flex shrink-0 flex-col justify-end overflow-hidden bg-[#48536d] p-3 text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(2)}`}>
-                  <span aria-hidden="true" className="mb-auto text-3xl">✎</span><strong className="text-lg">My reviews</strong>
+                <Link data-gamepad {...tileInteraction(2)} href="/blog/tags/video-game-industry/" className={`flex shrink-0 flex-col justify-end overflow-hidden bg-[#48536d] p-3 text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none max-sm:rounded-lg ${tileSize(2)}`}>
+                  <span aria-hidden="true" className="mb-auto text-3xl">✎</span><strong className="text-sm leading-tight sm:text-lg">My reviews</strong>
                 </Link>
-                <a data-gamepad {...tileInteraction(3)} href="https://www.trueachievements.com/gamer/bogas04" target="_blank" rel="noopener noreferrer" className={`flex shrink-0 flex-col justify-end overflow-hidden bg-[#365c43] p-3 text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none ${tileSize(3)}`}>
+                <a data-gamepad {...tileInteraction(3)} href="https://www.trueachievements.com/gamer/bogas04" target="_blank" rel="noopener noreferrer" className={`flex shrink-0 flex-col justify-end overflow-hidden bg-[#365c43] p-3 text-white no-underline outline-offset-2 transition-[width,height] duration-300 focus:z-10 focus:outline-4 focus:outline-[#8cdcff] focus:shadow-[0_0_22px_4px_#35a9ff] motion-reduce:transition-none max-sm:rounded-lg ${tileSize(3)}`}>
                   <span aria-hidden="true" className="mb-auto text-3xl font-bold">G</span><strong className="text-sm leading-tight sm:text-base">My achievements</strong>
                 </a>
               </section>

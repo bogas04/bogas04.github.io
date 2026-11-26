@@ -1,7 +1,8 @@
 # Content authoring
 
-This repository has two local-only authoring pages:
+This repository has a local-only authoring hub and two standalone editors:
 
+- `/admin` links to the editors and manages the home page.
 - `/write` creates and edits blog posts.
 - `/upload` creates and manages image-gallery albums and photos.
 
@@ -9,7 +10,7 @@ Use `pnpm write` or `pnpm upload` to start the development server and open the
 right authoring page. `pnpm start` remains available when you want the whole
 site without opening an editor.
 
-Both pages use the browser's File System Access API, so the first connection
+The editors use the browser's File System Access API, so the first connection
 still requires selecting this repository's root directory and granting
 read/write access. A command line tool cannot grant that browser permission or
 pass a directory handle to the page. The Connect repository button is focused
@@ -18,8 +19,23 @@ last directory used for this site. The saved directory handle stays only in that
 browser's local IndexedDB storage; neither page uploads files to a server or
 commits/pushes Git changes.
 
-They deliberately return 404 in production, so they are not deployed to the
+These local-only pages deliberately return 404 in production, so they are not deployed to the
 public site.
+
+## `/admin`: home page and editor hub
+
+`/admin` matches the local editors and links to `/write`, `/upload`, and the
+local composer on `/now`. Connect the repository in Chrome or Edge to edit
+the introduction, home links, work, travel, education, talks, and social links
+stored in `src/data/home.json`. Entries
+can be added, reordered, edited and removed; nested lists can be edited too.
+Save writes that file only after validation and rejects changes if it was edited
+on disk since connection. The browser warns before leaving with unsaved work;
+changes are not published, committed or pushed automatically. Keep existing
+work IDs and gallery album IDs stable because they appear in public URLs. Work details, education paragraphs, and the travel introduction use inline Markdown for links, **bold**, *italics*, and `code`; wrap text in `==double equals==` for a highlight. Links that open a new tab retain their target and rel attributes in an optional Markdown link title, for example `[name](https://example.com "target=_blank;rel=noopener noreferrer")`. Layout, icons, and interaction behavior remain in code.
+
+The page uses the same development-only 404 guard as the other editors. It is
+not an authentication mechanism and must not be exposed on a public server.
 
 ## `/write`: blog posts
 

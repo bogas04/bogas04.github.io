@@ -56,7 +56,9 @@ test("mobile travel galleries are horizontally scrollable carousels", async ({
 
   const gallery = page.locator("#travel .image-gallery").first();
   await expect(gallery).toBeVisible();
-  await expect(gallery.getByRole("button")).toHaveCount(11);
+  const photos = gallery.getByRole("link", { name: /View photo \d+ from/ });
+  expect(await photos.count()).toBeGreaterThan(1);
+  await expect(photos.first()).toHaveAttribute("href", /^\/images\//);
 
   const initialScrollLeft = await gallery.evaluate((element) => element.scrollLeft);
   await gallery.evaluate((element) => {
@@ -120,4 +122,18 @@ test("work highlights have shareable URLs and follow browser history", async ({ 
   await expect(page.locator("#work-experience-swiggy-sde3")).toBeVisible();
   await page.goForward();
   await expect(page.getByRole("region", { name: "Work experience" })).toBeVisible();
+});
+
+test("work duration stays readable and the website link does not stretch", async ({ page }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/?work=udaan#work");
+  const card = page.locator("#work article").filter({ hasText: "udaan, Bengaluru" });
+  const dates = card.getByText(/April 2020 - November 2026/);
+  await expect(dates).toContainText("(6y 7m)");
+  if (testInfo.project.name === "mobile") {
+    const dateBox = await dates.boundingBox();
+    const websiteBox = await card.getByRole("link", { name: /Visit udaan.*website/i }).boundingBox();
+    expect(dateBox && websiteBox).toBeTruthy();
+    expect(websiteBox!.height).toBeLessThan(dateBox!.height);
+  }
 });

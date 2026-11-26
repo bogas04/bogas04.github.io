@@ -11,6 +11,11 @@ import React, {
 } from "react";
 
 import SeoTags from "../components/SeoTags";
+import RichText from "../components/home/RichText";
+import homeContent from "../data/home.json";
+import type { HomeContent } from "../utils/homeContent";
+
+const { workExperience, travelDestinations, talks, socialLinks, heroLinks, education, settings: [settings] } = homeContent as HomeContent;
 
 import GithubIcon from "../components/icons/github";
 import Section from "../layout/section";
@@ -29,9 +34,9 @@ function HomePage() {
   return (
     <>
       <SeoTags
-        title="divjot"
-        description="Frontend Engineer, Sceptic & a Vegan residing in Bengaluru, India."
-        imageUrl="/profile.png"
+        title={settings.name}
+        description={settings.seoDescription}
+        imageUrl={settings.profileImage}
         pageUrl="https://bogas04.fyi/"
       />
       <main>
@@ -49,37 +54,27 @@ function HomePage() {
 export default HomePage;
 
 function Hero() {
-  const links = [
-    { label: "now", subtitle: "what life looks like lately", href: "/now", icon: "now" },
-    { label: "blog", subtitle: "thoughts & stories", href: "/blog", icon: "blog" },
-    { label: "images", subtitle: "places, people & moments", href: "/images", icon: "images" },
-    { label: "plays", subtitle: "games & adventures", href: "/plays", icon: "plays" },
-    { label: "linkedin", subtitle: "the professional me", href: "https://linkedin.com/in/bogas04", icon: "linkedin" },
-    { label: "github", subtitle: "things I've built", href: "https://github.com/bogas04", icon: "github" },
-  ] as const;
+  const links = heroLinks;
 
   return (
     <Section className="min-h-[91vh]" style={{ zIndex: 10 }}>
       <h1 className="flex flex-col items-center text-center max-md:text-7xl md:max-lg:text-8xl">
         <img
-          src="/profile.png"
-          alt="Portrait of divjot"
+          src={settings.profileImage}
+          alt={`Portrait of ${settings.name}`}
           className="bg-white rounded-full border-4 border-white min-w-24 min-h-24 w-6 h-6 relative"
         />
-        divjot
+        {settings.name}
       </h1>
 
       <p className="mx-auto mt-2 max-w-2xl text-center text-base leading-relaxed text-white/90 md:text-lg">
-        Heylo! I&apos;m divjot (dj) or bogas04, a software engineer by profession,
-        with a huge interest in veganism, single-player video gaming, and a newfound
-        interest in philosophy and psychology. I sometimes write unhinged
-        emotional pieces and share some cool tech work.
+        {settings.intro}
       </p>
 
       <nav aria-label="Find me online" className="mx-auto mt-10 mb-6 grid w-full max-w-4xl grid-cols-2 gap-3 sm:gap-4">
         {(() => {
           const renderLink = ({ label, subtitle, href, icon }: (typeof links)[number]) => {
-          const external = href.startsWith("https://");
+          const external = /^(?:https?:)?\/\//.test(href);
           const glyph = (
             <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-20 sm:w-20">
               {icon === "images" && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-full w-full"><rect x="3" y="3" width="18" height="18" rx="1" /><circle cx="16.5" cy="8" r="1.5" fill="currentColor" stroke="none" /><path d="m4 18 5-5 4 4 2-2 5 5" /></svg>}
@@ -242,7 +237,7 @@ function Work() {
       style={{ zIndex: 12 }}
       id="work"
     >
-      <h2>such work</h2>
+      <h2>{settings.workHeading}</h2>
 
       <div className="relative -mx-[5vw] pt-3">
         {reading ? (
@@ -266,19 +261,19 @@ function Work() {
             </div>
           ))}
           <div data-work-card style={{ zIndex: 100 - Math.abs(chronologicalJobs.length - activeIndex) }} className="relative flex w-[min(34vw,14rem)] shrink-0 snap-center">
-            <a href="https://linkedin.com/in/bogas04" target="_blank" rel="noopener noreferrer"
+            <a href={settings.wildcardUrl} target="_blank" rel="noopener noreferrer"
               onClick={(event) => { if (!isWildcard) { event.preventDefault(); moveTo(chronologicalJobs.length); } }}
               style={{ transform: isWildcard ? "none" : "perspective(1000px) rotateY(-55deg) scale(0.88)" }}
               className={`relative ml-[calc((min(34vw,14rem)-min(70vw,30rem))/2)] flex w-[min(70vw,30rem)] shrink-0 flex-col justify-between bg-[#ffdf5d] p-5 text-[#261a38] no-underline shadow-[0_12px_35px_rgba(0,0,0,0.6)] transition-[transform,filter] duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:p-8 motion-reduce:transition-none ${isWildcard ? "md:hover:grayscale" : "grayscale brightness-75"}`}>
               <span aria-hidden="true" className="font-body text-[clamp(7rem,20vw,12rem)] font-extrabold leading-none">?</span>
-              <span><span className="block font-body text-2xl font-extrabold">What’s next?</span><span className="mt-2 block font-display text-lg sm:text-xl">Find me on LinkedIn ↗</span></span>
+              <span><span className="block font-body text-2xl font-extrabold">{settings.wildcardTitle}</span><span className="mt-2 block font-display text-lg sm:text-xl">{settings.wildcardText}</span></span>
             </a>
           </div>
         </div>
         <div className="mx-auto mt-4 max-w-5xl px-[5vw]">
           <div className="mb-4 flex flex-wrap items-end justify-between gap-2 border-b border-white/20 pb-3">
-            <p className="m-0 font-display text-xl leading-tight sm:text-2xl">{isWildcard ? "What’s next?" : chronologicalJobs[activeIndex][0].company} {selectedYear !== null && <span className="font-utility text-sm text-white/70">/ {selectedYear}</span>}</p>
-            <p className="m-0 font-utility text-xs uppercase tracking-wide text-white/70">Scroll sideways to explore</p>
+            <p className="m-0 font-display text-xl leading-tight sm:text-2xl">{isWildcard ? settings.wildcardTitle : chronologicalJobs[activeIndex][0].company} {selectedYear !== null && <span className="font-utility text-sm text-white/70">/ {selectedYear}</span>}</p>
+            <p className="m-0 font-utility text-xs uppercase tracking-wide text-white/70">{settings.carouselHint}</p>
           </div>
           <div ref={rulerRef} className="overflow-x-auto pb-3 [scrollbar-width:thin]" aria-label="Work timeline">
             <div className="relative flex min-w-[42rem] border-t-2 border-white/70 pt-0">
@@ -313,28 +308,19 @@ const workCardThemes: Record<string, string> = {
   refiral: "bg-teal-600",
 };
 const defaultWorkCardTheme = "bg-[#673ab7]";
-const roleProgressions: Record<string, string[]> = {
-  udaan: ["SDE3", "SDE4", "UI Architect"],
-};
-const workGroupSummaries: Record<string, string> = {
-  samsung: "Revamped Samsung Internet’s Chrome extension, built Gaana for Tizen, and helped train Bixby for browser commands.",
-};
-
 const formatEmploymentLength = (duration: string) => {
   const [start, end] = duration.split(/\s[-–]\s/);
-  const startDate = new Date(`${start} 1`);
-  const endDate = end === "Present" ? new Date() : new Date(`${end} 1`);
-
-  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
-    return null;
-  }
-
-  const totalMonths = Math.max(
-    0,
-    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-      endDate.getMonth() -
-      startDate.getMonth(),
-  );
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const parseMonth = (value: string) => {
+    const [month, year] = value.split(" ");
+    const monthIndex = monthNames.indexOf(month);
+    return monthIndex < 0 || !/^\d{4}$/.test(year ?? "") ? null : Number(year) * 12 + monthIndex;
+  };
+  const startMonth = parseMonth(start);
+  const now = new Date();
+  const endMonth = end === "Present" ? now.getFullYear() * 12 + now.getMonth() : parseMonth(end ?? "");
+  if (startMonth === null || endMonth === null) return null;
+  const totalMonths = Math.max(0, endMonth - startMonth);
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
@@ -352,7 +338,7 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
   const rolesInChronologicalOrder = isGrouped ? [...jobs].reverse() : jobs;
   const roleProgression = isGrouped
     ? rolesInChronologicalOrder.map((role) => role.position)
-    : (roleProgressions[job.id] ?? [job.position]);
+    : (job.roleProgression?.length ? job.roleProgression : [job.position]);
   const toggleDetails = () => {
     const update = () => onReadingChange(!reading);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) update();
@@ -377,6 +363,7 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
   const combinedDuration = isGrouped
     ? `${jobs[jobs.length - 1].duration.split(" - ")[0]} - ${job.duration.split(" - ")[1]}`
     : job.duration;
+  const employmentLength = formatEmploymentLength(combinedDuration);
 
   return (
     <ViewTransition name={`work-tile-${job.id}`}>
@@ -414,10 +401,10 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
           </button>
         </h3>
         <ViewTransition name={`work-meta-${job.id}`}>
-        <div className="mt-6 flex flex-wrap gap-3 font-body text-sm font-semibold">
+        <div className="mt-6 flex flex-wrap items-start gap-3 font-body text-sm font-semibold">
           <span className="bg-black/15 px-3 py-1.5">
             {combinedDuration}{" "}
-            <span className="block sm:inline">({formatEmploymentLength(combinedDuration)})</span>
+            {employmentLength && <span className="block sm:inline">({employmentLength})</span>}
           </span>
           <a
             href={job.companyUrl}
@@ -443,7 +430,7 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
           <ViewTransition name={`work-summary-${job.id}`}>
           <p className={`m-0 flex-1 font-display leading-relaxed normal-case ${reading ? "max-w-3xl text-lg font-medium sm:text-2xl" : "order-1 text-base sm:text-xl"}`}>
             {isGrouped
-              ? (workGroupSummaries[job.id] ?? rolesInChronologicalOrder.map((role) => role.summary).join(" "))
+              ? (job.groupSummary || rolesInChronologicalOrder.map((role) => role.summary).join(" "))
               : job.summary}
           </p>
           </ViewTransition>
@@ -453,7 +440,7 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
             <h4 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">{section.title}</h4>
             <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed sm:text-lg marker:opacity-70">
               {section.items.map((item, index) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+                <li key={index}><RichText>{item}</RichText></li>
               ))}
             </ul>
           </section>
@@ -463,7 +450,7 @@ function WorkExperience({ jobs, offset, onSelect, reading, onReadingChange }: { 
             <h4 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">Major Achievements</h4>
             <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed sm:text-lg marker:opacity-70">
               {achievements.map((achievement, index) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: achievement }} />
+                <li key={index}><RichText>{achievement}</RichText></li>
               ))}
             </ul>
           </section>
@@ -494,7 +481,7 @@ function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
       {job.team && (
         <>
           <dt className="text-xs font-bold uppercase tracking-wider opacity-75">Team</dt>
-          <dd dangerouslySetInnerHTML={{ __html: job.team }} />
+          <dd><RichText>{job.team}</RichText></dd>
         </>
       )}
       {job.descriptions.filter((desc) => job.id !== "udaan" || desc.title !== "Management").map((desc, index) => (
@@ -502,17 +489,13 @@ function WorkDetails({ job }: { job: (typeof workExperience)[number] }) {
           <dt className="border-t border-current/30 pt-6 font-display text-2xl font-semibold leading-tight first:border-t-0 first:pt-0 sm:text-3xl">{desc.title}</dt>
           <dd>
             {desc.title === "Description" &&
-            desc.items.length === 1 &&
-            !desc.items[0].includes("<li>") ? (
-              <div dangerouslySetInnerHTML={{ __html: desc.items[0] }} />
+            desc.items.length === 1 ? (
+              <div><RichText>{desc.items[0]}</RichText></div>
             ) : (
               <>
                 <ul className="list-disc space-y-3 pl-6 marker:opacity-70">
                   {desc.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      dangerouslySetInnerHTML={{ __html: item }}
-                    />
+                    <li key={itemIndex}><RichText>{item}</RichText></li>
                   ))}
                 </ul>
               </>
@@ -573,21 +556,9 @@ function Travel() {
       style={{ zIndex: 11 }}
       id="travel"
     >
-      <h2>many travels</h2>
+      <h2>{settings.travelHeading}</h2>
 
-      <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed sm:hidden">
-        We think travel is how we gain new perspectives, but, as one of my
-        favourite{" "}
-        <a
-          href="https://www.youtube.com/@fiascodagama1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          YouTubers
-        </a>{" "}
-        puts it, it&apos;s also when we loosen our grip on identity and leave
-        much of our baggage at home.
-      </p>
+      <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed sm:hidden"><RichText>{settings.travelIntro}</RichText></p>
 
       <div
         className="flex justify-center p-8 relative max-sm:hidden "
@@ -665,49 +636,25 @@ function Education() {
   const highlightedLinkStyle = "[box-decoration-break:clone] bg-[linear-gradient(177deg,transparent_0%,transparent_7%,#ffdf5d_8%,#ffdf5d_92%,transparent_93%)] px-1 font-bold text-[#261a38] underline decoration-2 underline-offset-2 hover:text-[#261a38] focus-visible:outline-2 focus-visible:outline-offset-4";
   return (
     <Section className={`${sectionEdge} before:bg-[#ffc107] before:[clip-path:polygon(0_0,100%_0,100%_100%,0_25%)]`} color="pink" style={{ zIndex: 11 }} id="education">
-      <h2>much education</h2>
+      <h2>{settings.educationHeading}</h2>
       <div className="pb-14 pt-8 md:pb-20 md:pt-12 [&_a]:transition-colors">
-        <article className="grid gap-10 border-t-2 border-white pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-12">
-          <div>
-            <h3 className="m-0 font-display text-[clamp(3.5rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em]">NSIT<span aria-hidden="true">.</span></h3>
-            <p className="mt-4 max-w-md text-lg font-bold leading-snug">Netaji Subhas Institute of Technology<br />Computer Engineering · 2012–2016</p>
-            <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed">
-              <p><strong>79.48%</strong>, fifth in a department of around 190 students. Consistently in the top ten, with a merit scholarship for all four years.</p>
-              <p>Mentored a class of 30 in web development and design at IEEE NSIT, and worked on database watermarking research under Assistant Professor Vidhi Khanduja.</p>
-              <p>Projects included <a className={highlightedLinkStyle} href="https://github.com/bogas04/mvp-generator">MVP Generator</a>, <a className={highlightedLinkStyle} href="https://github.com/bogas04/collnet">CollNet</a>, <a className={highlightedLinkStyle} href="https://github.com/bogas04/cloudkeeper">CloudKeeper</a>, and the <a className={highlightedLinkStyle} href="https://github.com/bogas04/Attendance-System">Student Attendance System</a>. I also wrote a <a className={highlightedLinkStyle} href="/Rapes.pdf">report on rapes</a>.</p>
-              <p>Web developer at <a className={highlightedLinkStyle} href="//ieeensit.org">IEEE NSIT</a>, core member at <a className={highlightedLinkStyle} href="//junoonnsit.com">Junoon</a>, the photography club, and tech head at <a className={highlightedLinkStyle} href="//collegespace.in">CollegeSpace</a>.</p>
+        {education.map((school, index) => (
+          <article key={school.name} className={`${index ? "mt-14 lg:mt-24" : ""} grid gap-10 border-t-2 border-white pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-12`}>
+            <div>
+              <h3 className={`m-0 whitespace-pre-line font-display font-medium tracking-[-0.05em] ${index === 0 ? "text-[clamp(3.5rem,8vw,7rem)] leading-none" : "text-[clamp(2.8rem,6vw,5rem)] leading-[1.05]"}`}>{school.name}<span aria-hidden="true">.</span></h3>
+              <p className="mt-4 max-w-md whitespace-pre-line text-lg font-bold leading-snug">{school.subtitle}</p>
+              <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed [&_a]:[box-decoration-break:clone] [&_a]:bg-[linear-gradient(177deg,transparent_0%,transparent_7%,#ffdf5d_8%,#ffdf5d_92%,transparent_93%)] [&_a]:px-1 [&_a]:font-bold [&_a]:text-[#261a38] [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-2 [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4">
+                {school.facts.map((fact, i) => <p key={i}><RichText>{fact}</RichText></p>)}
+              </div>
+              <a className={`${highlightedLinkStyle} mt-7 inline-block text-base`} href={school.website} target="_blank" rel="noopener noreferrer">{school.websiteLabel}</a>
             </div>
-            <a className={`${highlightedLinkStyle} mt-7 inline-block text-base`} href="https://nsut.ac.in/en/home" target="_blank" rel="noopener noreferrer">College website ↗</a>
-          </div>
-          <blockquote className="relative isolate m-0 border-l-4 border-[#ffdf5d] px-6 pb-6 pt-12 font-display text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.5] before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:rotate-[1deg] before:bg-[#901044] before:content-[''] sm:px-10 sm:pb-10">
-            <span aria-hidden="true" className="absolute -top-8 left-4 select-none text-[8rem] leading-none text-[#ffdf5d] sm:left-8">“</span>
-            <div className="space-y-5">
-              <p>I spent my awkward teenage years at NSIT feeling a little lost and figuring out my place in the world. I kept finding myself thinking, “this is not me”, and asking who I really was. I’m still figuring that out.</p>
-              <p>One thing I did figure out was the complicated maths behind our grades, with different credits for each subject. A friend and I built <a className={linkStyle} href="https://www.youtube.com/watch?v=ZU_RGEo2tsM" target="_blank" rel="noopener noreferrer">NSITUlator</a> to make it easier. It was the first time I felt like an engineer: we saw a problem, made a naive solution, improved it with feedback, and tied it to CollegeSpace so people could use it. Internships, project ideas, and a calling as a web developer followed.</p>
-              <p>I made some friends along the way, though most of us are now scattered around the world.</p>
-            </div>
-          </blockquote>
-        </article>
-        <article className="mt-14 grid gap-10 border-t-2 border-white pt-8 lg:mt-24 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-12">
-          <div>
-            <h3 className="m-0 font-display text-[clamp(2.8rem,6vw,5rem)] font-medium leading-[1.05] tracking-[-0.05em]">St. Mary’s<br />School<span aria-hidden="true">.</span></h3>
-            <p className="mt-4 text-lg font-bold">2002–2012 · CBSE</p>
-            <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed">
-              <p><strong>95.2%</strong> in Class 12, topping the science stream. Scored <strong>9.8 CGPA</strong> (approximately 93.1%) in Class 10.</p>
-              <p>Received a merit scholarship for three years, from Class 10 through Class 12.</p>
-            </div>
-            <a className={`${highlightedLinkStyle} mt-7 inline-block text-base`} href="http://www.stmarysschooldwarka.com/" target="_blank" rel="noopener noreferrer">School website ↗</a>
-          </div>
-          <blockquote className="relative isolate m-0 border-l-4 border-[#ffdf5d] px-6 pb-6 pt-12 font-display text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.5] before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:rotate-[1deg] before:bg-[#901044] before:content-[''] sm:px-10 sm:pb-10">
-            <span aria-hidden="true" className="absolute -top-8 left-4 select-none text-[8rem] leading-none text-[#ffdf5d] sm:left-8">“</span>
-            <div className="space-y-5">
-              <p>St. Mary’s had a huge impact on my formative years. A lot of my values, and my emphasis on critical thinking, can be traced back to school.</p>
-              <p>Although it was a Christian school, I loved how open it was to different religions. I never felt like an outsider. Teachers helped me build intuition instead of simply learning by rote. I especially miss Shalini ma’am, whose progressive view of the world inspired me to think more critically and be more tolerant, even when the society around me was more orthodox.</p>
-              <p>I was delighted to find out I had topped the science stream in the board exams, and even more delighted to see my name in the newspaper!</p>
-            </div>
-          </blockquote>
-        </article>
-        <p className="mt-12 border-t border-white/50 pt-6 text-base"><a className={`${linkStyle} font-bold`} href="/resume" target="_blank" rel="noopener noreferrer">Download my résumé ↗</a></p>
+            <blockquote className="relative isolate m-0 border-l-4 border-[#ffdf5d] px-6 pb-6 pt-12 font-display text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.5] before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:rotate-[1deg] before:bg-[#901044] before:content-[''] sm:px-10 sm:pb-10">
+              <span aria-hidden="true" className="absolute -top-8 left-4 select-none text-[8rem] leading-none text-[#ffdf5d] sm:left-8">“</span>
+              <div className="space-y-5 [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a:hover]:text-yellow-200 [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4">{school.story.map((paragraph, i) => <p key={i}><RichText>{paragraph}</RichText></p>)}</div>
+            </blockquote>
+          </article>
+        ))}
+        <p className="mt-12 border-t border-white/50 pt-6 text-base"><a className={`${linkStyle} font-bold`} href={settings.resumeUrl} target="_blank" rel="noopener noreferrer">{settings.resumeLabel}</a></p>
       </div>
     </Section>
   );
@@ -716,7 +663,7 @@ function Talks() {
   const posterColors = ["bg-[#f3e3c4]", "bg-[#d4e2cf]", "bg-[#efd3c9]", "bg-[#ded8e8]"];
   return (
     <Section className={`${sectionEdge} before:bg-[#c2185b] before:[clip-path:polygon(0_0,100%_0,0_75%)]`} color="green" style={{ zIndex: 13 }} id="talks">
-      <h2>so talkative</h2>
+      <h2>{settings.talksHeading}</h2>
       <div className="grid gap-7 pb-14 pt-6 md:grid-cols-2 md:pb-20 md:pt-10">
         {talks.map((talk, index) => (
           <article key={talk.title} className={`relative isolate flex min-w-0 flex-col before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:translate-x-2 before:translate-y-2 before:bg-[#163f26] before:content-[''] ${index % 2 === 0 ? "before:rotate-[1deg]" : "before:rotate-[-1deg]"} ${index === 0 ? "md:col-span-2 sm:flex-row" : "sm:flex-row md:flex-col xl:flex-row"}`}>
@@ -737,7 +684,7 @@ function Talks() {
               <div className="w-full">
                 <p className="mb-4 text-base font-medium leading-snug">{talk.event}</p>
                 <div className="flex flex-wrap gap-2">
-                  <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.link} target="_blank" rel="noopener noreferrer" aria-label={`${talk.title}: ${talk.title === "Swiggy ♥️ Web" ? "website" : "slides"}`}>{talk.title === "Swiggy ♥️ Web" ? "Website" : "Slides"} ↗</a>
+                  <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.link} target="_blank" rel="noopener noreferrer" aria-label={`${talk.title}: ${talk.linkLabel.toLowerCase()}`}>{talk.linkLabel} ↗</a>
                   {talk.video && <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.video} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${talk.title}`}>Video ↗</a>}
                   {talk.eventLink !== talk.video && <a className="bg-[#193527] px-3 py-2 text-sm font-bold text-white no-underline hover:bg-[#315b41] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" href={talk.eventLink} target="_blank" rel="noopener noreferrer" aria-label={`${talk.title}: event details`}>Event ↗</a>}
                 </div>
@@ -753,7 +700,7 @@ function Talks() {
 function Social() {
   return (
     <Section className={`${sectionEdge} before:bg-[#2e7d32] before:[clip-path:polygon(0_0,100%_0,100%_80%,0_10%)]`} color="blue" style={{ zIndex: 13 }} id="social">
-      <h2>somewhat social</h2>
+      <h2>{settings.socialHeading}</h2>
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {socialLinks.map((link) => (
@@ -782,260 +729,7 @@ const coordsToPosition = (lat: number, lng: number) => ({
   y: ((90 - lat) / 180) * 100 + 10,
 });
 
-const workExperience = [
-  {
-    id: "udaan",
-    company: "udaan, Bengaluru",
-    companyUrl: "https://udaan.com",
-    position: "Software Architect",
-    duration: "April 2020 - November 2026",
-    summary:
-      "Led the core UI platform team and improved web and app experiences.",
-    team: undefined,
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Management",
-        items: [
-          "Led a <mark>core UI platform team of four very talented developers</mark>",
-          "Planned and delivered <mark>quarterly roadmaps</mark> with data-driven tasks and output",
-          "Identified and worked around common problems faced in leading a team (consistent deliverables, team morale, measuring impact, breaking down long running issues, scoping tasks, asynchronous communication, ...).",
-        ],
-      },
-      {
-        title: "Individual Contributions",
-        items: [
-          "Built a release bundle size tracker with historical graphs and size targets; reduced app size from <mark>20MB to 6MB</mark>.",
-          "<mark>Halved team operating costs</mark> through event optimization and resource sizing.",
-          "Modernized and migrated a React Native app with <mark>over 200 screens from version 0.70 to 0.85</mark>.",
-          "Authored a <mark>modular documentation and skills system</mark> for LLM-assisted UI development using internal libraries and design systems.",
-          "Remediated <mark>annual VAPT findings</mark> across web and mobile apps.",
-          "Evaluated esbuild, Vite, and Rspack; selected Rspack and made development server startup and <mark>builds 10x faster</mark>.",
-          "Built a <mark>screen explorer</mark> connecting registered screens to daily active user metrics and usage trends to identify unused screens.",
-          'Published <a href="https://vitadrop.in" rel="noopener noreferrer">vitadrop.in</a> and <a href="https://annabhumi.com" rel="noopener noreferrer">annabhumi.com</a> AI assisted brand websites.',
-          'Developed <a href="https://wondermart.com" rel="noopener noreferrer">wondermart</a> app from scratch in <mark>1 month for b2c vertical</mark>.',
-          'Fixed a <a href="https://medium.com/engineering-udaan/how-we-solved-a-2s-stutter-caused-by-re-rendering-react-components-5b852ca1852a" rel="noopener noreferrer"><mark>2400ms</mark></a> re-rendering linked stutter caused on add to cart action.',
-          "Reduced react-native codepush <mark>bundle size by 20%</mark> by optimizing image assets",
-          "Improved app <mark>startup time by 75% (P90)</mark>, thus improving <mark>conversions to 2nd page by 35%</mark>.",
-          "Updated internal react-native+react-native-web framework to use functional components with specialized hooks.",
-          "Built <mark>Year In Review screens for 2020 & 2021</mark>.",
-          "Deployed a <mark>webview fallback</mark> for react-native screens for quicker resolution during outages.",
-          "Drove improvements for developer experience initiatives by adding <mark>CI checks, pre-commit hooks and dev compiler optimizations</mark>.",
-          "Refactored tightly coupled internal library into <mark>individual npm packages in a mono-repo</mark>.",
-          "Used extensive A/B testing to drive higher (<mark>3.6 to 4.4</mark>) app store ratings using a strategically placed prompt.",
-          "Revamped udaan's homepage with <mark>60fps animations</mark> and better SEO.",
-          "Collaborated to make find.udaan.com during 2nd wave of covid19 in India to facilitate in finding essential medicines.",
-          "Worked supporting lazy loading of react-native+react-native-web screens.",
-          "Worked on an internal framework for creating SSR based React apps (using webpack+node)",
-          "Worked on adding systematic changes to allow <mark>Animated Skeleton Screens</mark> for faster perceived performance on React Native and Web App.",
-          "Revamped <mark>Order Details Experience</mark> for React Native and Web.",
-        ],
-      },
-    ],
-    achievements: [
-      "<mark>Unwavering Dedication Award</mark>",
-      "<mark>Leading Without Authority Award</mark> (winner twice)",
-    ],
-  },
-  {
-    id: "swiggy-sde3",
-    company: "Swiggy, Bengaluru",
-    companyUrl: "https://swiggy.com",
-    position: "Software Development Engineer III",
-    duration: "November 2019 - April 2020",
-    summary: "Led launches across Swiggy Go, Stores, checkout, and Genie.",
-    team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - New Initiatives Team (Web)',
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "Lead the release of <mark>Timeline shareability on Swiggy Go</mark>.",
-          "Lead the release of <mark>Swiggy Stores PWA</mark>.",
-          "Lead the release of <mark>Swiggy Single Page Checkout</mark> for Food.",
-          "Developed new PL driven UI for Swiggy Stores.",
-          "Developed new <mark>Swiggy Genie</mark>.",
-          'Developed a system for incorporating <mark>Origin Trials</mark> for our PWAs, starting with <a href="https://web.dev/sms-receiver-api-announcement/" target="_blank" rel="noopener noreferrer">SMS Receiver API</a> & <a href="https://web.dev/contact-picker/" target="_blank" rel="noopener noreferrer">Contacts API</a>.',
-          "Deprecated legacy systems and ported the same to modern services.",
-          "Regularly worked with and maintained HAProxy configuration.",
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-  {
-    id: "swiggy-sde2",
-    company: "Swiggy, Bengaluru",
-    companyUrl: "https://swiggy.com",
-    position: "Software Development Engineer II",
-    duration: "January 2018 - November 2019",
-    summary: "Built payments, platform tooling, and high-scale PWA features.",
-    team: '<a href="https://www.twitter.com/SwiggyTech" rel="noopener noreferrer" target="_blank">@SwiggyTech</a> - Web Team',
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "Designed and developed <mark>multi-tenant payments module</mark>",
-          "Designed and developed <mark>website generator (Gauntlet)</mark>. <mark>10+ dashboards</mark>.",
-          "Designed and developed static site serving system for legal pages.",
-          "Designed Hotstar-Pop integration and scaled codepath for <mark>120k RPM</mark>.",
-          "Moved codebase to a monorepo for improved developer experience.",
-          "Developed automatic UA based asset serving system for smaller <mark>bundle sizes. (20%)</mark>",
-          "Reduced <mark>bundle size by 50%</mark> for ES2015-compliant browsers with user-agent aware asset delivery.",
-          "Shipped enhancements across <mark>search, menu, and cart experiences</mark>.",
-          "Developed <mark>Restaurant Hygiene Pages</mark> for PWA and as webview for apps.",
-          "Developed <mark>Everyday Offers Feature</mark> for mobile PWA.",
-        ],
-      },
-    ],
-    achievements: ["Awards: <mark>MVP (Oct 2018)</mark>"],
-  },
-  {
-    id: "housing",
-    company: "Housing.com, Mumbai",
-    companyUrl: "https://housing.com",
-    position: "Senior Software Development Engineer",
-    duration: "October 2017 - January 2018",
-    summary: "Improved Housing's PWA performance, rendering, and page weight.",
-    team: '<a href="https://twitter.com/HousingEngg" target="_blank" rel="noopener noreferrer">@HousingEngg</a> - Frontend team',
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "As part of frontend team, I worked on improving performance of housing PWA. This was achieved by following enhancements:",
-          "Migrated to React 16 from version 15. <mark>50% win for <code>renderToString</code> completion time</mark>.",
-          "Migrated to NodeJS version 8 from version 6 gave <mark>another 50% win</mark> for above.",
-          "Reduced asset size by <mark>roughly 20% using Brotli compression</mark>.",
-          "Optimized PNGs, JPEGs, converted to SVGs wherever possible to reduce overall page size.",
-          "Improved <mark>scroll performance of listing page</mark> by using <code>will-change</code> CSS rule, along with disabling <code>pointer-events</code> on scroll.",
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-  {
-    id: "samsung",
-    company: "Samsung R&D Institute, Bengaluru",
-    companyUrl:
-      "http://www.samsung.com/in/aboutsamsung/samsungelectronics/india/rnd.html",
-    position: "Software Developer",
-    duration: "June 2016 - October 2017",
-    summary:
-      "Revamped Samsung Internet’s Chrome extension, built a Gaana music app for Tizen phones, and helped train Bixby for browser commands.",
-    team: '<a href="https://twitter.com/SamsungInternet" target="_blank" rel="noopener noreferrer">@SamsungInternet</a> team',
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          '<strong><a href="https://chrome.google.com/webstore/detail/samsung-internet/epejdmjgfibjaffbmojllapapjejipkh" target="_blank" rel="noopener noreferrer">Samsung Internet PC Extension</a></strong> Starting June 2016: Revamped the extension codebase by switching to modern JavaScript paradigms, UI overhaul and performance optimizations. Improved localization of strings and helped in <a href="https://medium.com/samsung-internet-dev/release-of-samsung-internet-chrome-extension-v2-644e7b97096e" target="_blank" rel="noopener noreferrer">rebranding</a> for version 2.0.',
-          "Successfully shipped version 2.0 in March which received great response (chrome web store rating increased from <mark>2.7 to 3.7</mark> post launch).",
-          "Improved bookmark sync and added <mark>dynamic loading for collections with 20,000 bookmarks</mark>, with caching and indexing to support browsing, searching, and favoriting.",
-          "Added loading bars and other perceived loading indicators to make bookmark sync and browsing feel more responsive.",
-          "Userbase increased from <mark>8,000 to 60,000 monthly active users (~8x)</mark> within 4 months of 2.0 release.",
-          '<strong><a href="https://www.tizenexperts.com/2017/06/galaxy-update-samsung-z2-z3-brings-samsung-z4-galaxy-app-features/" target="_blank" rel="noopener noreferrer">Gaana Web App</a></strong> Starting March 2017: Designed and developed the web application in ReactJS + Redux + <a href="https://github.com/styled-components/styled-components" target="_blank" rel="noopener noreferrer">Styled-Components</a> (later replaced with <a href="https://github.com/tkstrong4/emotion" target="_blank" rel="noopener noreferrer">Emotion</a> for perf wins).',
-          "Built the <mark>Gaana music experience as a web app for Tizen phones</mark>, as part of bringing third-party apps to the platform.",
-          "Challenges like performance on low end devices, inter-op between Tizen APIs and Web Platform were tackled along with the team.",
-          "Successfully launched <mark>first phase of app within MyGalaxy on Tizen</mark> in Late May.",
-          '<strong><a href="https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser" target="_blank" rel="noopener noreferrer">Samsung Internet</a> - <a href="http://www.samsung.com/global/galaxy/apps/bixby/" target="_blank" rel="noopener noreferrer">Bixby</a></strong> April 2017 to July 2017: Wrote JSGF gram files for Samsung Internet domain. [<a href="https://www.youtube.com/watch?v=k2IM_wHrSQ8" target="_blank" rel="noopener noreferrer">video</a>]',
-          "Helped train Bixby for Samsung Internet by writing <mark>voice commands and browser intents</mark>, so it could understand requests such as opening a particular website from their context.",
-          "Helped in bringing <mark>accuracy to 95%+</mark> for Bixby US launch.",
-        ],
-      },
-    ],
-    achievements: [
-      "<strong><mark>Employee of the Month (December 2016)</mark></strong> Awarded as Employee of the Month for supporting and developing Samsung Internet PC Extension v2.0 in HQ.",
-      '<strong><mark>Samsung Citizen Award (March 2017)</mark></strong> <em>"Though a fresher and new to product development, [he] took up one of the key components of Samsung Internet browser, viz Samsung Internet Extension for Chrome and commercialized it flawlessly. All through the project, [he] has displayed enormous passion with a clear goal of making it much better."</em>',
-    ],
-  },
-  {
-    id: "fizzy",
-    company: "Fizzy Food Lab's, Mumbai",
-    companyUrl: "http://chefsbasket.com",
-    position: "Fullstack JavaScript Developer",
-    duration: "December 2015 - January 2016",
-    summary: "Built a React, Node.js, and PostgreSQL single-page application.",
-    team: undefined,
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          'Developed an <a href="http://chefsbasket.herokuapp.com" target="_blank" rel="noopener noreferrer">SPA</a> using <mark>ReactJS, NodeJS and Postgresql</mark>',
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-  {
-    id: "samsung-trainee",
-    company: "Samsung Research Institute, Bengaluru",
-    companyUrl: "//www.samsung.com/in/sri-b/siso.html",
-    position: "Student Trainee",
-    duration: "June 2015 - August 2015",
-    summary:
-      "Built map-data infrastructure and analysis tooling during a student internship.",
-    team: undefined,
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "Developed <mark>tile based map server</mark> using NodeJS, mapnik and TileMill",
-          "Set up <mark>Mongodb cluster (3 systems)</mark>, developed scripts to convert data from mongodb to CSVs and CSVs to JSON to-and-from a Hadoop cluster, and a web app to display results of the road analysis done by Hadoop.",
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-  {
-    id: "refiral",
-    company: "Refiral, New Delhi",
-    companyUrl: "//refiral.com",
-    position: "Product Developer",
-    duration: "October 2013 - October 2014",
-    summary:
-      "Co-founded and built product, analytics, and platform integrations.",
-    team: undefined,
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "<mark>Co-founding member</mark>. Managed JavaScript head of the tool.",
-          "<mark>Health Report tool</mark> for analyzes all clients statistically and constantly check for API health status, hence benefiting in tracking downtimes and losses.",
-          "Performance improvements by deploying faster routes to server calls. (<mark>300-400ms win</mark>)",
-          "Expanding support to <mark>several e-commerce platforms</mark>.",
-          "Extending help in creating the internal API. Made its use to make several customizable popouts, providing more options than industry.",
-          "Integration with social networks to enable the tool. Studied Facebook documentation to leverage best out of its Graph API.",
-          "Helped in strategy and planning of the tool in its initial phase.",
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-  {
-    id: "frrole",
-    company: "Frrole, Remote",
-    companyUrl: "//frrole.com",
-    position: "Frontend Development Intern",
-    duration: "November 2013 - January 2014",
-    summary: "Built a responsive movie-buzz analytics web application.",
-    team: undefined,
-    isCurrent: false,
-    descriptions: [
-      {
-        title: "Description",
-        items: [
-          "<mark>Buzzometer</mark> - Created an interactive and responsive web app using the APIs of Frrole using jQuery, PHP and XML for analyzing the buzz created by a particular movie.",
-        ],
-      },
-    ],
-    achievements: undefined,
-  },
-];
+
 const companyGroupKey = (id: string) => {
   if (id.startsWith("swiggy-")) return "swiggy";
   if (id === "samsung" || id.startsWith("samsung-")) return "samsung";
@@ -1075,250 +769,10 @@ const workYearBounds = chronologicalWorkExperience.map((jobs) => {
 const workFirstYear = Math.min(...workYearBounds.map((period) => period.start));
 const workLastYear = Math.max(...workYearBounds.map((period) => period.end));
 
-const socialLinks = [
-  { title: "What I'm playing", url: "/plays" },
-  { title: "YouTube", url: "//youtube.com/divjotbogas" },
-];
 
-const talks = [
-  {
-    image: "/assets/talks/upfront91-2024.png",
-    title: "Surviving the Crunch",
-    link: "https://docs.google.com/presentation/d/1ih3NXkM9A4bCoMZqlwuXT894savVdkyser812xAHANQ",
-    event: "Upfront91 2024, Make My Trip Office",
-    eventLink: "https://upfront91.makemytrip.com/",
-    video:
-      "https://www.youtube.com/live/Vh5ljTCqGcw?si=HAbW0TShr_TbfIPS&t=11912",
-  },
-  {
-    image: "/assets/talks/designs-of-coder.png",
-    title: "Designs of a Coder (2021)",
-    link: "https://docs.google.com/presentation/d/1qm_7Td7GkyVud6V9SbhOOZ8zwdhxsm024JW7-C6ziag/edit?usp=sharing",
-    event: "Pesto",
-    eventLink: "https://pesto.tech/",
-    video: "https://youtu.be/es-oXFtKshI",
-  },
-  {
-    image: "/assets/talks/blazing-fast-web.png",
-    title: "Web Performance in 2019",
-    link: "http://bit.ly/web-performance-2019",
-    eventLink: "https://www.hellomeets.com/",
-    event: "Hello Meets, Swiggy Office",
-  },
-  {
-    image:
-      "https://ytimg.googleusercontent.com/vi/2mX8hmefCRI/maxresdefault.jpg",
-    title: "Swiggy ♥️ Web",
-    link: "https://www.swiggy.com",
-    event: "Keynote, Google for Mobile India 2019",
-    eventLink: "https://www.youtube.com/watch?v=2mX8hmefCRI",
-    video: "https://www.youtube.com/watch?v=2mX8hmefCRI",
-  },
-  {
-    image: "/assets/talks/react-2019.png",
-    title: "React in 2019",
-    link: "http://bit.ly/react-2019",
-    eventLink: "https://www.meetup.com/reactjs-bangalore/events/255737841/",
-    event: "ReactJS Bangalore #41",
-  },
-  {
-    image: "/assets/talks/testing-with-jest.png",
-    title: "Testing with Jest",
-    link: "http://bit.ly/jest-04-2018",
-    eventLink: "https://www.meetup.com/ReactJS-Bangalore/events/247773928",
-    event: "ReactJS Bangalore #32",
-  },
-  {
-    image:
-      "https://ytimg.googleusercontent.com/vi/lN8b_fXRC_A/maxresdefault.jpg",
-    video: "https://www.youtube.com/watch?v=lN8b_fXRC_A",
-    title: "Delivering Fast Web-apps Fast",
-    link: "http://bit.ly/gddx-dec2017",
-    eventLink:
-      "https://www.meetup.com/GDG-Mumbai/events/245206006/?_cookie-check=hdmhnBaW7ejxNONA",
-    event: "Google Developers' Day, Extended (Mumbai)",
-  },
-];
-const travelDestinations = [
-  {
-    name: "Sri Lanka",
-    albumId: "sri-lanka",
-    markerOffsetY: 20,
-    description: "September 2026\n• A trip through Sri Lanka",
-    images: [
-      "/img/travel/sri-lanka/sri-lanka-01.jpg",
-      "/img/travel/sri-lanka/sri-lanka-02.jpg",
-      "/img/travel/sri-lanka/sri-lanka-03.jpg",
-      "/img/travel/sri-lanka/sri-lanka-04.jpg",
-      "/img/travel/sri-lanka/sri-lanka-05.jpg",
-      "/img/travel/sri-lanka/sri-lanka-06.jpg",
-      "/img/travel/sri-lanka/sri-lanka-07.jpg",
-      "/img/travel/sri-lanka/sri-lanka-08.jpg",
-      "/img/travel/sri-lanka/sri-lanka-09.jpg",
-      "/img/travel/sri-lanka/sri-lanka-10.jpg",
-      "/img/travel/sri-lanka/sri-lanka-11.jpg",
-      "/img/travel/sri-lanka/sri-lanka-12.jpg",
-      "/img/travel/sri-lanka/sri-lanka-13.jpg",
-      "/img/travel/sri-lanka/sri-lanka-14.jpg",
-      "/img/travel/sri-lanka/sri-lanka-15.jpg",
-      "/img/travel/sri-lanka/sri-lanka-16.jpg",
-      "/img/travel/sri-lanka/sri-lanka-17.jpg",
-      "/img/travel/sri-lanka/sri-lanka-18.jpg",
-      "/img/travel/sri-lanka/sri-lanka-19.jpg",
-    ],
-    lat: 7.8731,
-    lng: 80.7718,
-  },
-{
-    name: "Ireland",
-    albumId: "ireland",
-    images: [
-      "/img/travel/ireland/ireland-1.jpg",
-      "/img/travel/ireland/ireland-10.jpg",
-      "/img/travel/ireland/ireland-11.jpg",
-      "/img/travel/ireland/ireland-2.jpg",
-      "/img/travel/ireland/ireland-3.jpg",
-      "/img/travel/ireland/ireland-4.jpg",
-      "/img/travel/ireland/ireland-5.jpg",
-      "/img/travel/ireland/ireland-6.jpg",
-      "/img/travel/ireland/ireland-7.jpg",
-      "/img/travel/ireland/ireland-8.jpg",
-      "/img/travel/ireland/ireland-9.jpg",
-    ],
-    description: "2025\n• Happy Pear, Galleries and vegan food!",
-    lat: 53.3498,
-    lng: -6.2603,
-  },
-{
-    name: "UK",
-    albumId: "uk",
-    images: [
-      "/img/travel/uk/uk-1.jpg",
-      "/img/travel/uk/uk-10.jpg",
-      "/img/travel/uk/uk-11.jpg",
-      "/img/travel/uk/uk-12.jpg",
-      "/img/travel/uk/uk-13.jpg",
-      "/img/travel/uk/uk-14.jpg",
-      "/img/travel/uk/uk-15.jpg",
-      "/img/travel/uk/uk-16.jpg",
-      "/img/travel/uk/uk-17.jpg",
-      "/img/travel/uk/uk-18.jpg",
-      "/img/travel/uk/uk-19.jpg",
-      "/img/travel/uk/uk-2.jpg",
-      "/img/travel/uk/uk-3.jpg",
-      "/img/travel/uk/uk-4.jpg",
-      "/img/travel/uk/uk-5.jpg",
-      "/img/travel/uk/uk-6.jpg",
-      "/img/travel/uk/uk-7.jpg",
-      "/img/travel/uk/uk-8.jpg",
-      "/img/travel/uk/uk-9.jpg",
-    ],
-    description: "2025\n• History & Heritage and lots of pies!",
-    lat: 51.5074,
-    lng: -0.1278,
-  },
-{
-    name: "Taiwan",
-    albumId: "taiwan",
-    images: [
-      "/img/travel/taiwan/taiwan-1.jpg",
-      "/img/travel/taiwan/taiwan-10.jpg",
-      "/img/travel/taiwan/taiwan-11.jpg",
-      "/img/travel/taiwan/taiwan-2.jpg",
-      "/img/travel/taiwan/taiwan-3.jpg",
-      "/img/travel/taiwan/taiwan-4.jpg",
-      "/img/travel/taiwan/taiwan-5.jpg",
-      "/img/travel/taiwan/taiwan-6.jpg",
-      "/img/travel/taiwan/taiwan-7.jpg",
-      "/img/travel/taiwan/taiwan-8.jpg",
-      "/img/travel/taiwan/taiwan-9.jpg",
-    ],
-    description: "2024, 2025\n• Amazing Buddhist culture, vegan food",
-    lat: 25.033,
-    lng: 121.5654,
-  },
-{
-    name: "Thailand",
-    albumId: "thailand",
-    description: "2024, 2025\n• Vegan food, road trips and beautiful sights",
-    images: [
-      "/img/travel/thailand/thailand-1.jpg",
-      "/img/travel/thailand/thailand-2.jpg",
-      "/img/travel/thailand/thailand-3.jpg",
-      "/img/travel/thailand/thailand-4.jpg",
-      "/img/travel/thailand/thailand-5.jpg",
-      "/img/travel/thailand/thailand-6.jpg",
-      "/img/travel/thailand/thailand-7.jpg",
-      "/img/travel/thailand/thailand-8.jpg",
-    ],
-    lat: 13.7563,
-    lng: 100.5018,
-  },
-{
-    name: "Malaysia",
-    albumId: "malaysia",
-    description: "2024\n• Beautiful temples, walkable cities!",
-    images: [
-      "/img/travel/malaysia/malaysia-1.jpg",
-      "/img/travel/malaysia/malaysia-2.jpg",
-      "/img/travel/malaysia/malaysia-3.jpg",
-      "/img/travel/malaysia/malaysia-4.jpg",
-      "/img/travel/malaysia/malaysia-5.jpg",
-    ],
-    lat: 3.139,
-    lng: 101.6869,
-  },
-{
-    name: "Bali, Indonesia",
-    albumId: "bali",
-    images: [
-      "/img/travel/bali/bali-1.jpg",
-      "/img/travel/bali/bali-2.jpg",
-      "/img/travel/bali/bali-3.jpg",
-      "/img/travel/bali/bali-4.jpg",
-      "/img/travel/bali/bali-5.jpg",
-      "/img/travel/bali/bali-6.jpg",
-    ],
-    description:
-      "2024\n• Stunning views of Nusa Penida, Sidemen and vegan food",
-    lat: -8.65,
-    lng: 115.2167,
-  },
-{
-    name: "Maldives",
-    albumId: "maldives-2023",
-    description: "2023\n• Island Paradise",
-    images: [
-      "/img/travel/maldives/maldives-1.jpg",
-      "/img/travel/maldives/maldives-2.jpg",
-      "/img/travel/maldives/maldives-3.jpg",
-      "/img/travel/maldives/maldives-4.jpg",
-    ],
-    lat: 4.1755,
-    lng: 73.5093,
-  },
-{
-    name: "South Korea",
-    albumId: "south-korea",
-    description: "2016\n• Worked at Samsung HQ, beautiful Fall and snow!",
-    images: [
-      "/img/travel/sk/sk-1.jpg",
-      "/img/travel/sk/sk-10.jpg",
-      "/img/travel/sk/sk-11.jpg",
-      "/img/travel/sk/sk-12.jpg",
-      "/img/travel/sk/sk-2.jpg",
-      "/img/travel/sk/sk-3.jpg",
-      "/img/travel/sk/sk-4.jpg",
-      "/img/travel/sk/sk-5.jpg",
-      "/img/travel/sk/sk-6.jpg",
-      "/img/travel/sk/sk-7.jpg",
-      "/img/travel/sk/sk-8.jpg",
-      "/img/travel/sk/sk-9.jpg",
-    ],
-    lat: 37.5665,
-    lng: 126.978,
-  },
-];
+
+
+
 
 function ImageGallery({
   destination,

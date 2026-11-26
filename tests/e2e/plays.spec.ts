@@ -38,8 +38,8 @@ test("dashboard tiles stay usable and do not shift surrounding content", async (
   expect(Math.abs(after!.y - before!.y)).toBeLessThan(1);
   expect(Math.abs(captureBox!.width - captureBox!.height)).toBeLessThan(1);
   if (testInfo.project.name === "mobile") {
-    expect(Math.abs(gameBox!.width - captureBox!.width)).toBeLessThan(1);
-    expect(Math.abs(gameBox!.y - captureBox!.y)).toBeLessThan(1);
+    expect(gameBox!.width).toBeGreaterThan(captureBox!.width * 2.9);
+    expect(gameBox!.y + gameBox!.height).toBeLessThanOrEqual(captureBox!.y);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   } else {
     expect(captureBox!.width).toBeGreaterThan(gameBox!.width * 1.9);
@@ -47,7 +47,7 @@ test("dashboard tiles stay usable and do not shift surrounding content", async (
   }
 });
 
-test("a standard gamepad moves between tiles and activates a link", async ({ page }) => {
+test("a standard gamepad moves between tiles and activates a link", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => {
     const state = { buttons: Array.from({ length: 16 }, () => ({ pressed: false })), axes: [0, 0] };
@@ -65,9 +65,15 @@ test("a standard gamepad moves between tiles and activates a link", async ({ pag
     const state = (window as unknown as { __playsGamepad: { buttons: { pressed: boolean }[] } }).__playsGamepad;
     state.buttons[index].pressed = pressed;
   }, { index, pressed });
-  await setButton(15, true);
+  await setButton(testInfo.project.name === "mobile" ? 13 : 15, true);
+  if (testInfo.project.name === "mobile") {
+    await expect(page.getByRole("link", { name: "My reviews" })).toBeFocused();
+    await setButton(13, false);
+    await page.waitForTimeout(50);
+    await setButton(14, true);
+  }
   await expect(captures).toBeFocused();
-  await setButton(15, false);
+  await setButton(testInfo.project.name === "mobile" ? 14 : 15, false);
   await setButton(0, true);
   await expect(page).toHaveURL(/\/images\/screenshots\/?$/);
 });

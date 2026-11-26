@@ -7,8 +7,9 @@ influence. Use published screenshots rather than invented game covers.
 
 On larger screens, the selected tile expands to 2×2 while the others remain
 1×1. They share a fixed-height, bottom-aligned row so selection does not move
-content below. On phones, use a two-column grid of equally sized tiles without
-horizontal scrolling or resizing on focus.
+content below. On phones, take cues from the Xbox mobile app: a wide featured
+games tile sits above three compact shortcuts. Keep the layout within the
+viewport and avoid resizing tiles on focus.
 
 The tiles link to the games board, captures, gaming posts and achievements.
 The My games tile uses published screenshots and links directly to the Trello
