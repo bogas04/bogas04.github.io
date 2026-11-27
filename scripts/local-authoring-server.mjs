@@ -1,4 +1,7 @@
 import { createServer } from "node:http";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { watchGallery } from "./watch-gallery.mjs";
 import { lookup } from "node:dns/promises";
 import { isIP } from "node:net";
 
@@ -185,6 +188,15 @@ const app = next({ dev: true, hostname, port });
 const handle = app.getRequestHandler();
 
 await app.prepare();
+const runFile = promisify(execFile);
+const stopGalleryWatch = watchGallery({
+  root: process.cwd(),
+  rebuild: async () => {
+    const { stdout } = await runFile(process.execPath, ["--no-warnings", "scripts/gallery-build.ts"], { cwd: process.cwd() });
+    process.stdout.write(stdout);
+  },
+  onError: (error) => console.error("Could not refresh the gallery manifest:", error),
+});
 const server = createServer((request, response) => {
   if (request.url?.split("?")[0] === OPTIMIZE_PATH) {
     void optimize(request, response);
@@ -207,6 +219,7 @@ let shuttingDown = false;
 async function shutdown(signal) {
   if (shuttingDown) return;
   shuttingDown = true;
+  stopGalleryWatch();
   console.log(`Received ${signal}; stopping local authoring server...`);
 
   const forceExit = setTimeout(() => process.exit(1), 5_000);

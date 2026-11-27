@@ -23,14 +23,42 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       replace.call(history, { ...history.state, [key]: 0 }, "");
     }
     history.pushState = function (state, unused, url) {
+      if (window.location.pathname.startsWith("/images") && history.state) {
+        replace.call(history, { ...history.state, __galleryScroll: [window.scrollX, window.scrollY] }, "");
+      }
       const nextState = state && typeof state === "object" ? { ...state, [key]: currentPosition() + 1 } : state;
       return push.call(this, nextState, unused, url);
     };
     history.replaceState = function (state, unused, url) {
-      const nextState = state && typeof state === "object" ? { ...state, [key]: currentPosition() } : state;
+      const sameLocation = !url || new URL(url, window.location.href).href === window.location.href;
+      const scroll = sameLocation ? history.state?.__galleryScroll : undefined;
+      const nextState = state && typeof state === "object"
+        ? { ...state, [key]: currentPosition(), ...(scroll ? { __galleryScroll: scroll } : {}) }
+        : state;
       return replace.call(this, nextState, unused, url);
     };
+    let restore: (() => void) | undefined;
+    const onPopState = (event: PopStateEvent) => {
+      if (restore) Router.events.off("routeChangeComplete", restore);
+      const position = event.state?.__galleryScroll;
+      if (!Array.isArray(position) || position.length !== 2) return;
+      restore = () => {
+        Router.events.off("routeChangeComplete", restore!);
+        restore = undefined;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const root = document.documentElement;
+          const previous = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          window.scrollTo(position[0], position[1]);
+          root.style.scrollBehavior = previous;
+        }));
+      };
+      Router.events.on("routeChangeComplete", restore);
+    };
+    window.addEventListener("popstate", onPopState, true);
     return () => {
+      window.removeEventListener("popstate", onPopState, true);
+      if (restore) Router.events.off("routeChangeComplete", restore);
       history.pushState = push;
       history.replaceState = replace;
     };
@@ -158,14 +186,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         ) => NativeViewTransition;
       };
       if (viewTransitionDocument.startViewTransition) {
+        // Only the chosen photo needs its own snapshot. Naming every image in
+        // the grid makes the browser capture hundreds of unnecessary layers.
+        const sourceImage = link.dataset.galleryImageTransition
+          ? link.querySelector<HTMLImageElement>("img")
+          : null;
+        if (sourceImage) sourceImage.style.viewTransitionName = link.dataset.galleryImageTransition!;
         document.documentElement.dataset.galleryViewTransition = "true";
         const transition = viewTransitionDocument.startViewTransition(() =>
           pushToGallery()
         );
-        void transition.finished.then(
-          () => delete document.documentElement.dataset.galleryViewTransition,
-          () => delete document.documentElement.dataset.galleryViewTransition
-        );
+        const cleanup = () => {
+          if (sourceImage) sourceImage.style.viewTransitionName = "";
+          delete document.documentElement.dataset.galleryViewTransition;
+        };
+        void transition.finished.then(cleanup, cleanup);
       } else {
         void pushToGallery();
       }

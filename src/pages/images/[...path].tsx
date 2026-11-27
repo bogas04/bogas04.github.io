@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<GalleryPageProps> = ({ params }) => 
     return {
       props: {
         kind: "photo",
-        manifest,
+        manifest: { ...manifest, images: [] },
         album: imageAlbum,
         image,
         ...photoNavigationProps,
@@ -74,9 +74,15 @@ export const getStaticProps: GetStaticProps<GalleryPageProps> = ({ params }) => 
   }
 
   const album = getGalleryAlbum(manifest, routeId);
-  if (album) return { props: { kind: "album", manifest, album } };
+  if (album) return { props: { kind: "album", manifest: { ...manifest, images: getGalleryImages(manifest, album.id) }, album } };
   const folder = getGalleryFolder(manifest, routeId);
-  if (folder) return { props: { kind: "folder", manifest, folder } };
+  if (folder) {
+    const covers = [...folder.folders, ...folder.albums].flatMap((id) => {
+      const image = manifest.images.find((item) => item.album === id || item.album.startsWith(`${id}/`));
+      return image ? [image] : [];
+    });
+    return { props: { kind: "folder", manifest: { ...manifest, images: covers }, folder } };
+  }
   return { notFound: true };
 };
 
@@ -100,7 +106,7 @@ function GalleryLayout({ manifest, selectedAlbumId, children }: { manifest: Gall
 }
 
 function AlbumPage({ manifest, album }: { manifest: GalleryManifest; album: GalleryAlbum }) {
-  return <GalleryFrame trail={album.title}><SeoTags title={`${album.title} — Pictures`} description={album.summary} pageUrl={`https://bogas04.fyi${getGalleryAlbumUrl(album.id)}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0"><div className="sticky top-0 z-20 -mx-4 mb-8 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><GalleryBack fallback={album.id.includes("/") ? `/images/${album.id.split("/").slice(0, -1).join("/")}/` : "/images/"} /><Link href="/images/" className="no-underline transition hover:text-[#1ba1e2] lg:pointer-events-none lg:text-white"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link></h1>{album.summary ? <p className="mt-6 mb-0 max-w-2xl text-lg font-light text-white/65">{album.summary}</p> : null}</div><GalleryGrid images={getGalleryImages(manifest, album.id)} /></section></GalleryLayout></main></GalleryFrame>;
+  return <GalleryFrame trail={album.title}><SeoTags title={`${album.title} — Pictures`} description={album.summary} pageUrl={`https://bogas04.fyi${getGalleryAlbumUrl(album.id)}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0"><div className="sticky top-0 z-20 -mx-4 mb-8 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><GalleryBack fallback={album.id.includes("/") ? `/images/${album.id.split("/").slice(0, -1).join("/")}/` : "/images/"} /><Link href="/images/" className="no-underline transition hover:text-[#1ba1e2] lg:pointer-events-none lg:text-white"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link></h1>{album.summary ? <p className="mt-6 mb-0 max-w-2xl text-lg font-light text-white/65">{album.summary}</p> : null}{process.env.NODE_ENV === "development" && <div className="mt-5 flex flex-wrap gap-2" aria-label="Local album controls"><Link href={{ pathname: "/upload", query: { album: album.id } }} className="bg-white/15 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-white/25">Edit album</Link><Link href={{ pathname: "/upload", query: { album: album.id, action: "add" } }} className="bg-[#1ba1e2] px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-[#1384ba]">Add images</Link></div>}</div><GalleryGrid images={getGalleryImages(manifest, album.id)} localAlbumControls /></section></GalleryLayout></main></GalleryFrame>;
 }
 
 function FolderPage({ manifest, folder }: { manifest: GalleryManifest; folder: GalleryFolder }) {
@@ -119,6 +125,8 @@ function PhotoPage({ manifest, album, image, previousImage, nextImage }: Require
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // The route transition positions the new page itself before its snapshot.
+    if (document.documentElement.dataset.galleryViewTransition) return;
     imageRef.current?.scrollIntoView({
       block: "start",
       inline: "nearest",
@@ -161,7 +169,7 @@ function PhotoPage({ manifest, album, image, previousImage, nextImage }: Require
     return () => window.removeEventListener("keydown", handleArrowKeys);
   }, [nextImage, previousImage, router]);
 
-  return <GalleryFrame trail={album.title}><SeoTags title={`${image.title} — ${album.title}`} description={image.caption || image.alt} imageUrl={`https://bogas04.fyi${image.displayUrl}`} pageUrl={`https://bogas04.fyi${image.photoUrl}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0 lg:flex lg:min-h-0 lg:flex-col"><div className="sticky top-0 z-20 -mx-4 mb-8 shrink-0 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><GalleryBack fallback={getGalleryAlbumUrl(album.id)} /><Link href={getGalleryAlbumUrl(album.id)} data-gallery-transition className="lg:text-white/55 no-underline transition hover:text-[#1ba1e2]"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link><span> /</span><span className="ml-2" style={{ viewTransitionName: "gallery-photo-title" }}>this image</span></h1><p className="mt-8 mb-0 text-lg font-light text-white/65 sm:text-xl">{image.alt}</p></div><section className="relative bg-transparent lg:min-h-0 lg:flex-1"><a href={image.fallbackUrl} target="_blank" rel="noopener noreferrer" className="block h-full lg:flex lg:items-center lg:justify-center"><img ref={imageRef} src={image.fallbackUrl} alt={image.alt} width={image.width} height={image.height} className="mx-auto block h-auto max-h-[calc(100svh-10rem)] w-auto max-w-full scroll-mt-36 bg-gray-800 object-contain" style={{ viewTransitionName: getGalleryImageViewTransitionName(image) }} decoding="async" /></a>{previousImage && nextImage ? <nav aria-label="Image navigation" className="pointer-events-none absolute inset-0 flex"><Link href={previousImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-start p-3 no-underline sm:p-5" aria-label={`Show previous image: ${previousImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="previous" /></span></Link><Link href={nextImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-end p-3 no-underline sm:p-5" aria-label={`Show next image: ${nextImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="next" /></span></Link></nav> : null}</section></section></GalleryLayout></main></GalleryFrame>;
+  return <GalleryFrame trail={album.title}><SeoTags title={`${image.title} — ${album.title}`} description={image.caption || image.alt} imageUrl={`https://bogas04.fyi${image.displayUrl}`} pageUrl={`https://bogas04.fyi${image.photoUrl}`} /><main><GalleryLayout manifest={manifest} selectedAlbumId={album.id}><section className="min-w-0 lg:flex lg:min-h-0 lg:flex-col"><div className="sticky top-0 z-20 -mx-4 mb-8 shrink-0 bg-[#1a1a1a] px-4 py-4 sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:px-0 lg:pt-0"><h1 className="m-0 text-4xl font-light lowercase tracking-[-0.06em] text-white sm:text-6xl"><GalleryBack fallback={getGalleryAlbumUrl(album.id)} /><Link href={getGalleryAlbumUrl(album.id)} data-gallery-transition className="lg:text-white/55 no-underline transition hover:text-[#1ba1e2]"><span style={{ viewTransitionName: getGalleryAlbumViewTransitionName(album) }}>{album.title}</span></Link><span> /</span><span className="ml-2" style={{ viewTransitionName: "gallery-photo-title" }}>this image</span></h1><p className="mt-8 mb-0 text-lg font-light text-white/65 sm:text-xl">{image.alt}</p>{process.env.NODE_ENV === "development" && <Link href={{ pathname: "/upload", query: { album: album.id, image: image.id } }} className="mt-4 inline-block bg-white/15 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-white/25">Edit image</Link>}</div><section className="relative bg-transparent lg:min-h-0 lg:flex-1"><a href={image.fallbackUrl} target="_blank" rel="noopener noreferrer" className="block h-full lg:flex lg:items-center lg:justify-center"><img ref={imageRef} src={image.fallbackUrl} alt={image.alt} width={image.width} height={image.height} className="mx-auto block h-auto max-h-[calc(100svh-10rem)] w-auto max-w-full scroll-mt-36 bg-gray-800 object-contain" style={{ viewTransitionName: getGalleryImageViewTransitionName(image) }} decoding="async" /></a>{previousImage && nextImage ? <nav aria-label="Image navigation" className="pointer-events-none absolute inset-0 flex"><Link href={previousImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-start p-3 no-underline sm:p-5" aria-label={`Show previous image: ${previousImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="previous" /></span></Link><Link href={nextImage.photoUrl} scroll={false} className="group pointer-events-auto flex h-full w-1/2 items-center justify-end p-3 no-underline sm:p-5" aria-label={`Show next image: ${nextImage.title}`}><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white shadow-lg transition group-hover:scale-105"><Arrow direction="next" /></span></Link></nav> : null}</section></section></GalleryLayout></main></GalleryFrame>;
 }
 
 export default function GalleryPathPage(props: GalleryPageProps) {

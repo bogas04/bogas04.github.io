@@ -5,8 +5,10 @@ import {
   ChangeEvent,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
+import { OPTIMIZATION_VERSION } from "../utils/image-optimization";
 import {
   discardRecovery,
   loadRecovery,
@@ -41,7 +43,6 @@ const REPOSITORY_HANDLE_KEY = "repository";
 const UPLOADER_RECOVERY_KEY = "divjot-gallery-uploader-recovery";
 const IMAGE_PATTERN = /\.(avif|gif|jpe?g|png|webp)$/i;
 const ALBUM_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
-const OPTIMIZATION_VERSION = "2";
 const MAX_CONCURRENT_TRANSFORMS = 4;
 
 type GalleryCategory = "travel" | "blog" | "random" | "screenshots";
@@ -326,6 +327,33 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: {} };
 };
 
+function AlbumSidebarItem({ album, selected, disabled, onSelect }: {
+  album: GalleryAlbum;
+  selected: boolean;
+  disabled: boolean;
+  onSelect: () => void;
+}) {
+  const [coverUrl, setCoverUrl] = useState<string | null>(null);
+  const cover = album.images.find((image) => image.id === album.form.cover) || album.images[0];
+
+  useEffect(() => {
+    if (!cover) return;
+    let active = true;
+    let url: string | undefined;
+    void album.directory.getFileHandle(cover.name).then((handle) => handle.getFile()).then((file) => {
+      if (!active) return;
+      url = URL.createObjectURL(file);
+      setCoverUrl(url);
+    }).catch(() => { if (active) setCoverUrl(null); });
+    return () => { active = false; if (url) URL.revokeObjectURL(url); };
+  }, [album.directory, cover?.name]);
+
+  return <li><button type="button" aria-current={selected ? "true" : undefined} disabled={disabled} onClick={onSelect} className={`flex w-full items-center gap-3 rounded-md border px-2 py-2 text-left text-sm transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${selected ? "border-blue-400 bg-blue-50 dark:border-blue-300/60 dark:bg-blue-400/15" : "border-transparent hover:bg-slate-100 dark:hover:bg-white/10"}`}>
+    <span className="h-12 w-12 shrink-0 overflow-hidden rounded bg-slate-200 dark:bg-white/10">{coverUrl && <img src={coverUrl} alt="" className="h-full w-full object-cover" />}</span>
+    <span className="min-w-0 flex-1"><span className="block truncate font-semibold">{album.form.title || album.id}</span><span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{album.images.length} {album.images.length === 1 ? "image" : "images"} · {album.form.published ? "Published" : "Draft"}</span></span>
+  </button></li>;
+}
+
 export default function GalleryUploader() {
   const router = useRouter();
   const [repository, setRepository] = useState<FileSystemDirectoryHandle | null>(null);
@@ -345,6 +373,10 @@ export default function GalleryUploader() {
   const [savedImageForm, setSavedImageForm] = useState<ImageForm>(emptyImage);
   const [recovery, setRecovery] = useState<RecoverySnapshot<UploaderRecovery> | null>(null);
   const [recoveryReady, setRecoveryReady] = useState(false);
+  const appliedLink = useRef<string | null>(null);
+  const addImagesRef = useRef<HTMLInputElement>(null);
+  const imageEditorRef = useRef<HTMLElement>(null);
+  const albumSearchRef = useRef<HTMLInputElement>(null);
 
   const selectedAlbum = albums.find((album) => album.id === selectedAlbumId) || null;
   const selectedImage = selectedAlbum?.images.find((image) => image.id === selectedImageId) || null;
@@ -526,6 +558,51 @@ export default function GalleryUploader() {
     setSavedImageForm(image);
   };
 
+  // Resolve gallery links only after the user grants access to the repository.
+  useEffect(() => {
+    if (!repository) {
+      appliedLink.current = null;
+      return;
+    }
+    if (!router.isReady) return;
+    const albumId = typeof router.query.album === "string" ? router.query.album : null;
+    if (!albumId) return;
+    const imageId = typeof router.query.image === "string" ? router.query.image : null;
+    const action = typeof router.query.action === "string" ? router.query.action : null;
+    const key = JSON.stringify([albumId, imageId, action]);
+    if (appliedLink.current === key) return;
+    appliedLink.current = key;
+    const album = albums.find((item) => item.id === albumId);
+    if (!album) {
+      setMessage(`Album "${albumId}" was not found in the connected repository.`);
+      return;
+    }
+    const image = imageId ? album.images.find((item) => item.id === imageId) : undefined;
+    if (imageId && !image) {
+      setMessage(`Image "${imageId}" was not found in ${album.form.title || album.id}.`);
+    }
+    if (isDirty) {
+      saveRecovery(UPLOADER_RECOVERY_KEY, recoveryValue());
+      if (!window.confirm("You have unsaved changes. They are kept in this browser for recovery. Continue?")) return;
+    }
+    setSelectedAlbumId(album.id);
+    setSelectedImageId(image?.id || null);
+    setAlbumForm(album.form);
+    setSavedAlbumForm(album.form);
+    const nextImage = image || emptyImage();
+    setImageForm(nextImage);
+    setSavedImageForm(nextImage);
+  }, [repository, albums, router.isReady, router.query.album, router.query.image, router.query.action]);
+
+  useEffect(() => {
+    if (!selectedAlbum || selectedAlbum.id !== router.query.album) return;
+    if (router.query.action === "add") {
+      addImagesRef.current?.focus();
+    } else if (selectedImage && selectedImage.id === router.query.image) {
+      imageEditorRef.current?.focus();
+    }
+  }, [selectedAlbumId, selectedImageId, router.query.album, router.query.image, router.query.action]);
+
   const restoreRecovery = () => {
     if (!recovery) return;
     const value = recovery.value;
@@ -705,6 +782,70 @@ export default function GalleryUploader() {
     }
   };
 
+  const deleteImage = async () => {
+    if (!repository || !selectedAlbum || !selectedImage) return;
+    if (isDirty) {
+      setMessage("Save your unsaved album and image details before deleting an image.");
+      return;
+    }
+    if (selectedAlbum.form.cover === selectedImage.id || albumForm.cover === selectedImage.id) {
+      setMessage("This image is the album cover. Choose and save another cover before deleting it.");
+      return;
+    }
+    const metadataName = `${selectedImage.id}.md`;
+    if (!window.confirm(`Delete ${selectedImage.name} and its metadata from this repository? Existing links to this image may stop working. This cannot be undone in the editor.`)) return;
+    setIsBusy(true);
+    let imageRemoved = false;
+    try {
+      await selectedAlbum.directory.removeEntry(selectedImage.name);
+      imageRemoved = true;
+      try {
+        await selectedAlbum.directory.removeEntry(metadataName);
+      } catch (error) {
+        if ((error as DOMException).name !== "NotFoundError") throw error;
+      }
+      await reload(repository, selectedAlbum.id);
+      setMessage(`Deleted ${selectedImage.name} and its metadata. The local gallery will refresh shortly.`);
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : "Unknown error.";
+      if (imageRemoved) {
+        try { await reload(repository, selectedAlbum.id); } catch { /* Keep the partial failure visible. */ }
+        setMessage(`Deleted ${selectedImage.name}, but could not finish cleanup: ${detail} Check ${metadataName}; the local gallery will refresh shortly.`);
+      } else {
+        setMessage(`Could not delete ${selectedImage.name}: ${detail}`);
+      }
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  useEffect(() => {
+    const focusSearch = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k" && repository) {
+        event.preventDefault();
+        albumSearchRef.current?.focus();
+        albumSearchRef.current?.select();
+      }
+    };
+    window.addEventListener("keydown", focusSearch);
+    return () => window.removeEventListener("keydown", focusSearch);
+  }, [repository]);
+
+  const newAlbum = () => {
+    if (isDirty) {
+      saveRecovery(UPLOADER_RECOVERY_KEY, recoveryValue());
+      if (!window.confirm("You have unsaved changes. They are kept in this browser for recovery. Continue?")) return;
+    }
+    const nextAlbum = emptyAlbum();
+    const nextImage = emptyImage();
+    setSelectedAlbumId(null);
+    setSelectedImageId(null);
+    setAlbumForm(nextAlbum);
+    setImageForm(nextImage);
+    setSavedAlbumForm(nextAlbum);
+    setSavedImageForm(nextImage);
+  };
+
   const visibleImages = useMemo(() => selectedAlbum?.images || [], [selectedAlbum]);
   const visibleAlbums = useMemo(() => {
     const search = albumSearch.trim().toLocaleLowerCase();
@@ -729,18 +870,24 @@ export default function GalleryUploader() {
         </div>
       </header>
 
-      {message && <p className="mb-6 rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-600 dark:bg-white/10 dark:text-slate-200">{message}</p>}
+      {message && <p role="status" className="mb-6 rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-600 dark:bg-white/10 dark:text-slate-200">{message}</p>}
 
       {recovery && <section className="mb-6 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950 dark:border-amber-300/40 dark:bg-amber-300/10 dark:text-amber-100" aria-label="Recovered gallery work"><p className="m-0">Unsaved gallery details from {new Date(recovery.savedAt).toLocaleString()} are available in this browser.</p><div className="mt-3 flex flex-wrap gap-2"><button className="rounded bg-amber-900 px-3 py-1.5 font-semibold text-white dark:bg-amber-100 dark:text-amber-950" type="button" onClick={restoreRecovery}>Restore them</button><button className="rounded border border-current px-3 py-1.5 font-semibold" type="button" onClick={discardStoredRecovery}>Discard recovery</button></div></section>}
 
       {isDirty && <p className="mb-6 text-sm text-slate-500 dark:text-slate-300">Unsaved details are recoverable in this browser and will not be written to the repository until you save.</p>}
 
       <div className="grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)_minmax(0,1fr)]">
-        <aside className="order-last border-t border-slate-200 pt-6 dark:border-white/15 lg:order-first lg:border-r lg:border-t-0 lg:pr-6 lg:pt-0">
-          <div className="mb-4 flex items-center justify-between"><p className="m-0 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">albums</p><button className="rounded bg-slate-800 px-2.5 py-1.5 text-xs font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={!repository || isBusy} onClick={() => { setSelectedAlbumId(null); setSelectedImageId(null); setAlbumForm(emptyAlbum()); setImageForm(emptyImage()); }}>New album</button></div>
+        <aside aria-label="Albums" className="order-first min-w-0 border-b border-slate-200 pb-6 dark:border-white/15 lg:sticky lg:top-6 lg:flex lg:max-h-[calc(100vh-3rem)] lg:flex-col lg:self-start lg:border-b-0 lg:border-r lg:pb-0 lg:pr-5">
+          <div className="mb-4 flex shrink-0 items-center justify-between gap-2"><div><p className="m-0 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">Albums</p>{repository && <p className="mb-0 mt-1 text-xs text-slate-500 dark:text-slate-300">{albums.length} total</p>}</div><button className="rounded bg-slate-800 px-3 py-2 text-xs font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={!repository || isBusy} onClick={newAlbum}>+ New album</button></div>
           {!repository && <p className="text-sm text-slate-500 dark:text-slate-300">Connect the repository to organise the gallery.</p>}
-          {repository && <input className="mb-3 w-full rounded border border-slate-300 bg-transparent px-2.5 py-2 text-sm dark:border-white/25" type="search" placeholder="Search albums" aria-label="Search albums" value={albumSearch} onChange={(event) => setAlbumSearch(event.target.value)} />}
-          <ul className="m-0 list-none space-y-1 p-0">{visibleAlbums.map((album) => <li key={album.id}><button className={`w-full rounded px-2 py-2 text-left text-sm ${album.id === selectedAlbumId ? "bg-slate-200 dark:bg-white/15" : "hover:bg-slate-100 dark:hover:bg-white/10"}`} type="button" disabled={isBusy} onClick={() => selectAlbum(album)}><span className="block truncate">{album.form.title || album.id}</span><span className="block truncate text-xs text-slate-500 dark:text-slate-300">{album.path}</span><span className="text-[0.65rem] uppercase text-slate-500 dark:text-slate-300">{album.images.length} images</span></button></li>)}{repository && visibleAlbums.length === 0 && <li className="px-2 py-3 text-sm text-slate-500 dark:text-slate-300">No matching albums.</li>}</ul>
+          {repository && <div className="mb-3 shrink-0"><input ref={albumSearchRef} className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 text-sm focus:outline-2 focus:outline-blue-600 dark:border-white/25" type="search" placeholder="Find an album…" aria-label="Search albums" value={albumSearch} onChange={(event) => setAlbumSearch(event.target.value)} /><p className="mb-0 mt-1 text-xs text-slate-500 dark:text-slate-300">⌘K / Ctrl+K to search</p></div>}
+          <div className="max-h-72 min-h-0 overflow-y-auto overscroll-contain lg:max-h-none" aria-label="Album list">
+            {(["screenshots", "travel", "blog", "random"] as const).map((category) => {
+              const group = visibleAlbums.filter((album) => album.form.category === category);
+              return group.length ? <section key={category} aria-label={`${category} albums`} className="mb-4"><h2 className="mb-1 mt-2 px-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-300">{category} <span className="font-normal">{group.length}</span></h2><ul className="m-0 list-none space-y-1 p-0">{group.map((album) => <AlbumSidebarItem key={album.id} album={album} selected={album.id === selectedAlbumId} disabled={isBusy} onSelect={() => selectAlbum(album)} />)}</ul></section> : null;
+            })}
+            {repository && visibleAlbums.length === 0 && <p className="px-2 py-3 text-sm text-slate-500 dark:text-slate-300">No matching albums. Try a title, category, or folder.</p>}
+          </div>
         </aside>
 
         <section aria-label="Album editor">
@@ -758,13 +905,13 @@ export default function GalleryUploader() {
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-3"><button className="rounded bg-slate-800 px-5 py-2.5 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={!repository || isBusy} onClick={() => void saveAlbum()}>{selectedAlbumId ? "Save album" : "Create album"}</button>{selectedAlbum && <><button className="rounded border border-slate-300 px-5 py-2.5 font-semibold disabled:opacity-50 dark:border-white/25" type="button" disabled={isBusy} onClick={autoFillAlbumDates}>Auto-fill from image dates</button><button className="rounded border border-slate-300 px-5 py-2.5 font-semibold disabled:opacity-50 dark:border-white/25" type="button" disabled={isBusy} onClick={() => void optimizeAlbumImages()}>Optimize all images</button>{optimizationNotice?.albumId === selectedAlbum.id && <p className="m-0 text-sm text-emerald-700 dark:text-emerald-300" role="status">{optimizationNotice.message}</p>}</>}</div>
 
-          {selectedAlbum && <div className="mt-9 border-t border-slate-200 pt-6 dark:border-white/15"><div className="mb-3 flex flex-wrap items-center justify-between gap-3"><p className="m-0 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">images</p><label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm dark:border-white/25"><input className="sr-only" type="file" multiple accept="image/avif,image/gif,image/jpeg,image/png,image/webp" onChange={uploadImages} disabled={isBusy} />Upload images</label></div><p className="text-xs text-slate-500 dark:text-slate-300">Select one or more images. They are reduced to 1440px on the longest edge, then saved as quality-95 JPEGs with orientation baked in and metadata removed.</p><div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{visibleImages.map((image) => <button className={`group relative aspect-square overflow-hidden rounded border text-left ${image.id === selectedImageId ? "border-slate-800 ring-2 ring-slate-800 dark:border-white dark:ring-white" : "border-slate-300 dark:border-white/25"}`} type="button" key={image.id} aria-label={`Edit ${image.title || image.name}`} onClick={() => selectImage(image)}>{thumbnailUrls[image.id] ? <img className="h-full w-full object-cover" src={thumbnailUrls[image.id]} alt="" /> : <span className="block h-full bg-slate-100 dark:bg-white/10" />}{image.optimizationVersion === OPTIMIZATION_VERSION && <span className="absolute bottom-1 left-1 rounded bg-emerald-700/85 px-1.5 py-0.5 text-[0.65rem] uppercase text-white">optimized</span>}<span className="absolute right-1 bottom-1 rounded bg-black/65 px-1.5 py-0.5 text-[0.65rem] uppercase text-white">{image.published ? "published" : "draft"}</span></button>)}</div></div>}
+          {selectedAlbum && <div className="mt-9 border-t border-slate-200 pt-6 dark:border-white/15"><div className="mb-3 flex flex-wrap items-center justify-between gap-3"><p className="m-0 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">images</p><label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm focus-within:ring-2 focus-within:ring-blue-500 dark:border-white/25"><input ref={addImagesRef} className="sr-only" type="file" multiple accept="image/avif,image/gif,image/jpeg,image/png,image/webp" onChange={uploadImages} disabled={isBusy} />Upload images</label></div><p className="text-xs text-slate-500 dark:text-slate-300">Select one or more images. They are reduced to 1440px on the longest edge, then saved as quality-95 JPEGs with orientation baked in and metadata removed.</p><div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{visibleImages.map((image) => <button className={`group relative aspect-square overflow-hidden rounded border text-left ${image.id === selectedImageId ? "border-slate-800 ring-2 ring-slate-800 dark:border-white dark:ring-white" : "border-slate-300 dark:border-white/25"}`} type="button" key={image.id} aria-label={`Edit ${image.title || image.name}`} onClick={() => selectImage(image)}>{thumbnailUrls[image.id] ? <img className="h-full w-full object-cover" src={thumbnailUrls[image.id]} alt="" /> : <span className="block h-full bg-slate-100 dark:bg-white/10" />}{image.optimizationVersion === OPTIMIZATION_VERSION && <span className="absolute bottom-1 left-1 rounded bg-emerald-700/85 px-1.5 py-0.5 text-[0.65rem] uppercase text-white">optimized</span>}<span className="absolute right-1 bottom-1 rounded bg-black/65 px-1.5 py-0.5 text-[0.65rem] uppercase text-white">{image.published ? "published" : "draft"}</span></button>)}</div></div>}
         </section>
 
-        <section className="min-w-0 border-t border-slate-200 pt-6 dark:border-white/15 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" aria-label="Image editor">
+        <section ref={imageEditorRef} tabIndex={-1} className="min-w-0 border-t border-slate-200 pt-6 outline-none dark:border-white/15 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" aria-label="Image editor">
           <p className="mb-4 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">image details</p>
           {!selectedImage && <p className="text-sm text-slate-500 dark:text-slate-300">Choose an image to add its accessible text, caption, and publishing details.</p>}
-          {selectedImage && <><div className="mb-5 overflow-hidden rounded border border-slate-200 bg-slate-100 dark:border-white/15 dark:bg-black/20">{previewUrl ? <img className="max-h-80 w-full object-contain" src={previewUrl} alt="" /> : <div className="h-48" />}</div><p className="mb-5 text-xs text-slate-500 dark:text-slate-300">{selectedImage.name}</p><div className="grid gap-4"><label><span className="mb-1 block text-sm font-semibold">Title</span><input className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.title} onChange={(event) => setImageForm((current) => ({ ...current, title: event.target.value }))} /></label><label><span className="mb-1 block text-sm font-semibold">Alt text</span><textarea className="min-h-20 w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.alt} onChange={(event) => setImageForm((current) => ({ ...current, alt: event.target.value }))} /></label><div className="grid gap-4 sm:grid-cols-2"><label><span className="mb-1 block text-sm font-semibold">Taken at</span><input type="date" className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.takenAt} onChange={(event) => setImageForm((current) => ({ ...current, takenAt: event.target.value }))} /></label><label><span className="mb-1 block text-sm font-semibold">Location</span><input className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.location} onChange={(event) => setImageForm((current) => ({ ...current, location: event.target.value }))} /></label></div><label><span className="mb-1 block text-sm font-semibold">Caption</span><textarea className="min-h-32 w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.caption} onChange={(event) => setImageForm((current) => ({ ...current, caption: event.target.value }))} /></label><div className="flex flex-wrap gap-4 text-sm"><label className="flex items-center gap-2"><input type="checkbox" checked={imageForm.published} onChange={(event) => setImageForm((current) => ({ ...current, published: event.target.checked }))} /> Publish image</label><label className="flex items-center gap-2"><input type="checkbox" checked={imageForm.featured} onChange={(event) => setImageForm((current) => ({ ...current, featured: event.target.checked }))} /> Featured</label></div></div><button className="mt-5 rounded bg-slate-800 px-5 py-2.5 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={isBusy} onClick={() => void saveImage()}>Save image details</button></>}
+          {selectedImage && <><div className="mb-5 overflow-hidden rounded border border-slate-200 bg-slate-100 dark:border-white/15 dark:bg-black/20">{previewUrl ? <img className="max-h-80 w-full object-contain" src={previewUrl} alt="" /> : <div className="h-48" />}</div><p className="mb-5 text-xs text-slate-500 dark:text-slate-300">{selectedImage.name}</p><div className="grid gap-4"><label><span className="mb-1 block text-sm font-semibold">Title</span><input className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.title} onChange={(event) => setImageForm((current) => ({ ...current, title: event.target.value }))} /></label><label><span className="mb-1 block text-sm font-semibold">Alt text</span><textarea className="min-h-20 w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.alt} onChange={(event) => setImageForm((current) => ({ ...current, alt: event.target.value }))} /></label><div className="grid gap-4 sm:grid-cols-2"><label><span className="mb-1 block text-sm font-semibold">Taken at</span><input type="date" className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.takenAt} onChange={(event) => setImageForm((current) => ({ ...current, takenAt: event.target.value }))} /></label><label><span className="mb-1 block text-sm font-semibold">Location</span><input className="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.location} onChange={(event) => setImageForm((current) => ({ ...current, location: event.target.value }))} /></label></div><label><span className="mb-1 block text-sm font-semibold">Caption</span><textarea className="min-h-32 w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-white/25" value={imageForm.caption} onChange={(event) => setImageForm((current) => ({ ...current, caption: event.target.value }))} /></label><div className="flex flex-wrap gap-4 text-sm"><label className="flex items-center gap-2"><input type="checkbox" checked={imageForm.published} onChange={(event) => setImageForm((current) => ({ ...current, published: event.target.checked }))} /> Publish image</label><label className="flex items-center gap-2"><input type="checkbox" checked={imageForm.featured} onChange={(event) => setImageForm((current) => ({ ...current, featured: event.target.checked }))} /> Featured</label></div></div><div className="mt-5 flex flex-wrap gap-3"><button className="rounded bg-slate-800 px-5 py-2.5 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-slate-800" type="button" disabled={isBusy} onClick={() => void saveImage()}>Save image details</button><button className="rounded border border-red-700 px-5 py-2.5 font-semibold text-red-700 hover:bg-red-50 disabled:opacity-50 dark:border-red-300 dark:text-red-300 dark:hover:bg-red-950" type="button" disabled={isBusy} onClick={() => void deleteImage()}>Delete image</button></div></>}
         </section>
       </div>
     </main>

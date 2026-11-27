@@ -21,3 +21,7 @@ supported identifiers are `udaan`, `swiggy`, `samsung`, `housing`, `fizzy`,
 `refiral`, and `frrole`. Keep these identifiers stable even if role data or
 presentation changes. Unknown identifiers leave the carousel closed. Other
 query parameters are preserved when highlights open or close.
+
+`/stats/` is a static redirect to `https://bogas04.goatcounter.com/`. It uses
+a meta refresh and a fallback link because the site is statically exported.
+It is excluded from the sitemap.

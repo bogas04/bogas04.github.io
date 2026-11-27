@@ -1,16 +1,18 @@
 import { GetStaticProps } from "next";
+import { useMemo } from "react";
 
 import SeoTags from "../../components/SeoTags";
 import GalleryCategoryFilter from "../../components/gallery/GalleryCategoryFilter";
 import GalleryFrame from "../../components/gallery/GalleryFrame";
-import type { GalleryManifest } from "../../utils/gallery";
+import { packGallery, unpackGallery, type PackedGallery } from "../../utils/gallery";
 import { getGalleryManifest } from "../../utils/gallery-server";
 
-export const getStaticProps: GetStaticProps<{ manifest: GalleryManifest }> = () => ({
-  props: { manifest: getGalleryManifest() },
+export const getStaticProps: GetStaticProps<{ manifest: PackedGallery }> = () => ({
+  props: { manifest: packGallery(getGalleryManifest()) },
 });
 
-export default function GalleryIndex({ manifest }: { manifest: GalleryManifest }) {
+export default function GalleryIndex({ manifest }: { manifest: PackedGallery }) {
+  const gallery = useMemo(() => unpackGallery(manifest), [manifest]);
   return (
     <GalleryFrame>
       <SeoTags
@@ -19,7 +21,7 @@ export default function GalleryIndex({ manifest }: { manifest: GalleryManifest }
         pageUrl="https://bogas04.fyi/images/"
       />
       <main>
-        <GalleryCategoryFilter manifest={manifest} />
+        <GalleryCategoryFilter manifest={gallery} />
       </main>
     </GalleryFrame>
   );

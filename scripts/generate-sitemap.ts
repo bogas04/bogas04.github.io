@@ -14,7 +14,7 @@ function findHtmlFiles(directory: string): string[] {
 
 function toPageUrl(filePath: string): string | null {
   const relativePath = path.relative(OUTPUT_DIRECTORY, filePath);
-  if (relativePath === "404.html" || relativePath.startsWith("_next")) return null;
+  if (relativePath === "404.html" || relativePath === path.join("stats", "index.html") || relativePath.startsWith("_next")) return null;
 
   const pathname = relativePath
     .replace(/\\/g, "/")

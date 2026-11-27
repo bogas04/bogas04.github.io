@@ -57,7 +57,10 @@ editor, live preview, tags, draft status, and a list of existing posts.
 ## `/upload`: gallery albums and images
 
 `/upload` manages `gallery/albums.json` plus the folders it references under
-`public/img`.
+`public/img`. On the local gallery, an album has **Edit album** and **Add images**
+shortcuts, and each photo has an edit shortcut. These open the relevant place
+in `/upload` after repository access is granted; adding images still requires
+choosing files. The shortcuts are absent from the public site.
 
 An album has a stable ID and a configurable source path. Its folder contains:
 
@@ -68,6 +71,10 @@ public/img/travel/example-trip/
   beach.md       # title, alt text, caption, and publication state
 ```
 
+The album sidebar groups albums by category, shows cover previews, image counts
+and publication state, and stays independently scrollable on desktop. Search
+by name, ID, category, or folder; Cmd+K or Ctrl+K focuses the search.
+
 The page can create an album, choose its category and cover, edit album
 metadata, upload one or more photos at once, and edit each photo's accessible
 text and caption. Gallery categories are Travel, Blog, Random, and
@@ -75,6 +82,11 @@ Screenshots. Image dates use the browser's date picker; use **Auto-fill from
 image dates** to set an album's start and end dates from its dated images.
 Unsaved album and image metadata is recoverable locally in the browser; it does
 not write to the repository until Save is selected.
+The image editor can delete the selected source image and its matching metadata
+file after confirmation. Save unsaved details first, and choose and save a new
+cover before deleting an image used as the album cover. Deletion can break
+existing links. The local server watches gallery files and refreshes the manifest
+after changes; reload an open gallery page to see the update.
 `pnpm start` runs a local-only Sharp service alongside Next.js, so `/upload`
 works whether it is opened through `pnpm upload` or visited from an ordinary
 local development session. Both it and `pnpm gallery:add` use the same image
@@ -108,8 +120,8 @@ pixels; use `/upload` or `pnpm gallery:add` to re-encode oversized originals.
 ## How the gallery is built
 
 Gallery back arrows use the visitor's known in-site browsing history, preserving
-the view they came from. For a direct entry, they replace the current page with
-the parent album or folder, then the pictures index, so repeated back actions
+the view and page scroll position they came from. For a direct entry, they
+replace the current page with the parent album or folder, then the pictures index, so repeated back actions
 continue up the hierarchy. The pictures header links home.
 
 `gallery/albums.json` maps a stable gallery ID to an arbitrary folder below
@@ -170,6 +182,10 @@ During each build:
 
 The `/images` timeline groups all published images by calendar year. Individual
 image and album metadata retains their more specific dates.
+
+The gallery index sends a compact form of this manifest as page data and restores
+its image fields for rendering. Photo pages only receive their navigation and
+album context; folder and album pages receive the images they need.
 
 The generated manifest is ignored by Git and recreated for every build.
 GitHub Actions runs the gallery validation, generation, and site build on

@@ -7,8 +7,8 @@ import {
   getGalleryAlbumUrl,
   type GalleryAlbum,
   type GalleryFolder,
-  type GalleryImage,
-  type GalleryManifest,
+  type GalleryBrowseImage,
+  type GalleryBrowseManifest,
 } from "../../utils/gallery";
 
 interface AlbumSidebarProps {
@@ -22,7 +22,7 @@ interface GalleryDateGroup {
   key: string;
   label: string;
   sortValue: string;
-  images: GalleryImage[];
+  images: GalleryBrowseImage[];
 }
 
 function dateGroupFor(rawDate: string): Omit<GalleryDateGroup, "images"> {
@@ -33,7 +33,7 @@ function dateGroupFor(rawDate: string): Omit<GalleryDateGroup, "images"> {
   return { key: year, label: year, sortValue: `${year}-00` };
 }
 
-function groupImagesByDate(images: GalleryImage[], albums: GalleryAlbum[]): GalleryDateGroup[] {
+function groupImagesByDate(images: GalleryBrowseImage[], albums: GalleryAlbum[]): GalleryDateGroup[] {
   const albumDates = new Map(albums.map((album) => [album.id, album.startDate]));
   const groups = new Map<string, GalleryDateGroup>();
 
@@ -171,7 +171,7 @@ function DateNavigator({
   );
 }
 
-function AllPhotosView({ manifest }: { manifest: GalleryManifest }) {
+function AllPhotosView({ manifest }: { manifest: GalleryBrowseManifest }) {
   const groups = useMemo(() => groupImagesByDate(manifest.images, manifest.albums), [manifest.albums, manifest.images]);
   const [activeDateKey, setActiveDateKey] = useState(groups[0]?.key || "");
   const [dateMenuOpen, setDateMenuOpen] = useState(false);
@@ -284,7 +284,7 @@ function AlbumGrid({
   manifest,
   onAlbumSelect,
 }: {
-  manifest: GalleryManifest;
+  manifest: GalleryBrowseManifest;
   onAlbumSelect?: (album: GalleryAlbum) => void;
 }) {
   return (
@@ -336,11 +336,11 @@ function AlbumGrid({
   );
 }
 
-function MobileAlbumsView({ manifest, onAlbumSelect }: { manifest: GalleryManifest; onAlbumSelect: (album: GalleryAlbum) => void }) {
+function MobileAlbumsView({ manifest, onAlbumSelect }: { manifest: GalleryBrowseManifest; onAlbumSelect: (album: GalleryAlbum) => void }) {
   return <AlbumGrid manifest={manifest} onAlbumSelect={onAlbumSelect} />;
 }
 
-function DesktopAlbumsView({ manifest }: { manifest: GalleryManifest }) {
+function DesktopAlbumsView({ manifest }: { manifest: GalleryBrowseManifest }) {
   return <AlbumGrid manifest={manifest} />;
 }
 
@@ -418,7 +418,7 @@ function MobileGallerySidebar({
   );
 }
 
-function MobileGallery({ manifest }: { manifest: GalleryManifest }) {
+function MobileGallery({ manifest }: { manifest: GalleryBrowseManifest }) {
   const router = useRouter();
   const [activePaneIndex, setActivePaneIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -495,7 +495,7 @@ function MobileGallery({ manifest }: { manifest: GalleryManifest }) {
   );
 }
 
-export default function GalleryCategoryFilter({ manifest }: { manifest: GalleryManifest }) {
+export default function GalleryCategoryFilter({ manifest }: { manifest: GalleryBrowseManifest }) {
   const [desktopView, setDesktopView] = useState<DesktopView>("all");
 
   useEffect(() => {

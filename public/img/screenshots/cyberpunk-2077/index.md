@@ -1,10 +1,10 @@
 ---
 title: "Cyberpunk 2077"
 summary: "Screenshots from Cyberpunk 2077."
-cover: "01"
+cover: "12"
 category: screenshots
-startDate:
-endDate:
+startDate: ""
+endDate: ""
 published: true
 ---
 

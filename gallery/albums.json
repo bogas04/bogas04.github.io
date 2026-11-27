@@ -29,6 +29,46 @@
       "path": "public/img/screenshots/a-plague-tale-innocence"
     },
     {
+      "id": "screenshots/a-plague-tale-requiem",
+      "path": "public/img/screenshots/a-plague-tale-requiem"
+    },
+    {
+      "id": "screenshots/alan-wake-2",
+      "path": "public/img/screenshots/alan-wake-2"
+    },
+    {
+      "id": "screenshots/alan-wake-remastered",
+      "path": "public/img/screenshots/alan-wake-remastered"
+    },
+    {
+      "id": "screenshots/assassins-creed-odyssey",
+      "path": "public/img/screenshots/assassins-creed-odyssey"
+    },
+    {
+      "id": "screenshots/assassins-creed-origins",
+      "path": "public/img/screenshots/assassins-creed-origins"
+    },
+    {
+      "id": "screenshots/assassins-creed-rift",
+      "path": "public/img/screenshots/assassins-creed-rift"
+    },
+    {
+      "id": "screenshots/assassins-creed-valhalla",
+      "path": "public/img/screenshots/assassins-creed-valhalla"
+    },
+    {
+      "id": "screenshots/avowed",
+      "path": "public/img/screenshots/avowed"
+    },
+    {
+      "id": "screenshots/clair-obscur-expedition-33",
+      "path": "public/img/screenshots/clair-obscur-expedition-33"
+    },
+    {
+      "id": "screenshots/control-ultimate-edition-xbox-series-x-s",
+      "path": "public/img/screenshots/control-ultimate-edition-xbox-series-x-s"
+    },
+    {
       "id": "screenshots/cyberpunk-2077",
       "path": "public/img/screenshots/cyberpunk-2077"
     },
@@ -37,20 +77,120 @@
       "path": "public/img/screenshots/days-gone"
     },
     {
+      "id": "screenshots/dead-spacetm",
+      "path": "public/img/screenshots/dead-spacetm"
+    },
+    {
+      "id": "screenshots/dead-spacetm-2",
+      "path": "public/img/screenshots/dead-spacetm-2"
+    },
+    {
       "id": "screenshots/deliver-us-mars",
       "path": "public/img/screenshots/deliver-us-mars"
+    },
+    {
+      "id": "screenshots/dirt-5",
+      "path": "public/img/screenshots/dirt-5"
+    },
+    {
+      "id": "screenshots/doom",
+      "path": "public/img/screenshots/doom"
+    },
+    {
+      "id": "screenshots/doom-3",
+      "path": "public/img/screenshots/doom-3"
+    },
+    {
+      "id": "screenshots/doom-eternal-battlemode",
+      "path": "public/img/screenshots/doom-eternal-battlemode"
+    },
+    {
+      "id": "screenshots/fallout-3",
+      "path": "public/img/screenshots/fallout-3"
+    },
+    {
+      "id": "screenshots/fallout-4",
+      "path": "public/img/screenshots/fallout-4"
+    },
+    {
+      "id": "screenshots/fallout-new-vegas",
+      "path": "public/img/screenshots/fallout-new-vegas"
+    },
+    {
+      "id": "screenshots/far-cry-4",
+      "path": "public/img/screenshots/far-cry-4"
+    },
+    {
+      "id": "screenshots/far-cry-5",
+      "path": "public/img/screenshots/far-cry-5"
     },
     {
       "id": "screenshots/far-cry-6",
       "path": "public/img/screenshots/far-cry-6"
     },
     {
+      "id": "screenshots/far-cry-primal",
+      "path": "public/img/screenshots/far-cry-primal"
+    },
+    {
       "id": "screenshots/final-fantasy-vii-remake",
       "path": "public/img/screenshots/final-fantasy-vii-remake"
     },
     {
+      "id": "screenshots/firewatch",
+      "path": "public/img/screenshots/firewatch"
+    },
+    {
+      "id": "screenshots/forza-horizon-4",
+      "path": "public/img/screenshots/forza-horizon-4"
+    },
+    {
+      "id": "screenshots/forza-horizon-6",
+      "path": "public/img/screenshots/forza-horizon-6"
+    },
+    {
+      "id": "screenshots/gears-of-war-2",
+      "path": "public/img/screenshots/gears-of-war-2"
+    },
+    {
+      "id": "screenshots/gears-of-war-3",
+      "path": "public/img/screenshots/gears-of-war-3"
+    },
+    {
+      "id": "screenshots/gears-of-war-4",
+      "path": "public/img/screenshots/gears-of-war-4"
+    },
+    {
+      "id": "screenshots/gears-of-war-judgment",
+      "path": "public/img/screenshots/gears-of-war-judgment"
+    },
+    {
+      "id": "screenshots/gears-of-war-ultimate-edition",
+      "path": "public/img/screenshots/gears-of-war-ultimate-edition"
+    },
+    {
       "id": "screenshots/god-of-war-ragnarok",
       "path": "public/img/screenshots/god-of-war-ragnarok"
+    },
+    {
+      "id": "screenshots/grand-theft-auto-san-andreas-the-definitive-edition",
+      "path": "public/img/screenshots/grand-theft-auto-san-andreas-the-definitive-edition"
+    },
+    {
+      "id": "screenshots/grand-theft-auto-v-xbox-one",
+      "path": "public/img/screenshots/grand-theft-auto-v-xbox-one"
+    },
+    {
+      "id": "screenshots/halo-campaign-evolved",
+      "path": "public/img/screenshots/halo-campaign-evolved"
+    },
+    {
+      "id": "screenshots/halo-the-master-chief-collection",
+      "path": "public/img/screenshots/halo-the-master-chief-collection"
+    },
+    {
+      "id": "screenshots/high-on-life",
+      "path": "public/img/screenshots/high-on-life"
     },
     {
       "id": "screenshots/horizon-forbidden-west",
@@ -61,12 +201,88 @@
       "path": "public/img/screenshots/horizon-zero-dawn"
     },
     {
+      "id": "screenshots/indiana-jones-and-the-great-circle",
+      "path": "public/img/screenshots/indiana-jones-and-the-great-circle"
+    },
+    {
+      "id": "screenshots/kingdom-come-deliverance-ii",
+      "path": "public/img/screenshots/kingdom-come-deliverance-ii"
+    },
+    {
+      "id": "screenshots/lies-of-p",
+      "path": "public/img/screenshots/lies-of-p"
+    },
+    {
+      "id": "screenshots/mafia-definitive-edition",
+      "path": "public/img/screenshots/mafia-definitive-edition"
+    },
+    {
+      "id": "screenshots/mafia-ii-definitive-edition",
+      "path": "public/img/screenshots/mafia-ii-definitive-edition"
+    },
+    {
+      "id": "screenshots/mafia-iii-definitive-edition",
+      "path": "public/img/screenshots/mafia-iii-definitive-edition"
+    },
+    {
       "id": "screenshots/mafia-the-old-country",
       "path": "public/img/screenshots/mafia-the-old-country"
     },
     {
+      "id": "screenshots/marvels-guardians-of-the-galaxy",
+      "path": "public/img/screenshots/marvels-guardians-of-the-galaxy"
+    },
+    {
+      "id": "screenshots/mortal-shell-enhanced-edition",
+      "path": "public/img/screenshots/mortal-shell-enhanced-edition"
+    },
+    {
+      "id": "screenshots/no-mans-sky",
+      "path": "public/img/screenshots/no-mans-sky"
+    },
+    {
+      "id": "screenshots/outriders",
+      "path": "public/img/screenshots/outriders"
+    },
+    {
+      "id": "screenshots/quantum-break",
+      "path": "public/img/screenshots/quantum-break"
+    },
+    {
+      "id": "screenshots/raji-an-ancient-epic",
+      "path": "public/img/screenshots/raji-an-ancient-epic"
+    },
+    {
+      "id": "screenshots/red-dead-redemption",
+      "path": "public/img/screenshots/red-dead-redemption"
+    },
+    {
       "id": "screenshots/resident-evil-village",
       "path": "public/img/screenshots/resident-evil-village"
+    },
+    {
+      "id": "screenshots/resonance-a-plague-tale-legacy",
+      "path": "public/img/screenshots/resonance-a-plague-tale-legacy"
+    },
+    {
+      "id": "screenshots/rise-of-the-tomb-raider",
+      "path": "public/img/screenshots/rise-of-the-tomb-raider"
+    },
+    {
+      "id": "screenshots/senuas-saga-hellblade-2",
+      "path": "public/img/screenshots/senuas-saga-hellblade-2"
+    },
+    {
+      "id": "screenshots/shadow-of-the-tomb-raider",
+      "path": "public/img/screenshots/shadow-of-the-tomb-raider"
+    },
+    {
+      "id": "screenshots/south-of-midnight",
+      "path": "public/img/screenshots/south-of-midnight"
+    },
+    {
+      "id": "screenshots/star-wars-jedi-survivortm",
+      "path": "public/img/screenshots/star-wars-jedi-survivortm"
     },
     {
       "id": "screenshots/stray",
@@ -75,6 +291,22 @@
     {
       "id": "screenshots/thank-goodness-youre-here",
       "path": "public/img/screenshots/thank-goodness-youre-here"
+    },
+    {
+      "id": "screenshots/the-alters",
+      "path": "public/img/screenshots/the-alters"
+    },
+    {
+      "id": "screenshots/the-medium",
+      "path": "public/img/screenshots/the-medium"
+    },
+    {
+      "id": "screenshots/the-witcher-3-wild-hunt-complete-edition",
+      "path": "public/img/screenshots/the-witcher-3-wild-hunt-complete-edition"
+    },
+    {
+      "id": "screenshots/trek-to-yomi",
+      "path": "public/img/screenshots/trek-to-yomi"
     },
     {
       "id": "south-korea",

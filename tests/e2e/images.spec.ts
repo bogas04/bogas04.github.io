@@ -43,12 +43,12 @@ test("image detail navigation fills each side of the photo and wraps within its 
   expect(previousBox!.height).toBeGreaterThanOrEqual(navigationBox!.height - 1);
   expect(nextBox!.height).toBeGreaterThanOrEqual(navigationBox!.height - 1);
   expect(previousBox!.width + nextBox!.width).toBeGreaterThanOrEqual(navigationBox!.width - 1);
-  await next.click({ position: { x: 4, y: 4 } });
+  await next.click({ position: { x: 4, y: nextBox!.height / 2 } });
   await expect(page).toHaveURL(/\/images\/ireland\/ireland-2\/?$/);
   const previousAfterNavigation = page.getByRole("navigation", { name: "Image navigation" }).getByRole("link", { name: /Show previous image:/ });
   const previousAfterNavigationBox = await previousAfterNavigation.boundingBox();
   expect(previousAfterNavigationBox).not.toBeNull();
-  await previousAfterNavigation.click({ position: { x: previousAfterNavigationBox!.width - 4, y: 4 } });
+  await previousAfterNavigation.click({ position: { x: previousAfterNavigationBox!.width - 4, y: previousAfterNavigationBox!.height / 2 } });
   await expect(page).toHaveURL(/\/images\/ireland\/ireland-1\/?$/);
 });
 
@@ -95,7 +95,7 @@ test("desktop image-gallery date picker opens beside the selected date and navig
   const triggerBox = await dateTrigger.boundingBox();
   expect(triggerBox).not.toBeNull();
   await dateTrigger.click();
-  const picker = page.getByRole("dialog", { name: "Choose a month or year" });
+  const picker = page.getByRole("dialog", { name: "Choose a year" });
   await expect(picker).toBeVisible();
   const pickerBox = await picker.boundingBox();
   expect(pickerBox).not.toBeNull();
@@ -120,11 +120,54 @@ test("gallery back follows browsing history and falls back through the directory
   // A direct entry has no known in-site predecessor. Each fallback replaces
   // the current entry, so the next back action continues up the hierarchy.
   const direct = await page.context().newPage();
-  await direct.goto("/images/screenshots/cyberpunk-2077/01/");
+  await direct.goto("/images/screenshots/cyberpunk-2077/02/");
   await direct.getByRole("link", { name: "Go back" }).click();
   await expect(direct).toHaveURL(/\/images\/screenshots\/cyberpunk-2077\/?$/);
   await direct.getByRole("link", { name: "Go back" }).click();
   await expect(direct).toHaveURL(/\/images\/screenshots\/?$/);
   await direct.getByRole("link", { name: "Go back" }).click();
   await expect(direct).toHaveURL(/\/images\/?$/);
+});
+
+test("gallery back restores the screenshots folder scroll position", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/images/screenshots/");
+  const album = page.getByRole("link", { name: /the witcher 3/i }).first();
+  await album.scrollIntoViewIfNeeded();
+  const before = await page.evaluate(() => window.scrollY);
+  expect(before).toBeGreaterThan(500);
+  await album.click();
+  await expect(page).toHaveURL(/\/the-witcher-3/);
+  await page.getByRole("link", { name: "Go back" }).click();
+  await expect(page).toHaveURL(/\/images\/screenshots\/?$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before - 10);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(before + 10);
+  await page.goForward();
+  await expect(page).toHaveURL(/\/the-witcher-3/);
+  await page.goBack();
+  await expect(page).toHaveURL(/\/images\/screenshots\/?$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before - 10);
+});
+
+test("opening a photo snapshots only the selected grid image", async ({ page }) => {
+  await page.goto("/images/");
+  const firstPhoto = page.locator('figure a[data-gallery-image-transition]:visible').first();
+  await expect(firstPhoto).toBeVisible();
+  const before = await page.locator('figure img').evaluateAll((images) => images.filter((image) => getComputedStyle(image).viewTransitionName !== "none").length);
+  expect(before).toBe(0);
+  await page.evaluate(() => {
+    const original = document.startViewTransition.bind(document);
+    document.startViewTransition = ((update: ViewTransitionUpdateCallback) => {
+      const names = Array.from(document.querySelectorAll("figure img"))
+        .map((image) => getComputedStyle(image).viewTransitionName)
+        .filter((name) => name !== "none");
+      (window as unknown as { capturedGalleryNames: string[] }).capturedGalleryNames = names;
+      return original(update);
+    }) as typeof document.startViewTransition;
+  });
+  await firstPhoto.click();
+  await expect(page.getByRole("heading", { name: /this image/i })).toBeVisible();
+  const names = await page.evaluate(() => (window as unknown as { capturedGalleryNames: string[] }).capturedGalleryNames);
+  expect(names).toHaveLength(1);
+  expect(names[0]).toMatch(/^gallery-/);
 });

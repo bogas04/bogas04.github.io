@@ -137,3 +137,10 @@ test("work duration stays readable and the website link does not stretch", async
     expect(websiteBox!.height).toBeLessThan(dateBox!.height);
   }
 });
+
+test("stats redirects to the GoatCounter dashboard", async ({ page }) => {
+  await page.route("https://bogas04.goatcounter.com/**", (route) => route.fulfill({ status: 200, body: "GoatCounter dashboard" }));
+  await page.goto("/stats/");
+  await expect(page).toHaveURL("https://bogas04.goatcounter.com/");
+  await expect(page.getByText("GoatCounter dashboard")).toBeVisible();
+});

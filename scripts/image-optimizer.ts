@@ -6,7 +6,7 @@ import sharp from "sharp";
 
 export const MAX_IMAGE_DIMENSION = 1440;
 export const JPEG_QUALITY = 95;
-export const OPTIMIZATION_VERSION = "3";
+export { OPTIMIZATION_VERSION } from "../src/utils/image-optimization.ts";
 
 function isHeicBuffer(input: Buffer): boolean {
   if (input.length < 12 || input.toString("ascii", 4, 8) !== "ftyp") {

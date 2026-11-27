@@ -67,7 +67,6 @@ async function main(): Promise<void> {
   const albums = readAlbums();
   const manifest: GalleryManifest = { albums: [], folders: [], images: [] };
 
-  fs.rmSync(GENERATED_DIRECTORY, { recursive: true, force: true });
   fs.mkdirSync(GENERATED_DIRECTORY, { recursive: true });
 
   for (const album of albums) {
@@ -139,11 +138,13 @@ async function main(): Promise<void> {
     albums: folder.albums.sort(),
   })).sort((a, b) => a.id.localeCompare(b.id));
 
+  const temporaryManifest = path.join(GENERATED_DIRECTORY, `manifest.${process.pid}.tmp`);
   fs.writeFileSync(
-    path.join(GENERATED_DIRECTORY, "manifest.json"),
+    temporaryManifest,
     `${JSON.stringify(manifest, null, 2)}\n`,
     "utf8",
   );
+  fs.renameSync(temporaryManifest, path.join(GENERATED_DIRECTORY, "manifest.json"));
   console.log(
     `Built gallery manifest for ${manifest.images.length} image(s) in ${formatPath(GENERATED_DIRECTORY)}`,
   );

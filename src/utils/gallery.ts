@@ -18,6 +18,10 @@ export interface GalleryImage {
   fallbackUrl: string;
 }
 
+export type GalleryBrowseImage = Pick<GalleryImage,
+  "id" | "album" | "title" | "alt" | "caption" | "takenAt" | "width" | "height" | "photoUrl" | "thumbUrl"
+>;
+
 export interface GalleryAlbum {
   id: string;
   title: string;
@@ -40,6 +44,28 @@ export interface GalleryManifest {
   albums: GalleryAlbum[];
   folders: GalleryFolder[];
   images: GalleryImage[];
+}
+
+export type GalleryBrowseManifest = Omit<GalleryManifest, "images"> & { images: GalleryBrowseImage[] };
+
+// Compact page data avoids repeating field names and album paths for every photo.
+export type PackedGalleryImage = [number, string, string, string, string, string, number, number, string];
+export type PackedGallery = Omit<GalleryManifest, "images"> & { images: PackedGalleryImage[] };
+
+export function packGallery(manifest: GalleryManifest): PackedGallery {
+  const indices = new Map(manifest.albums.map((album, index) => [album.id, index]));
+  return { albums: manifest.albums, folders: manifest.folders, images: manifest.images.map((image) => {
+    const index = indices.get(image.album);
+    if (index === undefined) throw new Error(`Unknown gallery album: ${image.album}`);
+    return [index, image.id, image.title, image.alt, image.caption, image.takenAt, image.width, image.height, image.thumbUrl];
+  }) };
+}
+
+export function unpackGallery(packed: PackedGallery): GalleryBrowseManifest {
+  return { albums: packed.albums, folders: packed.folders, images: packed.images.map(([index, id, title, alt, caption, takenAt, width, height, thumbUrl]) => {
+    const album = packed.albums[index].id;
+    return { id, album, title, alt, caption, takenAt, width, height, thumbUrl, photoUrl: `${getGalleryAlbumUrl(album)}${encodeURIComponent(id)}/` };
+  }) };
 }
 
 export function getGalleryAlbumUrl(albumId: string) {
@@ -73,7 +99,7 @@ export function getGalleryAlbumViewTransitionName(album: GalleryAlbum) {
   return `gallery-album-${album.id}`;
 }
 
-export function getGalleryImageViewTransitionName(image: GalleryImage) {
+export function getGalleryImageViewTransitionName(image: Pick<GalleryImage, "album" | "id">) {
   return `gallery-image-${image.album}-${image.id}`.replace(
     /[^a-zA-Z0-9_-]/g,
     "-",
