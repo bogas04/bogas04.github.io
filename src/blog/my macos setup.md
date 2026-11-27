@@ -9,6 +9,21 @@ slug: /@bogas04/my-macos-setup
 
 ![Picture of a macbook](/img/blog/macos.jpg)
 
+## 2026 update
+
+My setup has changed since I first wrote this post. These are the apps I use now:
+
+- **Helium** is my browser of choice.
+- **MacWhisper** handles voice-to-text.
+- **Maccy** keeps my clipboard history.
+- **Rectangle** manages window tiling.
+- **Karabiner-Elements** lets me use Caps Lock with H, J, K and L for navigation.
+- **MonitorControl** controls my Mac and external monitor.
+- **NeoDisk** helps me explore disk usage.
+- **FocusedDayPlanner** helps me plan my day.
+
+The notes below are from the original setup; some preferences, like my Caps Lock configuration, have since changed.
+
 ## Preferences
 
 I dislike macOS's fullscreen mode, so in order to get maximum screen real estate, I autohide menu bar and dock.
